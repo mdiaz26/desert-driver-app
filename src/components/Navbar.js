@@ -6,11 +6,14 @@ const Navbar = (props) => {
     
     return (
         <div style={{display: 'flex', justifyContent: 'space-between'}}>
-            <Link to={`/users/${props.userId}`}>Profile {props.userId}</Link>
             {isLoggedIn ?
+                <>
+                <Link to={`/users/${props.userId}`}>Profile</Link>
                 <button onClick={props.signOut}>Sign Out</button>
+                </>
                 :
                 <>
+                <Link to={'/'}>Profile</Link>
                 <Link to="/login">Log In</Link>
                 <Link to="/signup">Sign Up</Link>
                 </>

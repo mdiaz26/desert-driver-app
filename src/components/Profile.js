@@ -1,4 +1,5 @@
 import React from 'react'
+import {Redirect} from 'react-router-dom'
 
 class Profile extends React.Component {
     
@@ -10,25 +11,25 @@ class Profile extends React.Component {
         }
     }
 
+    componentDidMount(){
+        fetch(`http://localhost:3000/api/v1/users/` + this.props.match.params.id)
+        .then(response => response.json())
+        .then(user => this.setState({user}))
+    }
+
     findHighScore = () => {
         if (this.props.scores.length && this.state.user.id) {
             const scores = [...this.props.scores]
             let userScores = scores.filter(score => score.user_id === this.state.user.id)
             userScores.sort((scoreA, scoreB) =>scoreB.points -  scoreA.points)
-            // debugger
             return userScores[0].points
         }
     }
 
-    componentDidMount(){
-        fetch(`http://localhost:3000/api/v1/users/` + this.props.match.params.id)
-        //the user id (currently "1"), will be a variable that is dependent on either (or both)
-        // the URL (ie users/1) or props. I have to look it up
-        .then(response => response.json())
-        .then(user => this.setState({user}))
-    }
-
     render(){
+        if (this.props.userId === "") {
+            return <Redirect to="/"/>
+        }
         return(
             <div>
                 <h1>Profile</h1>

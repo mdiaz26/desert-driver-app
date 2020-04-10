@@ -29,6 +29,7 @@ class App extends React.Component {
 
   signOut = () => {
     this.setState({userId: ""})
+    // return <Redirect to="/"/>
   }
   
   render(){
@@ -39,7 +40,7 @@ class App extends React.Component {
           <Route path="/login" render={() => <Login users={this.state.users} setUser={this.setUser}/>}/>
           <Route path="/signup" render={() => <SignUp users={this.state.users}/>}/>
           <Route path="/leaderboard" render={() => <Leaderboard scores={this.state.scores}/>}/>
-          <Route path="/users/:id" render={(routerProps) => <Profile {...routerProps} scores={this.state.scores}/>}/>
+          <Route path="/users/:id" render={(routerProps) => <Profile {...routerProps} scores={this.state.scores} userId={this.state.userId}/>}/>
           <Route path="/" component={GameContainer}/>
         </Switch>
       </div>
