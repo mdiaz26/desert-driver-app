@@ -4,18 +4,17 @@ import {Redirect} from 'react-router-dom'
 class SignUp extends React.Component {
     
     state = {
-        users: [],
         username: "",
         password: "",
         confirmPassword: "",
         redirectToGame: false
     }
 
-    componentDidMount(){
-        fetch('http://localhost:3000/api/v1/users')
-        .then(response => response.json())
-        .then(users => this.setState({users}))
-    }
+    // componentDidMount(){
+    //     fetch('http://localhost:3000/api/v1/users')
+    //     .then(response => response.json())
+    //     .then(users => this.setState({users}))
+    // }
 
     handleChange = event => {
         this.setState({
@@ -35,7 +34,7 @@ class SignUp extends React.Component {
 
     handleSubmit = event => {
         event.preventDefault()
-        if (this.state.users.filter(user => user.username === this.state.username).length > 0) {
+        if (this.props.users.filter(user => user.username === this.state.username).length > 0) {
             alert("This user already exists. Try changing your username or logging in")
         } else if (!this.state.username || !this.state.password || !this.state.confirmPassword){
             alert("no blank spaces please")

@@ -8,6 +8,7 @@ import {Switch, Route} from 'react-router-dom'
 class App extends React.Component {
   
   state = {
+    users: [],
     scores: [],
     userId: 7
   }
@@ -16,6 +17,10 @@ class App extends React.Component {
     fetch('http://localhost:3000/api/v1/scores')
     .then(response => response.json())
     .then(scores => this.setState({scores}))
+
+    fetch('http://localhost:3000/api/v1/users')
+    .then(response => response.json())
+    .then(users => this.setState({users}))
   }
   
   render(){
@@ -23,10 +28,10 @@ class App extends React.Component {
       <div className="App">
         <Navbar userId={this.state.userId}/>
         <Switch>
-          <Route path="/login" component={Login}/>
-          <Route path="/signup" component={SignUp}/>
+          <Route path="/login" render={() => <Login users={this.state.users}/>}/>
+          <Route path="/signup" render={() => <SignUp users={this.state.users}/>}/>
           <Route path="/leaderboard" render={() => <Leaderboard scores={this.state.scores}/>}/>
-          <Route path="/users/:id" component={(routerProps) => <Profile {...routerProps} scores={this.state.scores}/>}/>
+          <Route path="/users/:id" render={(routerProps) => <Profile {...routerProps} scores={this.state.scores}/>}/>
           <Route path="/" component={GameContainer}/>
         </Switch>
       </div>
