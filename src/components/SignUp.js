@@ -41,13 +41,13 @@ class SignUp extends React.Component {
             alert("no blank spaces please")
         } else {
             this.createUser()
+            this.setState({
+                username: "",
+                password: "",
+                confirmPassword: "",
+                redirectToGame: true
+            })
         }
-        this.setState({
-            username: "",
-            password: "",
-            confirmPassword: "",
-            redirectToGame: true
-        })
     }
 
     render(){

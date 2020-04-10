@@ -1,10 +1,13 @@
 import React from 'react'
 
-const ScoreRow = () => {
+const ScoreRow = (props) => {
     return (
-        <div>
-            ScoreRow
-        </div>
+        <tr>
+            <td>{props.rank}</td>
+            <td>{props.points}</td>
+            <td>{props.distance}</td>
+            <td>{props.user.username}</td>
+        </tr>
     )
 }
 
