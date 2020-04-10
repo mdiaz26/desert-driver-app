@@ -10,7 +10,7 @@ class App extends React.Component {
   state = {
     users: [],
     scores: [],
-    userId: 7
+    userId: ""
   }
 
   componentDidMount(){
@@ -22,13 +22,17 @@ class App extends React.Component {
     .then(response => response.json())
     .then(users => this.setState({users}))
   }
+
+  setUser = (userId) => {
+    this.setState({userId})
+  }
   
   render(){
     return (
       <div className="App">
         <Navbar userId={this.state.userId}/>
         <Switch>
-          <Route path="/login" render={() => <Login users={this.state.users}/>}/>
+          <Route path="/login" render={() => <Login users={this.state.users} setUser={this.setUser}/>}/>
           <Route path="/signup" render={() => <SignUp users={this.state.users}/>}/>
           <Route path="/leaderboard" render={() => <Leaderboard scores={this.state.scores}/>}/>
           <Route path="/users/:id" render={(routerProps) => <Profile {...routerProps} scores={this.state.scores}/>}/>

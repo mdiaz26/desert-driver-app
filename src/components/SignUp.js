@@ -10,12 +10,6 @@ class SignUp extends React.Component {
         redirectToGame: false
     }
 
-    // componentDidMount(){
-    //     fetch('http://localhost:3000/api/v1/users')
-    //     .then(response => response.json())
-    //     .then(users => this.setState({users}))
-    // }
-
     handleChange = event => {
         this.setState({
             [event.target.name]: event.target.value
@@ -34,10 +28,24 @@ class SignUp extends React.Component {
 
     handleSubmit = event => {
         event.preventDefault()
-        if (this.props.users.filter(user => user.username === this.state.username).length > 0) {
+        if (this.state.password !== this.state.confirmPassword) {
+            alert("Password and confirm password do not match. Please try again")
+            this.setState({
+                password: "",
+                confirmPassword: ""
+            })
+        } else if (this.props.users.filter(user => user.username === this.state.username).length > 0) {
             alert("This user already exists. Try changing your username or logging in")
+            this.setState({
+                password: "",
+                confirmPassword: ""
+            })
         } else if (!this.state.username || !this.state.password || !this.state.confirmPassword){
             alert("no blank spaces please")
+            this.setState({
+                password: "",
+                confirmPassword: ""
+            })
         } else {
             this.createUser()
             this.setState({
