@@ -26,11 +26,15 @@ class App extends React.Component {
   setUser = (userId) => {
     this.setState({userId})
   }
+
+  signOut = () => {
+    this.setState({userId: ""})
+  }
   
   render(){
     return (
       <div className="App">
-        <Navbar userId={this.state.userId}/>
+        <Navbar userId={this.state.userId} signOut={this.signOut}/>
         <Switch>
           <Route path="/login" render={() => <Login users={this.state.users} setUser={this.setUser}/>}/>
           <Route path="/signup" render={() => <SignUp users={this.state.users}/>}/>
