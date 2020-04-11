@@ -6,7 +6,7 @@ import '../Canvas.css'
 class Canvas extends Component {
 
   state = {
-    lives: 10,
+    lives: 1,
     score: 0,
     distance: 0,
     highScore: 0, 
@@ -90,6 +90,8 @@ class Canvas extends Component {
           user_id: this.props.userId
         })
       })
+      // .then(response => response.json())
+      // .then(newScore => this.props.updateScores({...newScore, user: {username: this.props.username}}))
     }
 
     //AVATAR CREATION
