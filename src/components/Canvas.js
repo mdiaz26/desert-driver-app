@@ -25,9 +25,7 @@ class Canvas extends Component {
     canvas.width = window.innerWidth;
     canvas.height = 350;
     canvas.style["border-bottom"] = "100px solid rgb(45, 43, 39)";
-    
-    
-    //CANVAS END
+
 
     //NOISE START
     let val
@@ -44,19 +42,20 @@ class Canvas extends Component {
       noiseX = noiseX * 0.01 % 255;
       return lerp(perm[Math.floor(noiseX)], perm[Math.ceil(noiseX)], noiseX - Math.floor(noiseX));
     }
-    //NOISE END
+ 
 
+    //TIMER
     const setTimer = () => {
-      setInterval (() => this.setState({timer: this.state.timer + 1}), 1000)
+      let seconds = setInterval (() => this.setState((prevState) => ({timer: prevState.timer += 1})), 1000)
     }
-
     setTimer();
-    console.log(this.state.timer)
 
+    //MAIN AVATAR PHOTO
     const setAvatar = () => {
       this.setState({playerAvatar: player.frontImage.src})
     }
 
+    //LOSING LIVES
     const loseLives = () => {
       this.setState({lives: this.state.lives - 1})
       lifeOver = true
@@ -64,12 +63,14 @@ class Canvas extends Component {
       return ;
     }
 
+    //INCREASE DISTANCE
     const gainDistance = (speed) => {
       this.setState({
         distance: this.state.distance += (speed / 50)
       })
     }
 
+    //INCREASE SCORE
     const gainScore = (speed) => {
       this.setState((prevState) => ({score: prevState.score + ((this.state.distance / 1000) * speed)}))
     }
@@ -90,6 +91,7 @@ class Canvas extends Component {
         return ;
       }
 
+      //CACTUS JACK!
       const makeCacti = () => {
         let cactus = new Image()
         cactus.src = "desert-stage-images/cactus.png"
@@ -102,8 +104,8 @@ class Canvas extends Component {
         context.drawImage(cactus, -t+(this.state.lives*this.state.score+30000), 309, 24, 24)
         context.drawImage(cactus, -t+(this.state.lives*this.state.score+9800), 317, 33, 33)
       }
- 
       makeCacti()
+
 
       let p1 = canvas.height - noise(t + player.x) * 0.25;
       let p2 = canvas.height - noise(t+5 + player.x) * 0.25;

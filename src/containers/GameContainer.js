@@ -4,7 +4,6 @@ import Canvas from "../components/Canvas.js"
 const GameContainer = (props) => {
     return (
         <div>
-            GameContainer
             <Canvas />
         </div>
     )
