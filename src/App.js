@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import JSONAPIAdapter from './JSONAPIAdapter'
 import {Navbar, Login, SignUp, Profile} from './components'
 import Leaderboard from './containers/Leaderboard'
 import GameContainer from './containers/GameContainer'
@@ -15,12 +16,11 @@ class App extends React.Component {
   }
 
   componentDidMount(){
-    fetch('http://localhost:3000/api/v1/scores')
-    .then(response => response.json())
+    const adapter = new JSONAPIAdapter('http://localhost:3000/api/v1/')
+    adapter.getAll('scores')
     .then(scores => this.setState({scores}))
-
-    fetch('http://localhost:3000/api/v1/users')
-    .then(response => response.json())
+    
+    adapter.getAll('users')
     .then(users => this.setState({users}))
   }
 
