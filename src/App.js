@@ -10,7 +10,8 @@ class App extends React.Component {
   state = {
     users: [],
     scores: [],
-    userId: ""
+    userId: "",
+    username: ""
   }
 
   componentDidMount(){
@@ -23,13 +24,17 @@ class App extends React.Component {
     .then(users => this.setState({users}))
   }
 
-  setUser = (userId) => {
-    this.setState({userId})
+  setUser = (userObj) => {
+    this.setState({userId: userObj.id, username: userObj.username})
   }
 
   signOut = () => {
     this.setState({userId: ""})
-    // return <Redirect to="/"/>
+  }
+
+  updateScores = (scoreObj) => {
+    console.log(scoreObj)
+    this.setState(prevState => ({scores: [prevState, scoreObj]}))
   }
   
   render(){
@@ -39,9 +44,9 @@ class App extends React.Component {
         <Switch>
           <Route path="/login" render={() => <Login users={this.state.users} setUser={this.setUser}/>}/>
           <Route path="/signup" render={() => <SignUp users={this.state.users}/>}/>
-          <Route path="/leaderboard" render={() => <Leaderboard scores={this.state.scores}/>}/>
+          <Route path="/leaderboard" render={() => <Leaderboard scores={this.state.scores} users={this.state.users}/>}/>
           <Route path="/users/:id" render={(routerProps) => <Profile {...routerProps} scores={this.state.scores} userId={this.state.userId}/>}/>
-          <Route path="/" component={GameContainer}/>
+          <Route path="/" render={() => <GameContainer userId={this.state.userId} username={this.state.username} updateScores={this.updateScores}/>} />
         </Switch>
       </div>
     );
