@@ -41,7 +41,7 @@ class App extends React.Component {
           <Route path="/signup" render={() => <SignUp users={this.state.users}/>}/>
           <Route path="/leaderboard" render={() => <Leaderboard scores={this.state.scores}/>}/>
           <Route path="/users/:id" render={(routerProps) => <Profile {...routerProps} scores={this.state.scores} userId={this.state.userId}/>}/>
-          <Route path="/" component={GameContainer}/>
+          <Route path="/" render={() => <GameContainer userId={this.state.userId}/>}/>
         </Switch>
       </div>
     );

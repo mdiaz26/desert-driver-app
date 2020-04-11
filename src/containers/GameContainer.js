@@ -4,7 +4,7 @@ import Canvas from "../components/Canvas.js"
 const GameContainer = (props) => {
     return (
         <div>
-            <Canvas />
+            <Canvas userId={props.userId}/>
         </div>
     )
 }

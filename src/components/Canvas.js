@@ -48,7 +48,9 @@ class Canvas extends Component {
     const setTimer = () => {
       let seconds = setInterval (() => this.setState((prevState) => ({timer: prevState.timer += 1})), 1000)
     }
-    setTimer();
+    if (this.state.timer === 0) {
+      setTimer();
+    };
 
     //MAIN AVATAR PHOTO
     const setAvatar = () => {
@@ -73,6 +75,21 @@ class Canvas extends Component {
     //INCREASE SCORE
     const gainScore = (speed) => {
       this.setState((prevState) => ({score: prevState.score + ((this.state.distance / 1000) * speed)}))
+    }
+
+    //SAVE SCORE
+    const saveScore = () => {
+      fetch('http://localhost:3000/api/v1/scores', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          points: this.state.score,
+          distance: this.state.distance,
+          user_id: this.props.userId
+        })
+      })
     }
 
     //AVATAR CREATION
@@ -121,7 +138,13 @@ class Canvas extends Component {
 
       //LOSING FUNCTION
       if (player.rot < -2 && grounded){
-        loseLives()
+        if (this.state.lives > 1) {
+          loseLives()
+        } else if (this.state.lives === 1 && this.props.userId) {
+          loseLives()
+          console.log("game over")
+          saveScore()
+        }
       }
 
       if (!playing || grounded && Math.abs(player.rot) > Math.PI * 0.5){
