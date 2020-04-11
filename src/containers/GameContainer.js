@@ -1,9 +1,11 @@
 import React from 'react'
+import Canvas from "../components/Canvas.js"
 
-const GameContainer = () => {
+const GameContainer = (props) => {
     return (
         <div>
             GameContainer
+            <Canvas />
         </div>
     )
 }

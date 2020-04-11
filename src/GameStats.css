@@ -1,0 +1,30 @@
+.stats-container {
+  width: 100%;
+}
+
+.stats-div{
+  margin-right: 50px;
+  display: flex;
+  flex-direction: row;
+  float: right;
+}
+
+h5 {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: rgb(47, 37, 37);
+  margin-left: 75px;
+}
+h4 {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  color: rgb(47, 37, 37);
+
+}
+
+.lives {
+  display: flex;
+  flex-direction: row;
+}
+
+.current-player-image {
+  width: 50px;
+}
