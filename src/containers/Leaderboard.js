@@ -4,6 +4,7 @@ import ScoreRow from '../components/ScoreRow'
 const Leaderboard = (props) => {
     
     const orderedScores = [...props.scores].sort((scoreA, scoreB) => scoreB.points - scoreA.points)
+    const topTen = orderedScores.slice(0, 10)
     
     return (
         <div>
@@ -19,7 +20,7 @@ const Leaderboard = (props) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {orderedScores.map((score, index) => <ScoreRow key={score.id} rank={index + 1} {...score}/>)}
+                    {topTen.map((score, index) => <ScoreRow key={score.id} rank={index + 1} {...score}/>)}
                 </tbody>
             </table>
         </div>

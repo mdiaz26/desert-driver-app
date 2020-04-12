@@ -1,6 +1,7 @@
 import React from 'react'
 
 const ScoreRow = (props) => {
+    // const scoreUser = props.users.find(user => user.id === props.user.id)
     return (
         <tr>
             <td>{props.rank}</td>
