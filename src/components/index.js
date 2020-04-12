@@ -3,7 +3,7 @@ import Login from './Login'
 import Navbar from './Navbar'
 import ScoreRow from './ScoreRow'
 import SignUp from './SignUp'
-import Profile from './Profile'
+import ProfileContainer from '../containers/ProfileContainer'
 
 export {
     GameStats,
@@ -11,5 +11,5 @@ export {
     Navbar,
     ScoreRow,
     SignUp,
-    Profile
+    ProfileContainer
 }

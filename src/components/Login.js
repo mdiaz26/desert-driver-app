@@ -24,7 +24,7 @@ class Login extends React.Component {
         const userObj = this.findUser(this.state.username)
         if (userObj) {
             if (this.state.password === userObj.password) {
-                this.props.setUser(userObj.id) 
+                this.props.setUser(userObj) 
                 this.setState({redirectToGame: true})
             } else if (this.state.password !== userObj.password) {
                 alert("incorrect password")
