@@ -32,7 +32,7 @@ class JSONAPIAdapter {
         let response = await fetch(`${this.baseURL}${endpoint}/${id}`, {
             method: 'PATCH',
             headers: this.headers,
-            body
+            body: JSON.stringify(body)
         })
         return response.json()
     }

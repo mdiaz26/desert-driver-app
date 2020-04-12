@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import JSONAPIAdapter from './JSONAPIAdapter'
-import {Navbar, Login, SignUp, Profile} from './components'
+import {Navbar, Login, SignUp, ProfileContainer} from './components'
 import Leaderboard from './containers/Leaderboard'
 import GameContainer from './containers/GameContainer'
 import {Switch, Route} from 'react-router-dom'
@@ -33,8 +33,17 @@ class App extends React.Component {
   }
 
   updateScores = (scoreObj) => {
-    console.log(scoreObj)
     this.setState(prevState => ({scores: [prevState, scoreObj]}))
+  }
+
+  appendUpdatedUser = userObj => {
+    this.state.users.map(user => {
+      if (user.id === userObj.id) {
+        return userObj
+      } else {
+        return user
+      }
+    })
   }
   
   render(){
@@ -45,7 +54,7 @@ class App extends React.Component {
           <Route path="/login" render={() => <Login users={this.state.users} setUser={this.setUser}/>}/>
           <Route path="/signup" render={() => <SignUp users={this.state.users}/>}/>
           <Route path="/leaderboard" render={() => <Leaderboard scores={this.state.scores} users={this.state.users}/>}/>
-          <Route path="/users/:id" render={(routerProps) => <Profile {...routerProps} scores={this.state.scores} userId={this.state.userId}/>}/>
+          <Route path="/users/:id" render={(routerProps) => <ProfileContainer {...routerProps} scores={this.state.scores} userId={this.state.userId} appendUpdatedUser={this.appendUpdatedUser}/>}/>
           <Route path="/" render={() => <GameContainer userId={this.state.userId} username={this.state.username} updateScores={this.updateScores}/>} />
         </Switch>
       </div>
