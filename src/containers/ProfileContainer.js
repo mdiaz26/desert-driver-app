@@ -25,8 +25,13 @@ class ProfileContainer extends React.Component {
         if (this.props.scores.length && this.state.user.id) {
             const scores = [...this.props.scores]
             let userScores = scores.filter(score => score.user_id === this.state.user.id)
-            userScores.sort((scoreA, scoreB) =>scoreB.points -  scoreA.points)
-            return userScores[0].points
+            console.log(userScores)
+            if (userScores.length > 0) {
+                userScores.sort((scoreA, scoreB) =>scoreB.points -  scoreA.points)
+                return userScores[0].points
+            } else if (userScores.length === 0 ) {
+                return "no scores yet"
+            }
         }
     }
 
