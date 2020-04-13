@@ -1,37 +1,45 @@
-import React from 'react'
+import React, {useState} from 'react'
 import DeleteModal from './DeleteModal'
 
-class ProfileEdit extends React.Component {
-    
-    state = {
-        modalDisplay: false
+const ProfileEdit = (props) => {
+    const [modalState, changeModalState] = useState({display: false})
+    const [passwordState, changePasswordState] = useState({display: false})
+
+    const toggleModal = () => {
+        changeModalState({display: !modalState.display})
     }
 
-    toggleModal = () => {
-        this.setState(prevState => ({
-            modalDisplay: !prevState.modalDisplay
-        }))
+    const togglePassword = (event) => {
+        event.preventDefault()
+        changePasswordState({display: !passwordState.display})
     }
 
-    render(){
-        return(
-            <div>
-                <form onSubmit={this.props.handleSubmit}>
-                    <label>
-                        Username:
-                        <input type="text" name="username" value={this.props.user.username} onChange={this.props.handleChange}/>
-                    </label>
-                    <input type="submit" value="Submit"/>
-                </form>
-                <button onClick={this.toggleModal}>Delete Account</button>
-                {this.state.modalDisplay && 
-                    <DeleteModal 
-                        toggleModal={this.toggleModal} 
-                        deleteAccount={this.props.deleteAccount}
-                    />}
-            </div>
-        )
-    }
+    return(
+        <div>
+            <form onSubmit={props.handleSubmit}>
+                <label>
+                    Username:
+                    <input type="text" name="username" value={props.user.username} onChange={props.handleChange}/>
+                </label>
+                <label>
+                    Password:
+                    {passwordState.display ? 
+                        <input type="text" name="password" value={props.user.password} onChange={props.handleChange}/>
+                        :
+                        <input type="password" name="password" value={props.user.password} onChange={props.handleChange}/>
+                    }
+                    <button onClick={togglePassword}>Show Password</button>
+                </label>
+                <input type="submit" value="Submit"/>
+            </form>
+            <button onClick={toggleModal}>Delete Account</button>
+            {modalState.display && 
+                <DeleteModal 
+                    toggleModal={toggleModal} 
+                    deleteAccount={props.deleteAccount}
+                />}
+        </div>
+    )
 }
 
 export default ProfileEdit
