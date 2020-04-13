@@ -51,11 +51,34 @@ class App extends React.Component {
       <div className="App">
         <Navbar userId={this.state.userId} signOut={this.signOut}/>
         <Switch>
-          <Route path="/login" render={() => <Login users={this.state.users} setUser={this.setUser}/>}/>
-          <Route path="/signup" render={() => <SignUp users={this.state.users}/>}/>
-          <Route path="/leaderboard" render={() => <Leaderboard scores={this.state.scores} users={this.state.users}/>}/>
-          <Route path="/users/:id" render={(routerProps) => <ProfileContainer {...routerProps} scores={this.state.scores} userId={this.state.userId} appendUpdatedUser={this.appendUpdatedUser}/>}/>
-          <Route path="/" render={() => <GameContainer userId={this.state.userId} username={this.state.username} updateScores={this.updateScores}/>} />
+          <Route path="/login" render={() => 
+            <Login 
+              users={this.state.users} 
+              setUser={this.setUser}/>}
+            />
+          <Route path="/signup" render={() => 
+            <SignUp 
+              users={this.state.users}/>}
+            />
+          <Route path="/leaderboard" render={() => 
+            <Leaderboard 
+              scores={this.state.scores} 
+              users={this.state.users}/>}
+            />
+          <Route path="/users/:id" render={(routerProps) => 
+            <ProfileContainer 
+              {...routerProps} 
+              scores={this.state.scores} 
+              userId={this.state.userId} 
+              appendUpdatedUser={this.appendUpdatedUser}
+              signOut={this.signOut}
+            />}/>
+          <Route path="/" render={() => 
+            <GameContainer 
+              userId={this.state.userId} 
+              username={this.state.username} 
+              updateScores={this.updateScores}/>} 
+            />
         </Switch>
       </div>
     );

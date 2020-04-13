@@ -26,6 +26,10 @@ class SignUp extends React.Component {
         })
     }
 
+    removeSpaces = string => {
+        return string.replace(/\s+/g, '')
+    }
+
     handleSubmit = event => {
         event.preventDefault()
         if (this.state.password !== this.state.confirmPassword) {
@@ -40,7 +44,7 @@ class SignUp extends React.Component {
                 password: "",
                 confirmPassword: ""
             })
-        } else if (!this.state.username || !this.state.password || !this.state.confirmPassword){
+        } else if (!this.removeSpaces(this.state.username) || !this.removeSpaces(this.state.password) || !this.removeSpaces(this.state.confirmPassword)){
             alert("no blank spaces please")
             this.setState({
                 password: "",

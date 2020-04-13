@@ -4,6 +4,8 @@ import {Redirect} from 'react-router-dom'
 import Profile from '../components/Profile'
 import ProfileEdit from '../components/ProfileEdit'
 
+const adapter = new JSONAPIAdapter('http://localhost:3000/api/v1/')
+
 class ProfileContainer extends React.Component {
     
     state = {
@@ -16,7 +18,6 @@ class ProfileContainer extends React.Component {
     }
 
     componentDidMount(){
-        const adapter = new JSONAPIAdapter('http://localhost:3000/api/v1/')
         adapter.getOne('users', this.props.match.params.id)
         .then(user => this.setState({user}))
     }
@@ -56,10 +57,13 @@ class ProfileContainer extends React.Component {
     }
 
     updateAPI = () => {
-        console.log(this.state)
-        const adapter = new JSONAPIAdapter('http://localhost:3000/api/v1/')
         adapter.update("users", this.state.user.id, this.state.user)
         .then(this.props.appendUpdatedUser)
+    }
+
+    deleteAccount = () => {
+        adapter.delete("users", this.state.user.id)
+        this.props.signOut()
     }
 
     render(){
@@ -77,6 +81,7 @@ class ProfileContainer extends React.Component {
                             user={this.state.user}
                             handleChange={this.handleChange}
                             handleSubmit={this.handleSubmit}
+                            deleteAccount={this.deleteAccount}
                         />
                     </>
                     :
