@@ -36,6 +36,14 @@ class JSONAPIAdapter {
         })
         return response.json()
     }
+
+    async delete(endpoint, id){
+        let response = await fetch(`${this.baseURL}${endpoint}/${id}`, {
+            method: 'DELETE',
+            headers: this.headers
+        })
+        return response.json()
+    }
 }
 
 export default JSONAPIAdapter

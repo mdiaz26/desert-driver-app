@@ -97,20 +97,6 @@ class Canvas extends Component {
 
       adapter.post('scores', body)
       .then(this.props.updateScores)
-      // fetch('http://localhost:3000/api/v1/scores', {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json'
-      //   },
-      //   body: JSON.stringify({
-      //     points: this.state.score,
-      //     distance: this.state.distance,
-      //     user_number: this.props.userId,
-      //     username: this.props.username
-      //   })
-      // })
-      // .then(response => response.json())
-      // .then(this.props.updateScores)
     }
 
     //AVATAR CREATION
