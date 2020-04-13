@@ -26,7 +26,6 @@ class ProfileContainer extends React.Component {
         if (this.props.scores.length && this.state.user.id) {
             const scores = [...this.props.scores]
             let userScores = scores.filter(score => score.user_number === this.state.user.id)
-            console.log(userScores)
             if (userScores.length > 0) {
                 userScores.sort((scoreA, scoreB) =>scoreB.points -  scoreA.points)
                 return userScores[0].points
@@ -47,7 +46,7 @@ class ProfileContainer extends React.Component {
                 ...prevState.user,
                 [event.target.name]: event.target.value
             }
-        }), console.log(this.state))
+        }))
     }
 
     handleSubmit = (event) => {

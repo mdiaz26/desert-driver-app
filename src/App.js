@@ -37,19 +37,21 @@ class App extends React.Component {
   }
 
   appendUpdatedUser = userObj => {
-    this.state.users.map(user => {
+    let newUsersArray = this.state.users.map(user => {
       if (user.id === userObj.id) {
         return userObj
       } else {
         return user
       }
     })
+    this.setState({users: newUsersArray})
   }
   
   render(){
     return (
       <div className="App">
         <Navbar userId={this.state.userId} signOut={this.signOut}/>
+        <button onClick={() => console.log(this.state)}>See State</button>
         <Switch>
           <Route path="/login" render={() => 
             <Login 
