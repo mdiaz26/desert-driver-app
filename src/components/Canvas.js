@@ -1,4 +1,5 @@
 import React, { Component, useRef } from 'react'
+import JSONAPIAdapter from '../JSONAPIAdapter'
 import GameStats from './GameStats'
 import Player from './Player'
 import Sun from './Sun'
@@ -86,20 +87,30 @@ class Canvas extends Component {
 
     //SAVE SCORE
     const saveScore = () => {
-      fetch('http://localhost:3000/api/v1/scores', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          points: this.state.score,
-          distance: this.state.distance,
-          user_number: this.props.userId,
-          username: this.props.username
-        })
-      })
-      .then(response => response.json())
+      const adapter = new JSONAPIAdapter('http://localhost:3000/api/v1/')
+      const body = {
+        points: this.state.score,
+        distance: this.state.distance,
+        user_number: this.props.userId,
+        username: this.props.username
+      }
+
+      adapter.post('scores', body)
       .then(this.props.updateScores)
+      // fetch('http://localhost:3000/api/v1/scores', {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json'
+      //   },
+      //   body: JSON.stringify({
+      //     points: this.state.score,
+      //     distance: this.state.distance,
+      //     user_number: this.props.userId,
+      //     username: this.props.username
+      //   })
+      // })
+      // .then(response => response.json())
+      // .then(this.props.updateScores)
     }
 
     //AVATAR CREATION
