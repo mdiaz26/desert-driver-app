@@ -11,7 +11,7 @@ class Canvas extends Component {
 
   state = {
 
-    lives: 11,
+    lives: 1,
     score: 0,
     distance: 0,
     highScore: 0, 
@@ -94,11 +94,12 @@ class Canvas extends Component {
         body: JSON.stringify({
           points: this.state.score,
           distance: this.state.distance,
-          user_id: this.props.userId
+          user_number: this.props.userId,
+          username: this.props.username
         })
       })
-      // .then(response => response.json())
-      // .then(newScore => this.props.updateScores({...newScore, user: {username: this.props.username}}))
+      .then(response => response.json())
+      .then(this.props.updateScores)
     }
 
     //AVATAR CREATION

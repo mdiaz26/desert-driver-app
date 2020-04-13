@@ -33,7 +33,7 @@ class App extends React.Component {
   }
 
   updateScores = (scoreObj) => {
-    this.setState(prevState => ({scores: [prevState, scoreObj]}))
+    this.setState(prevState => ({scores: [...prevState.scores, scoreObj]}))
   }
 
   appendUpdatedUser = userObj => {
