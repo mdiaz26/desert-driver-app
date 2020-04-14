@@ -5,8 +5,7 @@ const Profile = (props) => {
         <div>
             <p>Username: {props.user.username}</p>
             <p>High Score: {props.findHighScore()}</p>
-            <img src={props.user.avatar.image} alt="avatar"/>
-
+            <img src={props.avatar.image} alt="avatar"/>
         </div>
     )
 }
