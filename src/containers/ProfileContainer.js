@@ -17,13 +17,14 @@ class ProfileContainer extends React.Component {
                 image: ""
             }
         },
+        avatar: {},
         editMode: false
     }
 
     componentDidMount(){
         adapter.getOne('users', this.props.match.params.id)
         // .then(console.log)
-        .then(user => this.setState({user}))
+        .then(user => this.setState({user: user, avatar: user.avatar}))
     }
 
     findHighScore = () => {
@@ -60,13 +61,26 @@ class ProfileContainer extends React.Component {
     }
 
     updateAPI = () => {
-        adapter.update("users", this.state.user.id, this.state.user)
+        adapter.update("users", this.state.user.id, {
+            username: this.state.user.username,
+            password: this.state.user.password,
+            avatar_id: this.state.avatar.id})
         .then(this.props.appendUpdatedUser)
     }
 
     deleteAccount = () => {
         adapter.delete("users", this.state.user.id)
         this.props.signOut()
+    }
+
+    isChecked = name => {
+        return this.state.avatar.name === name
+    }
+
+    handleRadioChange = event => {
+        // debugger
+        let avatarObj = this.props.avatars.find(avatar => avatar.name === event.target.value)
+        this.setState({avatar: avatarObj})
     }
 
     render(){
@@ -85,6 +99,9 @@ class ProfileContainer extends React.Component {
                             handleChange={this.handleChange}
                             handleSubmit={this.handleSubmit}
                             deleteAccount={this.deleteAccount}
+                            avatars={this.props.avatars}
+                            isChecked={this.isChecked}
+                            handleRadioChange={this.handleRadioChange}
                         />
                     </>
                     :
@@ -92,6 +109,7 @@ class ProfileContainer extends React.Component {
                         <button onClick={this.toggleEdit}>Edit</button>
                         <Profile
                             user={this.state.user}
+                            avatar={this.state.avatar}
                             findHighScore={this.findHighScore}
                         />
                     </>
