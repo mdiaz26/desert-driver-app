@@ -14,7 +14,7 @@ import '../Canvas.css'
 class Canvas extends Component {
 
   state = {
-    lives: 1,
+    lives: 10,
     coins: 0,
     score: 0,
     distance: 0,
@@ -32,38 +32,54 @@ class Canvas extends Component {
 
   componentDidMount() {
     this.game()
-    document.addEventListener('keyup', (event) => {
-      if (event.key === "ArrowUp"){
-        this.setState({moving: 0})
-      }
-      if (event.key === "ArrowDown"){
-        this.setState({moving: 0})
-      }
-      if (event.key === "ArrowLeft"){
-        this.setState({rotating: 0})
-      }
-      if (event.key === "ArrowRight"){
-        this.setState({rotating: 0})
-      }
-    })
-    document.addEventListener('keydown', (event) => {
-      if (event.key === "ArrowUp"){
-        this.setState({moving: 1})
-      }
-      if (event.key === "ArrowDown"){
-        this.setState({moving: -1})
-      }
-      if (event.key === "ArrowLeft"){
-        this.setState({rotating: -1})
-      }
-      if (event.key === "ArrowRight"){
-        this.setState({rotating: 1})
-      }
-    })
+    
+    // document.addEventListener('keyup', (event) => {
+    //   if (event.key === "ArrowUp"){
+    //     this.setState({moving: 0})
+    //   }
+    //   if (event.key === "ArrowDown"){
+    //     this.setState({moving: 0})
+    //   }
+    //   if (event.key === "ArrowLeft"){
+    //     this.setState({rotating: 0})
+    //   }
+    //   if (event.key === "ArrowRight"){
+    //     this.setState({rotating: 0})
+    //   }
+    // })
+    // document.addEventListener('keydown', (event) => {
+    //   if (event.key === "ArrowUp"){
+    //     this.setState({moving: 1})
+    //   }
+    //   if (event.key === "ArrowDown"){
+    //     this.setState({moving: -1})
+    //   }
+    //   if (event.key === "ArrowLeft"){
+    //     this.setState({rotating: -1})
+    //   }
+    //   if (event.key === "ArrowRight"){
+    //     this.setState({rotating: 1})
+      // }
+    // })
   }
 
   componentWillUnmount() {
     clearInterval(this.interval)
+  }
+
+  restartGame = () => {
+    this.coins = this.createCoins()
+    this.setState({
+      lives: 2, 
+      coins: 0,
+      score: 0,
+      distance: 0,
+      timer: 0,
+      moving: null, 
+      rotating: null, 
+      gameOn: true
+      
+    }, this.game())
   }
 
   startTimer = () => {
@@ -107,7 +123,6 @@ class Canvas extends Component {
     let k = {ArrowUp:0, ArrowDown:0, ArrowLeft:0, ArrowRight:0};
 
     this.setState({gameOn: true})
-
     this.setProfile(player)
 
     if (this.state.timer === 0) {
@@ -115,6 +130,10 @@ class Canvas extends Component {
     }
 
     const loseLives = () => {
+      if (this.state.lives === 1){
+        // setTimeout(() => lifeOver = true, 1000)
+        // return;
+      }
       this.setState((prevState) => ({lives: prevState.lives - 1}))
       lifeOver = true
       this.game()
@@ -136,10 +155,6 @@ class Canvas extends Component {
     
     this.draw = function() {
 
-      if (lifeOver) {
-        return ;
-      }
-      
       let p1 = canvas.height - ground.getY(t + player.x) * 0.25;
       let p2 = canvas.height - ground.getY(t+5 + player.x) * 0.25;
       
@@ -165,8 +180,7 @@ class Canvas extends Component {
       
       //PICKUP COINS
       const shouldPickUpCoin = (coin) => {
-        
-        return Math.abs(coin.x - playerCoordinates.x) < 5 && Math.abs(coin.y - playerCoordinates.y) < 25
+        return Math.abs(coin.x - playerCoordinates.x) < 3 && Math.abs(coin.y - playerCoordinates.y) < 25
       }
       this.coins = this.coins.filter(coin => !shouldPickUpCoin(coin))
 
@@ -193,10 +207,18 @@ class Canvas extends Component {
             lives: 0, 
             gameOn: false, 
             score: (totalScore).toFixed(2)
+<<<<<<< HEAD
           }, saveScore())
           clearInterval(this.interval)
           
+=======
+          })
+          // saveScore()
+          clearInterval(this.interval)
+          lifeOver = true
+>>>>>>> 7735ecc878600877704bd89ab4f923172f1ab625
         }
+        
       }
 
       if (!playing || grounded && Math.abs(player.rot) > Math.PI * 0.5){
@@ -228,10 +250,10 @@ class Canvas extends Component {
       context.drawImage(player.movingImage, -19, -19, 29, 35)
       context.restore(); 
     }
-
+    
     //LOOP
     const loop = () => {
-      if (lifeOver) {
+      if (lifeOver && this.state.lives > 0) {
         return ;
       }
       speed -= (speed - (k.ArrowUp - k.ArrowDown)) * 0.007;
@@ -281,10 +303,7 @@ class Canvas extends Component {
     onkeyup = d => k[d.key] = 0
 
     loop();
-  }
-
-  startGame = () => {
-    window.location.reload()
+    
   }
 
   render() {
@@ -292,7 +311,7 @@ class Canvas extends Component {
       <div>
         <canvas ref={this.canvas} height={350} width={window.innerWidth} className="canvas"/>
         <GameStats stats={this.state}/>
-        {!this.state.gameOn ? <EndGame stats={this.state} startGame={this.startGame}/> : null}
+        {!this.state.gameOn ? <EndGame stats={this.state} restartGame={this.restartGame}/> : null}
       </div>
     )
   }

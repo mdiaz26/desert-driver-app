@@ -8,7 +8,7 @@ class EndGame extends Component {
       <div className="background">
         <div className="end-game-report">
           <div>
-            <button onClick={() => this.props.startGame()} className="buttons">PLAY AGAIN</button>
+            <button onClick={() => this.props.restartGame()} className="buttons">PLAY AGAIN</button>
             <button className="buttons">GAME MENU</button>
           </div>
           <section className="counters">
