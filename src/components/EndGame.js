@@ -1,10 +1,47 @@
-import React, { Component, useRef } from 'react'
+import React, { Component } from 'react'
+import '../EndGame.css'
 
 class EndGame extends Component {
 
   render() {
     return (
-      "Game Over bruh"
+      <div className="background">
+        <div className="end-game-report">
+          <div>
+            <button onClick={() => this.props.startGame()} className="buttons">PLAY AGAIN</button>
+            <button className="buttons">GAME MENU</button>
+          </div>
+          <section className="counters">
+            <div className="container">
+              <div>
+                <h3>Coins</h3>
+                <div className="counter" >{this.props.stats.coins}</div>
+              </div>
+              <div>
+                <h3>Distance</h3>
+                <div className="counter" >{(this.props.stats.distance).toFixed(2)}</div>
+              </div>
+              <div>
+                <h3>Timer</h3>
+                <div className="counter" >{this.props.stats.timer}</div>
+              </div>
+              <div>
+                <h3>Final Score</h3>
+                <div className="counter" >{this.props.stats.score}</div>
+              </div>
+            </div>
+          </section>
+
+          {/* <span className="box one"></span>
+          <span className="box two"></span>
+          <span className="box three"></span> */}
+          
+          {/* <h3>(Coins x Distance) - Time Used</h3>
+          <h3>{this.props.stats.coins} x {(this.props.stats.distance).toFixed(2)} - {this.props.stats.timer}</h3>
+          <h1 className="total-score">FINAL SCORE: {this.props.stats.score}</h1> */}
+          
+        </div>
+      </div>
     )
   }
 

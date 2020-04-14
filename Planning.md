@@ -1,5 +1,15 @@
 GOALS:
 
+APRIL 14TH UPDATES:
+* 2000 Coins added
+* Coins counter
+* Score is now calculated at the end
+    - Coins x Distance - Timer = Score
+* Props passed down to EndGame component (Canvas state)
+* End of Lives leads to EndGame Component
+    - Lets confirm the window refresh mechanism when "PLAY AGAIN" button is selected
+
+
 Restructure folders:
   components(canvas, game stats, etc...)
   containers

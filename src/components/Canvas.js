@@ -14,19 +14,20 @@ import '../Canvas.css'
 class Canvas extends Component {
 
   state = {
-    lives: 10,
+    lives: 1,
+    coins: 0,
     score: 0,
     distance: 0,
-    highScore: 0, 
     timer: 0,
     playerName: null,
     playerAvatar: null, 
     moving: null, 
     rotating: null, 
-    coins: []
+    gameOn: true
   }
 
   canvas = React.createRef()
+  coins = this.createCoins()
   interval = null
 
   componentDidMount() {
@@ -83,31 +84,29 @@ class Canvas extends Component {
     }))
   }
 
-  makeCoin = (coin, pos, canvas, context, t, ground) => {
-    coin.x = ((pos + (this.state.lives * 100)) - t) + (canvas.width/2)
-    coin.y = (canvas.height - ground.getY(t + coin.x) * 0.25) - 44
-    context.drawImage(coin.img, coin.x, coin.y, 30, 30)
-    return coin
-  }
-
-  deleteCoin = (coin) => {
-    coin.stopAnimation()
+  createCoins() {
+    const positions = Array.from({ length: 2000 }, () => Math.random() * 100000)
+    
+    return positions.map(position => {
+      let coin = new Coin() 
+      coin.position = position
+      return coin  
+    })
   }
 
   game = () => {
-    //CANVAS START
     const canvas = this.canvas.current
     const context = canvas.getContext("2d")
     const ground = new Ground() 
     const player = new Player(canvas)
-    const coin = new Coin()
-
     let t = 0
     let speed = 0
     let isRunning = false
     let lifeOver = false
     let playing = true
     let k = {ArrowUp:0, ArrowDown:0, ArrowLeft:0, ArrowRight:0};
+
+    this.setState({gameOn: true})
 
     this.setProfile(player)
 
@@ -116,9 +115,6 @@ class Canvas extends Component {
     }
 
     const loseLives = () => {
-      // if (this.state.lives === 0) {
-      //   gameOver()
-      // }
       this.setState((prevState) => ({lives: prevState.lives - 1}))
       lifeOver = true
       this.game()
@@ -156,26 +152,50 @@ class Canvas extends Component {
         grounded = 1
       }
 
-      const position = 100
-      const newCoin = this.makeCoin(coin, position, canvas, context, t, ground)
       const playerCoordinates = {}
-      playerCoordinates["x"] = Math.round(player.x)
-      playerCoordinates["y"] = Math.round(player.y)
-  
-      if (newCoin.x - playerCoordinates.x < 10 ) {
-        console.log("got it")
-        this.deleteCoin(newCoin)
-      }
-      // let coinPositions = [300, 1200, 1899, 2600, 3400, 4300, 5100, 6200, 8000, 9300, 13000, 20000]
+      playerCoordinates.x = Math.round(player.x)
+      playerCoordinates.y = Math.round(player.y)
 
-      //LOSING FUNCTION
+      //RENDER COINS
+      this.coins.forEach(coin => {
+        coin.x = ((coin.position + (this.state.lives * 100)) - t) + (canvas.width/2)
+        coin.y = (canvas.height - ground.getY(t + coin.x) * 0.25) - 38
+        context.drawImage(coin.img, coin.x, coin.y, 26, 26)
+      })
+      
+      //PICKUP COINS
+      const shouldPickUpCoin = (coin) => {
+        
+        return Math.abs(coin.x - playerCoordinates.x) < 5 && Math.abs(coin.y - playerCoordinates.y) < 25
+      }
+      this.coins = this.coins.filter(coin => !shouldPickUpCoin(coin))
+
+      //COUNT COINS
+      if (this.state.lives > 0) {
+        this.setState(({coins: 2000 - this.coins.length}))
+      }
+
+      //EXTRA LIFE
+      // let lifeAdded = false
+
+      // if ((this.state.coins > 0 && this.state.coins % 20 === 0) && !lifeAdded){
+      //   lifeAdded = true
+      //   this.setState((prevState) => ({lives: prevState.lives + 1}))
+      // }
+      
+      //LOSING CONDITION
       if (player.rot < -2 && grounded){
         if (this.state.lives > 1) {
           loseLives()
-        } else if (this.state.lives === 1 && this.props.userId) {
-          loseLives()
-          console.log("game over")
-          saveScore()
+        } else {
+          let totalScore = (this.state.coins * this.state.distance) - this.state.timer
+          this.setState({
+            lives: 0, 
+            gameOn: false, 
+            score: (totalScore).toFixed(2)
+          })
+          clearInterval(this.interval)
+          // saveScore()
         }
       }
 
@@ -216,13 +236,12 @@ class Canvas extends Component {
       }
       speed -= (speed - (k.ArrowUp - k.ArrowDown)) * 0.007;
       t += 6 * speed;
-      if (speed.toFixed(2) > 0.05) {
+      if (speed.toFixed(2) > 0.05 && this.state.lives > 0) {
         this.gainScoreAndDistance(speed)
       }
       
       if (speed.toFixed(2) > 0.05 && !isRunning){
         player.startAnimation()
-        // coin.startAnimation()
         isRunning = true
       }
 
@@ -231,7 +250,8 @@ class Canvas extends Component {
         isRunning = false
       }
 
-      context.fillStyle = 'rgb(249, 200, 114)'
+      // context.fillStyle = 'rgb(249, 200, 114)'
+      context.fillStyle = 'rgb(245, 186, 83)'
       context.fillRect(0, 0, canvas.width, canvas.height);
 
       context.fillStyle = "rgb(45, 43, 39)";
@@ -263,11 +283,16 @@ class Canvas extends Component {
     loop();
   }
 
+  startGame = () => {
+    window.location.reload()
+  }
+
   render() {
     return (
       <div>
         <canvas ref={this.canvas} height={350} width={window.innerWidth} className="canvas"/>
         <GameStats stats={this.state}/>
+        {!this.state.gameOn ? <EndGame stats={this.state} startGame={this.startGame}/> : null}
       </div>
     )
   }

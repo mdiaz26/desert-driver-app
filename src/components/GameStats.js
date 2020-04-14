@@ -18,21 +18,21 @@ class GameStats extends Component {
             
           </div>
           
-          <div className="score">
+          {/* <div className="score">
             <h5>Score</h5>
             <h4>{Math.round(this.props.stats.score)}</h4>
-          </div>
-          <div className="high-score">
-            <h5>High Score</h5>
-            <h4>{this.props.stats.highScore}</h4>
+          </div> */}
+          <div className="timer">
+            <h5>Timer</h5>
+            <h4>{(this.props.stats.timer)}</h4>
           </div>
           <div className="distance">
             <h5>Distance</h5>
             <h4>{(this.props.stats.distance).toFixed(2)}</h4>
           </div>
-          <div className="timer">
-            <h5>Timer</h5>
-            <h4>{(this.props.stats.timer)}</h4>
+          <div className="coins">
+            <h5>Coins</h5>
+            <h4>{this.props.stats.coins}</h4>
           </div>
         </div>
       </div>
