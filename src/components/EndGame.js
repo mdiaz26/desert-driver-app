@@ -3,6 +3,10 @@ import '../EndGame.css'
 
 class EndGame extends Component {
 
+  componentDidMount(){
+    this.props.saveScore()
+  }
+
   render() {
     return (
       <div className="background">
