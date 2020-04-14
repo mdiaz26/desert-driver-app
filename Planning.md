@@ -8,6 +8,7 @@ APRIL 14TH UPDATES:
 * Props passed down to EndGame component (Canvas state)
 * End of Lives leads to EndGame Component
     - Lets confirm the window refresh mechanism when "PLAY AGAIN" button is selected
+* Today we can focus on 
 
 
 Restructure folders:
