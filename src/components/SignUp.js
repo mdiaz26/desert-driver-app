@@ -1,5 +1,6 @@
 import React from 'react'
 import {Redirect} from 'react-router-dom'
+import JSONAPIAdapter from '../JSONAPIAdapter'
 
 class SignUp extends React.Component {
     
@@ -17,13 +18,8 @@ class SignUp extends React.Component {
     }
 
     createUser = () => {
-        fetch('http://localhost:3000/api/v1/users', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({username: this.state.username, password: this.state.password})
-        })
+        const adapter = new JSONAPIAdapter('http://localhost:3000/api/v1/')
+        adapter.post('users', {user: {username: this.state.username, password: this.state.password, avatar_id: 8}})
     }
 
     removeSpaces = string => {

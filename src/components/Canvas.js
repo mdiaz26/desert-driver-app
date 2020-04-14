@@ -193,9 +193,9 @@ class Canvas extends Component {
             lives: 0, 
             gameOn: false, 
             score: (totalScore).toFixed(2)
-          })
+          }, saveScore())
           clearInterval(this.interval)
-          // saveScore()
+          
         }
       }
 
