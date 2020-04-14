@@ -1,8 +1,11 @@
-import React, { Component, useRef } from 'react'
+import React, { Component } from 'react'
 import GameStats from './GameStats'
 import Player from './Player'
+import Ground from './Ground'
+import Egypt from './Egypt'
 import Sun from './Sun'
 import Pyramid from './Pyramid'
+import PalmTree from './PalmTree'
 import Coin from './Coin'
 import EndGame from './EndGame'
 import '../Canvas.css'
@@ -10,125 +13,126 @@ import '../Canvas.css'
 class Canvas extends Component {
 
   state = {
-    lives: 11,
+    lives: 10,
     score: 0,
     distance: 0,
     highScore: 0, 
     timer: 0,
-    playerAvatar: null
+    playerName: null,
+    playerAvatar: null, 
+    moving: null, 
+    rotating: null, 
+    coins: []
   }
+
+  canvas = React.createRef()
+  interval = null
 
   componentDidMount() {
     this.game()
+    document.addEventListener('keyup', (event) => {
+      if (event.key === "ArrowUp"){
+        this.setState({moving: 0})
+      }
+      if (event.key === "ArrowDown"){
+        this.setState({moving: 0})
+      }
+      if (event.key === "ArrowLeft"){
+        this.setState({rotating: 0})
+      }
+      if (event.key === "ArrowRight"){
+        this.setState({rotating: 0})
+      }
+    })
+    document.addEventListener('keydown', (event) => {
+      if (event.key === "ArrowUp"){
+        this.setState({moving: 1})
+      }
+      if (event.key === "ArrowDown"){
+        this.setState({moving: -1})
+      }
+      if (event.key === "ArrowLeft"){
+        this.setState({rotating: -1})
+      }
+      if (event.key === "ArrowRight"){
+        this.setState({rotating: 1})
+      }
+    })
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval)
+  }
+
+  startTimer = () => {
+    this.interval = setInterval (() => this.setState((prevState) => ({timer: prevState.timer + 1})), 1000)
+  }
+
+  setProfile = (player) => {
+    this.setState({
+      playerName: player.name, 
+      playerAvatar: player.profileImageSource, 
+    })
+  }
+
+  gainScoreAndDistance = (speed) => {
+    this.setState((prevState) => ({
+      distance: prevState.distance + (speed / 50),
+      score: prevState.score + ((prevState.distance / 1000) * speed)
+    }))
+  }
+
+  makeCoin = (coin, pos, canvas, context, t, ground) => {
+    coin.x = ((pos + (this.state.lives * 100)) - t) + (canvas.width/2)
+    coin.y = (canvas.height - ground.getY(t + coin.x) * 0.25) - 44
+    context.drawImage(coin.img, coin.x, coin.y, 30, 30)
+    return coin
+  }
+
+  deleteCoin = (coin) => {
+    coin.stopAnimation()
   }
 
   game = () => {
-    
     //CANVAS START
-    const canvas = this.refs.canvas
+    const canvas = this.canvas.current
     const context = canvas.getContext("2d")
-    canvas.width = window.innerWidth;
-    canvas.height = 350;
-    
-    //NOISE START
-    let val
-    let perm = [];
+    const ground = new Ground() 
+    const player = new Player(canvas)
+    const coin = new Coin()
 
-    let lerp = (a,b,t) => a += (b-a) * (1-Math.cos(t*Math.PI))/2;
+    let t = 0
+    let speed = 0
+    let isRunning = false
+    let lifeOver = false
+    let playing = true
+    let k = {ArrowUp:0, ArrowDown:0, ArrowLeft:0, ArrowRight:0};
 
-    while (perm.length < 255){
-      while (perm.includes(val = Math.floor(Math.random()*255)));
-      perm.push(val)
-    }
-    
-    const noise = noiseX => {
-      noiseX = noiseX * 0.01 % 255;
-      return lerp(perm[Math.floor(noiseX)], perm[Math.ceil(noiseX)], noiseX - Math.floor(noiseX));
-    }
-    
-    //TIMER
-    const setTimer = () => {
-      let seconds = setInterval (() => this.setState((prevState) => ({timer: prevState.timer += 1})), 1000)
-    }
+    this.setProfile(player)
+
     if (this.state.timer === 0) {
-      setTimer();
+      this.startTimer()
     }
 
-    //MAIN AVATAR PHOTO
-    const setAvatar = () => {
-      this.setState({playerAvatar: player.frontImage.src})
-    }
-
-    //LOSING LIVES
     const loseLives = () => {
-      if (this.state.lives === 0) {
-        // gameOver()
-      }
-      this.setState({lives: this.state.lives - 1})
+      // if (this.state.lives === 0) {
+      //   gameOver()
+      // }
+      this.setState((prevState) => ({lives: prevState.lives - 1}))
       lifeOver = true
       this.game()
       return ;
     }
 
-    //INCREASE DISTANCE
-    const gainDistance = (speed) => {
-      this.setState({
-        distance: this.state.distance += (speed / 50)
-      })
-    }
-
-    //INCREASE SCORE
-    const gainScore = (speed) => {
-      this.setState((prevState) => ({score: prevState.score + ((this.state.distance / 1000) * speed)}))
-    }
-
-    //AVATAR CREATION
-    let lifeOver = false
-    let player = new Player(canvas)
-    let coin = new Coin(canvas)
-    
-    
-    setAvatar()
     
     this.draw = function() {
 
       if (lifeOver) {
         return ;
       }
-
-      const makeCoins = () => {
-        let positions = [300, 1200, 1899, 2600, 3400, 4300, 5100, 6200, 8000, 9300, 13000, 20000]
-        for (let i =0; i < positions.length; i++) {
-          positions[i] += this.state.distance
-          let x = ((positions[i] + (this.state.lives * 100)) - t) + (canvas.width/2)
-          let y = (canvas.height - noise(t + x) * 0.25) - 44
-          context.drawImage(coin.img, x, y, 30, 30)
-        }
-      }
-      makeCoins()
       
-
-      
-      //CACTUS JACK!
-      // const makeCacti = () => {
-      //   let cactus = new Image()
-      //   cactus.src = "desert-stage-images/cactus.png"
-      //   context.drawImage(cactus, -t+(this.state.lives*this.state.score+500), 312, 33, 33)
-        // context.drawImage(cactus, -t+(this.state.lives*this.state.score+5492), 320, 28, 28)
-        // context.drawImage(cactus, -t+(this.state.lives*this.state.score+11100), 318, 31, 31)
-        // context.drawImage(cactus, -t+(this.state.lives*this.state.score+15000), 305, 33, 33)
-        // context.drawImage(cactus, -t+(this.state.lives*this.state.score+20008), 321, 26, 26)
-        // context.drawImage(cactus, -t+(this.state.lives*this.state.score+25003), 316, 30, 30)
-        // context.drawImage(cactus, -t+(this.state.lives*this.state.score+30000), 309, 24, 24)
-        // context.drawImage(cactus, -t+(this.state.lives*this.state.score+9800), 317, 33, 33)
-      // }
-      // if (speed > 0){
-      //   makeCacti()
-      // }
-
-
-      let p1 = canvas.height - noise(t + player.x) * 0.25;
-      let p2 = canvas.height - noise(t+5 + player.x) * 0.25;
+      let p1 = canvas.height - ground.getY(t + player.x) * 0.25;
+      let p2 = canvas.height - ground.getY(t+5 + player.x) * 0.25;
       
       let grounded = 0
       if (p1-15 > player.y) {
@@ -138,6 +142,18 @@ class Canvas extends Component {
         player.y = p1 - 15;
         grounded = 1
       }
+
+      const position = 100
+      const newCoin = this.makeCoin(coin, position, canvas, context, t, ground)
+      const playerCoordinates = {}
+      playerCoordinates["x"] = Math.round(player.x)
+      playerCoordinates["y"] = Math.round(player.y)
+  
+      if (newCoin.x - playerCoordinates.x < 10 ) {
+        console.log("got it")
+        this.deleteCoin(newCoin)
+      }
+      // let coinPositions = [300, 1200, 1899, 2600, 3400, 4300, 5100, 6200, 8000, 9300, 13000, 20000]
 
       //LOSING FUNCTION
       if (player.rot < -2 && grounded){
@@ -170,19 +186,11 @@ class Canvas extends Component {
       context.rotate(player.rot)
       
       //AVATAR SIZE AND SCREEN POSITION
-      context.drawImage(player.img, -19, -19, 29, 35)
+      context.drawImage(player.movingImage, -19, -19, 29, 35)
       context.restore(); 
     }
 
-    
-
-    //CANVAS LOOP
-    let t = 0
-    let speed = 0
-    let playing = true
-    let k = {ArrowUp:0, ArrowDown:0, ArrowLeft:0, ArrowRight:0};
-    let isRunning = false
-
+    //LOOP
     const loop = () => {
       if (lifeOver) {
         return ;
@@ -190,13 +198,12 @@ class Canvas extends Component {
       speed -= (speed - (k.ArrowUp - k.ArrowDown)) * 0.007;
       t += 6 * speed;
       if (speed.toFixed(2) > 0.05) {
-        gainDistance(speed)
-        gainScore(speed)
+        this.gainScoreAndDistance(speed)
       }
       
       if (speed.toFixed(2) > 0.05 && !isRunning){
         player.startAnimation()
-        coin.startAnimation()
+        // coin.startAnimation()
         isRunning = true
       }
 
@@ -205,45 +212,24 @@ class Canvas extends Component {
         isRunning = false
       }
 
-      
       context.fillStyle = 'rgb(249, 200, 114)'
       context.fillRect(0, 0, canvas.width, canvas.height);
 
       context.fillStyle = "rgb(45, 43, 39)";
       context.beginPath();
 
-      
-
-      //SUN APPEARS
+      //EGYPT STAGE
       let sun = new Sun(canvas, this.state.distance)
-      context.drawImage(sun.img, sun.x, 40, 140, 140)
-
-      //PYRAMIDS APPEAR TWICE
       let pyramid = new Pyramid(canvas, this.state.distance)
-      context.drawImage(pyramid.img, pyramid.x, 10, 600, 600)
-      context.drawImage(pyramid.img, pyramid.x + 2000, -40, 540, 540)
-
+      let palmTree = new PalmTree(canvas, ground, this.state.distance, this.state.lives, this.state.timer, t)
       
+      let egypt = new Egypt(context, sun, pyramid, palmTree)
 
-
-      const makePalmTrees = () => {
-        let positions = [1200, 3800, 7400, 7480, 9800, 14000, 19065, 19500, 19580, 26345, 31568, 37842]
-        
-        for (let i =0; i < positions.length; i++) {
-          positions[i] += this.state.distance
-          let palmTree = new Image()
-          let x = ((positions[i] + (this.state.lives * 100)) - t) + (canvas.width/2)
-          let y = (canvas.height - noise(t + x) * 0.25) - 300
-          palmTree.src = "desert-stage-images/palm-trees.png"   
-          context.drawImage(palmTree, x, y, 380+this.state.timer, 380+this.state.timer)
-        }
-
-      }
-      makePalmTrees()
+      egypt.drawStage()
 
       context.moveTo(0, canvas.height);
       for (let i=0; i < canvas.width; i++) {
-        context.lineTo(i, canvas.height - noise(t + i) * 0.25);
+        context.lineTo(i, canvas.height - ground.getY(t + i) * 0.25);
       }
       context.lineTo(canvas.width, canvas.height);
       context.fill();
@@ -256,16 +242,13 @@ class Canvas extends Component {
     onkeyup = d => k[d.key] = 0
 
     loop();
-    
   }
 
-  
   render() {
     return (
       <div>
-        <canvas ref="canvas" className="canvas"/>
+        <canvas ref={this.canvas} height={350} width={window.innerWidth} className="canvas"/>
         <GameStats stats={this.state}/>
-        
       </div>
     )
   }

@@ -9,7 +9,6 @@ class Coin {
     this.interval = null;
     this.x = 0;
     this.y = 0;
-    this.i = 1;
   }
   
   startAnimation = () => {
@@ -19,9 +18,19 @@ class Coin {
   }
 
   stopAnimation = () => {
-    // delete this.img
     this.img.src = ""
-    // clearInterval(this.interval)
+    clearInterval(this.interval)
+  }
+
+  produceCoins = () => {
+    let allCoins = []
+    let positions = [300, 1200, 1899, 2600, 3400, 4300, 5100, 6200, 8000, 9300, 13000, 20000]
+    
+    for (let i = 0; i< positions.length; i++) {
+
+    }
+
+    return allCoins 
   }
 
 }

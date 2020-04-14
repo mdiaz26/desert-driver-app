@@ -2,18 +2,19 @@
   width: 100%;
 }
 
-.stats-div{
-  margin-right: 50px;
+.stats-div div{
+  margin-right: 40px;
+  margin-top: 18px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   float: right;
+  text-align: center;
 }
 
 h5 {
   position: relative;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   color: rgb(104, 134, 141);
-  margin-left: 75px;
   margin-top: 60px;
   margin-bottom: auto;
 }
@@ -21,11 +22,7 @@ h4 {
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   color: rgb(11, 228, 228);
   font-size: x-large;
-  margin-right: auto;
-  margin-left: auto;
   margin-top: 5px;
-  /* align-items: center; */
-  /* text-align: center; */
 }
 
 .lives {
@@ -39,10 +36,6 @@ h4 {
   margin-top: auto;
   margin-bottom: auto;
   margin-left: 5px;
-}
-
-.score {
-  flex-direction: column;
 }
 
 
