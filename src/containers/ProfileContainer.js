@@ -12,13 +12,17 @@ class ProfileContainer extends React.Component {
         user: {
             username: "",
             password: "",
-            id: ""
+            id: "",
+            avatar: {
+                image: ""
+            }
         },
         editMode: false
     }
 
     componentDidMount(){
         adapter.getOne('users', this.props.match.params.id)
+        // .then(console.log)
         .then(user => this.setState({user}))
     }
 
