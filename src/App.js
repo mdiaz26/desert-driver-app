@@ -11,6 +11,7 @@ class App extends React.Component {
   state = {
     users: [],
     scores: [],
+    avatars: [],
     userId: "",
     username: ""
   }
@@ -22,6 +23,9 @@ class App extends React.Component {
     
     adapter.getAll('users')
     .then(users => this.setState({users}))
+
+    adapter.getAll('avatars')
+    .then(avatars => this.setState({avatars}))
   }
 
   setUser = (userObj) => {
@@ -68,6 +72,7 @@ class App extends React.Component {
               users={this.state.users}
               setUser={this.setUser}
               appendNewUser={this.appendNewUser}
+              avatars={this.state.avatars}
             />}/>
           <Route path="/leaderboard" render={() => 
             <Leaderboard 
@@ -78,6 +83,7 @@ class App extends React.Component {
             <ProfileContainer 
               {...routerProps} 
               scores={this.state.scores} 
+              avatars={this.state.avatars}
               userId={this.state.userId} 
               appendUpdatedUser={this.appendUpdatedUser}
               signOut={this.signOut}

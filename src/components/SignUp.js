@@ -1,6 +1,7 @@
 import React from 'react'
 import {Redirect} from 'react-router-dom'
 import JSONAPIAdapter from '../JSONAPIAdapter'
+import AvatarChoice from './AvatarChoice'
 
 class SignUp extends React.Component {
     
@@ -8,6 +9,7 @@ class SignUp extends React.Component {
         username: "",
         password: "",
         confirmPassword: "",
+        selectedAvatar: "Cain Firstman",
         redirectToGame: false
     }
 
@@ -23,7 +25,7 @@ class SignUp extends React.Component {
             user: {
                 username: this.state.username, 
                 password: this.state.password, 
-                avatar_id: 20
+                avatar_id: this.getAvatarId(this.state.selectedAvatar)
             }
         })
         .then(this.props.appendNewUser)
@@ -32,6 +34,19 @@ class SignUp extends React.Component {
 
     removeSpaces = string => {
         return string.replace(/\s+/g, '')
+    }
+
+    getAvatarId = name => {
+        let avatarObj = this.props.avatars.find(avatar => avatar.name === name)
+        return avatarObj.id
+    }
+
+    isChecked = name => {
+        return this.state.selectedAvatar === name
+    }
+
+    handleRadioChange = event => {
+        this.setState({selectedAvatar: event.target.value})
     }
 
     handleSubmit = event => {
@@ -85,6 +100,16 @@ class SignUp extends React.Component {
                     <label>
                         Confirm Password:
                         <input type="password" value={this.state.confirmPassword} name="confirmPassword" onChange={this.handleChange}/>
+                    </label>
+                    <label>
+                        Choose Avatar:
+                        {this.props.avatars.map(avatar => 
+                            <AvatarChoice 
+                                key={avatar.id} 
+                                {...avatar} 
+                                isChecked={this.isChecked}
+                                handleRadioChange={this.handleRadioChange}
+                            />)}
                     </label>
                     <input type="submit" value="submit"/>
                 </form>
