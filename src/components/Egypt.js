@@ -1,32 +1,32 @@
+import PalmTree from './PalmTree.js'
+import Sun from './Sun'
+import Pyramid from './Pyramid'
+
 class Egypt {
-
-
-  constructor(context, sun, pyramid, palmTree) {
-    this.context = context
-    this.sun = sun
-    this.pyramid = pyramid
-    this.palmTree = palmTree
-  }
-
-  drawStage = () => {
+ 
+  drawStage(canvas, context, ground, distance, palmTreePositions, t, timer) {
     //SUN
-    this.context.drawImage(this.sun.img, this.sun.x, this.sun.y, this.sun.size, this.sun.size)
+    const sun = new Sun(canvas, distance)
+    context.drawImage(sun.img, sun.x, sun.y, sun.size, sun.size)
     
     //PYRAMIDS
-    this.context.drawImage(this.pyramid.img, this.pyramid.x, 10, 600, 600)
-    this.context.drawImage(this.pyramid.img, this.pyramid.x + 2000, -40, 540, 540)
+    const pyramid = new Pyramid(canvas, distance)
+    context.drawImage(pyramid.img, pyramid.x, 10, 600, 600)
+    context.drawImage(pyramid.img, pyramid.x + 2000, -40, 540, 540)
 
     //PALM TREES
-    for (let i=0; i < this.palmTree.positions.length; i++){
-      this.palmTree.positions[i] += this.palmTree.distance
-      this.palmTree.x = ((this.palmTree.positions[i] + (this.palmTree.lives * 100)) - this.palmTree.t) + (this.palmTree.canvas.width/2)
-      this.palmTree.y = (this.palmTree.canvas.height - this.palmTree.ground.getY(this.palmTree.t + this.palmTree.x) * 0.25) - 300
-      this.context.drawImage(this.palmTree.img, this.palmTree.x, this.palmTree.y, this.palmTree.size, this.palmTree.size)
-    }
+    const palmTrees = palmTreePositions.map(position => {
+      let tree = new PalmTree(timer)
+      tree.position = position
+      tree.x = ((position * 100) - t) + (canvas.width/2)
+      tree.y = (canvas.height - ground.getY(t + tree.x) * 0.25) - 290
+      return tree
+    })
+    palmTrees.forEach(tree => {
+      context.drawImage(tree.img, tree.x, tree.y, tree.size, tree.size)
+    })
+
   }
-  
-
-
 }
 
 

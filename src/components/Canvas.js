@@ -4,9 +4,6 @@ import GameStats from './GameStats'
 import Player from './Player'
 import Ground from './Ground'
 import Egypt from './Egypt'
-import Sun from './Sun'
-import Pyramid from './Pyramid'
-import PalmTree from './PalmTree'
 import Coin from './Coin'
 import EndGame from './EndGame'
 import '../Canvas.css'
@@ -28,39 +25,11 @@ class Canvas extends Component {
 
   canvas = React.createRef()
   coins = this.createCoins()
+  palmTreePositions = this.createPalmTreePositions()
   interval = null
 
   componentDidMount() {
     this.game()
-    
-    // document.addEventListener('keyup', (event) => {
-    //   if (event.key === "ArrowUp"){
-    //     this.setState({moving: 0})
-    //   }
-    //   if (event.key === "ArrowDown"){
-    //     this.setState({moving: 0})
-    //   }
-    //   if (event.key === "ArrowLeft"){
-    //     this.setState({rotating: 0})
-    //   }
-    //   if (event.key === "ArrowRight"){
-    //     this.setState({rotating: 0})
-    //   }
-    // })
-    // document.addEventListener('keydown', (event) => {
-    //   if (event.key === "ArrowUp"){
-    //     this.setState({moving: 1})
-    //   }
-    //   if (event.key === "ArrowDown"){
-    //     this.setState({moving: -1})
-    //   }
-    //   if (event.key === "ArrowLeft"){
-    //     this.setState({rotating: -1})
-    //   }
-    //   if (event.key === "ArrowRight"){
-    //     this.setState({rotating: 1})
-      // }
-    // })
   }
 
   componentWillUnmount() {
@@ -70,7 +39,7 @@ class Canvas extends Component {
   restartGame = () => {
     this.coins = this.createCoins()
     this.setState({
-      lives: 2, 
+      lives: 10, 
       coins: 0,
       score: 0,
       distance: 0,
@@ -110,6 +79,11 @@ class Canvas extends Component {
     })
   }
 
+  createPalmTreePositions() {
+    let positions = Array.from({ length: 50 }, () => (Math.random() * 400) + (Math.random() * 100))
+    return positions
+  }
+
   game = () => {
     const canvas = this.canvas.current
     const context = canvas.getContext("2d")
@@ -130,10 +104,6 @@ class Canvas extends Component {
     }
 
     const loseLives = () => {
-      if (this.state.lives === 1){
-        // setTimeout(() => lifeOver = true, 1000)
-        // return;
-      }
       this.setState((prevState) => ({lives: prevState.lives - 1}))
       lifeOver = true
       this.game()
@@ -186,16 +156,8 @@ class Canvas extends Component {
 
       //COUNT COINS
       if (this.state.lives > 0) {
-        this.setState(({coins: 2000 - this.coins.length}))
+        this.setState(({coins: 2000 - this.coins.length})) 
       }
-
-      //EXTRA LIFE
-      // let lifeAdded = false
-
-      // if ((this.state.coins > 0 && this.state.coins % 20 === 0) && !lifeAdded){
-      //   lifeAdded = true
-      //   this.setState((prevState) => ({lives: prevState.lives + 1}))
-      // }
       
       //LOSING CONDITION
       if (player.rot < -2 && grounded){
@@ -207,18 +169,11 @@ class Canvas extends Component {
             lives: 0, 
             gameOn: false, 
             score: (totalScore).toFixed(2)
-<<<<<<< HEAD
-          }, saveScore())
-          clearInterval(this.interval)
-          
-=======
           })
           // saveScore()
           clearInterval(this.interval)
           lifeOver = true
->>>>>>> 7735ecc878600877704bd89ab4f923172f1ab625
         }
-        
       }
 
       if (!playing || grounded && Math.abs(player.rot) > Math.PI * 0.5){
@@ -272,7 +227,6 @@ class Canvas extends Component {
         isRunning = false
       }
 
-      // context.fillStyle = 'rgb(249, 200, 114)'
       context.fillStyle = 'rgb(245, 186, 83)'
       context.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -280,13 +234,8 @@ class Canvas extends Component {
       context.beginPath();
 
       //EGYPT STAGE
-      let sun = new Sun(canvas, this.state.distance)
-      let pyramid = new Pyramid(canvas, this.state.distance)
-      let palmTree = new PalmTree(canvas, ground, this.state.distance, this.state.lives, this.state.timer, t)
-      
-      let egypt = new Egypt(context, sun, pyramid, palmTree)
-
-      egypt.drawStage()
+      let egypt = new Egypt()
+      egypt.drawStage(canvas, context, ground, this.state.distance, this.palmTreePositions, t, this.state.timer)
 
       context.moveTo(0, canvas.height);
       for (let i=0; i < canvas.width; i++) {

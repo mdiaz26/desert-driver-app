@@ -5,7 +5,7 @@ class Player {
     this.movingImage = new Image();
     this.movingImage.src = `caveman/running01.png`
     this.profileImageSource = `caveman/cavemanFront.png`
-    this.x = canvas.width/2;
+    this.x = canvas.width/3.5;
     this.y = 0;
     this.ySpeed = 0;
     this.rot = 0;
