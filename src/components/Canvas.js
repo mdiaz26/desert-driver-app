@@ -207,16 +207,10 @@ class Canvas extends Component {
             lives: 0, 
             gameOn: false, 
             score: (totalScore).toFixed(2)
-<<<<<<< HEAD
-          }, saveScore())
-          clearInterval(this.interval)
-          
-=======
           })
           // saveScore()
           clearInterval(this.interval)
           lifeOver = true
->>>>>>> 7735ecc878600877704bd89ab4f923172f1ab625
         }
         
       }

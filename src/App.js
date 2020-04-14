@@ -36,6 +36,11 @@ class App extends React.Component {
     this.setState(prevState => ({scores: [...prevState.scores, scoreObj]}))
   }
 
+  appendNewUser = userObj => {
+    this.setState(prevState => ({users: [...prevState.users, userObj]}))
+    return userObj
+  }
+
   appendUpdatedUser = userObj => {
     let newUsersArray = this.state.users.map(user => {
       if (user.id === userObj.id) {
@@ -60,8 +65,10 @@ class App extends React.Component {
             />
           <Route path="/signup" render={() => 
             <SignUp 
-              users={this.state.users}/>}
-            />
+              users={this.state.users}
+              setUser={this.setUser}
+              appendNewUser={this.appendNewUser}
+            />}/>
           <Route path="/leaderboard" render={() => 
             <Leaderboard 
               scores={this.state.scores} 

@@ -19,7 +19,15 @@ class SignUp extends React.Component {
 
     createUser = () => {
         const adapter = new JSONAPIAdapter('http://localhost:3000/api/v1/')
-        adapter.post('users', {user: {username: this.state.username, password: this.state.password, avatar_id: 8}})
+        adapter.post('users', {
+            user: {
+                username: this.state.username, 
+                password: this.state.password, 
+                avatar_id: 20
+            }
+        })
+        .then(this.props.appendNewUser)
+        .then(this.props.setUser)
     }
 
     removeSpaces = string => {
