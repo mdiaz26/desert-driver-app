@@ -12,7 +12,7 @@ import '../Canvas.css'
 class Canvas extends Component {
 
   state = {
-    lives: 10,
+    lives: 1,
     coins: 0,
     score: 0,
     distance: 0,
@@ -87,6 +87,20 @@ class Canvas extends Component {
     return positions
   }
 
+
+  //SAVE SCORE
+  saveScore = () => {
+    const adapter = new JSONAPIAdapter('http://localhost:3000/api/v1/')
+    const body = {
+      points: this.state.score,
+      distance: this.state.distance,
+      user_number: this.props.userId,
+      username: this.props.username
+    }
+    adapter.post('scores', body)
+    .then(this.props.updateScores)
+  }
+
   game = () => {
     const canvas = this.canvas.current
     const context = canvas.getContext("2d")
@@ -113,18 +127,6 @@ class Canvas extends Component {
       return ;
     }
 
-    //SAVE SCORE
-    const saveScore = () => {
-      const adapter = new JSONAPIAdapter('http://localhost:3000/api/v1/')
-      const body = {
-        points: this.state.score,
-        distance: this.state.distance,
-        user_number: this.props.userId,
-        username: this.props.username
-      }
-      adapter.post('scores', body)
-      .then(this.props.updateScores)
-    }
     
     this.draw = function() {
 
@@ -151,7 +153,6 @@ class Canvas extends Component {
             gameOn: false, 
             score: (totalScore).toFixed(2)
           })
-          // saveScore()
           clearInterval(this.interval)
           lifeOver = true
         }
@@ -280,7 +281,7 @@ class Canvas extends Component {
       <div>
         <canvas ref={this.canvas} height={350} width={window.innerWidth} className="canvas"/>
         <GameStats stats={this.state}/>
-        {!this.state.gameOn ? <EndGame stats={this.state} restartGame={this.restartGame}/> : null}
+        {!this.state.gameOn ? <EndGame stats={this.state} saveScore={this.saveScore} restartGame={this.restartGame}/> : null}
       </div>
     )
   }

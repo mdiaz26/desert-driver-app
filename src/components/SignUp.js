@@ -2,6 +2,8 @@ import React from 'react'
 import {Redirect} from 'react-router-dom'
 import JSONAPIAdapter from '../JSONAPIAdapter'
 import AvatarChoice from './AvatarChoice'
+// import '../Avatar.css'
+import '../styles.scss'
 
 class SignUp extends React.Component {
     
@@ -46,7 +48,7 @@ class SignUp extends React.Component {
     }
 
     handleRadioChange = event => {
-        this.setState({selectedAvatar: event.target.value})
+        this.setState({selectedAvatar: event.target.name})
     }
 
     handleSubmit = event => {
@@ -101,18 +103,20 @@ class SignUp extends React.Component {
                         Confirm Password:
                         <input type="password" value={this.state.confirmPassword} name="confirmPassword" onChange={this.handleChange}/>
                     </label>
-                    <label>
-                        Choose Avatar:
-                        {this.props.avatars.map(avatar => 
-                            <AvatarChoice 
-                                key={avatar.id} 
-                                {...avatar} 
-                                isChecked={this.isChecked}
-                                handleRadioChange={this.handleRadioChange}
-                            />)}
-                    </label>
                     <input type="submit" value="submit"/>
                 </form>
+                Choose Avatar:
+                <div className="avatar-frame">
+                    {this.props.avatars.map((avatar, index) => 
+                        <AvatarChoice 
+                            key={avatar.id} 
+                            {...avatar} 
+                            number={index + 1}
+                            isChecked={this.isChecked}
+                            handleRadioChange={this.handleRadioChange}
+                            className={this.state.selectedAvatar === avatar.name ? "gold-border" : "none"}
+                        />)}
+                </div>
             </div>
         )
     }
