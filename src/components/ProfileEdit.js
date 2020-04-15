@@ -6,7 +6,7 @@ import '../styles.scss'
 const ProfileEdit = (props) => {
     const [modalState, changeModalState] = useState({display: false})
     const [passwordState, changePasswordState] = useState({display: false})
-
+    
     const toggleModal = () => {
         changeModalState({display: !modalState.display})
     }
@@ -46,8 +46,8 @@ const ProfileEdit = (props) => {
                     key={avatar.id} 
                     {...avatar} 
                     number={index + 1}
-                    isChecked={props.isChecked}
                     handleRadioChange={props.handleRadioChange}
+                    className={props.avatar.name === avatar.name ? "gold-border" : "none"}
                 />)}
             </div>
         </div>

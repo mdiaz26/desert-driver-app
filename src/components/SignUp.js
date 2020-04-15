@@ -111,7 +111,6 @@ class SignUp extends React.Component {
                             key={avatar.id} 
                             {...avatar} 
                             number={index + 1}
-                            isChecked={this.isChecked}
                             handleRadioChange={this.handleRadioChange}
                             className={this.state.selectedAvatar === avatar.name ? "gold-border" : "none"}
                         />)}
