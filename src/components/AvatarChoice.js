@@ -4,9 +4,10 @@ import '../styles.scss'
 
 const AvatarChoice = (props) => {
     return (
-        <div className={props.className}>
+        <div className={`deg${props.number * 51}`}>
+        {/* <div className={props.className}> */}
             <img 
-                className={`deg${props.number * 51}`}
+                className={props.className}
                 src={props.image} 
                 alt={props.name} 
                 name={props.name}
