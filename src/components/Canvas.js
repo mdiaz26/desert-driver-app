@@ -6,6 +6,7 @@ import Ground from './Ground'
 import Egypt from './Egypt'
 import Coin from './Coin'
 import EndGame from './EndGame'
+import NightSky from './NightSky'
 import '../Canvas.css'
 
 class Canvas extends Component {
@@ -15,7 +16,7 @@ class Canvas extends Component {
     coins: 0,
     score: 0,
     distance: 0,
-    timer: 0,
+    timer: 0, 
     millisecond: 0,
     playerName: null,
     playerAvatar: null, 
@@ -82,7 +83,7 @@ class Canvas extends Component {
   }
 
   createPalmTreePositions() {
-    let positions = Array.from({ length: 100 }, () => (Math.random() * 500) + (Math.random() * 100))
+    let positions = Array.from({ length: 40}, () => (Math.random() * 1000))
     return positions
   }
 
@@ -127,10 +128,6 @@ class Canvas extends Component {
     
     this.draw = function() {
 
-
-      
-
-
       let p1 = canvas.height - ground.getY(t + player.x) * 0.25;
       let p2 = canvas.height - ground.getY(t+5 + player.x) * 0.25;
       
@@ -142,8 +139,6 @@ class Canvas extends Component {
         player.y = p1 - 15;
         grounded = 1
       }
-
-      
       
       //LOSING CONDITION
       if (player.rot < -2 && grounded){
@@ -195,7 +190,6 @@ class Canvas extends Component {
     //LOOP
     const loop = () => {
 
-
       if (lifeOver && this.state.lives > 0) {
         return ;
       }
@@ -215,33 +209,27 @@ class Canvas extends Component {
         isRunning = false
       }
 
+      //NIGHTSKY BACKGROUND
+      // const gradient = context.createLinearGradient(((100)-(this.state.distance/10)), (100-this.state.distance), (100-(this.state.distance/10)), (800+this.state.distance))
+      // gradient.addColorStop(0, "midnightblue");
+      // gradient.addColorStop(1, "thistle");
+      // context.fillStyle = gradient
       
-
-      // context.fillStyle = 'rgb(24, 26, 31)'
-      // let grade = context.createLinearGradient((1400 - (this.state.distance * 2)), 0, 3000 - (this.state.distance * 4), 1800-this.state.distance)
-      // grade.addColorStop(0, "midnightblue");
-      // grade.addColorStop(1, "thistle");
-      // context.fillStyle = grade
-
-      //EGYPT COLOR
+      //EGYPT BACKGROUND
       context.fillStyle = 'rgb(245, 186, 83)'
+    
+      //******************GREY FLOOR DON'T COMMENT**************************//
       context.fillRect(0, 0, canvas.width, canvas.height);
-
-      //GROUND COLOR
       context.fillStyle = "rgb(39, 44, 44)";
       context.beginPath();
-
+      //******************GREY FLOOR DON'T COMMENT**************************//
       
-
-      // let moon = new Image()
-      // moon.src = 'night-stage-images/moon2.png'
-      // let plane = new Image() 
-      // plane.src = 'night-stage-images/plane.png'
-
-      // context.drawImage(plane, 2000 - (this.state.millisecond/10), 80+(this.state.millisecond/100) , 60, 32)
-      // context.drawImage(moon, (canvas.width - 100) - (this.state.distance * 3), (250 - (this.state.distance)), 500, 500)
-      // console.log(moon)
-
+      
+      //************************NIGHT STAGE********************************//
+      // let nightSky = new NightSky()
+      // nightSky.drawStage(canvas, context, this.state.distance, this.state.millisecond)
+      //************************NIGHT STAGE********************************//
+      
       //************************EGYPT STAGE********************************//
       let egypt = new Egypt()
       egypt.drawStage(canvas, context, ground, this.state.distance, this.palmTreePositions, t, this.state.timer)
