@@ -1,0 +1,32 @@
+.avatar-frame img {
+    width: 10em;
+    position: absolute;
+    // top: 7%;
+    left: 60%;
+    margin: -5em
+
+}
+
+.gold-border {
+    border: 2px solid gold;
+    border-radius: 90px;
+}
+
+.avatar-frame {
+    /* display: grid;
+    grid-row: 30px;
+    grid-template-columns: repeat(3, 1fr);
+    margin-left: 100px; */
+    position: absolute;
+    top: 75%;
+    width: 50em;
+    height: 30em;
+}
+
+.deg51 { transform: rotate(51deg) translate(12em) rotate(-51deg); }
+.deg102 { transform: rotate(102deg) translate(12em) rotate(-102deg); }
+.deg153 { transform: rotate(153deg) translate(12em) rotate(-153deg); }
+.deg204 { transform: rotate(204deg) translate(12em) rotate(-204deg); }
+.deg255 { transform: rotate(255deg) translate(12em) rotate(-255deg); }
+.deg306 { transform: rotate(306deg) translate(12em) rotate(-306deg); }
+.deg357 { transform: rotate(357deg) translate(12em) rotate(-357deg); }
