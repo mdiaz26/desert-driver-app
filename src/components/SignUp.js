@@ -2,7 +2,6 @@ import React from 'react'
 import {Redirect} from 'react-router-dom'
 import JSONAPIAdapter from '../JSONAPIAdapter'
 import AvatarChoice from './AvatarChoice'
-// import '../Avatar.css'
 import '../styles.scss'
 
 class SignUp extends React.Component {
@@ -112,7 +111,6 @@ class SignUp extends React.Component {
                             key={avatar.id} 
                             {...avatar} 
                             number={index + 1}
-                            isChecked={this.isChecked}
                             handleRadioChange={this.handleRadioChange}
                             className={this.state.selectedAvatar === avatar.name ? "gold-border" : "none"}
                         />)}

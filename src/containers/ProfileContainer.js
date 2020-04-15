@@ -23,7 +23,6 @@ class ProfileContainer extends React.Component {
 
     componentDidMount(){
         adapter.getOne('users', this.props.match.params.id)
-        // .then(console.log)
         .then(user => this.setState({user: user, avatar: user.avatar}))
     }
 
@@ -58,6 +57,7 @@ class ProfileContainer extends React.Component {
         event.preventDefault()
         this.updateAPI()
         this.toggleEdit()
+        this.props.updateProfileLink(this.state.avatar)
     }
 
     updateAPI = () => {
@@ -73,13 +73,8 @@ class ProfileContainer extends React.Component {
         this.props.signOut()
     }
 
-    isChecked = name => {
-        return this.state.avatar.name === name
-    }
-
     handleRadioChange = event => {
-        // debugger
-        let avatarObj = this.props.avatars.find(avatar => avatar.name === event.target.value)
+        let avatarObj = this.props.avatars.find(avatar => avatar.name === event.target.name)
         this.setState({avatar: avatarObj})
     }
 
@@ -100,6 +95,7 @@ class ProfileContainer extends React.Component {
                             handleSubmit={this.handleSubmit}
                             deleteAccount={this.deleteAccount}
                             avatars={this.props.avatars}
+                            avatar={this.state.avatar}
                             isChecked={this.isChecked}
                             handleRadioChange={this.handleRadioChange}
                         />

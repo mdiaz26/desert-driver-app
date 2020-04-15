@@ -1,3 +1,12 @@
+.btn {
+    background-color: white;
+    margin-left: 10px;
+}
+
+.tiny-avatar {
+    width: 2em
+}
+
 .avatar-frame img {
     width: 8em;
     position: absolute;
@@ -5,7 +14,14 @@
     left: 50%;
     margin: -4em;
     margin-top: 11em;
+}
 
+.avatar {
+    width: 12em;
+    position: relative;
+    top: 65%;
+    left: 50%;
+    margin: -6em;
 }
 
 .gold-border {
@@ -14,11 +30,6 @@
 }
 
 .avatar-frame {
-    /* display: grid;
-    grid-row: 30px;
-    grid-template-columns: repeat(3, 1fr);
-    margin-left: 100px; */
-    // position: absolute;
     top: 30%;
     margin-left: auto;
     margin-right: auto;
