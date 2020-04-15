@@ -1,9 +1,10 @@
 .avatar-frame img {
-    width: 10em;
+    width: 8em;
     position: absolute;
-    // top: 7%;
-    left: 60%;
-    margin: -5em
+    top: 50%;
+    left: 50%;
+    margin: -4em;
+    margin-top: 11em;
 
 }
 
@@ -17,16 +18,20 @@
     grid-row: 30px;
     grid-template-columns: repeat(3, 1fr);
     margin-left: 100px; */
-    position: absolute;
-    top: 75%;
-    width: 50em;
+    // position: absolute;
+    top: 30%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 30em;
     height: 30em;
+    background-color: pink;
+    border-radius: 50%;
 }
 
-.deg51 { transform: rotate(51deg) translate(12em) rotate(-51deg); }
-.deg102 { transform: rotate(102deg) translate(12em) rotate(-102deg); }
-.deg153 { transform: rotate(153deg) translate(12em) rotate(-153deg); }
-.deg204 { transform: rotate(204deg) translate(12em) rotate(-204deg); }
-.deg255 { transform: rotate(255deg) translate(12em) rotate(-255deg); }
-.deg306 { transform: rotate(306deg) translate(12em) rotate(-306deg); }
-.deg357 { transform: rotate(357deg) translate(12em) rotate(-357deg); }
+.deg51 { transform: rotate(51deg) translate(10em) rotate(-51deg); }
+.deg102 { transform: rotate(102deg) translate(10em) rotate(-102deg); }
+.deg153 { transform: rotate(153deg) translate(10em) rotate(-153deg); }
+.deg204 { transform: rotate(204deg) translate(10em) rotate(-204deg); }
+.deg255 { transform: rotate(255deg) translate(10em) rotate(-255deg); }
+.deg306 { transform: rotate(306deg) translate(10em) rotate(-306deg); }
+.deg357 { transform: rotate(357deg) translate(10em) rotate(-357deg); }
