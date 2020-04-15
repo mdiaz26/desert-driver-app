@@ -2,7 +2,7 @@ import React from 'react'
 import {Redirect} from 'react-router-dom'
 import JSONAPIAdapter from '../JSONAPIAdapter'
 import AvatarChoice from './AvatarChoice'
-import '../Profile.css'
+import '../Avatar.css'
 
 class SignUp extends React.Component {
     

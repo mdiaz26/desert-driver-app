@@ -1,5 +1,5 @@
 import React from 'react'
-import '../Profile.css'
+import '../Avatar.css'
 
 const Profile = (props) => {
     return(
