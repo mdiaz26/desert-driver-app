@@ -12,7 +12,7 @@ import '../Canvas.css'
 class Canvas extends Component {
 
   state = {
-    lives: 10,
+    lives: 1,
     coins: 0,
     score: 0,
     distance: 0,
@@ -29,6 +29,8 @@ class Canvas extends Component {
   coins = this.createCoins()
   palmTreePositions = this.createPalmTreePositions()
   interval = null
+  miniInterval = null
+  animationId = null
 
   componentDidMount() {
     this.game()
@@ -36,12 +38,14 @@ class Canvas extends Component {
 
   componentWillUnmount() {
     clearInterval(this.interval)
+    clearInterval(this.miniInterval)
+    window.cancelAnimationFrame(this.animationId)
   }
 
   restartGame = () => {
     this.coins = this.createCoins()
     this.setState({
-      lives: 10, 
+      lives: 1, 
       coins: 0,
       score: 0,
       distance: 0,
@@ -54,8 +58,13 @@ class Canvas extends Component {
   }
 
   startTimer = () => {
-    this.interval = setInterval (() => this.setState((prevState) => ({timer: prevState.timer + 1})), 1000)
-    this.miniInterval = setInterval(() => this.setState((prevState) => ({millisecond: prevState.millisecond + 1})), 1)
+    this.interval = setInterval (() => {
+
+      // console.log("interval")
+      this.setState((prevState) => ({timer: prevState.timer + 1}))}, 1000)
+    this.miniInterval = setInterval(() => {
+      // console.log("miniInterval")
+      this.setState((prevState) => ({millisecond: prevState.millisecond + 10}))}, 10)
   }
 
   setProfile = (player) => {
@@ -154,6 +163,7 @@ class Canvas extends Component {
             score: (totalScore).toFixed(2)
           })
           clearInterval(this.interval)
+          clearInterval(this.miniInterval)
           lifeOver = true
         }
       }
@@ -190,7 +200,6 @@ class Canvas extends Component {
     
     //LOOP
     const loop = () => {
-
       if (lifeOver && this.state.lives > 0) {
         return ;
       }
@@ -237,7 +246,7 @@ class Canvas extends Component {
       //************************EGYPT STAGE********************************//
       
       this.draw();
-      requestAnimationFrame(loop);
+      this.animationId = requestAnimationFrame(loop);
       const playerCoordinates = {}
       playerCoordinates.x = Math.round(player.x)
       playerCoordinates.y = Math.round(player.y)
