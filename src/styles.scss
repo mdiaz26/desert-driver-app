@@ -1,0 +1,61 @@
+// .avatar-frame img {
+//     width: 10em;
+//     position: absolute;
+//     top: 50%;
+//     left: 50%;
+//     margin: -6em
+
+// }
+
+.gold-border {
+    border: 2px solid gold;
+    border-radius: 90px;
+}
+
+@mixin on-circle($item-count, $circle-size, $item-size){
+    position: relative;
+    width: $circle-size;
+    height: $circle-size;
+    padding: 0;
+    border-radius: 50%;
+    list-style: none;
+
+    * {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: $item-size;
+        margin: -($item-size/2);
+        $angle: (360 / $item-count);
+        $rot: 0;
+
+        @for $i from 1 through $item-count {
+            &:nth-of-type(#{i}){
+                transform:
+                    rotate($rot * 1deg)
+                    translate($circle-size / 2)
+                    rotate($rot * 1deg);
+            }
+            $rot : $rot + $angle;
+        }
+    }
+}
+
+.avatar-frame {
+    /* display: grid;
+    grid-row: 30px;
+    grid-template-columns: repeat(3, 1fr);
+    margin-left: 100px; */
+    // width: 40em;
+    // height: 40em;
+    // background: pink;
+    // border-radius: 50%;
+    @include on-circle($item-count: 7, $circle-size: 40em, $item-size: 10em);
+    // img {
+    //     width: 10em;
+    //     position: absolute;
+    //     top: 50%;
+    //     left: 50%;
+    //     margin: -6em
+    // }
+}

@@ -1,11 +1,12 @@
 import React from 'react'
-import '../Profile.css'
+// import '../Avatar.css'
+import '../styles.scss'
 
 const AvatarChoice = (props) => {
     return (
         <div className={props.className}>
             <img 
-                className="avatar"
+                className={`deg${props.number * 51}`}
                 src={props.image} 
                 alt={props.name} 
                 name={props.name}
