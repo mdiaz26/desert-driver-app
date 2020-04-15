@@ -1,6 +1,6 @@
 import GameStats from './GameStats'
 import Login from './Login'
-import Navbar from './Navbar'
+import Nav from './Nav'
 import ScoreRow from './ScoreRow'
 import SignUp from './SignUp'
 import ProfileContainer from '../containers/ProfileContainer'
@@ -8,7 +8,7 @@ import ProfileContainer from '../containers/ProfileContainer'
 export {
     GameStats,
     Login,
-    Navbar,
+    Nav,
     ScoreRow,
     SignUp,
     ProfileContainer

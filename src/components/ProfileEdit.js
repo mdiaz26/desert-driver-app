@@ -1,11 +1,12 @@
 import React, {useState} from 'react'
 import DeleteModal from './DeleteModal'
 import AvatarChoice from './AvatarChoice'
+import '../styles.scss'
 
 const ProfileEdit = (props) => {
     const [modalState, changeModalState] = useState({display: false})
     const [passwordState, changePasswordState] = useState({display: false})
-
+    
     const toggleModal = () => {
         changeModalState({display: !modalState.display})
     }
@@ -39,13 +40,16 @@ const ProfileEdit = (props) => {
                     toggleModal={toggleModal} 
                     deleteAccount={props.deleteAccount}
                 />}
-            {props.avatars.map(avatar => 
-                <AvatarChoice 
-                key={avatar.id} 
-                {...avatar} 
-                isChecked={props.isChecked}
-                handleRadioChange={props.handleRadioChange}
-            />)}
+            <div className="avatar-frame">
+                {props.avatars.map((avatar, index) => 
+                    <AvatarChoice 
+                    key={avatar.id} 
+                    {...avatar} 
+                    number={index + 1}
+                    handleRadioChange={props.handleRadioChange}
+                    className={props.avatar.name === avatar.name ? "gold-border" : "none"}
+                />)}
+            </div>
         </div>
     )
 }

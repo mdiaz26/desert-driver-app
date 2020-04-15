@@ -1,7 +1,8 @@
 import React from 'react';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import JSONAPIAdapter from './JSONAPIAdapter'
-import {Navbar, Login, SignUp, ProfileContainer} from './components'
+import {Nav, Login, SignUp, ProfileContainer} from './components'
 import Leaderboard from './containers/Leaderboard'
 import GameContainer from './containers/GameContainer'
 import {Switch, Route} from 'react-router-dom'
@@ -13,7 +14,8 @@ class App extends React.Component {
     scores: [],
     avatars: [],
     userId: "",
-    username: ""
+    username: "",
+    avatar: ""
   }
 
   componentDidMount(){
@@ -29,7 +31,7 @@ class App extends React.Component {
   }
 
   setUser = (userObj) => {
-    this.setState({userId: userObj.id, username: userObj.username})
+    this.setState({userId: userObj.id, username: userObj.username, avatar: userObj.avatar.image})
   }
 
   signOut = () => {
@@ -55,11 +57,15 @@ class App extends React.Component {
     })
     this.setState({users: newUsersArray})
   }
+
+  updateProfileLink = avatarObj => {
+    this.setState({avatar: avatarObj.image})
+  }
   
   render(){
     return (
       <div className="App">
-        <Navbar userId={this.state.userId} signOut={this.signOut}/>
+        <Nav userId={this.state.userId} avatar={this.state.avatar} signOut={this.signOut}/>
         <button onClick={() => console.log(this.state)}>See State</button>
         <Switch>
           <Route path="/login" render={() => 
@@ -86,6 +92,7 @@ class App extends React.Component {
               avatars={this.state.avatars}
               userId={this.state.userId} 
               appendUpdatedUser={this.appendUpdatedUser}
+              updateProfileLink={this.updateProfileLink}
               signOut={this.signOut}
             />}/>
           <Route path="/" render={() => 
