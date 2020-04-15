@@ -16,6 +16,7 @@ class Canvas extends Component {
     score: 0,
     distance: 0,
     timer: 0,
+    millisecond: 0,
     playerName: null,
     playerAvatar: null, 
     moving: null, 
@@ -53,6 +54,7 @@ class Canvas extends Component {
 
   startTimer = () => {
     this.interval = setInterval (() => this.setState((prevState) => ({timer: prevState.timer + 1})), 1000)
+    this.miniInterval = setInterval(() => this.setState((prevState) => ({millisecond: prevState.millisecond + 1})), 1)
   }
 
   setProfile = (player) => {
@@ -80,7 +82,7 @@ class Canvas extends Component {
   }
 
   createPalmTreePositions() {
-    let positions = Array.from({ length: 50 }, () => (Math.random() * 400) + (Math.random() * 100))
+    let positions = Array.from({ length: 100 }, () => (Math.random() * 500) + (Math.random() * 100))
     return positions
   }
 
@@ -125,6 +127,10 @@ class Canvas extends Component {
     
     this.draw = function() {
 
+
+      
+
+
       let p1 = canvas.height - ground.getY(t + player.x) * 0.25;
       let p2 = canvas.height - ground.getY(t+5 + player.x) * 0.25;
       
@@ -137,27 +143,7 @@ class Canvas extends Component {
         grounded = 1
       }
 
-      const playerCoordinates = {}
-      playerCoordinates.x = Math.round(player.x)
-      playerCoordinates.y = Math.round(player.y)
-
-      //RENDER COINS
-      this.coins.forEach(coin => {
-        coin.x = ((coin.position + (this.state.lives * 100)) - t) + (canvas.width/2)
-        coin.y = (canvas.height - ground.getY(t + coin.x) * 0.25) - 38
-        context.drawImage(coin.img, coin.x, coin.y, 26, 26)
-      })
       
-      //PICKUP COINS
-      const shouldPickUpCoin = (coin) => {
-        return Math.abs(coin.x - playerCoordinates.x) < 3 && Math.abs(coin.y - playerCoordinates.y) < 25
-      }
-      this.coins = this.coins.filter(coin => !shouldPickUpCoin(coin))
-
-      //COUNT COINS
-      if (this.state.lives > 0) {
-        this.setState(({coins: 2000 - this.coins.length})) 
-      }
       
       //LOSING CONDITION
       if (player.rot < -2 && grounded){
@@ -208,6 +194,8 @@ class Canvas extends Component {
     
     //LOOP
     const loop = () => {
+
+
       if (lifeOver && this.state.lives > 0) {
         return ;
       }
@@ -227,15 +215,62 @@ class Canvas extends Component {
         isRunning = false
       }
 
+      
+
+      // context.fillStyle = 'rgb(24, 26, 31)'
+      // let grade = context.createLinearGradient((1400 - (this.state.distance * 2)), 0, 3000 - (this.state.distance * 4), 1800-this.state.distance)
+      // grade.addColorStop(0, "midnightblue");
+      // grade.addColorStop(1, "thistle");
+      // context.fillStyle = grade
+
+      //EGYPT COLOR
       context.fillStyle = 'rgb(245, 186, 83)'
       context.fillRect(0, 0, canvas.width, canvas.height);
 
-      context.fillStyle = "rgb(45, 43, 39)";
+      //GROUND COLOR
+      context.fillStyle = "rgb(39, 44, 44)";
       context.beginPath();
 
-      //EGYPT STAGE
+      
+
+      // let moon = new Image()
+      // moon.src = 'night-stage-images/moon2.png'
+      // let plane = new Image() 
+      // plane.src = 'night-stage-images/plane.png'
+
+      // context.drawImage(plane, 2000 - (this.state.millisecond/10), 80+(this.state.millisecond/100) , 60, 32)
+      // context.drawImage(moon, (canvas.width - 100) - (this.state.distance * 3), (250 - (this.state.distance)), 500, 500)
+      // console.log(moon)
+
+      //************************EGYPT STAGE********************************//
       let egypt = new Egypt()
       egypt.drawStage(canvas, context, ground, this.state.distance, this.palmTreePositions, t, this.state.timer)
+      //************************EGYPT STAGE********************************//
+      
+      this.draw();
+      requestAnimationFrame(loop);
+      const playerCoordinates = {}
+      playerCoordinates.x = Math.round(player.x)
+      playerCoordinates.y = Math.round(player.y)
+      // console.log(this.state.millisecond)
+
+      //RENDER COINS
+      this.coins.forEach(coin => {
+        coin.x = ((coin.position + (this.state.lives * 100)) - t) + (canvas.width/2)
+        coin.y = (canvas.height - ground.getY(t + coin.x) * 0.25) - 38
+        context.drawImage(coin.img, coin.x, coin.y, 26, 26)
+      })
+      
+      //PICKUP COINS
+      const shouldPickUpCoin = (coin) => {
+        return Math.abs(coin.x - playerCoordinates.x) < 5 && Math.abs(coin.y - playerCoordinates.y) < 28
+      }
+      this.coins = this.coins.filter(coin => !shouldPickUpCoin(coin))
+
+      //COUNT COINS
+      if (this.state.lives > 0) {
+        this.setState(({coins: 2000 - this.coins.length})) 
+      }
 
       context.moveTo(0, canvas.height);
       for (let i=0; i < canvas.width; i++) {
@@ -243,9 +278,6 @@ class Canvas extends Component {
       }
       context.lineTo(canvas.width, canvas.height);
       context.fill();
-    
-      this.draw();
-      requestAnimationFrame(loop);
     }
 
     onkeydown = d => k[d.key] = 1
