@@ -210,13 +210,13 @@ class Canvas extends Component {
       }
 
       //NIGHTSKY BACKGROUND
-      // const gradient = context.createLinearGradient(((100)-(this.state.distance/10)), (100-this.state.distance), (100-(this.state.distance/10)), (800+this.state.distance))
-      // gradient.addColorStop(0, "midnightblue");
-      // gradient.addColorStop(1, "thistle");
-      // context.fillStyle = gradient
+      const gradient = context.createLinearGradient(((100)-(this.state.distance/10)), (100-this.state.distance), (100-(this.state.distance/10)), (800+this.state.distance))
+      gradient.addColorStop(0, "midnightblue");
+      gradient.addColorStop(1, "thistle");
+      context.fillStyle = gradient
       
       //EGYPT BACKGROUND
-      context.fillStyle = 'rgb(245, 186, 83)'
+      // context.fillStyle = 'rgb(245, 186, 83)'
     
       //******************GREY FLOOR DON'T COMMENT**************************//
       context.fillRect(0, 0, canvas.width, canvas.height);
@@ -226,13 +226,13 @@ class Canvas extends Component {
       
       
       //************************NIGHT STAGE********************************//
-      // let nightSky = new NightSky()
-      // nightSky.drawStage(canvas, context, this.state.distance, this.state.millisecond)
+      let nightSky = new NightSky()
+      nightSky.drawStage(canvas, context, this.state.distance, this.state.millisecond)
       //************************NIGHT STAGE********************************//
       
       //************************EGYPT STAGE********************************//
-      let egypt = new Egypt()
-      egypt.drawStage(canvas, context, ground, this.state.distance, this.palmTreePositions, t, this.state.timer)
+      // let egypt = new Egypt()
+      // egypt.drawStage(canvas, context, ground, this.state.distance, this.palmTreePositions, t, this.state.timer)
       //************************EGYPT STAGE********************************//
       
       this.draw();
