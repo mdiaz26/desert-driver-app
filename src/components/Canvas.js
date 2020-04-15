@@ -12,7 +12,7 @@ import '../Canvas.css'
 class Canvas extends Component {
 
   state = {
-    lives: 1,
+    lives: 10,
     coins: 0,
     score: 0,
     distance: 0,
