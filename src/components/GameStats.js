@@ -26,9 +26,13 @@ class GameStats extends Component {
             <h5>Timer</h5>
             <h4>{(this.props.stats.timer)}</h4>
           </div>
-          <div className="distance">
-            <h5>Distance</h5>
-            <h4>{(this.props.stats.distance).toFixed(2)}</h4>
+          <div className="max-distance">
+            <h5>Max Distance</h5>
+            <h4>{(this.props.stats.maxDistance).toFixed(2)}</h4>
+          </div>
+          <div className="current-distance">
+            <h5>Current Distance</h5>
+            <h4>{(this.props.stats.currentDistance).toFixed(2)}</h4>
           </div>
           <div className="coins">
             <h5>Coins</h5>

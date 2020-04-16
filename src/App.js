@@ -98,7 +98,8 @@ class App extends React.Component {
           <Route path="/" render={() => 
             <GameContainer 
               userId={this.state.userId} 
-              username={this.state.username} 
+              username={this.state.username}
+              avatarImage={this.state.avatar} 
               updateScores={this.updateScores}/>} 
             />
         </Switch>

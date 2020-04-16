@@ -1,5 +1,11 @@
 GOALS:
 
+APRIL 15 NOTES:
+  when new user is created an error occurs:
+    "cannot read property image of undefined"
+      App line 34 'setUser' function
+  Howecer, i can log in with newly created credentials
+
 APRIL 14TH UPDATES:
 * 2000 Coins added
 * Coins counter

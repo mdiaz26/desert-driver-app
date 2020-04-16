@@ -16,6 +16,8 @@ class Canvas extends Component {
     coins: 0,
     score: 0,
     distance: 0,
+    maxDistance: 0,
+    currentDistance: 0,
     timer: 0, 
     millisecond: 0,
     playerName: null,
@@ -29,16 +31,22 @@ class Canvas extends Component {
   coins = this.createCoins()
   palmTreePositions = this.createPalmTreePositions()
   interval = null
+  miniInterval = null
+  animationID = null
 
   componentDidMount() {
     this.game()
+    this.startTimers()
   }
 
   componentWillUnmount() {
     clearInterval(this.interval)
+    clearInterval(this.miniInterval)
+    cancelAnimationFrame(this.animationID)
   }
 
   restartGame = () => {
+    
     this.coins = this.createCoins()
     this.setState({
       lives: 10, 
@@ -50,26 +58,31 @@ class Canvas extends Component {
       rotating: null, 
       gameOn: true
       
-    }, this.game())
+    }, this.componentDidMount())
+
   }
 
-  startTimer = () => {
+  startTimers = () => {
     this.interval = setInterval (() => this.setState((prevState) => ({timer: prevState.timer + 1})), 1000)
     this.miniInterval = setInterval(() => this.setState((prevState) => ({millisecond: prevState.millisecond + 1})), 1)
   }
 
-  setProfile = (player) => {
+  setProfile = () => {
     this.setState({
-      playerName: player.name, 
-      playerAvatar: player.profileImageSource, 
+      playerName: this.props.username,
+      playerAvatar: this.props.avatarImage 
     })
   }
 
-  gainScoreAndDistance = (speed) => {
+  gainDistance = (speed) => {
     this.setState((prevState) => ({
       distance: prevState.distance + (speed / 50),
+      currentDistance: prevState.currentDistance + (speed / 50),
       score: prevState.score + ((prevState.distance / 1000) * speed)
     }))
+    if (this.state.maxDistance < this.state.currentDistance) {
+      this.setState({maxDistance: this.state.currentDistance})
+    }
   }
 
   createCoins() {
@@ -105,7 +118,7 @@ class Canvas extends Component {
     const canvas = this.canvas.current
     const context = canvas.getContext("2d")
     const ground = new Ground() 
-    const player = new Player(canvas)
+    const player = new Player(canvas, this.props.avatarImage)
     let t = 0
     let speed = 0
     let isRunning = false
@@ -114,14 +127,10 @@ class Canvas extends Component {
     let k = {ArrowUp:0, ArrowDown:0, ArrowLeft:0, ArrowRight:0};
 
     this.setState({gameOn: true})
-    this.setProfile(player)
-
-    if (this.state.timer === 0) {
-      this.startTimer()
-    }
+    this.setProfile()
 
     const loseLives = () => {
-      this.setState((prevState) => ({lives: prevState.lives - 1}))
+      this.setState((prevState) => ({lives: prevState.lives - 1, currentDistance: 0}))
       lifeOver = true
       this.game()
       return ;
@@ -147,13 +156,14 @@ class Canvas extends Component {
         if (this.state.lives > 1) {
           loseLives()
         } else {
-          let totalScore = (this.state.coins * this.state.distance) - this.state.timer
+          clearInterval(this.miniInterval)
+          clearInterval(this.interval)
+          let totalScore = (this.state.coins * this.state.maxDistance) - this.state.timer
           this.setState({
             lives: 0, 
             gameOn: false, 
             score: (totalScore).toFixed(2)
           })
-          clearInterval(this.interval)
           lifeOver = true
         }
       }
@@ -184,7 +194,7 @@ class Canvas extends Component {
       context.rotate(player.rot)
       
       //AVATAR SIZE AND SCREEN POSITION
-      context.drawImage(player.movingImage, -19, -19, 29, 35)
+      context.drawImage(player.movingImage, -21, -21, 40, 34)
       context.restore(); 
     }
     
@@ -197,7 +207,7 @@ class Canvas extends Component {
       speed -= (speed - (k.ArrowUp - k.ArrowDown)) * 0.007;
       t += 6 * speed;
       if (speed.toFixed(2) > 0.05 && this.state.lives > 0) {
-        this.gainScoreAndDistance(speed)
+        this.gainDistance(speed)
       }
       
       if (speed.toFixed(2) > 0.05 && !isRunning){
@@ -237,11 +247,10 @@ class Canvas extends Component {
       //************************EGYPT STAGE********************************//
       
       this.draw();
-      requestAnimationFrame(loop);
+      this.animationID = requestAnimationFrame(loop);
       const playerCoordinates = {}
       playerCoordinates.x = Math.round(player.x)
       playerCoordinates.y = Math.round(player.y)
-      // console.log(this.state.millisecond)
 
       //RENDER COINS
       this.coins.forEach(coin => {
