@@ -1,6 +1,6 @@
 import React from 'react'
 import Canvas from "../components/Canvas.js"
-import GameMenu from "../components/GameMenu.js"
+// import GameMenu from "../components/GameMenu.js"
 
 const GameContainer = (props) => {
     return (
