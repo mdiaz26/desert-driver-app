@@ -1,0 +1,54 @@
+.sign-up-screen {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.sign-up-form{
+  /* border-top: 5px solid blanchedalmond;
+  border-bottom: 5px solid blanchedalmond; */
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(236, 217, 174, 0.664);
+  margin-left: auto;
+  margin-right: auto;
+  /* margin-top: 20%; */
+}
+
+input {
+  margin-left: 5px;
+}
+
+p{
+  color: blanchedalmond;
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 5px;
+  margin-top: 6px;
+}
+.input-field {
+  text-align: center;
+  font-size: 13px;
+  width: 180px;
+}
+
+.submit-btn {
+  background-color: transparent;
+  background-repeat: no-repeat;
+  font-weight: bold;
+  border: none;
+  margin-bottom: 4px;
+  margin-left: auto;
+  margin-right: auto;
+  transition: all 0.2s ease-in-out;
+}
+.submit-btn:hover {
+  background-color: transparent;
+  background-repeat: no-repeat;
+  border: none;
+  text-decoration: underline;
+  color: antiquewhite;
+  margin-left: auto;
+  margin-right: auto;
+  transition: all 0.1s ease-in-out;
+}

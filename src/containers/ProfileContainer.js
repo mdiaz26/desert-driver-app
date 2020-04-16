@@ -84,11 +84,11 @@ class ProfileContainer extends React.Component {
         }
         return(
             <div>
-                <button onClick={() => console.log(this.state)}>See State</button>
-                <h1>Profile</h1>
+                {/* <button onClick={() => console.log(this.state)}>See State</button> */}
+                {/* <h1>Profile</h1> */}
                 {this.state.editMode ? 
                     <>
-                        <button onClick={this.toggleEdit}>Cancel</button>
+                        {/* <button onClick={this.toggleEdit}>Cancel</button> */}
                         <ProfileEdit
                             user={this.state.user}
                             handleChange={this.handleChange}
@@ -98,16 +98,18 @@ class ProfileContainer extends React.Component {
                             avatar={this.state.avatar}
                             isChecked={this.isChecked}
                             handleRadioChange={this.handleRadioChange}
+                            toggleEdit={this.toggleEdit}
                         />
                     </>
                     :
                     <>
-                        <button onClick={this.toggleEdit}>Edit</button>
                         <Profile
                             user={this.state.user}
                             avatar={this.state.avatar}
                             findHighScore={this.findHighScore}
+                            toggleEdit={this.toggleEdit}
                         />
+                        {/* <button onClick={this.toggleEdit}>Edit</button> */}
                     </>
             }
             </div>

@@ -1,0 +1,83 @@
+.user-profile {
+  width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.profile-div{
+  border: 5px solid blanchedalmond;
+  display: flex;
+  flex-direction: row;
+  background-color: rgb(129, 118, 88);
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20%;
+}
+
+.parent-column {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  color: aqua;
+  font-weight: bold;
+  font-size: 14px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  margin-left: 50px;
+}
+
+.column {
+  text-align: left;
+  color: aqua;
+  margin-left: 5px;
+}
+span{
+  text-align: center;
+  color: blanchedalmond;
+  margin-top: -10px;
+  margin-bottom: 5px;
+  margin-left: 5px;
+
+}
+
+.avatar-div {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  text-align: center;
+  /* margin-right: 255px; */
+  /* margin-top: -75px; */
+}
+.avatar{
+  position: relative;
+  float: right;
+  width: 180px;
+  margin-left: 110px;
+  margin-top: 15px;
+  /* margin-right: auto; */
+  /* white-space: break-spaces; */
+}
+.edit-btn {
+  position: relative;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  color: antiquewhite;
+  border: none;
+  margin-top: 10px;
+  margin-left: 330px;
+  /* margin-left: auto;
+  margin-right: auto; */
+  transition: all 0.2s ease-in-out;
+}
+.edit-btn:hover {
+  background-color: transparent;
+  background-repeat: no-repeat;
+  border: none;
+  text-decoration: underline;
+  color: rgb(248, 198, 124);
+  /* margin-top: 270px; */
+  /* margin-left: auto;
+  margin-right: auto; */
+  transition: all 0.1s ease-in-out;
+}
+

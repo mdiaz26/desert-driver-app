@@ -42,3 +42,7 @@ h4 {
   margin-top: -5px;
   color: rgb(161, 180, 180);
 }
+
+.current-player-image {
+  width: 150px;
+}

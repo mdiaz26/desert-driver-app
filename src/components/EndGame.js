@@ -13,7 +13,7 @@ class EndGame extends Component {
         <div className="end-game-report">
           <div>
             <button onClick={() => this.props.restartGame()} className="buttons">PLAY AGAIN</button>
-            <button className="buttons">GAME MENU</button>
+            <button onClick={() => this.props.backToGameMenu()} className="buttons">GAME MENU</button>
           </div>
           <section className="counters">
             <div className="container">
@@ -22,8 +22,8 @@ class EndGame extends Component {
                 <div className="counter" >{this.props.stats.coins}</div>
               </div>
               <div>
-                <h3>Distance</h3>
-                <div className="counter" >{(this.props.stats.distance).toFixed(2)}</div>
+                <h3>Max Distance</h3>
+                <div className="counter" >{(this.props.stats.maxDistance).toFixed(2)}</div>
               </div>
               <div>
                 <h3>Timer</h3>

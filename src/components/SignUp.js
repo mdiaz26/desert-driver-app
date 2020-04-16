@@ -3,6 +3,7 @@ import {Redirect} from 'react-router-dom'
 import JSONAPIAdapter from '../JSONAPIAdapter'
 import AvatarChoice from './AvatarChoice'
 import '../styles.scss'
+import '../SignUp.css'
 
 class SignUp extends React.Component {
     
@@ -10,7 +11,7 @@ class SignUp extends React.Component {
         username: "",
         password: "",
         confirmPassword: "",
-        selectedAvatar: "Cain Firstman",
+        selectedAvatar: "Billy Billions",
         redirectToGame: false
     }
 
@@ -81,39 +82,56 @@ class SignUp extends React.Component {
         }
     }
 
+    handleSelection = () => {
+        let selection = this.props.avatars.filter(avatar => avatar.name === this.state.selectedAvatar)
+        let obj = selection[0]
+        let image
+        for (let key in obj) {
+            if (key === "image")
+            image = obj[key]
+        }
+        return image
+    }
+
     render(){
         const redirectToGame = this.state.redirectToGame
         if (redirectToGame) {
             return <Redirect to="/"/>
         }
         return (
-            <div>
-                <h1>Sign Up Form</h1>
-                <form onSubmit={this.handleSubmit}>
-                    <label>
-                        Username:
-                        <input type="text" value={this.state.username} name="username" onChange={this.handleChange}/>
-                    </label>
-                    <label>
-                        Password:
-                        <input type="password" value={this.state.password} name="password" onChange={this.handleChange}/>
-                    </label>
-                    <label>
-                        Confirm Password:
-                        <input type="password" value={this.state.confirmPassword} name="confirmPassword" onChange={this.handleChange}/>
-                    </label>
-                    <input type="submit" value="submit"/>
-                </form>
-                Choose Avatar:
-                <div className="avatar-frame">
-                    {this.props.avatars.map((avatar, index) => 
-                        <AvatarChoice 
+            <div className="sign-up-screen">
+                <div className="sign-up-form">
+                    <p>Sign Up Form</p>
+
+                    <form className="form" onSubmit={this.handleSubmit}>
+                        <label>
+                            <input className="input-field" placeholder="Username" type="text" value={this.state.username} name="username" onChange={this.handleChange}/>
+                        </label>
+                        <label>
+                            <input className="input-field" placeholder="Password" type="password" value={this.state.password} name="password" onChange={this.handleChange}/>
+                        </label>
+                        <label>
+                            <input className="input-field" placeholder="Confirm Password" type="password" value={this.state.confirmPassword} name="confirmPassword" onChange={this.handleChange}/>
+                        </label>
+                        <br/>
+                    <p className="choose-your-ride">CHOOSE YOUR RIDE</p>
+                    <div className="avatar-frame">
+                        
+                        {this.props.avatars.map((avatar, index) => 
+                            <AvatarChoice 
                             key={avatar.id} 
                             {...avatar} 
                             number={index + 1}
                             handleRadioChange={this.handleRadioChange}
                             className={this.state.selectedAvatar === avatar.name ? "gold-border" : "none"}
-                        />)}
+                            />)}
+                            
+                            <div className="inner-circle">
+                                <img id="fill-this-image" src={this.handleSelection()} alt={this.handleSelection()}/>
+                            </div>
+                    </div>
+                            <input className="submit-btn" type="submit" value="Click Here To Start Riding"/>
+                        </form>
                 </div>
             </div>
         )

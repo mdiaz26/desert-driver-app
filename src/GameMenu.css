@@ -1,0 +1,12 @@
+.stage-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.stage-box div img {
+  margin-left: 3px;
+  cursor: pointer;
+  border: 5px solid rgb(141, 229, 245);
+  width: 80%;
+}

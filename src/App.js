@@ -15,7 +15,8 @@ class App extends React.Component {
     avatars: [],
     userId: "",
     username: "",
-    avatar: ""
+    avatar: "", 
+    selectedStage: ""
   }
 
   componentDidMount(){
@@ -61,6 +62,13 @@ class App extends React.Component {
   updateProfileLink = avatarObj => {
     this.setState({avatar: avatarObj.image})
   }
+
+  selectedStageHandler = (event) => {
+    this.setState({selectedStage: event.target.alt})
+  }
+  backToGameMenu = (event) => {
+    this.setState({selectedStage: ""})
+  }
   
   render(){
     return (
@@ -98,10 +106,14 @@ class App extends React.Component {
               />}/>
             <Route path="/" render={() => 
               <GameContainer 
-                userId={this.state.userId} 
-                username={this.state.username} 
-                updateScores={this.updateScores}/>} 
-              />
+              userId={this.state.userId} 
+              username={this.state.username}
+              avatarImage={this.state.avatar} 
+              updateScores={this.updateScores}
+              selectedStage={this.selectedStageHandler}
+              stage={this.state.selectedStage}
+              backToGameMenu={this.backToGameMenu}/>} 
+            />
           </Switch>
         </div>
       </div>

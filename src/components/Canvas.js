@@ -16,13 +16,14 @@ class Canvas extends Component {
     coins: 0,
     score: 0,
     distance: 0,
+    maxDistance: 0,
+    currentDistance: 0,
     timer: 0, 
     millisecond: 0,
     playerName: null,
-    playerAvatar: null, 
-    moving: null, 
-    rotating: null, 
-    gameOn: true
+    playerAvatar: null,  
+    gameOn: true, 
+    stage: this.props.stage
   }
 
   canvas = React.createRef()
@@ -30,55 +31,58 @@ class Canvas extends Component {
   palmTreePositions = this.createPalmTreePositions()
   interval = null
   miniInterval = null
-  animationId = null
+  animationID = null
 
   componentDidMount() {
     this.game()
+    this.startTimers()
   }
 
   componentWillUnmount() {
     clearInterval(this.interval)
     clearInterval(this.miniInterval)
-    window.cancelAnimationFrame(this.animationId)
+    cancelAnimationFrame(this.animationID)
   }
 
   restartGame = () => {
+    
     this.coins = this.createCoins()
     this.setState({
       lives: 1, 
       coins: 0,
       score: 0,
       distance: 0,
+      maxDistance: 0,
+      currentDistance: 0,
       timer: 0,
-      moving: null, 
-      rotating: null, 
+      millisecond: 0,
       gameOn: true
       
-    }, this.game())
+    }, this.componentDidMount())
+
   }
 
-  startTimer = () => {
-    this.interval = setInterval (() => {
-
-      // console.log("interval")
-      this.setState((prevState) => ({timer: prevState.timer + 1}))}, 1000)
-    this.miniInterval = setInterval(() => {
-      // console.log("miniInterval")
-      this.setState((prevState) => ({millisecond: prevState.millisecond + 10}))}, 10)
+  startTimers = () => {
+    this.interval = setInterval (() => this.setState((prevState) => ({timer: prevState.timer + 1})), 1000)
+    this.miniInterval = setInterval(() => this.setState((prevState) => ({millisecond: prevState.millisecond + 1})), 1)
   }
 
-  setProfile = (player) => {
+  setProfile = () => {
     this.setState({
-      playerName: player.name, 
-      playerAvatar: player.profileImageSource, 
+      playerName: this.props.username,
+      playerAvatar: this.props.avatarImage 
     })
   }
 
-  gainScoreAndDistance = (speed) => {
+  gainDistance = (speed) => {
     this.setState((prevState) => ({
       distance: prevState.distance + (speed / 50),
+      currentDistance: prevState.currentDistance + (speed / 50),
       score: prevState.score + ((prevState.distance / 1000) * speed)
     }))
+    if (this.state.maxDistance < this.state.currentDistance) {
+      this.setState({maxDistance: this.state.currentDistance})
+    }
   }
 
   createCoins() {
@@ -92,10 +96,9 @@ class Canvas extends Component {
   }
 
   createPalmTreePositions() {
-    let positions = Array.from({ length: 40}, () => (Math.random() * 1000))
+    let positions = Array.from({ length: 80}, () => (Math.random() * 1000))
     return positions
   }
-
 
   //SAVE SCORE
   saveScore = () => {
@@ -111,31 +114,27 @@ class Canvas extends Component {
   }
 
   game = () => {
+    
     const canvas = this.canvas.current
     const context = canvas.getContext("2d")
     const ground = new Ground() 
-    const player = new Player(canvas)
-    let t = 0
-    let speed = 0
+    const player = new Player(canvas, this.props.avatarImage)
+    const k = {ArrowUp:0, ArrowDown:0, ArrowLeft:0, ArrowRight:0};
     let isRunning = false
     let lifeOver = false
     let playing = true
-    let k = {ArrowUp:0, ArrowDown:0, ArrowLeft:0, ArrowRight:0};
-
+    let speed = 0
+    let t = 0
+    
     this.setState({gameOn: true})
-    this.setProfile(player)
-
-    if (this.state.timer === 0) {
-      this.startTimer()
-    }
+    this.setProfile()
 
     const loseLives = () => {
-      this.setState((prevState) => ({lives: prevState.lives - 1}))
+      this.setState((prevState) => ({lives: prevState.lives - 1, currentDistance: 0}))
       lifeOver = true
       this.game()
       return ;
     }
-
     
     this.draw = function() {
 
@@ -156,14 +155,14 @@ class Canvas extends Component {
         if (this.state.lives > 1) {
           loseLives()
         } else {
-          let totalScore = (this.state.coins * this.state.distance) - this.state.timer
+          clearInterval(this.miniInterval)
+          clearInterval(this.interval)
+          let totalScore = (this.state.coins * this.state.maxDistance) - this.state.timer
           this.setState({
             lives: 0, 
             gameOn: false, 
             score: (totalScore).toFixed(2)
           })
-          clearInterval(this.interval)
-          clearInterval(this.miniInterval)
           lifeOver = true
         }
       }
@@ -194,7 +193,7 @@ class Canvas extends Component {
       context.rotate(player.rot)
       
       //AVATAR SIZE AND SCREEN POSITION
-      context.drawImage(player.movingImage, -19, -19, 29, 35)
+      context.drawImage(player.movingImage, -21, -21, 40, 34)
       context.restore(); 
     }
     
@@ -206,7 +205,7 @@ class Canvas extends Component {
       speed -= (speed - (k.ArrowUp - k.ArrowDown)) * 0.007;
       t += 6 * speed;
       if (speed.toFixed(2) > 0.05 && this.state.lives > 0) {
-        this.gainScoreAndDistance(speed)
+        this.gainDistance(speed)
       }
       
       if (speed.toFixed(2) > 0.05 && !isRunning){
@@ -219,38 +218,43 @@ class Canvas extends Component {
         isRunning = false
       }
 
-      //NIGHTSKY BACKGROUND
-      const gradient = context.createLinearGradient(((100)-(this.state.distance/10)), (100-this.state.distance), (100-(this.state.distance/10)), (800+this.state.distance))
-      gradient.addColorStop(0, "midnightblue");
-      gradient.addColorStop(1, "thistle");
-      context.fillStyle = gradient
+      //NIGHT SKY BACKGROUND
+      if(this.state.stage === "Night Sky Stage"){
+        const gradient = context.createLinearGradient(((100)-(this.state.distance/10)), (100-this.state.distance), (100-(this.state.distance/10)), (800+this.state.distance))
+        gradient.addColorStop(0, "midnightblue");
+        gradient.addColorStop(1, "thistle");
+        context.fillStyle = gradient
+      }
+      //DESERT HEAT BACKGROUND
+      if(this.state.stage === "Desert Heat Stage"){
+        context.fillStyle = 'rgb(245, 186, 83)'
+      }
       
-      //EGYPT BACKGROUND
-      // context.fillStyle = 'rgb(245, 186, 83)'
-    
-      //******************GREY FLOOR DON'T COMMENT**************************//
+    //*************************DON'T COMMENT**************************//
       context.fillRect(0, 0, canvas.width, canvas.height);
       context.fillStyle = "rgb(39, 44, 44)";
       context.beginPath();
-      //******************GREY FLOOR DON'T COMMENT**************************//
+    //*************************DON'T COMMENT**************************//
       
+    //************************NIGHT STAGE********************************//
+      if(this.state.stage === "Night Sky Stage"){
+        let nightSky = new NightSky()
+        nightSky.drawStage(canvas, context, this.state.distance, this.state.millisecond)
+      }
+    //************************NIGHT STAGE********************************//
       
-      //************************NIGHT STAGE********************************//
-      let nightSky = new NightSky()
-      nightSky.drawStage(canvas, context, this.state.distance, this.state.millisecond)
-      //************************NIGHT STAGE********************************//
-      
-      //************************EGYPT STAGE********************************//
-      // let egypt = new Egypt()
-      // egypt.drawStage(canvas, context, ground, this.state.distance, this.palmTreePositions, t, this.state.timer)
-      //************************EGYPT STAGE********************************//
-      
+    //************************EGYPT STAGE********************************//
+      if(this.state.stage === "Desert Heat Stage"){
+        let egypt = new Egypt()
+        egypt.drawStage(canvas, context, ground, this.state.distance, this.palmTreePositions, t, this.state.timer)
+      }
+    //************************EGYPT STAGE********************************//
+        
       this.draw();
-      this.animationId = requestAnimationFrame(loop);
+      this.animationID = requestAnimationFrame(loop);
       const playerCoordinates = {}
       playerCoordinates.x = Math.round(player.x)
       playerCoordinates.y = Math.round(player.y)
-      // console.log(this.state.millisecond)
 
       //RENDER COINS
       this.coins.forEach(coin => {
@@ -290,7 +294,7 @@ class Canvas extends Component {
       <div>
         <canvas ref={this.canvas} height={350} width={window.innerWidth} className="canvas"/>
         <GameStats stats={this.state}/>
-        {!this.state.gameOn ? <EndGame stats={this.state} saveScore={this.saveScore} restartGame={this.restartGame}/> : null}
+        {!this.state.gameOn ? <EndGame backToGameMenu={this.props.backToGameMenu} stats={this.state} saveScore={this.saveScore} restartGame={this.restartGame}/> : null}
       </div>
     )
   }
