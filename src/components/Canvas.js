@@ -105,7 +105,7 @@ class Canvas extends Component {
     const adapter = new JSONAPIAdapter('http://localhost:3000/api/v1/')
     const body = {
       points: this.state.score,
-      max_distance: this.state.maxDistance,
+      max_distance: parseInt(this.state.maxDistance),
       user_number: this.props.userId,
       username: this.props.username
     }
