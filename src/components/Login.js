@@ -1,5 +1,6 @@
 import React from 'react'
 import {Redirect} from 'react-router-dom'
+import '../Login.css'
 
 class Login extends React.Component {
     
@@ -42,19 +43,21 @@ class Login extends React.Component {
             return <Redirect to="/"/>
         }
         return (
-            <div>
-                <h1>Login Form</h1>
-                <form onSubmit={this.handleSubmit}>
-                    <label>
-                        Username:
-                        <input type="text" value={this.state.username} name="username" onChange={this.handleChange}/>
-                    </label>
-                    <label>
-                        Password:
-                        <input type="password" value={this.state.password} name="password" onChange={this.handleChange}/>
-                    </label>
-                    <input type="submit" value="submit"/>
-                </form>
+            <div className="login-screen">
+                <div className="login-form">
+                    <p>Login</p>
+                    <form onSubmit={this.handleSubmit}>
+                        <label>
+                            <input className="input-field" type="text" placeholder="USERNAME" value={this.state.username} name="username" onChange={this.handleChange}/>
+                        </label>
+                        <br/>
+                        <label>
+                            <input className="input-field" type="password" placeholder="PASSWORD" value={this.state.password} name="password" onChange={this.handleChange}/>
+                        </label>
+                        <br/>
+                        <input className="submit-btn" type="submit" value="submit"/>
+                    </form>
+                </div>
             </div>
         )
     }

@@ -84,8 +84,8 @@ class ProfileContainer extends React.Component {
         }
         return(
             <div>
-                <button onClick={() => console.log(this.state)}>See State</button>
-                <h1>Profile</h1>
+                {/* <button onClick={() => console.log(this.state)}>See State</button> */}
+                {/* <h1>Profile</h1> */}
                 {this.state.editMode ? 
                     <>
                         <button onClick={this.toggleEdit}>Cancel</button>
@@ -102,12 +102,13 @@ class ProfileContainer extends React.Component {
                     </>
                     :
                     <>
-                        <button onClick={this.toggleEdit}>Edit</button>
                         <Profile
                             user={this.state.user}
                             avatar={this.state.avatar}
                             findHighScore={this.findHighScore}
+                            toggleEdit={this.toggleEdit}
                         />
+                        {/* <button onClick={this.toggleEdit}>Edit</button> */}
                     </>
             }
             </div>

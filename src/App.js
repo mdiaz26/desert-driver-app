@@ -15,7 +15,8 @@ class App extends React.Component {
     avatars: [],
     userId: "",
     username: "",
-    avatar: ""
+    avatar: "", 
+    selectedStage: ""
   }
 
   componentDidMount(){
@@ -61,12 +62,19 @@ class App extends React.Component {
   updateProfileLink = avatarObj => {
     this.setState({avatar: avatarObj.image})
   }
+
+  selectedStageHandler = (event) => {
+    this.setState({selectedStage: event.target.alt})
+  }
+  backToGameMenu = (event) => {
+    this.setState({selectedStage: ""})
+  }
   
   render(){
     return (
       <div className="App">
         <Nav userId={this.state.userId} avatar={this.state.avatar} signOut={this.signOut}/>
-        <button onClick={() => console.log(this.state)}>See State</button>
+        {/* <button onClick={() => console.log(this.state)}>See State</button> */}
         <Switch>
           <Route path="/login" render={() => 
             <Login 
@@ -100,7 +108,10 @@ class App extends React.Component {
               userId={this.state.userId} 
               username={this.state.username}
               avatarImage={this.state.avatar} 
-              updateScores={this.updateScores}/>} 
+              updateScores={this.updateScores}
+              selectedStage={this.selectedStageHandler}
+              stage={this.state.selectedStage}
+              backToGameMenu={this.backToGameMenu}/>} 
             />
         </Switch>
       </div>

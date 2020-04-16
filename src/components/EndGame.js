@@ -13,7 +13,7 @@ class EndGame extends Component {
         <div className="end-game-report">
           <div>
             <button onClick={() => this.props.restartGame()} className="buttons">PLAY AGAIN</button>
-            <button className="buttons">GAME MENU</button>
+            <button onClick={() => this.props.backToGameMenu()} className="buttons">GAME MENU</button>
           </div>
           <section className="counters">
             <div className="container">
