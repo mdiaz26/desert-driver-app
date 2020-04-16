@@ -48,6 +48,7 @@ class SignUp extends React.Component {
     }
 
     handleRadioChange = event => {
+        event.persist()
         this.setState({selectedAvatar: event.target.name})
     }
 

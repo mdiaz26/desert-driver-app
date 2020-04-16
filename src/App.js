@@ -32,7 +32,8 @@ class App extends React.Component {
   }
 
   setUser = (userObj) => {
-    this.setState({userId: userObj.id, username: userObj.username, avatar: userObj.avatar.image})
+    let avatar = this.getAvatarById(userObj.avatar_id)
+    this.setState({userId: userObj.id, username: userObj.username, avatar: avatar.image})
   }
 
   signOut = () => {
@@ -68,6 +69,10 @@ class App extends React.Component {
   }
   backToGameMenu = (event) => {
     this.setState({selectedStage: ""})
+  }
+
+  getAvatarById = avatarId => {
+    return this.state.avatars.find(avatar => avatar.id === avatarId)
   }
   
   render(){
