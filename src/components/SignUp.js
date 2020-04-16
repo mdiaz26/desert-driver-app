@@ -31,7 +31,7 @@ class SignUp extends React.Component {
             }
         })
         .then(this.props.appendNewUser)
-        .then(this.props.setUser)
+        .then(userObj => this.props.setUser(userObj, userObj.avatar_id))
     }
 
     removeSpaces = string => {

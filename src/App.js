@@ -31,8 +31,8 @@ class App extends React.Component {
     .then(avatars => this.setState({avatars}))
   }
 
-  setUser = (userObj) => {
-    let avatar = this.getAvatarById(userObj.avatar_id)
+  setUser = (userObj, avatarId) => {
+    let avatar = this.getAvatarById(avatarId)
     this.setState({userId: userObj.id, username: userObj.username, avatar: avatar.image})
   }
 

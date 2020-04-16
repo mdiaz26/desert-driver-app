@@ -5,7 +5,7 @@ const ScoreRow = (props) => {
         <tr>
             <td>{props.rank}</td>
             <td>{props.points}</td>
-            <td>{props.distance}</td>
+            <td>{props.max_distance}</td>
             <td>{props.username}</td>
         </tr>
     )

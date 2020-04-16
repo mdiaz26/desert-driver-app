@@ -1,7 +1,7 @@
 GOALS:
 
 APRIL 15 NOTES:
-  * when new user is created an error occurs:
+  √ when new user is created an error occurs:
     "cannot read property image of undefined"
       App line 34 'setUser' function
   However, i can log in with newly created credentials
