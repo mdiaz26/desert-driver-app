@@ -26,13 +26,13 @@ class ProfileContainer extends React.Component {
         .then(user => this.setState({user: user, avatar: user.avatar}))
     }
 
-    findHighScore = () => {
+    findBestInAttribute = (attribute) => {
         if (this.props.scores.length && this.state.user.id) {
             const scores = [...this.props.scores]
             let userScores = scores.filter(score => score.user_number === this.state.user.id)
             if (userScores.length > 0) {
-                userScores.sort((scoreA, scoreB) =>scoreB.points -  scoreA.points)
-                return userScores[0].points
+                userScores.sort((scoreA, scoreB) =>scoreB[attribute] -  scoreA.points)
+                return userScores[0][attribute]
             } else if (userScores.length === 0 ) {
                 return "no scores yet"
             }
@@ -106,7 +106,7 @@ class ProfileContainer extends React.Component {
                         <Profile
                             user={this.state.user}
                             avatar={this.state.avatar}
-                            findHighScore={this.findHighScore}
+                            findBestInAttribute={this.findBestInAttribute}
                             toggleEdit={this.toggleEdit}
                         />
                         {/* <button onClick={this.toggleEdit}>Edit</button> */}

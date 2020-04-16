@@ -77,50 +77,48 @@ class App extends React.Component {
   
   render(){
     return (
-      <div className="App">
-        <div className="text-white">
-          <Nav userId={this.state.userId} avatar={this.state.avatar} signOut={this.signOut}/>
-          <button onClick={() => console.log(this.state)}>See State</button>
-          <Switch>
-            <Route path="/login" render={() => 
-              <Login 
-                users={this.state.users} 
-                setUser={this.setUser}/>}
-              />
-            <Route path="/signup" render={() => 
-              <SignUp 
-                users={this.state.users}
-                setUser={this.setUser}
-                appendNewUser={this.appendNewUser}
-                avatars={this.state.avatars}
-              />}/>
-            <Route path="/leaderboard" render={() => 
-              <Leaderboard 
-                scores={this.state.scores} 
-                users={this.state.users}/>}
-              />
-            <Route path="/users/:id" render={(routerProps) => 
-              <ProfileContainer 
-                {...routerProps} 
-                scores={this.state.scores} 
-                avatars={this.state.avatars}
-                userId={this.state.userId} 
-                appendUpdatedUser={this.appendUpdatedUser}
-                updateProfileLink={this.updateProfileLink}
-                signOut={this.signOut}
-              />}/>
-            <Route path="/" render={() => 
-              <GameContainer 
-              userId={this.state.userId} 
-              username={this.state.username}
-              avatarImage={this.state.avatar} 
-              updateScores={this.updateScores}
-              selectedStage={this.selectedStageHandler}
-              stage={this.state.selectedStage}
-              backToGameMenu={this.backToGameMenu}/>} 
+      <div className="App text-white">
+        <Nav userId={this.state.userId} avatar={this.state.avatar} signOut={this.signOut}/>
+        {/* <button onClick={() => console.log(this.state)}>See State</button> */}
+        <Switch>
+          <Route path="/login" render={() => 
+            <Login 
+              users={this.state.users} 
+              setUser={this.setUser}/>}
             />
-          </Switch>
-        </div>
+          <Route path="/signup" render={() => 
+            <SignUp 
+              users={this.state.users}
+              setUser={this.setUser}
+              appendNewUser={this.appendNewUser}
+              avatars={this.state.avatars}
+            />}/>
+          <Route path="/leaderboard" render={() => 
+            <Leaderboard 
+              scores={this.state.scores} 
+              users={this.state.users}/>}
+            />
+          <Route path="/users/:id" render={(routerProps) => 
+            <ProfileContainer 
+              {...routerProps} 
+              scores={this.state.scores} 
+              avatars={this.state.avatars}
+              userId={this.state.userId} 
+              appendUpdatedUser={this.appendUpdatedUser}
+              updateProfileLink={this.updateProfileLink}
+              signOut={this.signOut}
+            />}/>
+          <Route path="/" render={() => 
+            <GameContainer 
+            userId={this.state.userId} 
+            username={this.state.username}
+            avatarImage={this.state.avatar} 
+            updateScores={this.updateScores}
+            selectedStage={this.selectedStageHandler}
+            stage={this.state.selectedStage}
+            backToGameMenu={this.backToGameMenu}/>} 
+          />
+        </Switch>
       </div>
     );
   }

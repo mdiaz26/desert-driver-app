@@ -17,7 +17,7 @@ class Login extends React.Component {
     }
 
     findUser = username => {
-        return this.props.users.find(user => user.username === username)
+        return this.props.users.find(user => user.username.toLowerCase() === username.toLowerCase())
     }
 
     handleSubmit = event => {
