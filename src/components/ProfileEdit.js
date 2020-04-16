@@ -16,39 +16,63 @@ const ProfileEdit = (props) => {
         changePasswordState({display: !passwordState.display})
     }
 
+    const handleSelection = () => {
+        let selection = props.avatars.filter(avatar => avatar.name === props.avatar.name)
+        let obj = selection[0]
+        let image
+        for (let key in obj) {
+            if (key === "image")
+            image = obj[key]
+        }
+        return image
+    }
+
     return(
-        <div>
-            <form onSubmit={props.handleSubmit}>
-                <label>
-                    Username:
-                    <input type="text" name="username" value={props.user.username} onChange={props.handleChange}/>
-                </label>
-                <label>
-                    Password:
-                    {passwordState.display ? 
-                        <input type="text" name="password" value={props.user.password} onChange={props.handleChange}/>
-                        :
-                        <input type="password" name="password" value={props.user.password} onChange={props.handleChange}/>
-                    }
-                    <button onClick={togglePassword}>Show Password</button>
-                </label>
-                <input type="submit" value="Submit"/>
-            </form>
-            <button onClick={toggleModal}>Delete Account</button>
-            {modalState.display && 
-                <DeleteModal 
-                    toggleModal={toggleModal} 
-                    deleteAccount={props.deleteAccount}
-                />}
-            <div className="avatar-frame">
-                {props.avatars.map((avatar, index) => 
-                    <AvatarChoice 
-                    key={avatar.id} 
-                    {...avatar} 
-                    number={index + 1}
-                    handleRadioChange={props.handleRadioChange}
-                    className={props.avatar.name === avatar.name ? "gold-border" : "none"}
-                />)}
+        <div className="sign-up-screen">
+            <div className="sign-up-form">
+                <p>Edit Profile</p>
+
+                <form className="form" onSubmit={props.handleSubmit}>
+                    <label>
+                        username
+                        <input className="input-field" type="text" name="username" value={props.user.username} onChange={props.handleChange}/>
+                    </label>
+                    <label>
+                        password
+                        {passwordState.display ? 
+                            <input className="input-field" type="text" name="password" value={props.user.password} onChange={props.handleChange}/>
+                            :
+                            <input className="input-field" type="password" name="password" value={props.user.password} onChange={props.handleChange}/>
+                        }
+                        {/* <button onClick={togglePassword}>Show Password</button> */}
+                    </label>
+                        {passwordState.display ? <img onClick={togglePassword} src="game-images/hide-password.png"/> : <img onClick={togglePassword} src="game-images/hide-password.png" alt="show-password"/>}
+                        
+                    <br/>
+                    <p className="choose-your-ride">SWITCH YOUR RIDE</p>
+                <div className="avatar-frame">
+                    {props.avatars.map((avatar, index) => 
+                        <AvatarChoice 
+                        key={avatar.id} 
+                        {...avatar} 
+                        number={index + 1}
+                        handleRadioChange={props.handleRadioChange}
+                        className={props.avatar.name === avatar.name ? "gold-border" : "none"}
+                        />)}
+                    <div className="inner-circle">
+                        <img id="fill-this-image" src={handleSelection()} alt={handleSelection()}/>
+                    </div>
+                </div>
+                        <input type="submit" value="Submit"/>
+                    </form>
+                        <button onClick={props.toggleEdit}>Cancel</button>
+                        <button onClick={toggleModal}>Delete Account</button>
+                        {modalState.display && 
+                            <DeleteModal 
+                            toggleModal={toggleModal} 
+                            deleteAccount={props.deleteAccount}
+                            />}
+
             </div>
         </div>
     )

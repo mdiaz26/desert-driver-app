@@ -13,7 +13,7 @@
     top: 50%;
     left: 50%;
     margin-left: -50px;
-    
+    transition: all 1s ease-in-out;
     margin-top: 200px;
 }
 #fill-this-image {
@@ -23,6 +23,7 @@
     // align-content: center;
     margin-left: -78px;
     margin-top: 150px;
+    transition: all 1s ease-in-out;
 }
 .inner-circle {
     display: flex;
@@ -33,6 +34,8 @@
     margin-right: auto;
     margin-bottom: auto;
     margin-top: auto;
+    transition: all 1s ease-in-out;
+
 }
 
 .choose-your-ride {
@@ -53,6 +56,7 @@
 
 .gold-border {
     // border: 2px solid gold;
+    transition: all 1s ease-in-out;
     width: 6em;
     // border-radius: 50%;
 }

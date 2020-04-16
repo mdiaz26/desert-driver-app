@@ -88,7 +88,7 @@ class ProfileContainer extends React.Component {
                 {/* <h1>Profile</h1> */}
                 {this.state.editMode ? 
                     <>
-                        <button onClick={this.toggleEdit}>Cancel</button>
+                        {/* <button onClick={this.toggleEdit}>Cancel</button> */}
                         <ProfileEdit
                             user={this.state.user}
                             handleChange={this.handleChange}
@@ -98,6 +98,7 @@ class ProfileContainer extends React.Component {
                             avatar={this.state.avatar}
                             isChecked={this.isChecked}
                             handleRadioChange={this.handleRadioChange}
+                            toggleEdit={this.toggleEdit}
                         />
                     </>
                     :

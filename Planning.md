@@ -10,7 +10,8 @@ APRIL 15 NOTES:
   * in ProfileContainer, can we create a method to retrieve the user's max distance? lets pass the return value down to Profile.js as a prop for display
   * lets talk about distance vs max distance
   * can we fix the validation so that logging in is not case sensitive? we can probably run .toLowerCase() on everything
-
+  * Signout button should redirect user to Login screen until we have a home page
+  
 
 
 

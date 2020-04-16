@@ -40,26 +40,33 @@ span{
 }
 
 .avatar-div {
+  position: absolute;
   display: flex;
   flex-direction: column;
   width: 300px;
   text-align: center;
+  /* margin-right: 255px; */
+  /* margin-top: -75px; */
 }
 .avatar{
+  position: relative;
   float: right;
   width: 180px;
-  white-space: break-spaces;
-  margin-right: 255px;
-  margin-top: -125px;
+  margin-left: 110px;
+  margin-top: 15px;
+  /* margin-right: auto; */
+  /* white-space: break-spaces; */
 }
 .edit-btn {
+  position: relative;
   background-color: transparent;
   background-repeat: no-repeat;
+  color: antiquewhite;
   border: none;
-  margin-top: 270px;
-  margin-left: 10px;
-  margin-left: auto;
-  margin-right: auto;
+  margin-top: 10px;
+  margin-left: 330px;
+  /* margin-left: auto;
+  margin-right: auto; */
   transition: all 0.2s ease-in-out;
 }
 .edit-btn:hover {
@@ -67,10 +74,10 @@ span{
   background-repeat: no-repeat;
   border: none;
   text-decoration: underline;
-  color: antiquewhite;
-  margin-top: 270px;
-  margin-left: auto;
-  margin-right: auto;
+  color: rgb(248, 198, 124);
+  /* margin-top: 270px; */
+  /* margin-left: auto;
+  margin-right: auto; */
   transition: all 0.1s ease-in-out;
 }
 
