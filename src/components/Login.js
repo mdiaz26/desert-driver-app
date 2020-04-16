@@ -1,4 +1,6 @@
 import React from 'react'
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
 import {Redirect} from 'react-router-dom'
 
 class Login extends React.Component {
@@ -45,15 +47,18 @@ class Login extends React.Component {
             <div>
                 <h1>Login Form</h1>
                 <form onSubmit={this.handleSubmit}>
-                    <label>
-                        Username:
-                        <input type="text" value={this.state.username} name="username" onChange={this.handleChange}/>
-                    </label>
-                    <label>
-                        Password:
-                        <input type="password" value={this.state.password} name="password" onChange={this.handleChange}/>
-                    </label>
-                    <input type="submit" value="submit"/>
+                    <Form.Group controlId="formBasicUsername">
+                        <Form.Label>Username:</Form.Label>
+                        <Form.Control type="text" value={this.state.username} name="username" onChange={this.handleChange}/>
+                    </Form.Group>
+
+                    <Form.Group controlId="formBasicPassword">
+                        <Form.Label>Password:</Form.Label>
+                        <Form.Control type="password" value={this.state.password} name="password" onChange={this.handleChange}/>
+                    <Button variant="primary" type="submit" className="text-dark">
+                        Submit
+                    </Button>
+                    </Form.Group>
                 </form>
             </div>
         )
