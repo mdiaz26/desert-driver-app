@@ -13,15 +13,9 @@ class Player {
   }
   
   startAnimation = () => {
-<<<<<<< HEAD
     // let i = 1
     // this.movement = setInterval(() => this.movingImage.src = `caveman/running0${i<8 ? i+=1 : i=1}`, 125)
     // this.movingImage.src = `caveman/caveman.gif`
-=======
-// let i = 1
-    // this.movement = setInterval(() => this.movingImage.src = `caveman/running0${i<8 ? i+=1 : i=1}.png`, 125)
-    this.movement = `caveman/running01.png`
->>>>>>> 9dd5b3592d272c87aa9d349389dc01d8bb67eb3f
   }
 
   stopAnimation = () => {

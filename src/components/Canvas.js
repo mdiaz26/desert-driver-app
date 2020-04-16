@@ -31,11 +31,7 @@ class Canvas extends Component {
   palmTreePositions = this.createPalmTreePositions()
   interval = null
   miniInterval = null
-<<<<<<< HEAD
   animationID = null
-=======
-  animationId = null
->>>>>>> 9dd5b3592d272c87aa9d349389dc01d8bb67eb3f
 
   componentDidMount() {
     this.game()
@@ -45,11 +41,7 @@ class Canvas extends Component {
   componentWillUnmount() {
     clearInterval(this.interval)
     clearInterval(this.miniInterval)
-<<<<<<< HEAD
     cancelAnimationFrame(this.animationID)
-=======
-    window.cancelAnimationFrame(this.animationId)
->>>>>>> 9dd5b3592d272c87aa9d349389dc01d8bb67eb3f
   }
 
   restartGame = () => {
@@ -70,20 +62,9 @@ class Canvas extends Component {
 
   }
 
-<<<<<<< HEAD
   startTimers = () => {
     this.interval = setInterval (() => this.setState((prevState) => ({timer: prevState.timer + 1})), 1000)
     this.miniInterval = setInterval(() => this.setState((prevState) => ({millisecond: prevState.millisecond + 1})), 1)
-=======
-  startTimer = () => {
-    this.interval = setInterval (() => {
-
-      // console.log("interval")
-      this.setState((prevState) => ({timer: prevState.timer + 1}))}, 1000)
-    this.miniInterval = setInterval(() => {
-      // console.log("miniInterval")
-      this.setState((prevState) => ({millisecond: prevState.millisecond + 10}))}, 10)
->>>>>>> 9dd5b3592d272c87aa9d349389dc01d8bb67eb3f
   }
 
   setProfile = () => {
@@ -124,7 +105,7 @@ class Canvas extends Component {
     const adapter = new JSONAPIAdapter('http://localhost:3000/api/v1/')
     const body = {
       points: this.state.score,
-      distance: this.state.distance,
+      max_distance: parseInt(this.state.maxDistance),
       user_number: this.props.userId,
       username: this.props.username
     }
@@ -182,11 +163,6 @@ class Canvas extends Component {
             gameOn: false, 
             score: (totalScore).toFixed(2)
           })
-<<<<<<< HEAD
-=======
-          clearInterval(this.interval)
-          clearInterval(this.miniInterval)
->>>>>>> 9dd5b3592d272c87aa9d349389dc01d8bb67eb3f
           lifeOver = true
         }
       }
@@ -275,11 +251,7 @@ class Canvas extends Component {
     //************************EGYPT STAGE********************************//
         
       this.draw();
-<<<<<<< HEAD
       this.animationID = requestAnimationFrame(loop);
-=======
-      this.animationId = requestAnimationFrame(loop);
->>>>>>> 9dd5b3592d272c87aa9d349389dc01d8bb67eb3f
       const playerCoordinates = {}
       playerCoordinates.x = Math.round(player.x)
       playerCoordinates.y = Math.round(player.y)

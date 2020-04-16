@@ -1,15 +1,15 @@
 GOALS:
 
 APRIL 15 NOTES:
-  * when new user is created an error occurs:
+  √ when new user is created an error occurs:
     "cannot read property image of undefined"
       App line 34 'setUser' function
   However, i can log in with newly created credentials
 
-  * let's update the scores table to show Max distance instead of distance
-  * in ProfileContainer, can we create a method to retrieve the user's max distance? lets pass the return value down to Profile.js as a prop for display
+  √ let's update the scores table to show Max distance instead of distance
+  √ in ProfileContainer, can we create a method to retrieve the user's max distance? lets pass the return value down to Profile.js as a prop for display
   * lets talk about distance vs max distance
-  * can we fix the validation so that logging in is not case sensitive? we can probably run .toLowerCase() on everything
+  √ can we fix the validation so that logging in is not case sensitive? we can probably run .toLowerCase() on everything
   * Signout button should redirect user to Login screen until we have a home page
   
 

@@ -31,8 +31,9 @@ class App extends React.Component {
     .then(avatars => this.setState({avatars}))
   }
 
-  setUser = (userObj) => {
-    this.setState({userId: userObj.id, username: userObj.username, avatar: userObj.avatar.image})
+  setUser = (userObj, avatarId) => {
+    let avatar = this.getAvatarById(avatarId)
+    this.setState({userId: userObj.id, username: userObj.username, avatar: avatar.image})
   }
 
   signOut = () => {
@@ -69,10 +70,14 @@ class App extends React.Component {
   backToGameMenu = (event) => {
     this.setState({selectedStage: ""})
   }
+
+  getAvatarById = avatarId => {
+    return this.state.avatars.find(avatar => avatar.id === avatarId)
+  }
   
   render(){
     return (
-      <div className="App">
+      <div className="App text-white">
         <Nav userId={this.state.userId} avatar={this.state.avatar} signOut={this.signOut}/>
         {/* <button onClick={() => console.log(this.state)}>See State</button> */}
         <Switch>
@@ -105,14 +110,14 @@ class App extends React.Component {
             />}/>
           <Route path="/" render={() => 
             <GameContainer 
-              userId={this.state.userId} 
-              username={this.state.username}
-              avatarImage={this.state.avatar} 
-              updateScores={this.updateScores}
-              selectedStage={this.selectedStageHandler}
-              stage={this.state.selectedStage}
-              backToGameMenu={this.backToGameMenu}/>} 
-            />
+            userId={this.state.userId} 
+            username={this.state.username}
+            avatarImage={this.state.avatar} 
+            updateScores={this.updateScores}
+            selectedStage={this.selectedStageHandler}
+            stage={this.state.selectedStage}
+            backToGameMenu={this.backToGameMenu}/>} 
+          />
         </Switch>
       </div>
     );

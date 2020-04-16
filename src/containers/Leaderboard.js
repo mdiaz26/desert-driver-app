@@ -15,7 +15,7 @@ const Leaderboard = (props) => {
                     <tr>
                         <th>Rank</th>
                         <th>Score</th>
-                        <th>Distance</th>
+                        <th>Max Distance</th>
                         <th>Player</th>
                     </tr>
                 </thead>

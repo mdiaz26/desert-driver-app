@@ -7,7 +7,6 @@ const Nav = (props) => {
     const isLoggedIn = (!!props.userId)
     
     return (
-        // <div style={{display: 'flex', justifyContent: 'space-between'}}>
         <Navbar bg="dark" >
             {isLoggedIn ?
                 <>

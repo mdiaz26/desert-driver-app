@@ -17,7 +17,7 @@ class Login extends React.Component {
     }
 
     findUser = username => {
-        return this.props.users.find(user => user.username === username)
+        return this.props.users.find(user => user.username.toLowerCase() === username.toLowerCase())
     }
 
     handleSubmit = event => {
@@ -25,7 +25,7 @@ class Login extends React.Component {
         const userObj = this.findUser(this.state.username)
         if (userObj) {
             if (this.state.password === userObj.password) {
-                this.props.setUser(userObj) 
+                this.props.setUser(userObj, userObj.avatar.id) 
                 this.setState({redirectToGame: true})
             } else if (this.state.password !== userObj.password) {
                 alert("incorrect password")
