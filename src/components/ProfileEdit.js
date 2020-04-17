@@ -44,9 +44,8 @@ const ProfileEdit = (props) => {
                             :
                             <input className="input-field" type="password" name="password" value={props.user.password} onChange={props.handleChange}/>
                         }
-                        {/* <button onClick={togglePassword}>Show Password</button> */}
                     </label>
-                        {passwordState.display ? <img onClick={togglePassword} src="game-images/hide-password.png"/> : <img onClick={togglePassword} src="game-images/hide-password.png" alt="show-password"/>}
+                        {passwordState.display ? <img onClick={togglePassword} src="/game-images/hide-password.png" alt="hide password" className="tiny-avatar"/> : <img onClick={togglePassword} src="/game-images/hide-password.png" alt="show-password" className="tiny-avatar"/>}
                         
                     <br/>
                     <p className="choose-your-ride">SWITCH YOUR RIDE</p>

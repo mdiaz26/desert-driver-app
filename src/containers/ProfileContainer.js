@@ -9,22 +9,48 @@ const adapter = new JSONAPIAdapter('http://localhost:3000/api/v1/')
 class ProfileContainer extends React.Component {
     
     state = {
-        user: {
-            username: "",
-            password: "",
-            id: "",
-            avatar: {
-                image: ""
-            }
-        },
-        avatar: {},
-        editMode: false
+        user: {},
+        avatar: "",
+        editMode: false,
+        redirectToLogin: false
     }
 
     componentDidMount(){
-        adapter.getOne('users', this.props.match.params.id)
-        .then(user => this.setState({user: user, avatar: user.avatar}))
+        if (this.props.user) {
+            console.log(this.props.user)    
+            this.setState({
+                user: {
+                    username: this.props.user.username,
+                    password: this.props.user.password,
+                    id: this.props.user.id
+                },
+                avatar: this.props.user.avatar,
+                editMode: false,
+                redirectToLogin: false
+            })
+        } else {
+            this.setState({
+                user: {},
+                avatar: "",
+                editMode: false,
+                redirectToLogin: true
+            })
+        }
     }
+
+    // abortController = new AbortController()
+
+    // componentDidMount(){
+    //     // adapter.getOne('users', this.props.match.params.id)
+    //     // .then(user => this.setState({user: user, avatar: user.avatar}))
+    //     fetch(`http://localhost:3000/api/v1/users/${this.props.match.params.id}`, {signal: this.abortController.signal})
+    //     .then(response => response.json())
+    //     .then(user => this.setState({user: user, avatar: user.avatar}))
+    // }
+
+    // componentWillUnmount(){
+    //     this.abortController.abort()
+    // }
 
     findBestInAttribute = (attribute) => {
         if (this.props.scores.length && this.state.user.id) {
@@ -64,7 +90,8 @@ class ProfileContainer extends React.Component {
         adapter.update("users", this.state.user.id, {
             username: this.state.user.username,
             password: this.state.user.password,
-            avatar_id: this.state.avatar.id})
+            avatar_id: this.state.avatar.id,
+        })
         .then(this.props.appendUpdatedUser)
     }
 
@@ -79,8 +106,9 @@ class ProfileContainer extends React.Component {
     }
 
     render(){
-        if (this.props.userId === "") {
-            return <Redirect to="/"/>
+        console.log("inside render", this.state)
+        if (this.state.redirectToLogin) {
+            return <Redirect to="/login"/>
         }
         return(
             <div>
@@ -88,7 +116,6 @@ class ProfileContainer extends React.Component {
                 {/* <h1>Profile</h1> */}
                 {this.state.editMode ? 
                     <>
-                        {/* <button onClick={this.toggleEdit}>Cancel</button> */}
                         <ProfileEdit
                             user={this.state.user}
                             handleChange={this.handleChange}
@@ -109,9 +136,8 @@ class ProfileContainer extends React.Component {
                             findBestInAttribute={this.findBestInAttribute}
                             toggleEdit={this.toggleEdit}
                         />
-                        {/* <button onClick={this.toggleEdit}>Edit</button> */}
                     </>
-            }
+                }
             </div>
         )
     }

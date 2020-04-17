@@ -9,7 +9,7 @@ const Leaderboard = (props) => {
     return (
         <div>
             <h1>Leaderboard</h1>
-            <button onClick={() => console.log(props)}>See my props</button>
+            {/* <button onClick={() => console.log(props)}>See my props</button> */}
             <table>
                 <thead>
                     <tr>

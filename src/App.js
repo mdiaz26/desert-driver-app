@@ -13,31 +13,38 @@ class App extends React.Component {
     users: [],
     scores: [],
     avatars: [],
+    user: {},
     userId: "",
     username: "",
     avatar: "", 
     selectedStage: ""
   }
 
+  adapter = new JSONAPIAdapter('http://localhost:3000/api/v1/')
+  
   componentDidMount(){
-    const adapter = new JSONAPIAdapter('http://localhost:3000/api/v1/')
-    adapter.getAll('scores')
+    this.adapter.getAll('scores')
     .then(scores => this.setState({scores}))
     
-    adapter.getAll('users')
+    this.adapter.getAll('users')
     .then(users => this.setState({users}))
 
-    adapter.getAll('avatars')
+    this.adapter.getAll('avatars')
     .then(avatars => this.setState({avatars}))
   }
 
-  setUser = (userObj, avatarId) => {
-    let avatar = this.getAvatarById(avatarId)
-    this.setState({userId: userObj.id, username: userObj.username, avatar: avatar.image})
-  }
+  setUser = (userObj) => {
+    console.log(userObj)
+    this.setState({user: userObj, avatar: userObj.avatar.image})
+    }
+
+  // setUser = (userObj, avatarId) => {
+  //   let avatar = this.getAvatarById(avatarId)
+  //   this.setState({userId: userObj.id, username: userObj.username, avatar: avatar.image})
+  // }
 
   signOut = () => {
-    this.setState({userId: ""})
+    this.setState({user: null})
   }
 
   updateScores = (scoreObj) => {
@@ -49,9 +56,10 @@ class App extends React.Component {
     return userObj
   }
 
-  appendUpdatedUser = userObj => {
+  appendUpdatedUser = (userObj) => {
     let newUsersArray = this.state.users.map(user => {
       if (user.id === userObj.id) {
+        console.log(userObj)
         return userObj
       } else {
         return user
@@ -78,7 +86,7 @@ class App extends React.Component {
   render(){
     return (
       <div className="App text-white">
-        <Nav userId={this.state.userId} avatar={this.state.avatar} signOut={this.signOut}/>
+        <Nav userId={this.state.user && this.state.user.id} avatar={this.state.avatar} signOut={this.signOut}/>
         {/* <button onClick={() => console.log(this.state)}>See State</button> */}
         <Switch>
           <Route path="/login" render={() => 
@@ -103,15 +111,17 @@ class App extends React.Component {
               {...routerProps} 
               scores={this.state.scores} 
               avatars={this.state.avatars}
-              userId={this.state.userId} 
+              user={this.state.user}
+              // userId={this.state.userId} 
               appendUpdatedUser={this.appendUpdatedUser}
               updateProfileLink={this.updateProfileLink}
               signOut={this.signOut}
             />}/>
           <Route path="/" render={() => 
             <GameContainer 
-            userId={this.state.userId} 
-            username={this.state.username}
+            user={this.state.user}
+            // userId={this.state.userId} 
+            // username={this.state.username}
             avatarImage={this.state.avatar} 
             updateScores={this.updateScores}
             selectedStage={this.selectedStageHandler}

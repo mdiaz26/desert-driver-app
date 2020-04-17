@@ -167,7 +167,7 @@ class Canvas extends Component {
         }
       }
 
-      if (!playing || grounded && Math.abs(player.rot) > Math.PI * 0.5){
+      if (!playing || (grounded && Math.abs(player.rot) > Math.PI * 0.5)){
         playing = false;
         player.rSpeed = 5;
         k.ArrowUp = 1;
