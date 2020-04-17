@@ -1,0 +1,48 @@
+.leaderboard-container {
+  width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.leaderboard-heading {
+  margin-top: 5%;
+  margin-bottom: 20px;
+  letter-spacing: 10px;
+  color: bisque;
+}
+
+.table{
+  border: 2px solid white;
+}
+
+.table-head {
+  background-color: rgb(172, 80, 80);
+  color: bisque;
+}
+
+.table-body {
+  background-color: rgb(210, 216, 228);
+  color: rgb(27, 130, 170);
+}
+
+.rank {
+  width: 50px;
+}
+
+.ranked-player {
+  font-weight: bold;
+  letter-spacing: 3px;
+}
+
+.ranked-distance {
+  width: 125px;
+
+}
+.ranked-score {
+  
+}
+
+
+#ranked-row:hover {
+  background-color: rgb(190, 196, 207);
+}

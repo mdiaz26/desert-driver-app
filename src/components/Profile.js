@@ -8,9 +8,9 @@ const Profile = (props) => {
                 <div className="parent-column">
                     <p className="column">USERNAME</p>
                     <span > {props.user.username.toUpperCase()}</span>
-                    <p className="colum">HIGH SCORE</p>
+                    <p className="column">HIGH SCORE</p>
                     <span > {props.findBestInAttribute('points')}</span>
-                    <p className="colum">MAX DISTANCE</p>
+                    <p className="column">MAX DISTANCE</p>
                     <span >{props.findBestInAttribute('max_distance')}</span>
                 </div>
                 

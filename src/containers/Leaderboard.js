@@ -1,5 +1,6 @@
 import React from 'react'
 import ScoreRow from '../components/ScoreRow'
+import '../Leaderboard.css'
 
 const Leaderboard = (props) => {
     
@@ -7,19 +8,19 @@ const Leaderboard = (props) => {
     const topTen = orderedScores.slice(0, 10)
     
     return (
-        <div>
-            <h1>Leaderboard</h1>
+        <div className="leaderboard-container">
+            <h1 className="leaderboard-heading">LEADERS</h1>
             {/* <button onClick={() => console.log(props)}>See my props</button> */}
-            <table>
-                <thead>
-                    <tr>
-                        <th>Rank</th>
-                        <th>Score</th>
-                        <th>Max Distance</th>
+            <table className="table">
+                <thead className="table-head">
+                    <tr >
+                        <th >Rank</th>
                         <th>Player</th>
+                        <th >Score</th>
+                        <th >Max Distance</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody className="table-body">
                     {topTen.map((score, index) => <ScoreRow key={score.id} rank={index + 1} {...score}/>)}
                 </tbody>
             </table>

@@ -18,14 +18,62 @@
 input {
   margin-left: 5px;
 }
-
-p{
+.username-label {
+  margin-bottom: -3px;
+  font-size: 13px;
+}
+.username-div {
+  margin-left: 25px;
+  display: flex;
+  flex-direction: column;
+}
+.password-div {
+  display: flex;
+  flex-direction: column;
+}
+#eye {
+  margin-top: 155px;
+}
+.edit-heading{
   color: blanchedalmond;
+
   font-weight: bold;
   font-size: 16px;
-  margin-bottom: 5px;
-  margin-top: 6px;
+  margin-bottom: -15px;
+  margin-top: 20px;
 }
+.cancel-btn {
+  margin-left: auto;
+  margin-right: auto;
+  background-color: transparent;
+  border: 1px solid transparent;
+}
+.delete-btn {
+  margin-left: auto;
+  margin-right: auto;
+  background-color: transparent;
+  border: 1px solid transparent;
+  margin-top: 10px
+}
+.cancel-btn:hover {
+  color: antiquewhite;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: transparent;
+  border: 1px solid transparent;
+  transition: all 0.1s ease-in-out;
+}
+.delete-btn:hover {
+  color: rgb(201, 66, 66);
+  font-weight: bold;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: transparent;
+  border: 1px solid transparent;
+  transition: all 0.1s ease-in-out;
+  margin-top: 10px
+}
+
 .input-field {
   text-align: center;
   font-size: 13px;
@@ -44,8 +92,9 @@ p{
 .submit-btn:hover {
   background-color: transparent;
   background-repeat: no-repeat;
+
   border: none;
-  text-decoration: underline;
+  text-decoration: none;
   color: antiquewhite;
   margin-left: auto;
   margin-right: auto;
