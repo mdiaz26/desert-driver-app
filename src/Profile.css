@@ -7,7 +7,7 @@
   border: 5px solid blanchedalmond;
   display: flex;
   flex-direction: row;
-  background-color: rgb(129, 118, 88);
+  background-color: rgb(216, 209, 191);
   margin-left: auto;
   margin-right: auto;
   margin-top: 20%;
@@ -27,15 +27,17 @@
 
 .column {
   text-align: left;
-  color: aqua;
-  margin-left: 5px;
+  color: rgb(87, 29, 29);
+  margin-left: -5px;
+  text-align: center;
 }
 span{
   text-align: center;
-  color: blanchedalmond;
+  color: rgb(175, 82, 66);
+  font-size: 17px;
   margin-top: -10px;
   margin-bottom: 5px;
-  margin-left: 5px;
+  /* margin-left: 5px; */
 
 }
 
@@ -53,7 +55,7 @@ span{
   float: right;
   width: 180px;
   margin-left: 110px;
-  margin-top: 15px;
+  margin-top: 40px;
   /* margin-right: auto; */
   /* white-space: break-spaces; */
 }
@@ -61,20 +63,20 @@ span{
   position: relative;
   background-color: transparent;
   background-repeat: no-repeat;
-  color: antiquewhite;
+  color: rgb(87, 29, 29);
   border: none;
   margin-top: 10px;
   margin-left: 330px;
   /* margin-left: auto;
   margin-right: auto; */
-  transition: all 0.2s ease-in-out;
+  transition: all 0.1s ease-in-out;
 }
 .edit-btn:hover {
   background-color: transparent;
   background-repeat: no-repeat;
   border: none;
-  text-decoration: underline;
-  color: rgb(248, 198, 124);
+  text-decoration: none;
+  color: rgb(175, 82, 66);
   /* margin-top: 270px; */
   /* margin-left: auto;
   margin-right: auto; */

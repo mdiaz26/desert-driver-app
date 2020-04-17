@@ -35,12 +35,11 @@ p{
 .submit-btn {
   background-color: transparent;
   background-repeat: no-repeat;
-  font-weight: bold;
   border: none;
   margin-bottom: 4px;
   margin-left: auto;
   margin-right: auto;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.1s ease-in-out;
 }
 .submit-btn:hover {
   background-color: transparent;

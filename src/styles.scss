@@ -1,10 +1,46 @@
+.nav-container{
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  margin-left: auto;
+}
+
 .btn {
-    background-color: white;
-    margin-left: 10px;
+  color: rgb(252, 229, 229);
+  margin-left: 10px;
+}
+.btn:hover {
+    background-color: transparent;
+    border: 1px solid transparent;
+    color: rgb(255, 147, 147);
+    // margin-left: auto;
+    margin-right: 0px;
+}
+.btn:hover::after {
+    background-color: transparent;
+    border: 1px solid transparent;
+    text-decoration: none;
+    // color: rgb(255, 147, 147);
+    // margin-left: auto;
+    // margin-right: 0px;
+}
+.profile-btn {
+  color: rgb(252, 229, 229);
+  margin-top: 5px;
+  // margin-left: auto;
+  margin-right: auto;
+}
+.profile-btn:hover {
+  background-color: transparent;
+  text-decoration: none;
+  color: rgb(255, 147, 147);
+  margin-top: 5px;
+  margin-right: auto;
 }
 
 .tiny-avatar {
-    width: 2em
+  // margin-top: 2px;
+  width: 2.5em
 }
 
 .avatar-frame img {

@@ -19,7 +19,7 @@ class GameStats extends Component {
                 <img className="current-player-image" src={this.props.stats.playerAvatar} alt={this.props.stats.playerName}/>
                 <h3 className="player-name">{this.props.stats.playerName ? this.capitalize(this.props.stats.playerName) : "..."}</h3>
             </div>
-            <h4 >X {this.props.stats.lives}</h4>
+            <h4 >x {this.props.stats.lives}</h4>
           </div>
         <div className="stats-div">
           <div className="pause-button">

@@ -1,53 +1,68 @@
-import React, { Component } from 'react'
+// import { render } from 'react-dom'
+import React, { useState } from 'react'
+import { useSpring, animated } from 'react-spring'
+// import useMeasure from '.useMeasure'
+import {Spring} from 'react-spring/renderprops'
 import '../EndGame.css'
 
-class EndGame extends Component {
+const EndGame = (props) => {
 
-  componentDidMount(){
-    this.props.saveScore()
-  }
+  const fade = useSpring({ from: { opacity: 0 }, opacity: 1 });
+  // console.log(fade)
 
-  render() {
-    return (
-      <div className="background">
-        <div className="end-game-report">
-          <div>
-            <button onClick={() => this.props.restartGame()} className="buttons">PLAY AGAIN</button>
-            <button onClick={() => this.props.backToGameMenu()} className="buttons">GAME MENU</button>
-          </div>
-          <section className="counters">
-            <div className="container">
-              <div>
-                <h3>Coins</h3>
-                <div className="counter" >{this.props.stats.coins}</div>
-              </div>
-              <div>
-                <h3>Max Distance</h3>
-                <div className="counter" >{(this.props.stats.maxDistance).toFixed(2)}</div>
-              </div>
-              <div>
-                <h3>Timer</h3>
-                <div className="counter" >{this.props.stats.timer}</div>
-              </div>
-              <div>
-                <h3>Final Score</h3>
-                <div className="counter" >{this.props.stats.score}</div>
-              </div>
-            </div>
-          </section>
-
-          {/* <span className="box one"></span>
-          <span className="box two"></span>
-          <span className="box three"></span> */}
-          
-          {/* <h3>(Coins x Distance) - Time Used</h3>
-          <h3>{this.props.stats.coins} x {(this.props.stats.distance).toFixed(2)} - {this.props.stats.timer}</h3>
-          <h1 className="total-score">FINAL SCORE: {this.props.stats.score}</h1> */}
-          
+  // componentDidMount(){
+  //   this.props.saveScore()
+  // }
+  
+  return (
+    <div className="background">
+      <div className="end-game-report">
+        <div className="buttons">
+          <button style={fade} onClick={() => props.restartGame()} className="btn1">PLAY AGAIN</button>
+          <button onClick={() => props.backToGameMenu()} className="btn2">GAME MENU</button>
         </div>
+        <section className="counters">
+          <div className="container">
+            <div>
+              <h3 >Coins</h3>
+              <Spring 
+                from={{ number: 0 }}
+                to={{ number: props.stats.coins }}>
+                {props => <div className="counter">{(props.number).toFixed(0)}</div>}
+              </Spring>
+            </div>
+            <div>
+              <h3 >Max Distance</h3>
+              <Spring 
+                from={{ number: 0 }}
+                to={{ number: props.stats.maxDistance }}>
+                {props => <div className="counter">{(props.number).toFixed(0)}</div>}
+              </Spring>
+            </div>
+            <div>
+              <h3 >Timer</h3>
+              <Spring 
+                from={{ number: 0, 
+                        color: 'red' }}
+                to={{ number: props.stats.timer, 
+                        color: 'green'  }}>
+                {props => <div className="counter">{(props.number).toFixed(0)}</div>}
+              </Spring>
+            </div>
+            <div>
+              <h3 >Final Score</h3>
+              <Spring 
+                from={{ number: 0 }}
+                to={{ number: props.stats.score }}>
+                {props => <div className="counter">{(props.number).toFixed(0)}</div>}
+              </Spring>
+            </div>
+          </div>
+        </section>
       </div>
-    )
-  }
+    </div>
+  )
+  
 
 }
 

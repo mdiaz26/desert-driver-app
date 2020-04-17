@@ -23,7 +23,8 @@ class Canvas extends Component {
     playerName: null,
     playerAvatar: null,  
     gameOn: true, 
-    stage: this.props.stage
+    stage: this.props.stage,
+    countDown: 3
   }
 
   canvas = React.createRef()
@@ -31,25 +32,23 @@ class Canvas extends Component {
   palmTreePositions = this.createPalmTreePositions()
   interval = null
   miniInterval = null
-<<<<<<< HEAD
   animationID = null
-=======
-  animationId = null
->>>>>>> 9dd5b3592d272c87aa9d349389dc01d8bb67eb3f
+  countDown = null
 
   componentDidMount() {
     this.game()
-    this.startTimers()
+    setTimeout(() => {
+      this.startTimers()
+    }, 3000)
+    this.countDown = setInterval(() => {
+      this.setState((prevState) => ({countDown: prevState.countDown -1}))
+    }, 1000)
   }
 
   componentWillUnmount() {
     clearInterval(this.interval)
     clearInterval(this.miniInterval)
-<<<<<<< HEAD
     cancelAnimationFrame(this.animationID)
-=======
-    window.cancelAnimationFrame(this.animationId)
->>>>>>> 9dd5b3592d272c87aa9d349389dc01d8bb67eb3f
   }
 
   restartGame = () => {
@@ -64,26 +63,17 @@ class Canvas extends Component {
       currentDistance: 0,
       timer: 0,
       millisecond: 0,
-      gameOn: true
+      gameOn: true,
+      countDown: 3
       
     }, this.componentDidMount())
 
   }
 
-<<<<<<< HEAD
   startTimers = () => {
     this.interval = setInterval (() => this.setState((prevState) => ({timer: prevState.timer + 1})), 1000)
     this.miniInterval = setInterval(() => this.setState((prevState) => ({millisecond: prevState.millisecond + 1})), 1)
-=======
-  startTimer = () => {
-    this.interval = setInterval (() => {
-
-      // console.log("interval")
-      this.setState((prevState) => ({timer: prevState.timer + 1}))}, 1000)
-    this.miniInterval = setInterval(() => {
-      // console.log("miniInterval")
-      this.setState((prevState) => ({millisecond: prevState.millisecond + 10}))}, 10)
->>>>>>> 9dd5b3592d272c87aa9d349389dc01d8bb67eb3f
+    
   }
 
   setProfile = () => {
@@ -119,7 +109,6 @@ class Canvas extends Component {
     return positions
   }
 
-  //SAVE SCORE
   saveScore = () => {
     const adapter = new JSONAPIAdapter('http://localhost:3000/api/v1/')
     const body = {
@@ -144,7 +133,7 @@ class Canvas extends Component {
     let playing = true
     let speed = 0
     let t = 0
-    
+      
     this.setState({gameOn: true})
     this.setProfile()
 
@@ -182,11 +171,6 @@ class Canvas extends Component {
             gameOn: false, 
             score: (totalScore).toFixed(2)
           })
-<<<<<<< HEAD
-=======
-          clearInterval(this.interval)
-          clearInterval(this.miniInterval)
->>>>>>> 9dd5b3592d272c87aa9d349389dc01d8bb67eb3f
           lifeOver = true
         }
       }
@@ -226,7 +210,10 @@ class Canvas extends Component {
       if (lifeOver && this.state.lives > 0) {
         return ;
       }
-      speed -= (speed - (k.ArrowUp - k.ArrowDown)) * 0.007;
+      if (this.state.millisecond > 0) {
+        clearInterval(this.countDown) 
+        speed -= (speed - (k.ArrowUp - k.ArrowDown)) * 0.007;
+      }
       t += 6 * speed;
       if (speed.toFixed(2) > 0.05 && this.state.lives > 0) {
         this.gainDistance(speed)
@@ -241,7 +228,7 @@ class Canvas extends Component {
         player.stopAnimation()
         isRunning = false
       }
-
+      
       //NIGHT SKY BACKGROUND
       if(this.state.stage === "Night Sky Stage"){
         const gradient = context.createLinearGradient(((100)-(this.state.distance/10)), (100-this.state.distance), (100-(this.state.distance/10)), (800+this.state.distance))
@@ -254,11 +241,11 @@ class Canvas extends Component {
         context.fillStyle = 'rgb(245, 186, 83)'
       }
       
-    //*************************DON'T COMMENT**************************//
+      //*************************DON'T COMMENT**************************//
       context.fillRect(0, 0, canvas.width, canvas.height);
       context.fillStyle = "rgb(39, 44, 44)";
       context.beginPath();
-    //*************************DON'T COMMENT**************************//
+      //*************************DON'T COMMENT**************************//
       
     //************************NIGHT STAGE********************************//
       if(this.state.stage === "Night Sky Stage"){
@@ -274,12 +261,10 @@ class Canvas extends Component {
       }
     //************************EGYPT STAGE********************************//
         
+    
+      
       this.draw();
-<<<<<<< HEAD
       this.animationID = requestAnimationFrame(loop);
-=======
-      this.animationId = requestAnimationFrame(loop);
->>>>>>> 9dd5b3592d272c87aa9d349389dc01d8bb67eb3f
       const playerCoordinates = {}
       playerCoordinates.x = Math.round(player.x)
       playerCoordinates.y = Math.round(player.y)
@@ -310,6 +295,7 @@ class Canvas extends Component {
       context.fill();
     }
 
+    
     onkeydown = d => k[d.key] = 1
     onkeyup = d => k[d.key] = 0
 
@@ -319,8 +305,11 @@ class Canvas extends Component {
 
   render() {
     return (
-      <div>
-        <canvas ref={this.canvas} height={350} width={window.innerWidth} className="canvas"/>
+      <div id="container">
+        <canvas ref={this.canvas} height={350} width={window.innerWidth} className="fade-in"/>
+        <div className="count-container">
+    <div id="count-down">{this.state.countDown < 1 ? "" : this.state.countDown}</div>
+        </div>
         <GameStats stats={this.state}/>
         {!this.state.gameOn ? <EndGame backToGameMenu={this.props.backToGameMenu} stats={this.state} saveScore={this.saveScore} restartGame={this.restartGame}/> : null}
       </div>

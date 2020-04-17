@@ -1,5 +1,17 @@
 GOALS:
 
+
+NEW DEPENDENCIES:
+  npm install react-resize-observer
+  npm install react-spring
+  npm install react-scripts
+  npm i -g npm 
+  npm i -- save lodash
+
+
+
+
+
 APRIL 15 NOTES:
   * when new user is created an error occurs:
     "cannot read property image of undefined"

@@ -6,11 +6,11 @@ const Profile = (props) => {
         <div className="user-profile">
             <div className="profile-div">
                 <div className="parent-column">
-                    <p className="colum">USERNAME</p>
+                    <p className="column">USERNAME</p>
                     <span > {props.user.username.toUpperCase()}</span>
-                    <p className="colum">HIGH SCORE</p>
+                    <p className="column">HIGH SCORE</p>
                     <span > {props.findHighScore()}</span>
-                    <p className="colum">MAX DISTANCE</p>
+                    <p className="column">MAX DISTANCE</p>
                     <span >(max distance here)</span>
                 </div>
                 

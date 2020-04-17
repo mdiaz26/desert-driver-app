@@ -45,7 +45,7 @@ class Login extends React.Component {
         return (
             <div className="login-screen">
                 <div className="login-form">
-                    <p>Login</p>
+                    <p className="login">Login</p>
                     <form onSubmit={this.handleSubmit}>
                         <label>
                             <input className="input-field" type="text" placeholder="USERNAME" value={this.state.username} name="username" onChange={this.handleChange}/>
@@ -55,7 +55,7 @@ class Login extends React.Component {
                             <input className="input-field" type="password" placeholder="PASSWORD" value={this.state.password} name="password" onChange={this.handleChange}/>
                         </label>
                         <br/>
-                        <input className="submit-btn" type="submit" value="submit"/>
+                        <input className="submit-button" type="submit" value="submit"/>
                     </form>
                 </div>
             </div>

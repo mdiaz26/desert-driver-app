@@ -1,13 +1,74 @@
-
+body{
+  margin: 0;
+  top: 0;
+  width: 100%;
+  height:÷ 100%
+}
+.end-game-report{
+  background-color: rgba(0, 0, 0, 0.747);
+}
 
 .background {
   position: absolute;
-  margin: 0;
   width: 100%;
-  margin-top: -400px;
-  height: 1500px;
-  background-color: rgba(0, 0, 0, 0.753);
-  transition: all 5s ease-in-out;
+  margin-top: auto;
+  margin-bottom: auto;
+  height: 200%;
+}
+.buttons {
+  display: flex;
+  flex-direction: row;
+}
+
+button {
+  
+}
+button:hover {
+  color: blanchedalmond;
+  background-color: rgb(241, 97, 97);
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+.btn1 {
+  float: left;
+  margin-right: 50px;
+  background-color: transparent;
+  border: 1px solid rgb(170, 202, 235);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  color: rgb(247, 183, 183);
+  margin-bottom: 30px;
+  transition: all 0.2s ease-in-out;
+}
+.btn2 {
+  background-color: transparent;
+  border: 1px solid rgb(170, 202, 235);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  color: rgb(247, 183, 183);
+  margin-bottom: 30px;
+  transition: all 0.2s ease-in-out;
+}
+.btn1:hover {
+  float: left;
+  margin-right: 50px;
+  color: blanchedalmond;
+  background-color: rgb(241, 97, 97);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  margin-bottom: 30px;
+  transition: all 0.2s ease-in-out;
+}
+.btn2:hover {
+  color: blanchedalmond;
+  background-color: rgb(241, 97, 97);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  margin-bottom: 30px;
+  transition: all 0.2s ease-in-out;
 }
 
 .end-game-report {
@@ -27,11 +88,15 @@
   text-align: center;
   color: rgb(245, 186, 83);
 }
+h3 {
+  color: rgb(170, 202, 235);
+}
 
 .counters .counter {
   font-size: 30px;
   margin: 10px 0;
 }
+
 
 @media(max-width: 700px){
   .counters .container {
@@ -93,8 +158,3 @@
 }
 
  */
-
-
- .test {
-   color: rgb(230, 117, 169)
- }
