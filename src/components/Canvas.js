@@ -12,7 +12,7 @@ import '../Canvas.css'
 class Canvas extends Component {
 
   state = {
-    lives: 1,
+    lives: 2,
     coins: 0,
     score: 0,
     distance: 0,
@@ -110,10 +110,11 @@ class Canvas extends Component {
   }
 
   saveScore = () => {
+    console.log("Saving")
     const adapter = new JSONAPIAdapter('http://localhost:3000/api/v1/')
     const body = {
-      points: this.state.score,
-      distance: this.state.distance,
+      points: (this.state.coins * this.state.maxDistance) - this.state.timer,
+      max_distance: parseInt(this.state.maxDistance),
       user_number: this.props.userId,
       username: this.props.username
     }
@@ -128,6 +129,7 @@ class Canvas extends Component {
     const ground = new Ground() 
     const player = new Player(canvas, this.props.avatarImage)
     const k = {ArrowUp:0, ArrowDown:0, ArrowLeft:0, ArrowRight:0};
+    let lastLostLife = false
     let isRunning = false
     let lifeOver = false
     let playing = true
@@ -138,10 +140,18 @@ class Canvas extends Component {
     this.setProfile()
 
     const loseLives = () => {
+      console.log("losing")
       this.setState((prevState) => ({lives: prevState.lives - 1, currentDistance: 0}))
       lifeOver = true
       this.game()
       return ;
+    }
+    const lastLife = () => {
+      if (lastLostLife === false) {
+        lastLostLife = true
+        this.saveScore()
+        return ;
+      }
     }
     
     this.draw = function() {
@@ -163,6 +173,7 @@ class Canvas extends Component {
         if (this.state.lives > 1) {
           loseLives()
         } else {
+          lastLife()
           clearInterval(this.miniInterval)
           clearInterval(this.interval)
           let totalScore = (this.state.coins * this.state.maxDistance) - this.state.timer
@@ -175,7 +186,7 @@ class Canvas extends Component {
         }
       }
 
-      if (!playing || grounded && Math.abs(player.rot) > Math.PI * 0.5){
+      if (!playing || (grounded && Math.abs(player.rot) > Math.PI * 0.5)){
         playing = false;
         player.rSpeed = 5;
         k.ArrowUp = 1;

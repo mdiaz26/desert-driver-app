@@ -1,5 +1,5 @@
 // import { render } from 'react-dom'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSpring, animated } from 'react-spring'
 // import useMeasure from '.useMeasure'
 import {Spring} from 'react-spring/renderprops'
@@ -8,11 +8,8 @@ import '../EndGame.css'
 const EndGame = (props) => {
 
   const fade = useSpring({ from: { opacity: 0 }, opacity: 1 });
-  // console.log(fade)
-
-  // componentDidMount(){
-  //   this.props.saveScore()
-  // }
+  
+  
   
   return (
     <div className="background">
