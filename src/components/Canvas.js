@@ -12,7 +12,7 @@ import '../Canvas.css'
 class Canvas extends Component {
 
   state = {
-    lives: 2,
+    lives: 3,
     coins: 0,
     score: 0,
     distance: 0,
@@ -55,7 +55,7 @@ class Canvas extends Component {
     
     this.coins = this.createCoins()
     this.setState({
-      lives: 1, 
+      lives: 3, 
       coins: 0,
       score: 0,
       distance: 0,
