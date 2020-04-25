@@ -7,7 +7,7 @@ body {
 }
 
 canvas {
-  opacity: 100%;
+  /* opacity: 100%; */
   width: 100%;
   height: 350px;
   border: 1px solid transparent;

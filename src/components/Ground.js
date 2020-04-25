@@ -1,13 +1,12 @@
 class Ground {
 
   constructor() {
-    let set = new Set()
-    
-    while (set.size < 255) {
-      set.add(Math.floor(Math.random()*255))
+    let array = []
+    while (array.length < 10000) {
+      let newValue = Math.floor(Math.random() * 255)
+      array.push(newValue)
     }
-
-    this.perm = Array.from(set)
+    this.perm = array
   }
 
   getY(x) {
