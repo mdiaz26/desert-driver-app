@@ -20,7 +20,7 @@ class App extends React.Component {
   }
 
   componentDidMount(){
-    const adapter = new JSONAPIAdapter('http://localhost:3000/api/v1/')
+    const adapter = new JSONAPIAdapter('https://desert-driver-api.herokuapp.com/api/v1/')
     adapter.getAll('scores')
     .then(scores => this.setState({scores}))
     
