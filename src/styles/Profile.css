@@ -2,12 +2,14 @@
   width: 500px;
   margin-left: auto;
   margin-right: auto;
+  align-content: center;
 }
-.profile-div{
+.profile-div {
   border: 5px solid blanchedalmond;
   display: flex;
+  align-content: center;
   flex-direction: row;
-  background-color: rgb(216, 209, 191);
+  background-color: rgb(56, 54, 49);
   margin-left: auto;
   margin-right: auto;
   margin-top: 20%;
@@ -27,18 +29,17 @@
 
 .column {
   text-align: left;
-  color: rgb(87, 29, 29);
+  color: #ff0091;
   margin-left: -5px;
   text-align: center;
 }
-span{
+span {
   text-align: center;
-  color: rgb(175, 82, 66);
+  color: rgb(252, 229, 229);
   font-size: 17px;
   margin-top: -10px;
   margin-bottom: 5px;
   /* margin-left: 5px; */
-
 }
 
 .avatar-div {
@@ -50,7 +51,7 @@ span{
   /* margin-right: 255px; */
   /* margin-top: -75px; */
 }
-.avatar{
+.avatar {
   position: relative;
   float: right;
   width: 180px;
@@ -63,10 +64,12 @@ span{
   position: relative;
   background-color: transparent;
   background-repeat: no-repeat;
-  color: rgb(87, 29, 29);
+  font-weight: bold;
+  letter-spacing: 5px;
+  color: rgb(252, 229, 229);
   border: none;
   margin-top: 10px;
-  margin-left: 330px;
+  margin-left: 320px;
   /* margin-left: auto;
   margin-right: auto; */
   transition: all 0.1s ease-in-out;
@@ -76,10 +79,9 @@ span{
   background-repeat: no-repeat;
   border: none;
   text-decoration: none;
-  color: rgb(175, 82, 66);
+  color: #ff0091;
   /* margin-top: 270px; */
   /* margin-left: auto;
   margin-right: auto; */
   transition: all 0.1s ease-in-out;
 }
-

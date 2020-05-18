@@ -25,44 +25,36 @@ class EndGame extends Component {
     return (
       <div className="game-menu-container">
         <div>
-          <h4 className="game-menu-header">SELECT A STAGE</h4>
+          <p className="game-menu-header">SELECT A STAGE</p>
           <div className="stage-container">
             <div className="stage-box">
-              <div
-                onClick={(event) => this.props.selectedStage(event)}
-                className="desert-heat"
-                alt="Desert Heat Stage"
-              >
+              <div className="desert-heat" alt="Desert Heat Stage">
+                <p className="stage-title" alt="Desert Heat Stage">
+                  DESERT HEAT
+                </p>
                 <img
                   onMouseEnter={(event) => this.switchToGif(event)}
                   onMouseLeave={(event) => this.switchToGif(event)}
+                  onClick={(event) => this.props.selectedStage(event)}
                   className="desert-heat-img"
                   src={this.state.desertHover ? desertGIF : desertStill}
                   alt="Desert Heat Stage"
                 />
-                <div className="title-container">
-                  {/* <h3 className="stage-title" alt="Desert Heat Stage">
-                    DESERT HEAT
-                  </h3> */}
-                </div>
+                <div className="title-container"></div>
               </div>
-              <div
-                onClick={(event) => this.props.selectedStage(event)}
-                className="night-sky"
-                alt="Night Sky Stage"
-              >
+              <div className="night-sky" alt="Night Sky Stage">
+                <p className="stage-title" alt="Night Sky Stage">
+                  NIGHT SKY
+                </p>
                 <img
                   onMouseEnter={(event) => this.switchToGif(event)}
                   onMouseLeave={(event) => this.switchToGif(event)}
+                  onClick={(event) => this.props.selectedStage(event)}
                   className="night-sky-img"
                   src={this.state.nightHover ? nightGIF : nightStill}
                   alt="Night Sky Stage"
                 />
-                <div className="title-container">
-                  {/* <h3 className="stage-title" alt="Night Sky Stage">
-                    NIGHT SKY
-                  </h3> */}
-                </div>
+                <div className="title-container"></div>
               </div>
             </div>
           </div>
