@@ -17,7 +17,7 @@ const Profile = (props) => {
         <div className="avatar-div">
           <img className="avatar" src={props.avatar.image} alt="avatar" />
           <button className="edit-btn" onClick={() => props.toggleEdit()}>
-            Edit
+            EDIT
           </button>
         </div>
       </div>
