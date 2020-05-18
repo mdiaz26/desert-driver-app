@@ -24,7 +24,7 @@ class SignUp extends React.Component {
   };
 
   createUser = () => {
-    const adapter = new JSONAPIAdapter("http://desert-driver-api.herokuapp.com/api/v1/");
+    const adapter = new JSONAPIAdapter("https://desert-driver-api.herokuapp.com/api/v1/");
     adapter
       .post("users", {
         user: {
