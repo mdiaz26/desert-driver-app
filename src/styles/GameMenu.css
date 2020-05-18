@@ -13,7 +13,7 @@
   border: 3px solid rgb(43, 43, 43);
   text-align: center;
   width: 65%;
-  opacity: 50%;
+  opacity: 0.5;
   margin-bottom: 10px;
   filter: grayscale(100%);
   transition: all 0.5s ease-in-out;
@@ -21,7 +21,7 @@
 .stage-box div img:hover {
   margin-left: 3px;
   cursor: pointer;
-  opacity: 100%;
+  opacity: 1.0;
   text-align: center;
   z-index: -500;
   border: 3px solid #fff0e9;
