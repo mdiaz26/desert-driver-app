@@ -1,0 +1,112 @@
+.sign-up-screen {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.sign-up-form {
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+input {
+  margin-left: 5px;
+}
+.username-label {
+  margin-bottom: -3px;
+  font-size: 13px;
+}
+.username-div {
+  margin-left: 25px;
+  display: flex;
+  flex-direction: column;
+}
+.password-div {
+  display: flex;
+  flex-direction: column;
+}
+#eye {
+  margin-top: 155px;
+}
+.edit-heading {
+  /* color: #ff0091; */
+  /* color: #fc5b0a; */
+  color: blanchedalmond;
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: -15px;
+  margin-top: 20px;
+}
+.cancel-btn {
+  margin-left: auto;
+  margin-right: auto;
+  background-color: transparent;
+  color: antiquewhite;
+  font-weight: bold;
+  /* color: rgb(247, 164, 164); */
+  border: 1px solid transparent;
+}
+#sign-up-logo {
+  align-self: center;
+  margin-top: 1.5%;
+  width: 150px;
+}
+.delete-btn {
+  margin-left: auto;
+  margin-right: auto;
+  background-color: transparent;
+  border: 1px solid transparent;
+  color: rgb(90, 20, 20);
+  margin-top: 10px;
+}
+.cancel-btn:hover {
+  color: #ff0091;
+  /* color: antiquewhite; */
+  margin-left: auto;
+  margin-right: auto;
+  background-color: transparent;
+  border: 1px solid transparent;
+  transition: all 0.1s ease-in-out;
+}
+.delete-btn:hover {
+  color: rgb(201, 66, 66);
+  font-weight: bold;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: transparent;
+  border: 1px solid transparent;
+  transition: all 0.1s ease-in-out;
+  margin-top: 10px;
+}
+
+.input-field {
+  text-align: center;
+  font-size: 13px;
+  width: 180px;
+}
+
+.submit-btn {
+  background-color: transparent;
+  background-repeat: no-repeat;
+  border: none;
+  margin-bottom: 4px;
+  margin-left: auto;
+  color: antiquewhite;
+  font-weight: bold;
+  /* color: rgb(247, 164, 164); */
+  margin-right: auto;
+  transition: all 0.1s ease-in-out;
+}
+.submit-btn:hover {
+  background-color: transparent;
+  background-repeat: no-repeat;
+  border: none;
+  text-decoration: none;
+  color: #ff0091;
+
+  margin-left: auto;
+  margin-right: auto;
+  transition: all 0.1s ease-in-out;
+}

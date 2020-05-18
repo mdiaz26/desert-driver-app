@@ -1,0 +1,61 @@
+.container {
+  width: 100%;
+}
+
+.logo-background {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  z-index: -20;
+}
+#logo {
+  margin-top: 5%;
+  width: 30%;
+}
+.container .login-screen {
+  position: absolute;
+  width: 100%;
+  left: 0;
+}
+
+.container .login-form {
+  flex-direction: column;
+  margin-top: 7%;
+  width: 100%;
+}
+.login {
+  color: blanchedalmond;
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 0.5%;
+  margin-top: 0.5%;
+}
+.input-field {
+  text-align: center;
+  font-size: 13px;
+  color: white;
+  border: 1px solid blanchedalmond;
+  background-color: rgba(0, 0, 0, 0.15);
+  width: 10%;
+}
+
+.submit-button {
+  background-color: transparent;
+  border: none;
+  font-weight: bold;
+  margin-bottom: 4px;
+  margin-left: auto;
+  margin-right: auto;
+  color: blanchedalmond;
+  transition: all 0.2s ease-in-out;
+}
+.submit-button:hover {
+  background-color: transparent;
+  border: none;
+  text-decoration: none;
+  /* color: rgb(143, 62, 51); */
+  color: #ff0091;
+  margin-left: auto;
+  margin-right: auto;
+  transition: all 0.1s ease-in-out;
+}

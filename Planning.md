@@ -1,5 +1,15 @@
 GOALS:
 
+mike-and-lou-present-game
+
+removed from scripts in package json file for upload to heroku
+"start": "react-scripts start",
+"build": "react-scripts build",
+"test": "react-scripts test",
+"eject": "react-scripts eject"
+
+
+
 
 NEW DEPENDENCIES:
   npm install react-resize-observer

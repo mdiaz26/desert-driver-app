@@ -1,0 +1,210 @@
+.nav-container {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  flex-direction: row;
+  min-width: 50%;
+}
+.logo-btn {
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  min-width: 50%;
+}
+.nav-container #logo {
+  width: 120px;
+  margin-top: -3px;
+  cursor: pointer;
+}
+.sign-up-background {
+  // margin-top: 150px;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  z-index: -20;
+}
+
+.btn {
+  color: rgb(252, 229, 229);
+  font-weight: bold;
+  margin-left: 10px;
+}
+.btn:hover {
+  background-color: transparent;
+  border: 1px solid transparent;
+  color: #ff0091;
+  // color: rgb(255, 147, 147);
+  margin-right: 0px;
+}
+.btn:hover::after {
+  background-color: transparent;
+  border: 1px solid transparent;
+  text-decoration: none;
+}
+.profile-btn {
+  color: rgb(252, 229, 229);
+  font-weight: bold;
+  margin-top: 5px;
+  margin-right: auto;
+}
+.profile-btn:hover {
+  background-color: transparent;
+  text-decoration: none;
+  color: #ff0091;
+  // color: rgb(255, 147, 147);
+  margin-top: 5px;
+  margin-right: auto;
+}
+
+.tiny-avatar {
+  width: 2.5em;
+}
+.eye {
+  margin-top: 37px;
+  width: 2.5em;
+  filter: invert(100%);
+}
+
+.avatar-frame img {
+  width: 6em;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-left: -50px;
+  transition: all 1s ease-in-out;
+  margin-top: 200px;
+}
+#fill-this-image {
+  position: relative;
+  filter: grayscale(0%);
+  width: 10em;
+  // align-content: center;
+  margin-left: -78px;
+  margin-top: 150px;
+  transition: all 1s ease-in-out;
+}
+.inner-circle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: auto;
+  margin-top: auto;
+  transition: all 1s ease-in-out;
+}
+
+.choose-your-ride {
+  // margin-top: 4px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  // color: #fc5b0a;
+  // color: #ff0091;
+  // color: rgb(238, 198, 205);
+  font-size: 18px;
+}
+
+.avatar {
+  width: 12em;
+  position: absolute;
+  top: 65%;
+  left: 50%;
+  // margin: -6em;
+}
+
+.gold-border {
+  // border: 2px solid gold;
+  transition: all 1s ease-in-out;
+  width: 6em;
+  // border-radius: 50%;
+}
+
+.avatar-frame {
+  top: 30%;
+  margin-left: auto;
+  margin-right: auto;
+  width: 30em;
+  height: 30em;
+  border-radius: 50%;
+}
+.sign-up-screen .moon-container .moon {
+  position: relative;
+  margin-top: -640px;
+  filter: brightness(30%);
+  margin-right: auto;
+  margin-left: auto;
+  width: 38em;
+  height: 38em;
+  z-index: -10;
+}
+
+.sign-up-screen .edit-moon-container .edit-moon {
+  position: relative;
+  margin-top: -580px;
+  filter: brightness(30%);
+  margin-right: auto;
+  margin-left: auto;
+  width: 38em;
+  height: 38em;
+  z-index: -10;
+}
+
+@-webkit-keyframes img {
+  from {
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes img {
+  from {
+    -ms-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -ms-transform: rotate(-360deg);
+    -moz-transform: rotate(-360deg);
+    -webkit-transform: rotate(-360deg);
+    -o-transform: rotate(-360deg);
+    transform: rotate(-360deg);
+  }
+}
+.none {
+  filter: grayscale(80%);
+  -webkit-animation: img 21s linear infinite;
+  -moz-animation: img 25s linear infinite;
+  -ms-animation: img 29s linear infinite;
+  -o-animation: img 34s linear infinite;
+  animation: img 38s linear infinite;
+}
+
+.deg51 {
+  transform: rotate(51deg) translate(11em) rotate(-51deg);
+}
+.deg102 {
+  transform: rotate(102deg) translate(11em) rotate(-102deg);
+}
+.deg153 {
+  transform: rotate(153deg) translate(11em) rotate(-153deg);
+}
+.deg204 {
+  transform: rotate(204deg) translate(11em) rotate(-204deg);
+}
+.deg255 {
+  transform: rotate(255deg) translate(11em) rotate(-255deg);
+}
+.deg306 {
+  transform: rotate(306deg) translate(11em) rotate(-306deg);
+}
+.deg357 {
+  transform: rotate(357deg) translate(11em) rotate(-357deg);
+}
