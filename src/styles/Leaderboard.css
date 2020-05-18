@@ -10,9 +10,7 @@
   letter-spacing: 5px;
   font-size: 24px;
   font-weight: bold;
-  /* color: #ff0091; */
   color: rgb(231, 199, 160);
-  /* color: bisque; */
 }
 
 .table {
@@ -26,13 +24,11 @@
 
 .table-head {
   background-color: rgb(190, 153, 107);
-  /* color: #ff0091; */
 }
 
 .table-body {
   background-color: rgb(172, 80, 80);
   background-color: rgb(227, 240, 253);
-
   color: rgb(27, 130, 170);
 }
 
@@ -50,7 +46,3 @@
 }
 .ranked-score {
 }
-
-/* #ranked-row:hover {
-  background-color: rgb(190, 196, 207);
-} */

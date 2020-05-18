@@ -21,7 +21,7 @@
 .stage-box div img:hover {
   margin-left: 3px;
   cursor: pointer;
-  opacity: 1.0;
+  opacity: 1;
   text-align: center;
   z-index: -500;
   border: 3px solid #fff0e9;
@@ -37,7 +37,6 @@
   align-items: center;
   text-align: center;
   margin-top: 2%;
-  /* margin-bottom: 100%; */
 }
 .desert-heat {
   height: 20%;

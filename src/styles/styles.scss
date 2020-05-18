@@ -17,7 +17,6 @@
   cursor: pointer;
 }
 .sign-up-background {
-  // margin-top: 150px;
   position: absolute;
   width: 100%;
   left: 0;
@@ -33,7 +32,6 @@
   background-color: transparent;
   border: 1px solid transparent;
   color: #ff0091;
-  // color: rgb(255, 147, 147);
   margin-right: 0px;
 }
 .btn:hover::after {
@@ -51,11 +49,9 @@
   background-color: transparent;
   text-decoration: none;
   color: #ff0091;
-  // color: rgb(255, 147, 147);
   margin-top: 5px;
   margin-right: auto;
 }
-
 .tiny-avatar {
   width: 2.5em;
 }
@@ -64,7 +60,6 @@
   width: 2.5em;
   filter: invert(100%);
 }
-
 .avatar-frame img {
   width: 6em;
   position: fixed;
@@ -78,7 +73,6 @@
   position: relative;
   filter: grayscale(0%);
   width: 10em;
-  // align-content: center;
   margin-left: -78px;
   margin-top: 150px;
   transition: all 1s ease-in-out;
@@ -96,12 +90,8 @@
 }
 
 .choose-your-ride {
-  // margin-top: 4px;
   margin-bottom: 10px;
   font-weight: bold;
-  // color: #fc5b0a;
-  // color: #ff0091;
-  // color: rgb(238, 198, 205);
   font-size: 18px;
 }
 
@@ -110,14 +100,11 @@
   position: absolute;
   top: 65%;
   left: 50%;
-  // margin: -6em;
 }
 
 .gold-border {
-  // border: 2px solid gold;
   transition: all 1s ease-in-out;
   width: 6em;
-  // border-radius: 50%;
 }
 
 .avatar-frame {

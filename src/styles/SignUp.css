@@ -3,14 +3,12 @@
   margin-left: auto;
   margin-right: auto;
 }
-
 .sign-up-form {
   display: flex;
   flex-direction: column;
   margin-left: auto;
   margin-right: auto;
 }
-
 input {
   margin-left: 5px;
 }
@@ -31,8 +29,6 @@ input {
   margin-top: 155px;
 }
 .edit-heading {
-  /* color: #ff0091; */
-  /* color: #fc5b0a; */
   color: blanchedalmond;
   font-weight: bold;
   font-size: 16px;
@@ -45,7 +41,6 @@ input {
   background-color: transparent;
   color: antiquewhite;
   font-weight: bold;
-  /* color: rgb(247, 164, 164); */
   border: 1px solid transparent;
 }
 #sign-up-logo {
@@ -63,7 +58,6 @@ input {
 }
 .cancel-btn:hover {
   color: #ff0091;
-  /* color: antiquewhite; */
   margin-left: auto;
   margin-right: auto;
   background-color: transparent;
@@ -80,13 +74,11 @@ input {
   transition: all 0.1s ease-in-out;
   margin-top: 10px;
 }
-
 .input-field {
   text-align: center;
   font-size: 13px;
   width: 180px;
 }
-
 .submit-btn {
   background-color: transparent;
   background-repeat: no-repeat;
@@ -95,7 +87,6 @@ input {
   margin-left: auto;
   color: antiquewhite;
   font-weight: bold;
-  /* color: rgb(247, 164, 164); */
   margin-right: auto;
   transition: all 0.1s ease-in-out;
 }
@@ -105,7 +96,6 @@ input {
   border: none;
   text-decoration: none;
   color: #ff0091;
-
   margin-left: auto;
   margin-right: auto;
   transition: all 0.1s ease-in-out;
