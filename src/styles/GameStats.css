@@ -1,0 +1,67 @@
+@keyframes custom-fadein {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 100;
+  }
+}
+.stats-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(39, 44, 44);
+  animation-name: custom-fadein;
+  animation-duration: 3s;
+  animation-timing-function: ease-in-out;
+  top: 350px;
+  margin-top: 0;
+  z-index: -1000;
+}
+
+.stats-div div {
+  margin-right: 40px;
+  margin-top: 18px;
+  display: flex;
+  background-color: rgb(39, 44, 44);
+  flex-direction: column;
+  float: right;
+  text-align: center;
+}
+
+h5 {
+  position: relative;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: rgb(104, 134, 141);
+  margin-top: 60px;
+  margin-bottom: auto;
+}
+h4 {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  color: rgb(11, 228, 228);
+  font-size: x-large;
+  margin-top: 5px;
+}
+
+.lives {
+  float: left;
+  justify-content: right;
+  display: flex;
+  flex-direction: row;
+  margin-left: 50px;
+}
+.lives h4 {
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 5px;
+}
+
+.player-name {
+  margin-top: -5px;
+  color: rgb(161, 180, 180);
+}
+
+.current-player-image {
+  width: 150px;
+}
