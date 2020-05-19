@@ -21,6 +21,7 @@ class EndGame extends Component {
       }));
     }
   };
+
   render() {
     return (
       <div className="game-menu-container">

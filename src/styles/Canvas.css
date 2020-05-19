@@ -4,6 +4,17 @@ body {
 #container {
   position: relative;
 }
+.keypad-container {
+  position: absolute;
+  padding-top: 1%;
+  padding-left: 19%;
+}
+.keypad {
+  /* position: relative; */
+  opacity: 0.6;
+  width: 40%;
+  height: 32%;
+}
 
 canvas {
   width: 100%;
