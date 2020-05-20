@@ -1,14 +1,13 @@
 import JSONAPIAdapter from "../JSONAPIAdapter";
 import React, { Component } from "react";
-import ReactAudioPlayer from "react-audio-player";
 import DesertHeat from "../stages/DesertHeat";
 import NightSky from "../stages/NightSky";
 import Player from "../stages/Player";
 import Coin from "../stages/Coin";
-import CoinSound from "../coin-sound-full.mp3";
 import GameStats from "./GameStats";
 import EndGame from "./EndGame";
 import Ground from "../helpers/Ground";
+import Sounds from "../audio/Sounds";
 import "../styles/Canvas.css";
 
 class Canvas extends Component {
@@ -111,7 +110,7 @@ class Canvas extends Component {
   createCoins() {
     const positions = Array.from(
       { length: 2000 },
-      () => Math.random() * 100000
+      () => Math.random() * 500000
     );
 
     return positions.map((position) => {
@@ -328,14 +327,14 @@ class Canvas extends Component {
         );
       };
       this.coins.forEach((coin) => {
-        const coinSound = document.getElementById("coin-sound");
-        if (shouldPickUpCoin(coin)) {
-          let coinSound = new Audio();
-          coinSound.src = CoinSound;
-          coinSound.volume = 0.5;
+        let coinSound;
+        if (shouldPickUpCoin(coin) && this.state.lives > 0) {
+          coinSound = new Audio();
+          coinSound.src = Sounds.coin;
+          coinSound.controls = true;
+          coinSound.volume = 0.05;
           coinSound.play();
-          // coinSound[0].paused = false;
-          // coinSound.play();
+          coinSound = null;
         }
       });
       this.coins = this.coins.filter((coin) => !shouldPickUpCoin(coin));
