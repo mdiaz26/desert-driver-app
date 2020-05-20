@@ -1,17 +1,17 @@
 import React, { useState } from "react";
-import DeleteModal from "../helpers/DeleteModal";
+// import DeleteModal from "../helpers/DeleteModal";
 import AvatarChoice from "./AvatarChoice";
 import "../styles/styles.scss";
 import background from "../sign-up-background2.gif";
 import moon from "../moon.png";
 
 const ProfileEdit = (props) => {
-  const [modalState, changeModalState] = useState({ display: false });
+  // const [modalState, changeModalState] = useState({ display: false });
   const [passwordState, changePasswordState] = useState({ display: false });
 
-  const toggleModal = () => {
-    changeModalState({ display: !modalState.display });
-  };
+  // const toggleModal = () => {
+  //   changeModalState({ display: !modalState.display });
+  // };
 
   const togglePassword = (event) => {
     event.preventDefault();
@@ -33,7 +33,7 @@ const ProfileEdit = (props) => {
   return (
     <div className="sign-up-screen">
       <div className="logo-container">
-        <img className="sign-up-background" src={background} />
+        <img className="sign-up-background" alt="background" src={background} />
       </div>
       <div className="sign-up-form">
         <p className="edit-heading">EDIT PROFILE</p>
@@ -125,7 +125,7 @@ const ProfileEdit = (props) => {
         {/* )} */}
       </div>
       <div className="edit-moon-container">
-        <img className="edit-moon" src={moon} />
+        <img className="edit-moon" alt="giant-moon" src={moon} />
       </div>
     </div>
   );

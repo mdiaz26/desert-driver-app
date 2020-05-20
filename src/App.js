@@ -143,7 +143,7 @@ class App extends React.Component {
         </div>
         <div>
           <p className="signature">
-            March 2020 | Made with <img class="heart" src={heart} /> by{" "}
+            March 2020 | Made with <img className="heart" alt="heart" src={heart} /> by{" "}
             <a
               className="signature-links"
               target="_blank"

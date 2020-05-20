@@ -2,14 +2,16 @@ import React from "react";
 import "../styles/styles.scss";
 
 const AvatarChoice = (props) => {
+
   return (
-    <div className={`deg${props.number * 51}`}>
+    <div className={`deg${props.number * 51}`} >
       <img
         className={props.className}
         src={props.image}
         alt={props.name}
         name={props.name}
         onClickCapture={props.handleRadioChange}
+        style={{opacity: props.opacity}}
       />
     </div>
   );

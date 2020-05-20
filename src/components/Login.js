@@ -50,8 +50,8 @@ class Login extends React.Component {
     return (
       <div className="container">
         <div className="logo-container">
-          <img className="logo-background" src={loginBackground} />
-          <img id="logo" src={logo} />
+          <img className="logo-background" alt="background" src={loginBackground} />
+          <img id="logo" alt="logo" src={logo} />
         </div>
         <div className="login-screen">
           <div className="login-form">
