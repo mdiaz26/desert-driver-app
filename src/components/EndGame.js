@@ -22,7 +22,7 @@ const EndGame = (props) => {
               GAME MENU
             </button>
           </div>
-          <section className="counters">
+          <div className="counters">
             <div className="container">
               <div>
                 <h3>Coins</h3>
@@ -63,7 +63,7 @@ const EndGame = (props) => {
                 </Spring>
               </div>
             </div>
-          </section>
+          </div>
         </div>
       </div>
     </div>

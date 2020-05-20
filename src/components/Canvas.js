@@ -6,7 +6,6 @@ import Player from "../stages/Player";
 import Coin from "../stages/Coin";
 import GameStats from "./GameStats";
 import EndGame from "./EndGame";
-import KeyPad from "./KeyPad";
 import Ground from "../helpers/Ground";
 import "../styles/Canvas.css";
 
@@ -26,6 +25,10 @@ class Canvas extends Component {
     millisecond: 0,
     maxDistance: 0,
     currentDistance: 0,
+    ArrowUp: false,
+    ArrowDown: false,
+    ArrowLeft: false,
+    ArrowRight: false,
   };
 
   canvas = React.createRef();
@@ -339,40 +342,64 @@ class Canvas extends Component {
       context.fill();
     };
 
-    onkeydown = (d) => (k[d.key] = 1);
-    onkeyup = (d) => (k[d.key] = 0);
+    onkeydown = (d) => {
+      if (d.key === "ArrowUp") {
+        this.setState({ ArrowUp: true });
+      } else if (d.key === "ArrowDown") {
+        this.setState({ ArrowDown: true });
+      } else if (d.key === "ArrowLeft") {
+        this.setState({ ArrowLeft: true });
+      } else if (d.key === "ArrowRight") {
+        this.setState({ ArrowRight: true });
+      }
+      return (k[d.key] = 1);
+    };
+    onkeyup = (d) => {
+      if (d.key === "ArrowUp") {
+        this.setState({ ArrowUp: false });
+      } else if (d.key === "ArrowDown") {
+        this.setState({ ArrowDown: false });
+      } else if (d.key === "ArrowLeft") {
+        this.setState({ ArrowLeft: false });
+      } else if (d.key === "ArrowRight") {
+        this.setState({ ArrowRight: false });
+      }
+      return (k[d.key] = 0);
+    };
 
     loop();
   };
 
   render() {
     return (
-      <div id="container">
-        <canvas
-          ref={this.canvas}
-          height={350}
-          width={window.innerWidth}
-          className="fade-in"
-        />
-        <div className="logo-middle"></div>
-        <div className="logo-container"></div>
-        <div className="count-container">
-          <div id="count-down">
-            {this.state.countDown < 1 ? "" : this.state.countDown}
+      <div className="big-container">
+        <div id="container">
+          <div className="canvas-container">
+            <canvas
+              ref={this.canvas}
+              height={350}
+              width={window.innerWidth}
+              className="fade-in"
+            />
+            <div className="count-container">
+              <div id="count-down">
+                {this.state.countDown < 1 ? "" : this.state.countDown}
+              </div>
+            </div>
+          </div>
+          <GameStats stats={this.state} />
+
+          <div className="end-game-container">
+            {!this.state.gameOn ? (
+              <EndGame
+                backToGameMenu={this.props.backToGameMenu}
+                stats={this.state}
+                saveScore={this.saveScore}
+                restartGame={this.restartGame}
+              />
+            ) : null}
           </div>
         </div>
-        <GameStats stats={this.state} />
-        <div className="keypad-container">
-          <KeyPad />
-        </div>
-        {!this.state.gameOn ? (
-          <EndGame
-            backToGameMenu={this.props.backToGameMenu}
-            stats={this.state}
-            saveScore={this.saveScore}
-            restartGame={this.restartGame}
-          />
-        ) : null}
       </div>
     );
   }

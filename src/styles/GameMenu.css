@@ -62,7 +62,7 @@
   margin-bottom: auto;
   font-weight: bold;
   color: #a5949d;
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 
 .night-sky .stage-title {
@@ -78,7 +78,7 @@
   margin-bottom: auto;
   font-weight: bold;
   color: #a5949d;
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 .game-menu-header {
   margin-top: 2%;

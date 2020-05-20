@@ -1,19 +1,16 @@
 body {
   background-color: #070507;
 }
+.big-container {
+  height: 70%;
+}
 #container {
-  position: relative;
-}
-.keypad-container {
   position: absolute;
-  padding-top: 1%;
-  padding-left: 19%;
+  height: 100%;
 }
-.keypad {
-  /* position: relative; */
-  opacity: 0.6;
-  width: 40%;
-  height: 32%;
+
+.canvas-container {
+  height: 50%;
 }
 
 canvas {

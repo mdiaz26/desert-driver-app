@@ -20,7 +20,9 @@ class App extends React.Component {
   };
 
   componentDidMount() {
-    const adapter = new JSONAPIAdapter("https://desert-driver-api.herokuapp.com/api/v1/");
+    const adapter = new JSONAPIAdapter(
+      "https://desert-driver-api.herokuapp.com/api/v1/"
+    );
     adapter.getAll("scores").then((scores) => this.setState({ scores }));
 
     adapter.getAll("users").then((users) => this.setState({ users }));
@@ -77,7 +79,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="main-container">
+      <div id="main-container">
         <div className="App text-white">
           <Nav
             userId={this.state.userId}

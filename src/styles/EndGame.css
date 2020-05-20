@@ -57,25 +57,29 @@ button:hover {
   margin-bottom: 30px;
   transition: all 0.2s ease-in-out;
 }
-.background {
+.background .end-game-report {
   position: absolute;
   width: 100%;
+  top: 0;
+}
+.end-game-report {
+  position: relative;
   height: 100%;
+  width: 100%;
+  top: 0;
 }
 
-.end-game-report .report-container {
+.report-container {
+  height: 100%;
   background-color: rgba(0, 0, 0, 0.8);
   margin-left: auto;
   margin-right: auto;
-  height: 800px;
-  margin-top: -356px;
-  padding-bottom: 380px;
-  z-index: -100;
+  padding-bottom: 280px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: antiquewhite;
+  /* color: antiquewhite; */
 }
 .counters .container {
   display: grid;

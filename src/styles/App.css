@@ -1,6 +1,15 @@
 .App {
   text-align: center;
 }
+/* html,
+body,
+#app,
+#app > div {
+  height: 100%;
+}
+#main-container {
+  height: auto;
+} */
 
 .App-logo {
   height: 40vmin;
