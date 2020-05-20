@@ -1,9 +1,11 @@
 import JSONAPIAdapter from "../JSONAPIAdapter";
 import React, { Component } from "react";
+import ReactAudioPlayer from "react-audio-player";
 import DesertHeat from "../stages/DesertHeat";
 import NightSky from "../stages/NightSky";
 import Player from "../stages/Player";
 import Coin from "../stages/Coin";
+import CoinSound from "../coin-sound-full.mp3";
 import GameStats from "./GameStats";
 import EndGame from "./EndGame";
 import Ground from "../helpers/Ground";
@@ -125,7 +127,6 @@ class Canvas extends Component {
   }
 
   saveScore = () => {
-    console.log("Saving");
     const adapter = new JSONAPIAdapter(
       "https://desert-driver-api.herokuapp.com/api/v1/"
     );
@@ -155,7 +156,6 @@ class Canvas extends Component {
     this.setProfile();
 
     const loseLives = () => {
-      console.log("losing");
       this.setState((prevState) => ({
         lives: prevState.lives - 1,
         currentDistance: 0,
@@ -327,6 +327,17 @@ class Canvas extends Component {
           Math.abs(coin.y - playerCoordinates.y) < 28
         );
       };
+      this.coins.forEach((coin) => {
+        const coinSound = document.getElementById("coin-sound");
+        if (shouldPickUpCoin(coin)) {
+          let coinSound = new Audio();
+          coinSound.src = CoinSound;
+          coinSound.volume = 0.5;
+          coinSound.play();
+          // coinSound[0].paused = false;
+          // coinSound.play();
+        }
+      });
       this.coins = this.coins.filter((coin) => !shouldPickUpCoin(coin));
 
       //COUNT COINS
@@ -387,8 +398,17 @@ class Canvas extends Component {
               </div>
             </div>
           </div>
+          {/* <audio id="coin-sound">
+            <source src={CoinSound}></source>
+          </audio> */}
+          {/* <ReactAudioPlayer
+            className="coin-sound"
+            src={CoinSound}
+            autoPlay={false}
+            loop={false}
+            controls={false}
+          /> */}
           <GameStats stats={this.state} />
-
           <div className="end-game-container">
             {!this.state.gameOn ? (
               <EndGame
