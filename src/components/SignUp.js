@@ -120,8 +120,7 @@ class SignUp extends React.Component {
 
   render() {
     const redirectToGame = this.state.redirectToGame;
-    // const onImagesLoaded = require("react-on-images-loaded")
-    console.log("what are our avatars?", this.props.avatars)
+
     if (redirectToGame) {
       return <Redirect to="/" />;
     } else {
@@ -134,12 +133,8 @@ class SignUp extends React.Component {
           <br />
           <div className="sign-up-form">
             <p className="choose-your-ride">CHOOSE YOUR RIDE</p>
-            {/* <br /> */}
-            {this.props.avatars.length < 7 ? 
-                <div className="loader"></div>
-              :
-            <>
-            <OnImagesLoaded
+            {/* <> */}
+            {this.props.avatars.length === 7 && <OnImagesLoaded
               onLoaded={() => this.setState({showImages: true})}
               onTimeout={() => this.setState({showImages: true})}
               timeout={7000}
@@ -173,7 +168,7 @@ class SignUp extends React.Component {
                 style={{ opacity: this.state.showImages ? 0 : 1 }}
               ></div>
             </div>
-            </OnImagesLoaded>
+            </OnImagesLoaded>}
     
             {/* <br />
             <br /> */}
@@ -213,8 +208,7 @@ class SignUp extends React.Component {
               <br />
               <input className="submit-btn" type="submit" value="START GAME" />
             </form>
-            </>
-            }
+            {/* </> */}
             <div className="moon-container">
               <img className="moon" alt="giant-moon" src={moon} />
             </div>
