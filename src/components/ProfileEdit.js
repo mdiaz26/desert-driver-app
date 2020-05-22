@@ -4,14 +4,13 @@ import AvatarChoice from "./AvatarChoice";
 import "../styles/styles.scss";
 import background from "../sign-up-background2.gif";
 import moon from "../moon.png";
+import OnImagesLoaded from "react-on-images-loaded";
+
 
 const ProfileEdit = (props) => {
-  // const [modalState, changeModalState] = useState({ display: false });
   const [passwordState, changePasswordState] = useState({ display: false });
+  const [showImagesState, changeShowImagesState] = useState({ showImages: false });
 
-  // const toggleModal = () => {
-  //   changeModalState({ display: !modalState.display });
-  // };
 
   const togglePassword = (event) => {
     event.preventDefault();
@@ -89,26 +88,32 @@ const ProfileEdit = (props) => {
           )}
           <br />
           <p className="choose-your-ride">SWITCH YOUR RIDE</p>
-          <div className="avatar-frame">
-            {props.avatars.map((avatar, index) => (
-              <AvatarChoice
-                key={avatar.id}
-                {...avatar}
-                number={index + 1}
-                handleRadioChange={props.handleRadioChange}
-                className={
-                  props.avatar.name === avatar.name ? "gold-border" : "none"
-                }
-              />
-            ))}
-            <div className="inner-circle">
-              <img
-                id="fill-this-image"
-                src={handleSelection()}
-                alt={handleSelection()}
-              />
+          {props.avatars.length === 7 && <OnImagesLoaded
+              onLoaded={() => changeShowImagesState({showImages: true})}
+            >
+            <div className="avatar-frame">
+              {props.avatars.map((avatar, index) => (
+                <AvatarChoice
+                  key={avatar.id}
+                  {...avatar}
+                  number={index + 1}
+                  handleRadioChange={props.handleRadioChange}
+                  className={
+                    props.avatar.name === avatar.name ? "gold-border" : "none"
+                  }
+                  opacity= {showImagesState.showImages ? 1 : 0}
+                />
+              ))}
+              <div className="inner-circle">
+                <img
+                  id="fill-this-image"
+                  src={handleSelection()}
+                  alt={handleSelection()}
+                  style={{opacity: showImagesState.showImages ? 1 : 0}}
+                />
+              </div>
             </div>
-          </div>
+          </OnImagesLoaded>}
           <input className="submit-btn" type="submit" value="Submit" /> |
           <button className="cancel-btn" onClick={props.toggleEdit}>
             Cancel

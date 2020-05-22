@@ -120,22 +120,11 @@ class SignUp extends React.Component {
 
   render() {
     const redirectToGame = this.state.redirectToGame;
-    const onImagesLoaded = require("react-on-images-loaded")
+    // const onImagesLoaded = require("react-on-images-loaded")
     console.log("what are our avatars?", this.props.avatars)
     if (redirectToGame) {
       return <Redirect to="/" />;
-    } else if (this.props.avatars.length < 7) {
-      return (
-        <div className="sign-up-screen">
-          <div className="logo-container">
-            <img id="sign-up-logo" alt="game logo" src={logo} />
-            <img className="sign-up-background" alt="background" src={background} />
-            <div>loading...</div>
-          </div>
-        </div>
-      )
     } else {
-
       return (
         <div className="sign-up-screen">
           <div className="logo-container">
@@ -146,6 +135,10 @@ class SignUp extends React.Component {
           <div className="sign-up-form">
             <p className="choose-your-ride">CHOOSE YOUR RIDE</p>
             {/* <br /> */}
+            {this.props.avatars.length < 7 ? 
+                <div className="loader"></div>
+              :
+            <>
             <OnImagesLoaded
               onLoaded={() => this.setState({showImages: true})}
               onTimeout={() => this.setState({showImages: true})}
@@ -167,7 +160,7 @@ class SignUp extends React.Component {
                 />
                 ))}
   
-              <div className="inner-circle">
+              <div className="inner-circle"> 
                 <img
                   id="fill-this-image"
                   src={this.handleSelection()}
@@ -175,8 +168,13 @@ class SignUp extends React.Component {
                   style={{ opacity: this.state.showImages ? 1 : 0}}
                   />
               </div>
+              <div 
+                className="loader"
+                style={{ opacity: this.state.showImages ? 0 : 1 }}
+              ></div>
             </div>
             </OnImagesLoaded>
+    
             {/* <br />
             <br /> */}
   
@@ -215,6 +213,8 @@ class SignUp extends React.Component {
               <br />
               <input className="submit-btn" type="submit" value="START GAME" />
             </form>
+            </>
+            }
             <div className="moon-container">
               <img className="moon" alt="giant-moon" src={moon} />
             </div>
