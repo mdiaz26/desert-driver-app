@@ -2,7 +2,7 @@ import React from "react";
 import "../styles/styles.scss";
 import { Link } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
-import logo from "../desert-driver-logo6.png";
+import Images from "../asset-libraries/Images";
 
 const Nav = (props) => {
   const isLoggedIn = !!props.userId;
@@ -16,7 +16,7 @@ const Nav = (props) => {
               <img src={props.avatar} alt="Profile" className="tiny-avatar" />
             </Link>
             <Link to="/" className="logo-btn">
-              <img id="logo" src={logo} />
+              <img id="logo" src={Images.logo} alt="Desert Heat Logo" />
             </Link>
             <Link to="/" className="btn">
               Play!

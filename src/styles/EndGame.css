@@ -88,7 +88,9 @@ button:hover {
   text-align: center;
   color: rgb(245, 186, 83);
 }
-h3 {
+.stat-report-category {
+  font-weight: bolder;
+  font-size: 20px;
   color: rgb(170, 202, 235);
 }
 

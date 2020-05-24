@@ -7,7 +7,7 @@ import Coin from "../stages/Coin";
 import GameStats from "./GameStats";
 import EndGame from "./EndGame";
 import Ground from "../helpers/Ground";
-import Sounds from "../audio/Sounds";
+import Sounds from "../asset-libraries/Sounds";
 import "../styles/Canvas.css";
 
 class Canvas extends Component {
@@ -30,6 +30,12 @@ class Canvas extends Component {
     ArrowDown: false,
     ArrowLeft: false,
     ArrowRight: false,
+    pauseGame: false,
+    musicPlaying: true,
+    gameSound: true,
+    bgMusicVolume: 0.4,
+    gameVolume: 0.8,
+    bgSongInfo: "",
   };
 
   canvas = React.createRef();
@@ -39,25 +45,103 @@ class Canvas extends Component {
   miniInterval = null;
   animationID = null;
   countDown = null;
+  bgMusic = null;
+  fadeOut = null;
+  gameSound = {
+    countdownAudio: null,
+    coinAudio: null,
+  };
 
   componentDidMount() {
     this.game();
+    this.coinAudio();
     setTimeout(() => {
       this.startTimers();
     }, 3000);
     this.countDown = setInterval(() => {
       this.setState((prevState) => ({ countDown: prevState.countDown - 1 }));
     }, 1000);
+    this.bgMusic = new Audio();
+    let song =
+      Sounds.bgMusic[Math.floor(Math.random() * Sounds.bgMusic.length)];
+    setTimeout(() => {
+      this.state.musicPlaying && this.musicPlay(song);
+    }, 3000);
+    this.countdownAudio();
   }
+
+  countdownAudio = () => {
+    this.gameSound.countdownAudio = new Audio();
+    this.gameSound.countdownAudio.src = Sounds.countdown;
+    this.gameSound.countdownAudio.controls = true;
+    this.gameSound.countdownAudio.maxVolume = 0.3;
+    this.gameSound.countdownAudio.volume =
+      this.state.gameVolume * this.gameSound.countdownAudio.maxVolume;
+    this.gameSound.countdownAudio.play();
+  };
+
+  coinAudio = () => {
+    this.gameSound.coinAudio = new Audio();
+    this.gameSound.coinAudio.src = Sounds.coin;
+    this.gameSound.coinAudio.controls = true;
+    this.gameSound.coinAudio.maxVolume = 0.1;
+    this.gameSound.coinAudio.volume =
+      this.state.gameVolume * this.gameSound.coinAudio.maxVolume;
+    this.gameSound.coinAudio.play();
+  };
+
+  musicPlay = (song) => {
+    this.bgMusic.src = song.src;
+    this.bgMusic.controls = true;
+    this.bgMusic.volume = this.state.bgMusicVolume;
+    this.bgMusic.load();
+    this.bgMusic.play();
+    this.getInfo(song);
+    this.bgMusic.addEventListener("ended", () => {
+      this.bgMusic.pause();
+      this.nextSong(song);
+    });
+  };
+
+  nextSong = (song = this.bgMusic) => {
+    let newSong =
+      Sounds.bgMusic[Math.floor(Math.random() * Sounds.bgMusic.length)];
+    newSong.src === song.src && this.nextSong((song = this.bgMusic));
+    this.musicPlay(newSong);
+  };
+
+  getInfo = (song) => {
+    this.setState({
+      bgSongInfo: `"${song.title}" by ${song.artist}`,
+    });
+  };
+
+  musicFadeOut = () => {
+    if (this.state.musicPlaying) {
+      this.fadeOut = setInterval(
+        () => (this.bgMusic.volume -= this.bgMusic.volume * 0.05),
+        5
+      );
+      setTimeout(() => clearInterval(this.fadeOut), 500);
+      setTimeout(() => this.bgMusic.pause(), 500);
+      setTimeout(() => (this.bgMusic = null), 500);
+    }
+  };
 
   componentWillUnmount() {
     clearInterval(this.interval);
     clearInterval(this.miniInterval);
     cancelAnimationFrame(this.animationID);
+    this.props.selectedStage(null);
+    this.bgMusic && this.musicFadeOut();
   }
 
   restartGame = () => {
+    clearInterval(this.miniInterval);
     this.coins = this.createCoins();
+    if (this.bgMusic) {
+      clearInterval(this.fadeOut);
+    }
     this.setState(
       {
         lives: 3,
@@ -80,6 +164,7 @@ class Canvas extends Component {
       () => this.setState((prevState) => ({ timer: prevState.timer + 1 })),
       1000
     );
+    clearInterval(this.miniInterval);
     this.miniInterval = setInterval(
       () =>
         this.setState((prevState) => ({
@@ -166,6 +251,7 @@ class Canvas extends Component {
     const lastLife = () => {
       if (lastLostLife === false) {
         lastLostLife = true;
+        this.musicFadeOut();
         this.saveScore();
         return;
       }
@@ -190,7 +276,6 @@ class Canvas extends Component {
           loseLives();
         } else {
           lastLife();
-          clearInterval(this.miniInterval);
           clearInterval(this.interval);
           let totalScore =
             this.state.coins * this.state.maxDistance - this.state.timer;
@@ -220,7 +305,7 @@ class Canvas extends Component {
       }
 
       //LEFT & RIGHT KEY SETTINGS
-      player.rSpeed += (k.ArrowLeft - k.ArrowRight) * 0.09;
+      player.rSpeed += (k.ArrowLeft - k.ArrowRight) * 0.08;
       player.rot -= player.rSpeed * 0.1;
       if (player.rot > Math.PI) player.rot = -Math.PI;
       if (player.rot < -Math.PI) player.rot = Math.PI;
@@ -229,7 +314,7 @@ class Canvas extends Component {
       context.rotate(player.rot);
 
       //AVATAR SIZE AND SCREEN POSITION
-      context.drawImage(player.movingImage, -21, -21, 40, 34);
+      context.drawImage(player.movingImage, -18.5, -18.5, 40, 32);
       context.restore();
     };
 
@@ -242,7 +327,7 @@ class Canvas extends Component {
         clearInterval(this.countDown);
         speed -= (speed - (k.ArrowUp - k.ArrowDown)) * 0.007;
       }
-      t += 6 * speed;
+      t += 7 * speed;
       if (speed.toFixed(2) > 0.05 && this.state.lives > 0) {
         this.gainDistance(speed);
       }
@@ -327,16 +412,11 @@ class Canvas extends Component {
         );
       };
       this.coins.forEach((coin) => {
-        let coinSound;
         if (shouldPickUpCoin(coin) && this.state.lives > 0) {
-          coinSound = new Audio();
-          coinSound.src = Sounds.coin;
-          coinSound.controls = true;
-          coinSound.volume = 0.05;
-          coinSound.play();
-          coinSound = null;
+          this.coinAudio();
         }
       });
+
       this.coins = this.coins.filter((coin) => !shouldPickUpCoin(coin));
 
       //COUNT COINS
@@ -352,38 +432,118 @@ class Canvas extends Component {
       context.fill();
     };
 
-    onkeydown = (d) => {
-      if (d.key === "ArrowUp") {
-        this.setState({ ArrowUp: true });
-      } else if (d.key === "ArrowDown") {
-        this.setState({ ArrowDown: true });
-      } else if (d.key === "ArrowLeft") {
-        this.setState({ ArrowLeft: true });
-      } else if (d.key === "ArrowRight") {
-        this.setState({ ArrowRight: true });
+    const pauseHandler = () => {
+      if (this.state.pauseGame) {
+        requestAnimationFrame(loop);
+        this.startTimers();
+      } else {
+        cancelAnimationFrame(this.animationID);
+        clearInterval(this.interval);
+        clearInterval(this.miniInterval);
       }
-      return (k[d.key] = 1);
-    };
-    onkeyup = (d) => {
-      if (d.key === "ArrowUp") {
-        this.setState({ ArrowUp: false });
-      } else if (d.key === "ArrowDown") {
-        this.setState({ ArrowDown: false });
-      } else if (d.key === "ArrowLeft") {
-        this.setState({ ArrowLeft: false });
-      } else if (d.key === "ArrowRight") {
-        this.setState({ ArrowRight: false });
-      }
-      return (k[d.key] = 0);
+      updatePauseState();
     };
 
+    const updatePauseState = () => {
+      this.setState((state) => ({
+        pauseGame: !state.pauseGame,
+      }));
+    };
+
+    const resumeButton = document.getElementById("resume-button");
+
+    resumeButton.addEventListener("click", (event) => {
+      pauseHandler();
+      resumeButton.blur();
+    });
+
+    onkeydown = (d) => {
+      if (this.state.lives > 0) {
+        if (!this.state.pauseGame) {
+          if (d.key === "ArrowUp") {
+            this.setState({ ArrowUp: true });
+          } else if (d.key === "ArrowDown") {
+            this.setState({ ArrowDown: true });
+          } else if (d.key === "ArrowLeft") {
+            this.setState({ ArrowLeft: true });
+          } else if (d.key === "ArrowRight") {
+            this.setState({ ArrowRight: true });
+          }
+        }
+        if (this.state.millisecond > 0) {
+          if (d.key === " ") {
+            pauseHandler(loop);
+          }
+        }
+        return (k[d.key] = 1);
+      }
+    };
+    onkeyup = (d) => {
+      if (this.state.lives > 0) {
+        if (d.key === "ArrowUp") {
+          this.setState({ ArrowUp: false });
+        } else if (d.key === "ArrowDown") {
+          this.setState({ ArrowDown: false });
+        } else if (d.key === "ArrowLeft") {
+          this.setState({ ArrowLeft: false });
+        } else if (d.key === "ArrowRight") {
+          this.setState({ ArrowRight: false });
+        }
+        return (k[d.key] = 0);
+      }
+    };
     loop();
+  };
+
+  setMusicVolume = (value) => {
+    this.bgMusic.volume = value;
+    this.setState({
+      bgMusicVolume: value,
+    });
+  };
+
+  setGameVolume = (value) => {
+    Object.keys(this.gameSound).forEach((audio) => {
+      this.gameSound[audio].volume = value * this.gameSound[audio].maxVolume;
+    });
+    this.setState({
+      gameVolume: value,
+    });
+  };
+
+  stopOrPlayMusic = () => {
+    if (this.state.musicPlaying) {
+      this.musicFadeOut();
+    } else {
+      this.bgMusic = new Audio();
+      let song =
+        Sounds.bgMusic[Math.floor(Math.random() * Sounds.bgMusic.length)];
+      this.musicPlay(song);
+    }
+    this.setState((state) => ({
+      musicPlaying: !state.musicPlaying,
+    }));
   };
 
   render() {
     return (
       <div className="big-container">
         <div id="container">
+          <div
+            className={this.state.pauseGame ? "pause-screen" : "resume-screen"}
+          >
+            <button
+              onClick={this.pauseHandler}
+              id="resume-button"
+              className={
+                this.state.millisecond > 0
+                  ? "resume-button"
+                  : "hide-resume-button"
+              }
+            >
+              RESUME GAME
+            </button>
+          </div>
           <div className="canvas-container">
             <canvas
               ref={this.canvas}
@@ -397,17 +557,13 @@ class Canvas extends Component {
               </div>
             </div>
           </div>
-          {/* <audio id="coin-sound">
-            <source src={CoinSound}></source>
-          </audio> */}
-          {/* <ReactAudioPlayer
-            className="coin-sound"
-            src={CoinSound}
-            autoPlay={false}
-            loop={false}
-            controls={false}
-          /> */}
-          <GameStats stats={this.state} />
+          <GameStats
+            stats={this.state}
+            setMusicVolume={this.setMusicVolume}
+            setGameVolume={this.setGameVolume}
+            nextSong={this.nextSong}
+            stopOrPlayMusic={this.stopOrPlayMusic}
+          />
           <div className="end-game-container">
             {!this.state.gameOn ? (
               <EndGame

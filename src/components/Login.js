@@ -1,8 +1,7 @@
 import "../styles/Login.css";
 import React from "react";
 import { Redirect } from "react-router-dom";
-import loginBackground from "../sign-in-background.gif";
-import logo from "../desert-driver-logo6.png";
+import Images from "../asset-libraries/Images";
 
 class Login extends React.Component {
   state = {
@@ -50,8 +49,12 @@ class Login extends React.Component {
     return (
       <div className="container">
         <div className="logo-container">
-          <img className="logo-background" src={loginBackground} />
-          <img id="logo" src={logo} />
+          <img
+            className="logo-background"
+            src={Images.loginGif}
+            alt="Login Gif"
+          />
+          <img id="logo" src={Images.logo} alt="Desert Heat Logo" />
         </div>
         <div className="login-screen">
           <div className="login-form">

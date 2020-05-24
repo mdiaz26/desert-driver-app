@@ -25,7 +25,7 @@ const EndGame = (props) => {
           <div className="counters">
             <div className="container">
               <div>
-                <h3>Coins</h3>
+                <p className="stat-report-category">COINS</p>
                 <Spring from={{ number: 0 }} to={{ number: props.stats.coins }}>
                   {(props) => (
                     <div className="counter">{props.number.toFixed(0)}</div>
@@ -33,7 +33,7 @@ const EndGame = (props) => {
                 </Spring>
               </div>
               <div>
-                <h3>Max Distance</h3>
+                <p className="stat-report-category">MAX DISTANCE</p>
                 <Spring
                   from={{ number: 0 }}
                   to={{ number: props.stats.maxDistance }}
@@ -44,7 +44,7 @@ const EndGame = (props) => {
                 </Spring>
               </div>
               <div>
-                <h3>Timer</h3>
+                <p className="stat-report-category">TIMER</p>
                 <Spring
                   from={{ number: 0, color: "red" }}
                   to={{ number: props.stats.timer, color: "green" }}
@@ -55,7 +55,7 @@ const EndGame = (props) => {
                 </Spring>
               </div>
               <div>
-                <h3>Final Score</h3>
+                <p className="stat-report-category">FINAL SCORE</p>
                 <Spring from={{ number: 0 }} to={{ number: props.stats.score }}>
                   {(props) => (
                     <div className="counter">{props.number.toFixed(0)}</div>

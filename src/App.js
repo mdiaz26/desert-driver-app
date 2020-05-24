@@ -6,7 +6,7 @@ import { Switch, Route } from "react-router-dom";
 import GameContainer from "./containers/GameContainer";
 import Leaderboard from "./containers/Leaderboard";
 import React from "react";
-import heart from "./heart.png";
+import Images from "./asset-libraries/Images";
 
 class App extends React.Component {
   state = {
@@ -67,7 +67,11 @@ class App extends React.Component {
   };
 
   selectedStageHandler = (event) => {
-    this.setState({ selectedStage: event.target.alt });
+    if (event) {
+      this.setState({ selectedStage: event.target.alt });
+    } else {
+      this.setState({ selectedStage: "" });
+    }
   };
   backToGameMenu = (event) => {
     this.setState({ selectedStage: "" });
@@ -145,10 +149,12 @@ class App extends React.Component {
         </div>
         <div>
           <p className="signature">
-            March 2020 | Made with <img class="heart" src={heart} /> by{" "}
+            March 2020 | Made with{" "}
+            <img className="heart" src={Images.heart} alt="heart" /> by{" "}
             <a
               className="signature-links"
               target="_blank"
+              rel="noopener noreferrer"
               href="https://www.linkedin.com/in/alejoluis/"
             >
               LUIS ALEJO
@@ -157,6 +163,7 @@ class App extends React.Component {
             <a
               className="signature-links"
               target="_blank"
+              rel="noopener noreferrer"
               href="https://www.linkedin.com/in/mikediaz006/"
             >
               MICHAEL DIAZ

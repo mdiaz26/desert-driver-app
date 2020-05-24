@@ -4,9 +4,10 @@ import JSONAPIAdapter from "../JSONAPIAdapter";
 import AvatarChoice from "./AvatarChoice";
 import "../styles/styles.scss";
 import "../styles/SignUp.css";
-import background from "../sign-up-background2.gif";
-import moon from "../moon.png";
-import logo from "../desert-driver-logo6.png";
+// import background from "../sign-up-background2.gif";
+// import moon from "../moon.png";
+// import logo from "../logo.png";
+import Images from "../asset-libraries/Images";
 
 class SignUp extends React.Component {
   state = {
@@ -24,7 +25,9 @@ class SignUp extends React.Component {
   };
 
   createUser = () => {
-    const adapter = new JSONAPIAdapter("https://desert-driver-api.herokuapp.com/api/v1/");
+    const adapter = new JSONAPIAdapter(
+      "https://desert-driver-api.herokuapp.com/api/v1/"
+    );
     adapter
       .post("users", {
         user: {
@@ -120,8 +123,12 @@ class SignUp extends React.Component {
     return (
       <div className="sign-up-screen">
         <div className="logo-container">
-          <img id="sign-up-logo" src={logo} />
-          <img className="sign-up-background" src={background} />
+          <img id="sign-up-logo" src={Images.logo} alt="Desert Heat Logo" />
+          <img
+            className="sign-up-background"
+            src={Images.signUpGif}
+            alt="Sign Up Gif"
+          />
         </div>
         <br />
         <div className="sign-up-form">
@@ -189,7 +196,7 @@ class SignUp extends React.Component {
             <input className="submit-btn" type="submit" value="START GAME" />
           </form>
           <div className="moon-container">
-            <img className="moon" src={moon} />
+            <img className="moon" src={Images.moon} alt="Moon" />
           </div>
         </div>
       </div>

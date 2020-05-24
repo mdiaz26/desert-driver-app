@@ -25,6 +25,7 @@ body,
   bottom: 0;
   margin-left: auto;
   margin-right: auto;
+  cursor: default;
 }
 .signature-links:hover {
   text-decoration: none;

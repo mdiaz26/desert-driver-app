@@ -1,19 +1,87 @@
 body {
   background-color: #070507;
 }
+@keyframes custom-fadein {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 100;
+  }
+}
+@keyframes custom-fadeout {
+  100% {
+    opacity: 0;
+  }
+  0% {
+    opacity: 100;
+  }
+}
 .big-container {
-  height: 70%;
+  position: fixed;
+  height: 100%;
+  z-index: -1;
+  animation-name: custom-fadein;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
 }
 #container {
-  position: absolute;
+  position: fixed;
   height: 100%;
-  top: 0;
+  top: 0px;
   z-index: -10;
-  bottom: 60;
+  animation-name: custom-fadein;
+  animation-duration: 3s;
+  animation-timing-function: ease-in-out;
 }
-
+.pause-screen {
+  position: fixed;
+  width: 100%;
+  top: 0px;
+  height: 100%;
+  z-index: 0;
+  background-color: rgba(8, 8, 8, 0.719);
+  top: 54px;
+  animation-name: custom-fadein;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-in-out;
+  
+}
+.resume-screen {
+  position: fixed;
+  width: 100%;
+  z-index: -50;
+  top: 54px;
+  height: 100%;
+  background-color: transparent;
+  
+}
+.resume-button {
+  position: relative;
+  border: 2px solid #ffab3dbd;
+  background-color: #110e108a;
+  color: #ffab3dbd;
+  border-radius: 35px;
+  top: 18%;
+  transition: all 0.3s ease-in-out;
+}
+.resume-button:hover {
+  position: relative;
+  border: 2px solid #110e10ce;
+  background-color: #ffab3dbd;
+  color: #1b1217;
+  border-radius: 35px;
+  top: 18%;
+}
+.resume-button:focus {
+  outline: 0;
+}
+.hide-resume-button {
+  display: none;
+}
 .canvas-container {
   height: 50%;
+  background-color: rgb(39, 44, 44);
   top: 0;
 }
 
@@ -47,7 +115,7 @@ img .pyramid {
   opacity: 60%;
 }
 
-.fade-in {
+/* .fade-in {
   animation: fadeIn ease-in-out 3s;
   -webkit-animation: fadeIn ease-in-out 3s;
   -moz-animation: fadeIn ease-in-out 3s;
@@ -98,4 +166,4 @@ img .pyramid {
   100% {
     opacity: 1;
   }
-}
+} */

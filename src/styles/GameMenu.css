@@ -86,3 +86,7 @@
   letter-spacing: 5px;
   color: #ff0091;
 }
+.game-container {
+  position: absolute;
+  height: calc(100% - 55px)
+}

@@ -1,9 +1,6 @@
 import React, { Component } from "react";
+import Images from "../asset-libraries/Images";
 import "../styles/GameMenu.css";
-import desertGIF from "../desert-snippet.gif";
-import desertStill from "../desert-screenshot.jpg";
-import nightGIF from "../night-snippet.gif";
-import nightStill from "../night-screenshot.jpg";
 
 class EndGame extends Component {
   state = {
@@ -38,7 +35,11 @@ class EndGame extends Component {
                   onMouseLeave={(event) => this.switchToGif(event)}
                   onClick={(event) => this.props.selectedStage(event)}
                   className="desert-heat-img"
-                  src={this.state.desertHover ? desertGIF : desertStill}
+                  src={
+                    this.state.desertHover
+                      ? Images.desertHeatGif
+                      : Images.desertHeatStill
+                  }
                   alt="Desert Heat Stage"
                 />
                 <div className="title-container"></div>
@@ -52,7 +53,11 @@ class EndGame extends Component {
                   onMouseLeave={(event) => this.switchToGif(event)}
                   onClick={(event) => this.props.selectedStage(event)}
                   className="night-sky-img"
-                  src={this.state.nightHover ? nightGIF : nightStill}
+                  src={
+                    this.state.nightHover
+                      ? Images.nightSkyGif
+                      : Images.nightSkyStill
+                  }
                   alt="Night Sky Stage"
                 />
                 <div className="title-container"></div>
