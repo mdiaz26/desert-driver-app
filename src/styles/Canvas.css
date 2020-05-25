@@ -97,15 +97,15 @@ canvas {
   margin-right: auto;
   text-align: center;
 }
-#count-down {
+.count-down {
   position: absolute;
   width: inherit;
   margin-top: -250px;
-  color: rgb(116, 55, 55);
-  -webkit-text-stroke: 1px rgb(241, 216, 179);
+  color: #a14378f1;
+  -webkit-text-stroke: 2px rgb(241, 216, 179);
   font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
   transition: all 1s ease-in-out;
-  font-size: 70px;
+  font-size: 100px;
 }
 
 img .pyramid {

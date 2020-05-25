@@ -24,7 +24,9 @@ class GameStats extends Component {
       <div className="game-sound-controls">
         <div
           className={
-            this.state.gameSoundMuted
+            this.state.powerOff
+              ? "speakers-off-container"
+              : this.state.gameSoundMuted
               ? "speaker-container-disabled game-volume"
               : "speaker-container game-volume"
           }
@@ -36,7 +38,9 @@ class GameStats extends Component {
             src={Images.speaker}
             alt="Game Sound Speaker"
             className={
-              this.state.gameSoundMuted
+              this.state.powerOff
+                ? "speakers-off"
+                : this.state.gameSoundMuted
                 ? "speaker-disabled game-volume"
                 : "speaker game-volume"
             }
@@ -44,7 +48,9 @@ class GameStats extends Component {
           <img
             src={Images.speaker}
             className={
-              this.state.gameSoundMuted
+              this.state.powerOff
+                ? "speakers-off"
+                : this.state.gameSoundMuted
                 ? "speaker-disabled game-volume"
                 : "speaker-glow game-volume"
             }
@@ -89,7 +95,9 @@ class GameStats extends Component {
       <div className="song-controls">
         <div
           className={
-            this.state.musicMuted
+            this.state.powerOff
+              ? "speakers-off-container"
+              : this.state.musicMuted
               ? "speaker-container-disabled music-volume"
               : "speaker-container music-volume"
           }
@@ -102,7 +110,9 @@ class GameStats extends Component {
             src={Images.speaker}
             alt="Music Volume"
             className={
-              this.state.musicMuted
+              this.state.powerOff
+                ? "speakers-off"
+                : this.state.musicMuted
                 ? "speaker-disabled music-volume"
                 : "speaker music-volume"
             }
@@ -111,7 +121,9 @@ class GameStats extends Component {
             src={Images.speaker}
             alt="Music Volume"
             className={
-              this.state.musicMuted
+              this.state.powerOff
+                ? "speakers-off"
+                : this.state.musicMuted
                 ? "speaker-disabled music-volume"
                 : "speaker-glow music-volume"
             }
@@ -167,13 +179,29 @@ class GameStats extends Component {
     return (
       <div className="audio-header">
         <div className="radio-title-container">
-          <span className="radio-title">DESERT RADIO</span>
+          <span
+            className={this.state.powerOff ? "radio-title-off" : "radio-title"}
+          >
+            DESERT RADIO
+          </span>
         </div>
         <div className="artist-and-title-container">
           <div>
-            <span className="now-playing">NOW PLAYING</span>
+            <span
+              className={
+                this.state.powerOff ? "now-playing-off" : "now-playing"
+              }
+            >
+              {"NOW PLAYING"}
+            </span>
             <br />
-            <span className="artist-and-title">
+            <span
+              className={
+                this.state.powerOff
+                  ? "artist-and-title-off"
+                  : "artist-and-title"
+              }
+            >
               {this.props.stats.bgSongInfo}
             </span>
           </div>
@@ -295,26 +323,37 @@ class GameStats extends Component {
   statBox = () => {
     return (
       <div className="stat-box">
-        <div className="stat">
-          <p className="stat-cat">TIMER</p>
-          <p className="stat-value">{this.props.stats.timer}</p>
+        <div className="stats-top">
+          <div className="stat">
+            <p className="stat-cat">TIMER</p>
+            <p className="stat-value">{this.props.stats.timer}</p>
+          </div>
+          <div className="stat">
+            <p className="stat-cat">COINS</p>
+            <p className="stat-value">{this.props.stats.coins}</p>
+          </div>
+          <div className="stat">
+            <p className="stat-cat">FLIPS</p>
+            <p className="stat-value">{this.props.stats.flipCount}</p>
+          </div>
+          <div className="stat">
+            <p className="stat-cat">BEST FLIP</p>
+            <p className="stat-value">{this.props.stats.bestFlip}°</p>
+          </div>
         </div>
-        <div className="stat">
-          <p className="stat-cat">COINS</p>
-          <p className="stat-value">{this.props.stats.coins}</p>
-        </div>
-        <div className="stat">
-          <p className="stat-cat">CURRENT DISTANCE</p>
-          <p className="stat-value">
-            {this.props.stats.currentDistance.toFixed(2)}
-          </p>
-        </div>
-
-        <div className="stat">
-          <p className="stat-cat">MAX DISTANCE</p>
-          <p className="stat-value">
-            {this.props.stats.maxDistance.toFixed(2)}
-          </p>
+        <div className="stats-bottom">
+          <div className="stat">
+            <p className="stat-cat">CURRENT DISTANCE</p>
+            <p className="stat-value">
+              {this.props.stats.currentDistance.toFixed(2)}
+            </p>
+          </div>
+          <div className="stat">
+            <p className="stat-cat">MAX DISTANCE</p>
+            <p className="stat-value">
+              {this.props.stats.maxDistance.toFixed(2)}
+            </p>
+          </div>
         </div>
       </div>
     );
@@ -381,6 +420,7 @@ class GameStats extends Component {
     this.setState((state) => ({
       powerOff: !state.powerOff,
     }));
+    this.stopAllSounds();
   };
 
   toggleMuted = (event) => {
@@ -424,10 +464,8 @@ class GameStats extends Component {
     this.props.nextSong();
   };
 
-  stopOrPlayMusic = () => {
-    this.props.stopOrPlayMusic();
-    const playButton = document.querySelector("#stop-the-music");
-    playButton.blur();
+  stopAllSounds = () => {
+    this.props.stopAllSounds();
   };
 
   render() {

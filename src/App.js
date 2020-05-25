@@ -17,8 +17,19 @@ class App extends React.Component {
     username: "",
     avatar: "",
     selectedStage: "",
+    musicPlaying: true,
+    gameSound: true,
+    bgMusicVolume: 0.4,
+    gameVolume: 0.8,
   };
 
+  bgMusic = null 
+  fadeOut = null 
+  gameSound = {
+    countdownAudio: null,
+    coinAudio: null
+  }
+  
   componentDidMount() {
     const adapter = new JSONAPIAdapter(
       "https://desert-driver-api.herokuapp.com/api/v1/"
@@ -80,6 +91,8 @@ class App extends React.Component {
   getAvatarById = (avatarId) => {
     return this.state.avatars.find((avatar) => avatar.id === avatarId);
   };
+
+
 
   render() {
     return (

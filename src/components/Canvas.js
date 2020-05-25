@@ -36,6 +36,8 @@ class Canvas extends Component {
     bgMusicVolume: 0.4,
     gameVolume: 0.8,
     bgSongInfo: "",
+    flipCount: 0,
+    bestFlip: 0,
   };
 
   canvas = React.createRef();
@@ -71,23 +73,27 @@ class Canvas extends Component {
   }
 
   countdownAudio = () => {
-    this.gameSound.countdownAudio = new Audio();
-    this.gameSound.countdownAudio.src = Sounds.countdown;
-    this.gameSound.countdownAudio.controls = true;
-    this.gameSound.countdownAudio.maxVolume = 0.3;
-    this.gameSound.countdownAudio.volume =
-      this.state.gameVolume * this.gameSound.countdownAudio.maxVolume;
-    this.gameSound.countdownAudio.play();
+    if (this.state.gameSound) {
+      this.gameSound.countdownAudio = new Audio();
+      this.gameSound.countdownAudio.src = Sounds.countdown;
+      this.gameSound.countdownAudio.controls = true;
+      this.gameSound.countdownAudio.maxVolume = 0.3;
+      this.gameSound.countdownAudio.volume =
+        this.state.gameVolume * this.gameSound.countdownAudio.maxVolume;
+      this.gameSound.countdownAudio.play();
+    }
   };
 
   coinAudio = () => {
-    this.gameSound.coinAudio = new Audio();
-    this.gameSound.coinAudio.src = Sounds.coin;
-    this.gameSound.coinAudio.controls = true;
-    this.gameSound.coinAudio.maxVolume = 0.1;
-    this.gameSound.coinAudio.volume =
-      this.state.gameVolume * this.gameSound.coinAudio.maxVolume;
-    this.gameSound.coinAudio.play();
+    if (this.state.gameSound) {
+      this.gameSound.coinAudio = new Audio();
+      this.gameSound.coinAudio.src = Sounds.coin;
+      this.gameSound.coinAudio.controls = true;
+      this.gameSound.coinAudio.maxVolume = 0.1;
+      this.gameSound.coinAudio.volume =
+        this.state.gameVolume * this.gameSound.coinAudio.maxVolume;
+      this.gameSound.coinAudio.play();
+    }
   };
 
   musicPlay = (song) => {
@@ -95,7 +101,7 @@ class Canvas extends Component {
     this.bgMusic.controls = true;
     this.bgMusic.volume = this.state.bgMusicVolume;
     this.bgMusic.load();
-    this.bgMusic.play();
+    setTimeout(() => this.bgMusic.play(), 1000);
     this.getInfo(song);
     this.bgMusic.addEventListener("ended", () => {
       this.bgMusic.pause();
@@ -154,6 +160,8 @@ class Canvas extends Component {
         millisecond: 0,
         maxDistance: 0,
         currentDistance: 0,
+        flipCount: 0,
+        bestFlip: 0,
       },
       this.componentDidMount()
     );
@@ -235,6 +243,9 @@ class Canvas extends Component {
     let playing = true;
     let speed = 0;
     let t = 0;
+    let flipping = false;
+    let flipCount = 0;
+    let flipDirection = 0;
 
     this.setState({ gameOn: true });
     this.setProfile();
@@ -288,6 +299,26 @@ class Canvas extends Component {
         }
       }
 
+      //FLIP TRIGGER
+      if (!grounded && playing) {
+        if (Math.abs(player.rot) > 3.1) {
+          flipDirection = player.rot;
+          flipping = true;
+        }
+        if (flipping && Math.round(Math.abs(player.rot)) === 0) {
+          this.setState((state) => ({ flipCount: state.flipCount + 1 }));
+          flipCount += 1;
+          flipDirection = 0;
+          flipping = false;
+        }
+      }
+      if (!flipping && grounded) {
+        if (this.state.bestFlip < flipCount * 360) {
+          this.setState({ bestFlip: flipCount * 360 });
+        }
+        flipCount = 0;
+      }
+
       if (!playing || (grounded && Math.abs(player.rot) > Math.PI * 0.5)) {
         playing = false;
         player.rSpeed = 5;
@@ -314,7 +345,7 @@ class Canvas extends Component {
       context.rotate(player.rot);
 
       //AVATAR SIZE AND SCREEN POSITION
-      context.drawImage(player.movingImage, -18.5, -18.5, 40, 32);
+      context.drawImage(player.movingImage, -19, -19, 40, 32);
       context.restore();
     };
 
@@ -511,7 +542,7 @@ class Canvas extends Component {
     });
   };
 
-  stopOrPlayMusic = () => {
+  stopAllSounds = () => {
     if (this.state.musicPlaying) {
       this.musicFadeOut();
     } else {
@@ -522,6 +553,7 @@ class Canvas extends Component {
     }
     this.setState((state) => ({
       musicPlaying: !state.musicPlaying,
+      gameSound: !state.gameSound,
     }));
   };
 
@@ -552,7 +584,7 @@ class Canvas extends Component {
               className="fade-in"
             />
             <div className="count-container">
-              <div id="count-down">
+              <div className="count-down">
                 {this.state.countDown < 1 ? "" : this.state.countDown}
               </div>
             </div>
@@ -562,7 +594,8 @@ class Canvas extends Component {
             setMusicVolume={this.setMusicVolume}
             setGameVolume={this.setGameVolume}
             nextSong={this.nextSong}
-            stopOrPlayMusic={this.stopOrPlayMusic}
+            stopAllSounds={this.stopAllSounds}
+            bgMusic={this.bgMusic}
           />
           <div className="end-game-container">
             {!this.state.gameOn ? (
