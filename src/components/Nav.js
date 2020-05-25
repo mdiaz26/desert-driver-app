@@ -16,7 +16,7 @@ const Nav = (props) => {
               <img src={props.avatar} alt="Profile" className="tiny-avatar" />
             </Link>
             <Link to="/" className="logo-btn">
-              <img id="logo" src={logo} />
+              <img id="logo" src={logo} alt="logo"/>
             </Link>
             <Link to="/" className="btn">
               Play!

@@ -16,7 +16,7 @@ class ProfileContainer extends React.Component {
         image: "",
       },
     },
-    avatar: {},
+    avatar: null,
     editMode: false,
   };
 
