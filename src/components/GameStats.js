@@ -12,10 +12,10 @@ class GameStats extends Component {
     powerOff: false,
   };
 
-  currentVolume = this.props.stats.bgMusicVolume;
+  currentVolume = this.props.bgMusicVolume;
   previousVolume = 0;
 
-  currentGameVolume = this.props.stats.gameVolume;
+  currentGameVolume = this.props.gameVolume;
   previousGameVolume = 0;
   muted = false;
 
@@ -30,9 +30,7 @@ class GameStats extends Component {
               ? "speaker-container-disabled game-volume"
               : "speaker-container game-volume"
           }
-          onClick={
-            this.props.stats.gameSound && ((event) => this.toggleMuted(event))
-          }
+          onClick={this.props.gameSound && ((event) => this.toggleMuted(event))}
         >
           <img
             src={Images.speaker}
@@ -62,11 +60,11 @@ class GameStats extends Component {
             type="range"
             min="0.0"
             max="1"
-            disabled={!this.props.stats.musicPlaying}
+            disabled={!this.props.musicPlaying}
             step="0.001"
             defaultValue="0.8"
             id={
-              this.props.stats.musicPlaying
+              this.props.musicPlaying
                 ? "game-sound-volume"
                 : "game-sound-volume-disabled"
             }
@@ -102,8 +100,7 @@ class GameStats extends Component {
               : "speaker-container music-volume"
           }
           onClick={
-            this.props.stats.musicPlaying &&
-            ((event) => this.toggleMuted(event))
+            this.props.musicPlaying && ((event) => this.toggleMuted(event))
           }
         >
           <img
@@ -135,11 +132,11 @@ class GameStats extends Component {
             type="range"
             min="0.0"
             max="0.5"
-            disabled={!this.props.stats.musicPlaying}
+            disabled={!this.props.musicPlaying}
             step="0.001"
             defaultValue="0.4"
             id={
-              this.props.stats.musicPlaying
+              this.props.musicPlaying
                 ? "bg-music-volume"
                 : "bg-music-volume-disabled"
             }
@@ -150,9 +147,9 @@ class GameStats extends Component {
         </div>
         <div className="next-song-container">
           <div
-            onClick={this.props.stats.musicPlaying ? this.nextSong : null}
+            onClick={this.props.musicPlaying ? this.nextSong : null}
             className={
-              this.props.stats.musicPlaying ? "next-song" : "next-song-disabled"
+              this.props.musicPlaying ? "next-song" : "next-song-disabled"
             }
           >
             <img
@@ -202,7 +199,7 @@ class GameStats extends Component {
                   : "artist-and-title"
               }
             >
-              {this.props.stats.bgSongInfo}
+              {this.props.bgSongInfo}
             </span>
           </div>
         </div>

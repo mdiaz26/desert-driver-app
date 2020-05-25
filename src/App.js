@@ -7,6 +7,7 @@ import GameContainer from "./containers/GameContainer";
 import Leaderboard from "./containers/Leaderboard";
 import React from "react";
 import Images from "./asset-libraries/Images";
+import Sounds from "./asset-libraries/Sounds"
 
 class App extends React.Component {
   state = {
@@ -21,6 +22,7 @@ class App extends React.Component {
     gameSound: true,
     bgMusicVolume: 0.4,
     gameVolume: 0.8,
+    bgSongInfo: null
   };
 
   bgMusic = null 
@@ -29,7 +31,7 @@ class App extends React.Component {
     countdownAudio: null,
     coinAudio: null
   }
-  
+
   componentDidMount() {
     const adapter = new JSONAPIAdapter(
       "https://desert-driver-api.herokuapp.com/api/v1/"
@@ -92,7 +94,100 @@ class App extends React.Component {
     return this.state.avatars.find((avatar) => avatar.id === avatarId);
   };
 
+  musicPlay = (song) => {
+    this.bgMusic = new Audio();
+    this.bgMusic.src = song.src;
+    this.bgMusic.controls = true;
+    this.bgMusic.volume = this.state.bgMusicVolume;
+    this.bgMusic.song = song
+    this.bgMusic.load();
+    setTimeout(() => this.bgMusic.play(), 1000);
+    this.setState({
+      bgSongInfo: `"${song.title}" by ${song.artist}`,
+    });
+    this.bgMusic.addEventListener("ended", () => {
+      this.bgMusic.pause();
+      this.nextSong(song);
+    });
+  };
 
+  nextSong = (song = this.bgMusic) => {
+    if (this.state.musicPlaying) {
+      this.bgMusic.pause()
+      this.bgMusic = null
+    }
+    let newSong =
+      Sounds.bgMusic[Math.floor(Math.random() * Sounds.bgMusic.length)];
+    newSong.src === song.src && this.nextSong((song = this.bgMusic));
+    this.musicPlay(newSong);
+  };
+
+  setMusicVolume = (value) => {
+    this.bgMusic.volume = value;
+    this.setState({
+      bgMusicVolume: value,
+    });
+  };
+
+  setGameVolume = (value) => {
+    Object.keys(this.gameSound).forEach((audioType) => {
+      this.gameSound[audioType].volume = value * this.gameSound[audioType].maxVolume;
+    });
+    this.setState({
+      gameVolume: value,
+    });
+  };
+
+  musicFadeOut = () => {
+    if (this.state.musicPlaying) {
+      this.fadeOut = setInterval(
+        () => (this.bgMusic.volume -= this.bgMusic.volume * 0.05),
+        5
+      );
+      setTimeout(() => clearInterval(this.fadeOut), 1000);
+      setTimeout(() => this.bgMusic.pause(), 1000);
+      setTimeout(() => (this.bgMusic = null), 1000);
+    }
+  };
+
+  coinAudio = () => {
+    if (this.state.gameSound) {
+      this.gameSound.coinAudio = new Audio();
+      this.gameSound.coinAudio.src = Sounds.coin;
+      this.gameSound.coinAudio.controls = true;
+      this.gameSound.coinAudio.maxVolume = 0.1;
+      this.gameSound.coinAudio.volume =
+        this.state.gameVolume * this.gameSound.coinAudio.maxVolume;
+      this.gameSound.coinAudio.play();
+    }
+  };
+
+  countdownAudio = () => {
+    if (this.state.gameSound) {
+      this.gameSound.countdownAudio = new Audio();
+      this.gameSound.countdownAudio.src = Sounds.countdown;
+      this.gameSound.countdownAudio.controls = true;
+      this.gameSound.countdownAudio.maxVolume = 0.3;
+      this.gameSound.countdownAudio.volume =
+        this.state.gameVolume * this.gameSound.countdownAudio.maxVolume;
+      this.gameSound.countdownAudio.play();
+    }
+  };
+
+  stopAllSounds = () => {
+    if (this.state.musicPlaying) {
+      this.musicFadeOut();
+    } else {
+      this.bgMusic = new Audio();
+      let song =
+        Sounds.bgMusic[Math.floor(Math.random() * Sounds.bgMusic.length)];
+      this.musicPlay(song);
+    }
+    this.setState((state) => ({
+      musicPlaying: !state.musicPlaying,
+      gameSound: !state.gameSound,
+    }));
+  };
 
   render() {
     return (
@@ -148,6 +243,21 @@ class App extends React.Component {
               path="/"
               render={() => (
                 <GameContainer
+                  nextSong={this.nextSong}
+                  bgSongInfo={this.state.bgSongInfo}
+                  musicFadeOut={this.musicFadeOut}
+                  stopAllSounds={this.stopAllSounds}
+                  setGameVolume={this.setGameVolume}
+                  setMusicVolume={this.setMusicVolume}
+                  gameVolume={this.state.gameVolume}
+                  gameSound={this.state.gameSound}
+                  bgMusicVolume={this.state.bgMusicVolume}
+                  countdownAudio={this.countdownAudio}
+                  coinAudio={this.coinAudio}
+                  bgMusic={this.bgMusic}
+                  fadeOut={this.fadeOut}
+                  musicPlay={this.musicPlay}
+                  musicPlaying={this.state.musicPlaying}
                   userId={this.state.userId}
                   username={this.state.username}
                   avatarImage={this.state.avatar}

@@ -56,97 +56,109 @@ class Canvas extends Component {
 
   componentDidMount() {
     this.game();
-    this.coinAudio();
+    this.props.coinAudio();
     setTimeout(() => {
       this.startTimers();
     }, 3000);
     this.countDown = setInterval(() => {
       this.setState((prevState) => ({ countDown: prevState.countDown - 1 }));
     }, 1000);
-    this.bgMusic = new Audio();
+    // this.props.bgMusic = new Audio();
     let song =
       Sounds.bgMusic[Math.floor(Math.random() * Sounds.bgMusic.length)];
     setTimeout(() => {
-      this.state.musicPlaying && this.musicPlay(song);
+      this.props.musicPlaying && this.props.musicPlay(song);
     }, 3000);
-    this.countdownAudio();
+    // setTimeout(() => {
+    //   this.setState({
+    //     bgSongInfo: this.props.bgSongInfo,
+    //   });
+    // }, 3010);
+    // setTimeout(() => {
+    //   this.getInfo(this.props.bgMusic.song);
+    // }, 3000);
+    this.props.countdownAudio();
   }
 
-  countdownAudio = () => {
-    if (this.state.gameSound) {
-      this.gameSound.countdownAudio = new Audio();
-      this.gameSound.countdownAudio.src = Sounds.countdown;
-      this.gameSound.countdownAudio.controls = true;
-      this.gameSound.countdownAudio.maxVolume = 0.3;
-      this.gameSound.countdownAudio.volume =
-        this.state.gameVolume * this.gameSound.countdownAudio.maxVolume;
-      this.gameSound.countdownAudio.play();
-    }
-  };
+  componentDidUpdate() {
+    // this.getInfo();
+  }
 
-  coinAudio = () => {
-    if (this.state.gameSound) {
-      this.gameSound.coinAudio = new Audio();
-      this.gameSound.coinAudio.src = Sounds.coin;
-      this.gameSound.coinAudio.controls = true;
-      this.gameSound.coinAudio.maxVolume = 0.1;
-      this.gameSound.coinAudio.volume =
-        this.state.gameVolume * this.gameSound.coinAudio.maxVolume;
-      this.gameSound.coinAudio.play();
-    }
-  };
+  // countdownAudio = () => {
+  //   if (this.state.gameSound) {
+  //     this.gameSound.countdownAudio = new Audio();
+  //     this.gameSound.countdownAudio.src = Sounds.countdown;
+  //     this.gameSound.countdownAudio.controls = true;
+  //     this.gameSound.countdownAudio.maxVolume = 0.3;
+  //     this.gameSound.countdownAudio.volume =
+  //       this.state.gameVolume * this.gameSound.countdownAudio.maxVolume;
+  //     this.gameSound.countdownAudio.play();
+  //   }
+  // };
 
-  musicPlay = (song) => {
-    this.bgMusic.src = song.src;
-    this.bgMusic.controls = true;
-    this.bgMusic.volume = this.state.bgMusicVolume;
-    this.bgMusic.load();
-    setTimeout(() => this.bgMusic.play(), 1000);
-    this.getInfo(song);
-    this.bgMusic.addEventListener("ended", () => {
-      this.bgMusic.pause();
-      this.nextSong(song);
-    });
-  };
+  // coinAudio = () => {
+  //   if (this.state.gameSound) {
+  //     this.gameSound.coinAudio = new Audio();
+  //     this.gameSound.coinAudio.src = Sounds.coin;
+  //     this.gameSound.coinAudio.controls = true;
+  //     this.gameSound.coinAudio.maxVolume = 0.1;
+  //     this.gameSound.coinAudio.volume =
+  //       this.state.gameVolume * this.gameSound.coinAudio.maxVolume;
+  //     this.gameSound.coinAudio.play();
+  //   }
+  // };
 
-  nextSong = (song = this.bgMusic) => {
-    let newSong =
-      Sounds.bgMusic[Math.floor(Math.random() * Sounds.bgMusic.length)];
-    newSong.src === song.src && this.nextSong((song = this.bgMusic));
-    this.musicPlay(newSong);
-  };
+  // musicPlay = (song) => {
+  //   this.bgMusic.src = song.src;
+  //   this.bgMusic.controls = true;
+  //   this.bgMusic.volume = this.state.bgMusicVolume;
+  //   this.bgMusic.load();
+  //   setTimeout(() => this.bgMusic.play(), 1000);
+  //   this.getInfo(song);
+  //   this.bgMusic.addEventListener("ended", () => {
+  //     this.bgMusic.pause();
+  //     this.nextSong(song);
+  //   });
+  // };
 
-  getInfo = (song) => {
-    this.setState({
-      bgSongInfo: `"${song.title}" by ${song.artist}`,
-    });
-  };
+  // nextSong = (song = this.bgMusic) => {
+  //   let newSong =
+  //     Sounds.bgMusic[Math.floor(Math.random() * Sounds.bgMusic.length)];
+  //   newSong.src === song.src && this.nextSong((song = this.bgMusic));
+  //   this.musicPlay(newSong);
+  // };
 
-  musicFadeOut = () => {
-    if (this.state.musicPlaying) {
-      this.fadeOut = setInterval(
-        () => (this.bgMusic.volume -= this.bgMusic.volume * 0.05),
-        5
-      );
-      setTimeout(() => clearInterval(this.fadeOut), 500);
-      setTimeout(() => this.bgMusic.pause(), 500);
-      setTimeout(() => (this.bgMusic = null), 500);
-    }
-  };
+  // getInfo = () => {
+  //   this.setState({
+  //     bgSongInfo: this.props.bgSongInfo,
+  //   });
+  // };
+
+  // musicFadeOut = () => {
+  //   if (this.props.musicPlaying) {
+  //     this.props.fadeOut = setInterval(
+  //       () => (this.props.bgMusic.volume -= this.props.bgMusic.volume * 0.05),
+  //       5
+  //     );
+  //     setTimeout(() => clearInterval(this.props.fadeOut), 500);
+  //     setTimeout(() => this.props.bgMusic.pause(), 500);
+  //     setTimeout(() => (this.props.bgMusic = null), 500);
+  //   }
+  // };
 
   componentWillUnmount() {
     clearInterval(this.interval);
     clearInterval(this.miniInterval);
     cancelAnimationFrame(this.animationID);
     this.props.selectedStage(null);
-    this.bgMusic && this.musicFadeOut();
+    this.props.bgMusic && this.props.musicFadeOut();
   }
 
   restartGame = () => {
     clearInterval(this.miniInterval);
     this.coins = this.createCoins();
-    if (this.bgMusic) {
-      clearInterval(this.fadeOut);
+    if (this.props.bgMusic) {
+      clearInterval(this.props.fadeOut);
     }
     this.setState(
       {
@@ -262,7 +274,7 @@ class Canvas extends Component {
     const lastLife = () => {
       if (lastLostLife === false) {
         lastLostLife = true;
-        this.musicFadeOut();
+        this.props.musicFadeOut();
         this.saveScore();
         return;
       }
@@ -444,7 +456,7 @@ class Canvas extends Component {
       };
       this.coins.forEach((coin) => {
         if (shouldPickUpCoin(coin) && this.state.lives > 0) {
-          this.coinAudio();
+          this.props.coinAudio();
         }
       });
 
@@ -526,36 +538,36 @@ class Canvas extends Component {
     loop();
   };
 
-  setMusicVolume = (value) => {
-    this.bgMusic.volume = value;
-    this.setState({
-      bgMusicVolume: value,
-    });
-  };
+  // setMusicVolume = (value) => {
+  //   this.bgMusic.volume = value;
+  //   this.setState({
+  //     bgMusicVolume: value,
+  //   });
+  // };
 
-  setGameVolume = (value) => {
-    Object.keys(this.gameSound).forEach((audio) => {
-      this.gameSound[audio].volume = value * this.gameSound[audio].maxVolume;
-    });
-    this.setState({
-      gameVolume: value,
-    });
-  };
+  // setGameVolume = (value) => {
+  //   Object.keys(this.gameSound).forEach((audio) => {
+  //     this.gameSound[audio].volume = value * this.gameSound[audio].maxVolume;
+  //   });
+  //   this.setState({
+  //     gameVolume: value,
+  //   });
+  // };
 
-  stopAllSounds = () => {
-    if (this.state.musicPlaying) {
-      this.musicFadeOut();
-    } else {
-      this.bgMusic = new Audio();
-      let song =
-        Sounds.bgMusic[Math.floor(Math.random() * Sounds.bgMusic.length)];
-      this.musicPlay(song);
-    }
-    this.setState((state) => ({
-      musicPlaying: !state.musicPlaying,
-      gameSound: !state.gameSound,
-    }));
-  };
+  // stopAllSounds = () => {
+  //   if (this.state.musicPlaying) {
+  //     this.musicFadeOut();
+  //   } else {
+  //     this.bgMusic = new Audio();
+  //     let song =
+  //       Sounds.bgMusic[Math.floor(Math.random() * Sounds.bgMusic.length)];
+  //     this.musicPlay(song);
+  //   }
+  //   this.setState((state) => ({
+  //     musicPlaying: !state.musicPlaying,
+  //     gameSound: !state.gameSound,
+  //   }));
+  // };
 
   render() {
     return (
@@ -590,12 +602,17 @@ class Canvas extends Component {
             </div>
           </div>
           <GameStats
+            bgSongInfo={this.props.bgSongInfo}
+            gameSound={this.props.gameSound}
+            gameVolume={this.props.gameVolume}
+            bgMusicVolume={this.props.bgMusicVolume}
+            musicPlaying={this.props.musicPlaying}
             stats={this.state}
-            setMusicVolume={this.setMusicVolume}
-            setGameVolume={this.setGameVolume}
-            nextSong={this.nextSong}
-            stopAllSounds={this.stopAllSounds}
-            bgMusic={this.bgMusic}
+            setMusicVolume={this.props.setMusicVolume}
+            setGameVolume={this.props.setGameVolume}
+            nextSong={this.props.nextSong}
+            stopAllSounds={this.props.stopAllSounds}
+            bgMusic={this.props.bgMusic}
           />
           <div className="end-game-container">
             {!this.state.gameOn ? (

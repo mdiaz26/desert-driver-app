@@ -14,6 +14,21 @@ const GameContainer = (props) => {
           <GameMenu selectedStage={props.selectedStage} />
         ) : (
           <Canvas
+            gameVolume={props.gameVolume}
+            bgMusicVolume={props.bgMusicVolume}
+            nextSong={props.nextSong}
+            bgSongInfo={props.bgSongInfo}
+            musicFadeOut={props.musicFadeOut}
+            stopAllSounds={props.stopAllSounds}
+            setGameVolume={props.setGameVolume}
+            gameSound={props.gameSound}
+            setMusicVolume={props.setMusicVolume}
+            fadeOut={props.fadeOut}
+            countdownAudio={props.countdownAudio}
+            coinAudio={props.coinAudio}
+            bgMusic={props.bgMusic}
+            musicPlaying={props.musicPlaying}
+            musicPlay={props.musicPlay}
             selectedStage={props.selectedStage}
             backToGameMenu={props.backToGameMenu}
             stage={props.stage}
