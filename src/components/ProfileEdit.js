@@ -112,6 +112,7 @@ const ProfileEdit = (props) => {
                   style={{opacity: showImagesState.showImages ? 1 : 0}}
                 />
               </div>
+              {!showImagesState.showImages && <div className="loader"></div>}
             </div>
           </OnImagesLoaded>}
           <input className="submit-btn" type="submit" value="Submit" /> |

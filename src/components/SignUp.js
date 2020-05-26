@@ -163,10 +163,7 @@ class SignUp extends React.Component {
                   style={{ opacity: this.state.showImages ? 1 : 0}}
                   />
               </div>
-              { !this.state.showImages && <div 
-                className="loader"
-                style={{ opacity: this.state.showImages ? 0 : 1 }}
-              ></div>}
+              { !this.state.showImages && <div className="loader"></div>}
             </div>
             </OnImagesLoaded>}
     

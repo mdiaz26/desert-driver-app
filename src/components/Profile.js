@@ -21,24 +21,19 @@ const Profile = (props) => {
           <div className="avatar-div">
             {console.log(showImagesState.showImages)}
             {props.avatar ? 
+              <>
               <img 
-              className="avatar" 
-              src={props.avatar.image} 
-              // src={"/Avatars/bad-santa.png"} 
-              alt="avatar" 
-              onLoad={() => console.log("image has loaded")}
+                className="avatar" 
+                src={props.avatar.image} 
+                alt="avatar" 
               />
+              <button className="edit-btn" onClick={() => props.toggleEdit()}>
+                EDIT
+              </button>
+              </>
               :
-              <div 
-                className="loader"
-                // style={{ opacity: this.state.showImages ? 0 : 1 }}
-              >
-                {console.log("image has not loaded")}
-                LOADING</div>  
+              <div className="small loader"></div>  
             }
-            <button className="edit-btn" onClick={() => props.toggleEdit()}>
-              EDIT
-            </button>
           </div>
       </div>
     </div>
