@@ -16,7 +16,11 @@ const Nav = (props) => {
               <img src={props.avatar} alt="Profile" className="tiny-avatar" />
             </Link>
             <Link to="/" className="logo-btn">
+<<<<<<< HEAD
               <img id="logo" src={Images.logo} alt="Desert Heat Logo" />
+=======
+              <img id="logo" src={logo} alt="logo"/>
+>>>>>>> loading-images
             </Link>
             <Link to="/" className="btn">
               Play!

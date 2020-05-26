@@ -49,12 +49,17 @@ class Login extends React.Component {
     return (
       <div className="container">
         <div className="logo-container">
+<<<<<<< HEAD
           <img
             className="logo-background"
             src={Images.loginGif}
             alt="Login Gif"
           />
           <img id="logo" src={Images.logo} alt="Desert Heat Logo" />
+=======
+          <img className="logo-background" alt="background" src={loginBackground} />
+          <img id="logo" alt="logo" src={logo} />
+>>>>>>> loading-images
         </div>
         <div className="login-screen">
           <div className="login-form">

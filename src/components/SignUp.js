@@ -4,10 +4,8 @@ import JSONAPIAdapter from "../JSONAPIAdapter";
 import AvatarChoice from "./AvatarChoice";
 import "../styles/styles.scss";
 import "../styles/SignUp.css";
-// import background from "../sign-up-background2.gif";
-// import moon from "../moon.png";
-// import logo from "../logo.png";
 import Images from "../asset-libraries/Images";
+import OnImagesLoaded from "react-on-images-loaded";
 
 class SignUp extends React.Component {
   state = {
@@ -16,7 +14,12 @@ class SignUp extends React.Component {
     confirmPassword: "",
     selectedAvatar: "Billy Billions",
     redirectToGame: false,
+    showImages: false,
   };
+
+  componentDidMount() {
+    console.log("the component has mounted")
+  }
 
   handleChange = (event) => {
     this.setState({
@@ -117,90 +120,103 @@ class SignUp extends React.Component {
 
   render() {
     const redirectToGame = this.state.redirectToGame;
+
     if (redirectToGame) {
       return <Redirect to="/" />;
-    }
-    return (
-      <div className="sign-up-screen">
-        <div className="logo-container">
-          <img id="sign-up-logo" src={Images.logo} alt="Desert Heat Logo" />
-          <img
-            className="sign-up-background"
-            src={Images.signUpGif}
-            alt="Sign Up Gif"
-          />
-        </div>
-        <br />
-        <div className="sign-up-form">
-          <p className="choose-your-ride">CHOOSE YOUR RIDE</p>
-          {/* <br /> */}
-          <div className="avatar-frame">
-            {this.props.avatars.map((avatar, index) => (
-              <AvatarChoice
-                key={avatar.id}
-                {...avatar}
-                number={index + 1}
-                handleRadioChange={this.handleRadioChange}
-                className={
-                  this.state.selectedAvatar === avatar.name
-                    ? "gold-border"
-                    : "none"
-                }
-              />
-            ))}
+    } else {
+      return (
+        <div className="sign-up-screen">
+          <div className="logo-container">
+            <img id="sign-up-logo" src={Images.logo} alt="Desert Heat Logo" />
+            <img
+              className="sign-up-background"
+              src={Images.signUpGif}
+              alt="Sign Up Gif"
+            />
+          </div>
+          <br />
+          <div className="sign-up-form">
+            <p className="choose-your-ride">CHOOSE YOUR RIDE</p>
+            {/* <> */}
+            {this.props.avatars.length === 7 && <OnImagesLoaded
+              onLoaded={() => this.setState({ showImages: true })}
+              onTimeout={() => this.setState({ showImages: true })}
+              timeout={7000}
+            >
+              <div className="avatar-frame">
+                {this.props.avatars.map((avatar, index) => (
+                  <AvatarChoice
+                    key={avatar.id}
+                    {...avatar}
+                    number={index + 1}
+                    handleRadioChange={this.handleRadioChange}
+                    className={
+                      this.state.selectedAvatar === avatar.name
+                        ? "gold-border"
+                        : "none"
+                    }
+                    opacity={this.state.showImages ? 1 : 0}
+                  />
+                ))}
 
-            <div className="inner-circle">
-              <img
-                id="fill-this-image"
-                src={this.handleSelection()}
-                alt={this.handleSelection()}
-              />
+                <div className="inner-circle">
+                  <img
+                    id="fill-this-image"
+                    src={this.handleSelection()}
+                    alt={this.handleSelection()}
+                    style={{ opacity: this.state.showImages ? 1 : 0 }}
+                  />
+                </div>
+                {!this.state.showImages && <div className="loader"></div>}
+              </div>
+            </OnImagesLoaded>}
+
+            {/* <br />
+            <br /> */}
+
+            {/* <p>Sign Up Form</p> */}
+            <form className="form" onSubmit={this.handleSubmit}>
+              <label>
+                <input
+                  className="input-field"
+                  placeholder="Username"
+                  type="text"
+                  value={this.state.username}
+                  name="username"
+                  onChange={this.handleChange}
+                />
+              </label>
+              <label>
+                <input
+                  className="input-field"
+                  placeholder="Password"
+                  type="password"
+                  value={this.state.password}
+                  name="password"
+                  onChange={this.handleChange}
+                />
+              </label>
+              <label>
+                <input
+                  className="input-field"
+                  placeholder="Confirm Password"
+                  type="password"
+                  value={this.state.confirmPassword}
+                  name="confirmPassword"
+                  onChange={this.handleChange}
+                />
+              </label>
+              <br />
+              <input className="submit-btn" type="submit" value="START GAME" />
+            </form>
+            {/* </> */}
+            <div className="moon-container">
+              <img className="moon" src={Images.moon} alt="Moon" />
             </div>
           </div>
-          {/* <br />
-          <br /> */}
-
-          {/* <p>Sign Up Form</p> */}
-          <form className="form" onSubmit={this.handleSubmit}>
-            <label>
-              <input
-                className="input-field"
-                placeholder="Username"
-                type="text"
-                value={this.state.username}
-                name="username"
-                onChange={this.handleChange}
-              />
-            </label>
-            <label>
-              <input
-                className="input-field"
-                placeholder="Password"
-                type="password"
-                value={this.state.password}
-                name="password"
-                onChange={this.handleChange}
-              />
-            </label>
-            <label>
-              <input
-                className="input-field"
-                placeholder="Confirm Password"
-                type="password"
-                value={this.state.confirmPassword}
-                name="confirmPassword"
-                onChange={this.handleChange}
-              />
-            </label>
-            <br />
-            <input className="submit-btn" type="submit" value="START GAME" />
-          </form>
-          <div className="moon-container">
-            <img className="moon" src={Images.moon} alt="Moon" />
-          </div>
         </div>
-      </div>
-    );
+      );
+    }
   }
 }
 
