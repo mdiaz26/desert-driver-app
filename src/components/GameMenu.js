@@ -19,6 +19,11 @@ class EndGame extends Component {
     }
   };
 
+  startGame = (event) => {
+    this.props.selectedStage(event);
+    this.props.stopThemeSong();
+  };
+
   render() {
     return (
       <div className="game-menu-container">
@@ -33,7 +38,7 @@ class EndGame extends Component {
                 <img
                   onMouseEnter={(event) => this.switchToGif(event)}
                   onMouseLeave={(event) => this.switchToGif(event)}
-                  onClick={(event) => this.props.selectedStage(event)}
+                  onClick={(event) => this.startGame(event)}
                   className="desert-heat-img"
                   src={
                     this.state.desertHover
@@ -51,7 +56,7 @@ class EndGame extends Component {
                 <img
                   onMouseEnter={(event) => this.switchToGif(event)}
                   onMouseLeave={(event) => this.switchToGif(event)}
-                  onClick={(event) => this.props.selectedStage(event)}
+                  onClick={(event) => this.startGame(event)}
                   className="night-sky-img"
                   src={
                     this.state.nightHover

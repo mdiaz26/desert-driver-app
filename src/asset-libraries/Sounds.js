@@ -1,6 +1,11 @@
 const Sounds = {
   coin: "audio/coin-sound-sonic.mp3",
   countdown: "audio/countdown.mp3",
+  themeSong: {
+    src: "audio/pretty-lights-still-rockin-snippet.mp3",
+    artist: "Pretty Lights",
+    title: "Still Rockin",
+  },
   bgMusic: [
     {
       src: "audio/Tsuruda-Ruthess.mp3", 

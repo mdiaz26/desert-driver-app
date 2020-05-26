@@ -9,7 +9,7 @@ class GameStats extends Component {
     musicMuted: false,
     gameSoundMuted: false,
     hoverPower: false,
-    powerOff: false,
+    powerOff: !this.props.musicPlaying && !this.props.gameSound,
   };
 
   currentVolume = this.props.bgMusicVolume;
@@ -30,7 +30,9 @@ class GameStats extends Component {
               ? "speaker-container-disabled game-volume"
               : "speaker-container game-volume"
           }
-          onClick={this.props.gameSound && ((event) => this.toggleMuted(event))}
+          onClick={
+            this.props.gameSound ? (event) => this.toggleMuted(event) : null
+          }
         >
           <img
             src={Images.speaker}
@@ -45,6 +47,7 @@ class GameStats extends Component {
           />
           <img
             src={Images.speaker}
+            alt="Game Sound Speaker Glow"
             className={
               this.state.powerOff
                 ? "speakers-off"
@@ -64,7 +67,7 @@ class GameStats extends Component {
             step="0.001"
             defaultValue="0.8"
             id={
-              this.props.musicPlaying
+              this.props.musicPlaying && this.props.gameSound
                 ? "game-sound-volume"
                 : "game-sound-volume-disabled"
             }
@@ -100,7 +103,7 @@ class GameStats extends Component {
               : "speaker-container music-volume"
           }
           onClick={
-            this.props.musicPlaying && ((event) => this.toggleMuted(event))
+            this.props.musicPlaying ? (event) => this.toggleMuted(event) : null
           }
         >
           <img

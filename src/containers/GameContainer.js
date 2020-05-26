@@ -11,9 +11,10 @@ const GameContainer = (props) => {
     return (
       <div className="game-container">
         {props.stage === "" ? (
-          <GameMenu selectedStage={props.selectedStage} />
+          <GameMenu selectedStage={props.selectedStage} stopThemeSong={props.stopThemeSong} />
         ) : (
           <Canvas
+            startThemeSong={props.startThemeSong}
             gameVolume={props.gameVolume}
             bgMusicVolume={props.bgMusicVolume}
             nextSong={props.nextSong}
