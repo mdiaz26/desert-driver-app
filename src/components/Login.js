@@ -43,6 +43,7 @@ class Login extends React.Component {
   };
 
   enterSite = () => {
+    this.props.startThemeSong();
     this.setState({
       entered: true,
     });

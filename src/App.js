@@ -23,7 +23,7 @@ class App extends React.Component {
 		bgMusicVolume: 0.4,
 		gameVolume: 0.8,
 		bgSongInfo: null,
-		onGameScreen: false
+		onGameScreen: true
 	};
 
 	bgMusic = null;
@@ -41,8 +41,6 @@ class App extends React.Component {
 
 		adapter.getAll('avatars').then((avatars) => this.setState({ avatars }));
 
-		this.startThemeSong();
-
 	}
 
 	setUser = (userObj) => {
@@ -54,7 +52,8 @@ class App extends React.Component {
 	};
 
 	signOut = () => {
-		this.setState({ userId: '' });
+		this.setState({ userId: '', onGameScreen: true });
+    this.musicFadeOut()
 	};
 
 	updateScores = (scoreObj) => {
@@ -161,7 +160,6 @@ class App extends React.Component {
 			this.fadeOut = setInterval(() => (this.bgMusic.volume -= this.bgMusic.volume * 0.05), 5);
 			setTimeout(() => clearInterval(this.fadeOut), 1000);
 			setTimeout(() => this.bgMusic.pause(), 1000);
-			// setTimeout(() => (this.bgMusic = null), 1000);
 		}
 	};
 
@@ -213,6 +211,11 @@ class App extends React.Component {
 		this.setState({ onGameScreen: false })
 	};
 
+  switchFromGameScreen = () => {
+    if (this.state.userId !== "") {
+    this.setState({ onGameScreen: false })
+    }
+  }
 	toggleMusicPlaying = () => {
 		if (this.state.musicPlaying) {
 			this.musicFadeOut()
@@ -228,7 +231,9 @@ class App extends React.Component {
 		if (this.state.musicPlaying) {
 			this.musicFadeOut()
 		}
+    if (this.state.user !== "") {
 		this.setState({ onGameScreen: true })
+    }
 	}
 
 	render() {
@@ -276,6 +281,7 @@ class App extends React.Component {
 							path="/"
 							render={() => (
 								<GameContainer
+                  switchFromGameScreen={this.switchFromGameScreen}
 									startThemeSong={this.startThemeSong}
 									stopThemeSong={this.stopThemeSong}
 									nextSong={this.nextSong}

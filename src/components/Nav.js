@@ -24,7 +24,7 @@ const Nav = (props) => {
             <Link to="/leaderboard" className="btn">
               Leaderboard
             </Link>
-            <button onClick={props.signOut} className="btn">
+            <button onClick={props.signOut} className="btn signOutButton">
               Sign Out
             </button>
           </>

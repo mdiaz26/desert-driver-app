@@ -65,8 +65,9 @@ class Canvas extends Component {
     clearInterval(this.miniInterval);
     cancelAnimationFrame(this.animationID);
     this.props.selectedStage(null);
-    this.props.bgMusic && this.props.musicFadeOut();
-    setTimeout(() => this.props.startThemeSong(), 1001);
+    this.props.switchFromGameScreen()
+    // this.props.bgMusic && this.props.musicFadeOut();
+    // setTimeout(() => this.props.startThemeSong(), 1001);
   }
 
   restartGame = () => {

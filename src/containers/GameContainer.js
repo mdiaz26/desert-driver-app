@@ -14,6 +14,7 @@ const GameContainer = (props) => {
           <GameMenu selectedStage={props.selectedStage} stopThemeSong={props.stopThemeSong} />
         ) : (
           <Canvas
+            switchFromGameScreen={props.switchFromGameScreen}
             startThemeSong={props.startThemeSong}
             gameVolume={props.gameVolume}
             bgMusicVolume={props.bgMusicVolume}
