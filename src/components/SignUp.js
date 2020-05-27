@@ -127,7 +127,7 @@ class SignUp extends React.Component {
       return (
         <div className="sign-up-screen">
           <div className="logo-container">
-            <img id="sign-up-logo" src={Images.logo} alt="Desert Heat Logo" />
+            {/* <img id="sign-up-logo" src={Images.logo} alt="Desert Heat Logo" /> */}
             <img
               className="sign-up-background"
               src={Images.signUpGif}
@@ -175,7 +175,12 @@ class SignUp extends React.Component {
             <br /> */}
 
             {/* <p>Sign Up Form</p> */}
-            <form className="form" onSubmit={this.handleSubmit}>
+            
+            {/* </> */}
+            <div className="moon-container">
+              <img className="moon" src={Images.moon} alt="Moon" />
+            </div>
+            <form id="sign-up-form" className="form" onSubmit={this.handleSubmit}>
               <label>
                 <input
                   className="input-field"
@@ -209,10 +214,6 @@ class SignUp extends React.Component {
               <br />
               <input className="submit-btn" type="submit" value="START GAME" />
             </form>
-            {/* </> */}
-            <div className="moon-container">
-              <img className="moon" src={Images.moon} alt="Moon" />
-            </div>
           </div>
         </div>
       );

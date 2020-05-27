@@ -9,6 +9,11 @@
   margin-left: auto;
   margin-right: auto;
 }
+#sign-up-form {
+  /* position: absolute; */
+  /* margin-bottom: -40px */
+}
+
 input {
   margin-left: 5px;
 }
@@ -46,7 +51,7 @@ input {
 #sign-up-logo {
   align-self: center;
   margin-top: 1.5%;
-  width: 150px;
+  width: 5%;
 }
 .delete-btn {
   margin-left: auto;
@@ -78,6 +83,7 @@ input {
   text-align: center;
   font-size: 13px;
   width: 180px;
+  /* margin-top: 30px; */
 }
 .submit-btn {
   background-color: transparent;
