@@ -135,7 +135,8 @@ class App extends React.Component {
 			newSong.src === song.src && this.nextSong((song = this.bgMusic));
 		} else if (!this.state.onGameScreen) {
 			newSong = Sounds.themeSong;
-		}
+    }
+    this.bgMusic = new Audio()
 		this.musicPlay(newSong);
 	};
 

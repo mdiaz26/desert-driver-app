@@ -6,6 +6,9 @@
   flex-direction: row;
   min-width: 50%;
 }
+#nav-bar {
+  background-color: rgb(31, 29, 29);
+}
 .logo-btn {
   position: absolute;
   margin-left: auto;
@@ -13,8 +16,8 @@
   min-width: 10%;
 }
 .nav-container #logo {
-  width: 120px;
-  margin-top: -3px;
+  width: 80px;
+  margin-top: -8px;
   cursor: pointer;
 }
 .sign-up-background {
@@ -29,17 +32,20 @@
   font-weight: bold;
   margin-left: 10px;
 }
+.btn:focus {
+  outline: 0;
+}
 .btn:hover {
   background-color: transparent;
   border: 1px solid transparent;
   color: #ff0091;
   margin-right: 0px;
 }
-.btn:hover::after {
-  background-color: transparent;
-  border: 1px solid transparent;
-  text-decoration: none;
-}
+// .btn:hover::after {
+//   background-color: transparent;
+//   border: 1px solid transparent;
+//   text-decoration: none;
+// }
 .profile-btn {
   color: rgb(252, 229, 229);
   font-weight: bold;

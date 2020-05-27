@@ -84,7 +84,8 @@ body,
   width: 50px;
   height: 50px;
   border-radius: 35px;
-  background-color: rgb(39, 44, 44);
+  background-color: rgb(31, 29, 29);
+  z-index: 10;
   transition: all 1.2s ease-in-out;
   overflow: hidden;
 }
@@ -95,7 +96,8 @@ body,
   width: 300px;
   height: 50px;
   border-radius: 35px;
-  background-color: rgb(39, 44, 44);
+  background-color: rgb(31, 29, 29);
+  z-index: 10;
   transition: all 1.2s ease-in-out;
   transition-timing-function: cubic-bezier(0.310, 0.0010, 0.165, 1.350);
 
@@ -108,14 +110,15 @@ body,
   width: 50px;
   height: 50px;
   border-radius: 35px;
-  background-color: rgb(39, 44, 44);
+  background-color: rgb(31, 29, 29);
   transition: all 1s ease-in-out;
+  /* z-index: 10; */
   overflow: hidden;
 }
 
 .footer-speaker-container {
   position: absolute;
-  background: rgb(39, 44, 44);;
+  background: rgb(31, 29, 29);;
   line-height: 29.5px;
   width: 30px;
   height: 30px;
@@ -131,7 +134,7 @@ body,
 }
 .footer-speaker-container:hover {
   position: absolute;
-  background: rgb(39, 44, 44);;
+  background: rgb(31, 29, 29);;
   line-height: 29.5px;
   width: 30px;
   height: 30px;
@@ -148,7 +151,7 @@ body,
 }
 .footer-speaker-container:active {
   position: absolute;
-  background: rgb(39, 44, 44);;
+  background: rgb(31, 29, 29);;
   line-height: 29.5px;
   width: 30px;
   height: 30px;
@@ -165,7 +168,7 @@ body,
 }
 .footer-speaker-container-disabled {
   position: absolute;
-  background: rgb(39, 44, 44);;
+  background: rgb(31, 29, 29);;
   line-height: 29.5px;
   width: 30px;
   height: 30px;
@@ -179,7 +182,7 @@ body,
 }
 .footer-speaker-container-disabled:hover {
   position: absolute;
-  background: rgb(39, 44, 44);;
+  background: rgb(31, 29, 29);;
   line-height: 29.5px;
   width: 30px;
   height: 30px;
@@ -195,7 +198,7 @@ body,
 }
 .footer-speaker-container-disabled:active {
   position: absolute;
-  background: rgb(39, 44, 44);;
+  background: rgb(31, 29, 29);;
   line-height: 29.5px;
   width: 30px;
   height: 30px;

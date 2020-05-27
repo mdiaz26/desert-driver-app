@@ -42,6 +42,12 @@ class Login extends React.Component {
     }
   };
 
+  enterSite = () => {
+    this.setState({
+      entered: true,
+    });
+  };
+
   render() {
     const redirectToGame = this.state.redirectToGame;
     if (redirectToGame) {
@@ -60,8 +66,16 @@ class Login extends React.Component {
             src={Images.logo}
             alt="Desert Heat Logo"
           />
-          <div className="home-screen-buttons-container">
-            <button className="home-screen-buttons">LOG IN</button>
+          <div
+            className={
+              this.state.entered
+                ? "home-screen-buttons-container-hidden"
+                : "home-screen-buttons-container"
+            }
+          >
+            <button onClick={this.enterSite} className="home-screen-buttons">
+              LOG IN
+            </button>
             <button className="home-screen-buttons">SIGN UP</button>
           </div>
         </div>

@@ -8,7 +8,7 @@ const Nav = (props) => {
   const isLoggedIn = !!props.userId;
 
   return (
-    <Navbar bg="dark">
+    <Navbar id="nav-bar">
       <div className="nav-container">
         {isLoggedIn ? (
           <>

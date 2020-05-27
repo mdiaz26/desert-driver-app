@@ -27,12 +27,23 @@
   width: 20%;
   align-self: center;
 }
+.home-screen-buttons-container-hidden {
+  display: none;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 20%;
+  align-self: center;
+}
 .home-screen-buttons {
   width: 100px;
   align-self: center;
   background-color: transparent;
   color: bisque;
   border: 1px solid transparent;
+  transition: all 0.5s ease-in-out;
+}
+.home-screen-buttons:focus {
+  outline: 0;
 }
 .home-screen-buttons:hover {
   width: 100px;
@@ -40,16 +51,24 @@
   background-color: transparent;
   color: #FC5B0A;
   border: 1px solid transparent;
+  transition: all 0.5s ease-in-out;
 }
 #logo {
-  margin-top: 5%;
+  position: relative;
+  align-self: center;
+  margin-top: 3%;
   width: 30%;
+  transition: all 1s ease-in-out;
+  transition-timing-function: cubic-bezier(0.310, 0.00, 0.0, 1.000);
+
 }
 #large-logo {
   position: relative;
   align-self: center;
-  margin-top: 8%;
-  width: 50%;
+  margin-top: 10%;
+  width: 45%;
+  transition: all 1s ease-in-out;
+
 }
 .container .login-screen {
   position: absolute;
@@ -59,7 +78,7 @@
 
 .container .login-form {
   flex-direction: column;
-  margin-top: 7%;
+  margin-top: 3%;
   width: 100%;
 }
 .container .login-form-hidden {

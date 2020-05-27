@@ -318,7 +318,7 @@ class Canvas extends Component {
 
       //*************************DON'T COMMENT**************************//
       context.fillRect(0, 0, canvas.width, canvas.height * 2);
-      context.fillStyle = "rgb(39, 44, 44)";
+      context.fillStyle = "rgb(31, 29, 29)";
       context.beginPath();
       //*************************DON'T COMMENT**************************//
 
