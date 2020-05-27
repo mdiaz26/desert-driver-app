@@ -81,11 +81,24 @@ body,
   position: absolute;
   bottom: 10px;
   left: 10px;
+  width: 50px;
+  height: 50px;
+  border-radius: 35px;
+  background-color: rgb(39, 44, 44);
+  transition: all 1.2s ease-in-out;
+  overflow: hidden;
+}
+.footer-speaker-outer-container:hover {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
   width: 300px;
   height: 50px;
   border-radius: 35px;
   background-color: rgb(39, 44, 44);
-  transition: all 1s ease-in-out;
+  transition: all 1.2s ease-in-out;
+  transition-timing-function: cubic-bezier(0.310, 0.0010, 0.165, 1.350);
+
   overflow: hidden;
 }
 .footer-speaker-outer-container-closed {
@@ -249,12 +262,12 @@ body,
   text-align: left;
   height: 13px;
   line-height: 13px;
-  width: 100%;
+  width: 300%;
   z-index: 0;
   font-size: 13px;
   opacity: 0.8;
   cursor: default;
-  flex-wrap: nowrap;
+  /* flex-wrap: wrap; */
   transition: all 1.8s ease-out;
   transition-timing-function: cubic-bezier(0.310, 0.0010, 0.165, 1.350);
 }
@@ -267,11 +280,11 @@ body,
   left: 10px;
   height: 13px;
   line-height: 13px;
-  width: 280px;
+  width: 300%;
   font-size: 13px;
   opacity: 0;
   /* z-index: -20; */
-  flex-wrap: nowrap;
+  /* flex-wrap: wrap; */
   transition: all 0.9s ease-out;
   cursor: default;
 }

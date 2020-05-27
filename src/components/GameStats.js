@@ -46,8 +46,8 @@ class GameStats extends Component {
             }
           />
           <img
-            src={Images.speaker}
             alt="Game Sound Speaker Glow"
+            src={Images.speaker}
             className={
               this.state.powerOff
                 ? "speakers-off"

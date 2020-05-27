@@ -5,12 +5,51 @@
 .logo-background {
   position: absolute;
   width: 100%;
+  top: 55px;
   left: 0;
   z-index: -20;
+}
+.logo-container {
+  /* position: absolute; */
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+.home-screen-buttons-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 20%;
+  align-self: center;
+}
+.home-screen-buttons {
+  width: 100px;
+  align-self: center;
+  background-color: transparent;
+  color: bisque;
+  border: 1px solid transparent;
+}
+.home-screen-buttons:hover {
+  width: 100px;
+  align-self: center;
+  background-color: transparent;
+  color: #FC5B0A;
+  border: 1px solid transparent;
 }
 #logo {
   margin-top: 5%;
   width: 30%;
+}
+#large-logo {
+  position: relative;
+  align-self: center;
+  margin-top: 8%;
+  width: 50%;
 }
 .container .login-screen {
   position: absolute;
@@ -19,6 +58,12 @@
 }
 
 .container .login-form {
+  flex-direction: column;
+  margin-top: 7%;
+  width: 100%;
+}
+.container .login-form-hidden {
+  display: none;
   flex-direction: column;
   margin-top: 7%;
   width: 100%;

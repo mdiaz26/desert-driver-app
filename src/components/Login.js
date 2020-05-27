@@ -8,6 +8,7 @@ class Login extends React.Component {
     username: "",
     password: "",
     redirectToGame: false,
+    entered: false,
   };
 
   handleChange = (event) => {
@@ -49,21 +50,26 @@ class Login extends React.Component {
     return (
       <div className="container">
         <div className="logo-container">
-<<<<<<< HEAD
           <img
+            alt="Login Gif"
             className="logo-background"
             src={Images.loginGif}
-            alt="Login Gif"
           />
-          <img id="logo" src={Images.logo} alt="Desert Heat Logo" />
-=======
-          <img className="logo-background" alt="background" src={loginBackground} />
-          <img id="logo" alt="logo" src={logo} />
->>>>>>> loading-images
+          <img
+            id={this.state.entered ? "logo" : "large-logo"}
+            src={Images.logo}
+            alt="Desert Heat Logo"
+          />
+          <div className="home-screen-buttons-container">
+            <button className="home-screen-buttons">LOG IN</button>
+            <button className="home-screen-buttons">SIGN UP</button>
+          </div>
         </div>
         <div className="login-screen">
-          <div className="login-form">
-            {/* <p className="login">Login</p> */}
+          <div></div>
+          <div
+            className={this.state.entered ? "login-form" : "login-form-hidden"}
+          >
             <form onSubmit={this.handleSubmit}>
               <label>
                 <input

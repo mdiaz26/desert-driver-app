@@ -21,7 +21,7 @@ const Images = {
 
   desertHeatStill: "gifs/desert-heat-screenshot.jpg",
   nightSkyStill: "gifs/night-sky-screenshot.jpg",
-  logo: "logo.png",
+  logo: "logo3.png",
   heart: "heart.png",
 };
 

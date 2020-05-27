@@ -102,8 +102,18 @@ class App extends React.Component {
 		this.bgMusic.controls = true;
 		this.bgMusic.volume = this.state.bgMusicVolume;
 		this.bgMusic.autoPlay = true
-		this.bgMusic.load()
-		this.bgMusic.play();
+    this.bgMusic.load()
+    let playPromise = this.bgMusic.play();
+    if (playPromise) {
+      playPromise
+      .then(_ => {
+        console.log("audio played auto")
+      })
+      .catch(error => {
+        console.log("playback prevented")
+      })
+    }
+    this.bgMusic.muted = false
 		setTimeout(() => this.bgMusic.play(), 1000);
 		this.setState({
 			bgSongInfo: `"${song.title}" by ${song.artist}`
