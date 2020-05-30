@@ -28,8 +28,11 @@ class App extends React.Component {
 	
 	musicDeck = {
 		a: null, 
-		b: null
+		b: null, 
+		c: null
 	}
+
+	// currentDeck = "a"
 
 	gameSound = {
 		countdownAudio: null,
@@ -37,6 +40,8 @@ class App extends React.Component {
 	};
 	
 	fadeOut = null;
+
+
 
 	componentDidMount() {
 		const adapter = new JSONAPIAdapter('https://desert-driver-api.herokuapp.com/api/v1/');
@@ -101,7 +106,9 @@ class App extends React.Component {
 		let emptySide
 		if (this.musicDeck.a) {
 			emptySide = "b"
-		} else if (this.musicDeck.b || (!this.musicDeck.a && !this.musicDeck.b)) {
+		} else if (this.musicDeck.b) {
+			emptySide = "c"
+		} else if (this.musicDeck.c || (!this.musicDeck.a && !this.musicDeck.b && !this.musicDeck.c)) {
 			emptySide = "a"
 		} 
 
@@ -113,7 +120,7 @@ class App extends React.Component {
     this.musicDeck[emptySide].load()
     this.musicDeck[emptySide].play();
     this.musicDeck[emptySide].muted = false
-		setTimeout(() => this.musicDeck[emptySide].play(), 1000);
+		this.musicDeck[emptySide].play()
 		this.setState({
 			songInfo: `"${song.title}" by ${song.artist}`
 		});
@@ -123,15 +130,15 @@ class App extends React.Component {
 		});
 	};
 
-	findCurrentSong = () => {
-		if (this.state.musicPlaying) {
-			if (this.musicDeck.a) {
-				return this.musicDeck.a
-			} else if (this.musicDeck.b) {
-				return this.musicDeck.b
-			}
-		}
-	}
+	// findCurrentSong = () => {
+	// 	if (this.state.musicPlaying) {
+	// 		if (this.musicDeck.a) {
+	// 			return this.musicDeck.a
+	// 		} else if (this.musicDeck.b) {
+	// 			return this.musicDeck.b
+	// 		}
+	// 	}
+	// }
 
 	nextSong = (song) => {
 		let activeSide;
@@ -140,6 +147,8 @@ class App extends React.Component {
 				activeSide = 'a'
 			} else if (this.musicDeck.b) {
 				activeSide = 'b'
+			} else if (this.musicDeck.c) {
+				activeSide = 'c'
 			}
 			this.musicDeck[activeSide].pause();
 		}
@@ -163,6 +172,8 @@ class App extends React.Component {
 			activeSide = 'a'
 		} else if (this.musicDeck.b) {
 			activeSide = 'b'
+		} else if (this.musicDeck.c) {
+			activeSide = 'c'
 		}
 
 		this.musicDeck[activeSide].volume = value;
@@ -181,17 +192,22 @@ class App extends React.Component {
 	};
 
 	musicFadeOut = () => {
-		let activeSide = null
+		let activeSide
 		if (this.state.musicPlaying) {
 			if (this.musicDeck.a) {
 				activeSide = "a"
 			} else if (this.musicDeck.b) {
 				activeSide = "b"
+			} else if (this.musicDeck.c) {
+				activeSide = "c"
 			}
-			this.fadeOut = setInterval(() => (this.musicDeck[activeSide].volume -= this.musicDeck[activeSide].volume * 0.05), 5);
-			setTimeout(() => clearInterval(this.fadeOut), 2000);
-			setTimeout(() => this.musicDeck[activeSide].pause(), 2000);
-			setTimeout(() => this.musicDeck[activeSide] = null, 2010);
+			this.fadeOut = setInterval(() => {
+				console.log(this.musicDeck[activeSide].volume)
+				this.musicDeck[activeSide].volume -= this.musicDeck[activeSide].volume * 0.5
+			}, 10);
+			setTimeout(() => clearInterval(this.fadeOut), 18);
+			setTimeout(() => this.musicDeck[activeSide].pause(), 18);
+			setTimeout(() => this.musicDeck[activeSide] = null, 20);
 		}
 	};
 

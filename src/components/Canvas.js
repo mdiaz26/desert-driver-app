@@ -71,6 +71,10 @@ class Canvas extends Component {
   restartGame = () => {
     clearInterval(this.miniInterval);
     this.coins = this.createCoins();
+    this.props.musicFadeOut();
+    // let song =
+    //   Sounds.bgMusic[Math.floor(Math.random() * Sounds.bgMusic.length)];
+    // this.props.musicPlay(song);
     if (this.props.musicDeckB) {
       clearInterval(this.props.fadeOut);
     }
@@ -498,14 +502,15 @@ class Canvas extends Component {
             musicDeckB={this.props.musicDeckB}
           />
           <div className="end-game-container">
-            {!this.state.gameOn ? (
+            {!this.state.gameOn && (
               <EndGame
                 backToGameMenu={this.props.backToGameMenu}
+                musicPlay={this.props.musicPlay}
                 stats={this.state}
                 saveScore={this.saveScore}
                 restartGame={this.restartGame}
               />
-            ) : null}
+            )}
           </div>
         </div>
       </div>

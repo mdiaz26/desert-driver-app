@@ -1,14 +1,22 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useSpring } from "react-spring";
 import { Spring } from "react-spring/renderprops";
 import "../styles/EndGame.css";
+import Sounds from "../asset-libraries/Sounds";
 
 const EndGame = (props) => {
   const fade = useSpring({ from: { opacity: 0 }, opacity: 1 });
 
+  const [play, changePlay] = useState({ play: false });
+
+  useEffect(() => {
+    let gameOverSong = Sounds.losingSong;
+    props.musicPlay(gameOverSong);
+  }, []);
+
   return (
     <div className="background">
-      <div className="end-game-report">
+      <div onLoad={() => changePlay()} className="end-game-report">
         <div className="report-container">
           <div className="buttons">
             <button

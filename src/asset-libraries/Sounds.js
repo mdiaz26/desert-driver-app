@@ -6,6 +6,11 @@ const Sounds = {
     artist: "Pretty Lights",
     title: "Still Rockin",
   },
+  losingSong: {
+    src: "audio/tsuruda-out-here-snippet.mp3",
+    artist: "Tsuruda",
+    title: "Out Here",
+  },
   bgMusic: [
     {
       src: "audio/tsuruda-heat-wave-snippet.mp3", 
