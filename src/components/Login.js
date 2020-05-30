@@ -9,6 +9,7 @@ class Login extends React.Component {
     password: "",
     redirectToGame: false,
     entered: false,
+    flashing: false,
   };
 
   handleChange = (event) => {
@@ -46,7 +47,17 @@ class Login extends React.Component {
     this.props.startThemeSong();
     this.setState({
       entered: true,
+      flashing: false,
     });
+    setTimeout(() => {
+      this.setState({ flashing: false });
+    }, 5583);
+    let flashing = setInterval(() => {
+      this.setState((state) => ({
+        flashing: !state.flashing,
+      }));
+    }, 483);
+    setTimeout(() => clearInterval(flashing), 4500);
   };
 
   render() {
@@ -110,6 +121,17 @@ class Login extends React.Component {
               <br />
               <input className="submit-button" type="submit" value="ENTER" />
             </form>
+          </div>
+          <div className="sound-warning-container">
+            <span
+              className={
+                this.state.flashing && this.props.musicPlaying
+                  ? "sound-warning"
+                  : "sound-warning-hidden"
+              }
+            >
+              WARNING: SOUND ON
+            </span>
           </div>
         </div>
       </div>

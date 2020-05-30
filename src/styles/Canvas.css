@@ -1,118 +1,116 @@
 body {
-  background-color: #070507;
+	background-color: #070507;
 }
 @keyframes custom-fadein {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 100;
-  }
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 100;
+	}
 }
 @keyframes custom-fadeout {
-  100% {
-    opacity: 0;
-  }
-  0% {
-    opacity: 100;
-  }
+	100% {
+		opacity: 0;
+	}
+	0% {
+		opacity: 100;
+	}
 }
 .big-container {
-  position: fixed;
-  height: 100%;
-  z-index: -1;
-  animation-name: custom-fadein;
-  animation-duration: 1s;
-  animation-timing-function: ease-in-out;
+	position: fixed;
+	height: 100%;
+	z-index: -1;
+	animation-name: custom-fadein;
+	animation-duration: 1s;
+	animation-timing-function: ease-in-out;
 }
 #container {
-  position: fixed;
-  height: 100%;
-  top: 0px;
-  z-index: -10;
-  animation-name: custom-fadein;
-  animation-duration: 3s;
-  animation-timing-function: ease-in-out;
+	position: fixed;
+	height: 100%;
+	top: 0px;
+	z-index: -10;
+	animation-name: custom-fadein;
+	animation-duration: 3s;
+	animation-timing-function: ease-in-out;
 }
 .pause-screen {
-  position: fixed;
-  width: 100%;
-  top: 0px;
-  height: 100%;
-  z-index: 0;
-  background-color: rgba(8, 8, 8, 0.719);
-  top: 54px;
-  animation-name: custom-fadein;
-  animation-duration: 0.5s;
-  animation-timing-function: ease-in-out;
-  
+	position: fixed;
+	width: 100%;
+	top: 0px;
+	height: 100%;
+	z-index: 0;
+	background-color: rgba(8, 8, 8, 0.719);
+	top: 54px;
+	animation-name: custom-fadein;
+	animation-duration: 0.5s;
+	animation-timing-function: ease-in-out;
 }
 .resume-screen {
-  position: fixed;
-  width: 100%;
-  z-index: -50;
-  top: 54px;
-  height: 100%;
-  background-color: transparent;
-  
+	position: fixed;
+	width: 100%;
+	z-index: -50;
+	top: 54px;
+	height: 100%;
+	background-color: transparent;
 }
 .resume-button {
-  position: relative;
-  border: 2px solid #ffab3dbd;
-  background-color: #110e108a;
-  color: #ffab3dbd;
-  border-radius: 35px;
-  top: 18%;
-  transition: all 0.3s ease-in-out;
+	position: relative;
+	border: 2px solid #ffab3dbd;
+	background-color: #110e108a;
+	color: #ffab3dbd;
+	border-radius: 35px;
+	top: 18%;
+	transition: all 0.3s ease-in-out;
 }
 .resume-button:hover {
-  position: relative;
-  border: 2px solid #110e10ce;
-  background-color: #ffab3dbd;
-  color: #1b1217;
-  border-radius: 35px;
-  top: 18%;
+	position: relative;
+	border: 2px solid #110e10ce;
+	background-color: #ffab3dbd;
+	color: #1b1217;
+	border-radius: 35px;
+	top: 18%;
 }
 .resume-button:focus {
-  outline: 0;
+	outline: 0;
 }
 .hide-resume-button {
-  display: none;
+	display: none;
 }
 .canvas-container {
-  height: 50%;
-  background-color: rgb(39, 44, 44);
-  top: 0;
+	height: 50%;
+	background-color: rgb(39, 44, 44);
+	top: 0;
 }
 
 canvas {
-  margin-top: 54px;
-  width: 100%;
-  height: 350px;
-  transition: all 3s ease-in-out;
+	margin-top: 54px;
+	width: 100%;
+	height: 350px;
+	transition: all 3s ease-in-out;
 }
 .count-container {
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
 }
 .count-down {
-  position: absolute;
-  width: inherit;
-  margin-top: -250px;
-  color: #a14378f1;
-  -webkit-text-stroke: 2px rgb(241, 216, 179);
-  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
-  transition: all 1s ease-in-out;
-  font-size: 100px;
+	position: absolute;
+	width: inherit;
+	margin-top: -250px;
+	color: #ff0090;
+	-webkit-text-stroke: 3px rgb(19, 20, 20);
+	font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+	transition: all 1s ease-in-out;
+	font-size: 100px;
 }
 
 img .pyramid {
-  width: 500px;
-  display: none;
-  border: 10px solid black;
-  opacity: 60%;
+	width: 500px;
+	display: none;
+	border: 10px solid black;
+	opacity: 60%;
 }
 
 /* .fade-in {

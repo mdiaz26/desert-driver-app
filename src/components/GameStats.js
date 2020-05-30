@@ -12,7 +12,7 @@ class GameStats extends Component {
     powerOff: !this.props.musicPlaying && !this.props.gameSound,
   };
 
-  currentVolume = this.props.bgMusicVolume;
+  currentVolume = this.props.deckBVolume;
   previousVolume = 0;
 
   currentGameVolume = this.props.gameVolume;
@@ -134,10 +134,10 @@ class GameStats extends Component {
           <input
             type="range"
             min="0.0"
-            max="0.5"
+            max="1"
             disabled={!this.props.musicPlaying}
             step="0.001"
-            defaultValue="0.4"
+            defaultValue="0.8"
             id={
               this.props.musicPlaying
                 ? "bg-music-volume"
@@ -195,14 +195,12 @@ class GameStats extends Component {
               {"NOW PLAYING"}
             </span>
             <br />
-            <span
-              className={
-                this.state.powerOff
-                  ? "artist-and-title-off"
-                  : "artist-and-title"
-              }
-            >
-              {this.props.bgSongInfo}
+            <span className={this.state.powerOff ? "title-off" : "title"}>
+              {this.props.songInfo.split(" by ")[0]}
+            </span>
+            <br />
+            <span className={this.state.powerOff ? "artist-off" : "artist"}>
+              {"by " + this.props.songInfo.split(" by ")[1]}
             </span>
           </div>
         </div>

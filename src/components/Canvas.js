@@ -54,10 +54,8 @@ class Canvas extends Component {
     }, 1000);
     let song =
       Sounds.bgMusic[Math.floor(Math.random() * Sounds.bgMusic.length)];
-    setTimeout(() => {
-      this.props.musicPlaying && this.props.musicPlay(song);
-    }, 3000);
-    this.props.countdownAudio();
+    this.props.musicPlaying && this.props.musicPlay(song);
+    // this.props.countdownAudio();
   }
 
   componentWillUnmount() {
@@ -65,15 +63,15 @@ class Canvas extends Component {
     clearInterval(this.miniInterval);
     cancelAnimationFrame(this.animationID);
     this.props.selectedStage(null);
-    this.props.switchFromGameScreen()
-    // this.props.bgMusic && this.props.musicFadeOut();
+    this.props.switchFromGameScreen();
+    // this.props.musicDeckB && this.props.musicFadeOut();
     // setTimeout(() => this.props.startThemeSong(), 1001);
   }
 
   restartGame = () => {
     clearInterval(this.miniInterval);
     this.coins = this.createCoins();
-    if (this.props.bgMusic) {
+    if (this.props.musicDeckB) {
       clearInterval(this.props.fadeOut);
     }
     this.setState(
@@ -487,17 +485,17 @@ class Canvas extends Component {
             </div>
           </div>
           <GameStats
-            bgSongInfo={this.props.bgSongInfo}
+            songInfo={this.props.songInfo}
             gameSound={this.props.gameSound}
             gameVolume={this.props.gameVolume}
-            bgMusicVolume={this.props.bgMusicVolume}
+            deckBVolume={this.props.deckBVolume}
             musicPlaying={this.props.musicPlaying}
             stats={this.state}
             setMusicVolume={this.props.setMusicVolume}
             setGameVolume={this.props.setGameVolume}
             nextSong={this.props.nextSong}
             stopAllSounds={this.props.stopAllSounds}
-            bgMusic={this.props.bgMusic}
+            musicDeckB={this.props.musicDeckB}
           />
           <div className="end-game-container">
             {!this.state.gameOn ? (

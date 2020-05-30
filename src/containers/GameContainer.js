@@ -17,9 +17,9 @@ const GameContainer = (props) => {
             switchFromGameScreen={props.switchFromGameScreen}
             startThemeSong={props.startThemeSong}
             gameVolume={props.gameVolume}
-            bgMusicVolume={props.bgMusicVolume}
+            deckBVolume={props.deckBVolume}
             nextSong={props.nextSong}
-            bgSongInfo={props.bgSongInfo}
+            songInfo={props.songInfo}
             musicFadeOut={props.musicFadeOut}
             stopAllSounds={props.stopAllSounds}
             setGameVolume={props.setGameVolume}
@@ -28,7 +28,7 @@ const GameContainer = (props) => {
             fadeOut={props.fadeOut}
             countdownAudio={props.countdownAudio}
             coinAudio={props.coinAudio}
-            bgMusic={props.bgMusic}
+            musicDeckB={props.musicDeckB}
             musicPlaying={props.musicPlaying}
             musicPlay={props.musicPlay}
             selectedStage={props.selectedStage}

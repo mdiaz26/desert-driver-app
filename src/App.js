@@ -20,27 +20,29 @@ class App extends React.Component {
 		selectedStage: '',
 		musicPlaying: true,
 		gameSound: true,
-		bgMusicVolume: 0.4,
+		musicVolume: 0.8,
 		gameVolume: 0.8,
-		bgSongInfo: null,
+		songInfo: null,
 		onGameScreen: true
 	};
+	
+	musicDeck = {
+		a: null, 
+		b: null
+	}
 
-	bgMusic = null;
-	fadeOut = null;
 	gameSound = {
 		countdownAudio: null,
 		coinAudio: null
 	};
+	
+	fadeOut = null;
 
 	componentDidMount() {
 		const adapter = new JSONAPIAdapter('https://desert-driver-api.herokuapp.com/api/v1/');
 		adapter.getAll('scores').then((scores) => this.setState({ scores }));
-
 		adapter.getAll('users').then((users) => this.setState({ users }));
-
 		adapter.getAll('avatars').then((avatars) => this.setState({ avatars }));
-
 	}
 
 	setUser = (userObj) => {
@@ -96,53 +98,76 @@ class App extends React.Component {
 	};
 
 	musicPlay = (song) => {
-		// this.bgMusic = new Audio();
-		this.bgMusic.src = song.src;
-		this.bgMusic.controls = true;
-		this.bgMusic.volume = this.state.bgMusicVolume;
-		this.bgMusic.autoPlay = true
-    this.bgMusic.load()
-    let playPromise = this.bgMusic.play();
-    if (playPromise) {
-      playPromise
-      .then(_ => {
-        console.log("audio played auto")
-      })
-      .catch(error => {
-        console.log("playback prevented")
-      })
-    }
-    this.bgMusic.muted = false
-		setTimeout(() => this.bgMusic.play(), 1000);
+		let emptySide
+		if (this.musicDeck.a) {
+			emptySide = "b"
+		} else if (this.musicDeck.b || (!this.musicDeck.a && !this.musicDeck.b)) {
+			emptySide = "a"
+		} 
+
+		this.musicDeck[emptySide] = new Audio()
+		this.musicDeck[emptySide].src = song.src;
+		this.musicDeck[emptySide].controls = true;
+		this.musicDeck[emptySide].volume = this.state.musicVolume;
+		this.musicDeck[emptySide].autoPlay = true
+    this.musicDeck[emptySide].load()
+    this.musicDeck[emptySide].play();
+    this.musicDeck[emptySide].muted = false
+		setTimeout(() => this.musicDeck[emptySide].play(), 1000);
 		this.setState({
-			bgSongInfo: `"${song.title}" by ${song.artist}`
+			songInfo: `"${song.title}" by ${song.artist}`
 		});
-		this.bgMusic.addEventListener('ended', () => {
-			this.bgMusic.pause();
+		this.musicDeck[emptySide].addEventListener('ended', () => {
+			this.musicDeck[emptySide].pause();
 			this.nextSong(song);
 		});
 	};
 
-	nextSong = (song = this.bgMusic) => {
+	findCurrentSong = () => {
 		if (this.state.musicPlaying) {
-			this.bgMusic.pause();
-			this.bgMusic = null;
+			if (this.musicDeck.a) {
+				return this.musicDeck.a
+			} else if (this.musicDeck.b) {
+				return this.musicDeck.b
+			}
+		}
+	}
+
+	nextSong = (song) => {
+		let activeSide;
+		if (this.state.musicPlaying) {
+			if (this.musicDeck.a) {
+				activeSide = 'a'
+			} else if (this.musicDeck.b) {
+				activeSide = 'b'
+			}
+			this.musicDeck[activeSide].pause();
+		}
+		if (!song) {
+			song = this.musicDeck[activeSide]
 		}
 		let newSong;
 		if (this.state.onGameScreen) {
 			newSong = Sounds.bgMusic[Math.floor(Math.random() * Sounds.bgMusic.length)];
-			newSong.src === song.src && this.nextSong((song = this.bgMusic));
+			newSong.src === song.src && this.nextSong(song);
 		} else if (!this.state.onGameScreen) {
 			newSong = Sounds.themeSong;
     }
-    this.bgMusic = new Audio()
+		this.musicDeck[activeSide] = null;
 		this.musicPlay(newSong);
 	};
 
 	setMusicVolume = (value) => {
-		this.bgMusic.volume = value;
+		let activeSide = null
+		if (this.musicDeck.a) {
+			activeSide = 'a'
+		} else if (this.musicDeck.b) {
+			activeSide = 'b'
+		}
+
+		this.musicDeck[activeSide].volume = value;
 		this.setState({
-			bgMusicVolume: value
+			musicVolume: value
 		});
 	};
 
@@ -156,10 +181,17 @@ class App extends React.Component {
 	};
 
 	musicFadeOut = () => {
+		let activeSide = null
 		if (this.state.musicPlaying) {
-			this.fadeOut = setInterval(() => (this.bgMusic.volume -= this.bgMusic.volume * 0.05), 5);
-			setTimeout(() => clearInterval(this.fadeOut), 1000);
-			setTimeout(() => this.bgMusic.pause(), 1000);
+			if (this.musicDeck.a) {
+				activeSide = "a"
+			} else if (this.musicDeck.b) {
+				activeSide = "b"
+			}
+			this.fadeOut = setInterval(() => (this.musicDeck[activeSide].volume -= this.musicDeck[activeSide].volume * 0.05), 5);
+			setTimeout(() => clearInterval(this.fadeOut), 2000);
+			setTimeout(() => this.musicDeck[activeSide].pause(), 2000);
+			setTimeout(() => this.musicDeck[activeSide] = null, 2010);
 		}
 	};
 
@@ -187,45 +219,48 @@ class App extends React.Component {
 
 	stopAllSounds = () => {
 		if (this.state.musicPlaying) {
-			this.setState((state) => ({
+			this.setState({
 				musicPlaying: false,
 				gameSound: false,
-			}), this.musicFadeOut());
+			}, this.musicFadeOut());
 
 		} else {
 			let song = Sounds.bgMusic[Math.floor(Math.random() * Sounds.bgMusic.length)];
-			this.setState((state) => ({
+			this.setState({
 				musicPlaying: true,
 				gameSound: true,
-			}), this.musicPlay(song));
+			}, this.musicPlay(song));
 
 		}
 	};
 
 	startThemeSong = () => {
 		if (this.state.musicPlaying) {
-			this.bgMusic = new Audio()
 			let themeSong = Sounds.themeSong;
-			this.musicPlay(themeSong);
+			this.musicPlay(themeSong)
+			this.setState({
+				songInfo: `"${themeSong.title}" by ${themeSong.artist}`,
+				onGameScreen: false
+			});
 		}
-		this.setState({ onGameScreen: false })
 	};
 
   switchFromGameScreen = () => {
     if (this.state.userId !== "") {
     this.setState({ onGameScreen: false })
     }
-  }
-	toggleMusicPlaying = () => {
-		if (this.state.musicPlaying) {
-			this.musicFadeOut()
-		} else {
-			this.startThemeSong()
-		}
-		this.setState((state) => ({
-			musicPlaying: !state.musicPlaying
-		}));
-	};
+	}
+	
+	// toggleMusicPlaying = () => {
+	// 	if (this.state.musicPlaying) {
+	// 		this.musicFadeOut()
+	// 	} else {
+	// 		this.startThemeSong()
+	// 	}
+	// 	this.setState((state) => ({
+	// 		musicPlaying: !state.musicPlaying
+	// 	}));
+	// };
 
 	stopThemeSong = () => {
 		if (this.state.musicPlaying) {
@@ -245,7 +280,7 @@ class App extends React.Component {
 						<Route
 							path="/login"
 							render={() => (
-								<Login startThemeSong={this.startThemeSong} users={this.state.users} setUser={this.setUser} />
+								<Login startThemeSong={this.startThemeSong} users={this.state.users} setUser={this.setUser} musicPlaying={this.state.musicPlaying}/>
 							)}
 						/>
 						<Route
@@ -285,17 +320,17 @@ class App extends React.Component {
 									startThemeSong={this.startThemeSong}
 									stopThemeSong={this.stopThemeSong}
 									nextSong={this.nextSong}
-									bgSongInfo={this.state.bgSongInfo}
+									songInfo={this.state.songInfo}
 									musicFadeOut={this.musicFadeOut}
 									stopAllSounds={this.stopAllSounds}
 									setGameVolume={this.setGameVolume}
 									setMusicVolume={this.setMusicVolume}
 									gameVolume={this.state.gameVolume}
 									gameSound={this.state.gameSound}
-									bgMusicVolume={this.state.bgMusicVolume}
+									deckBVolume={this.state.musicVolume}
 									countdownAudio={this.countdownAudio}
 									coinAudio={this.coinAudio}
-									bgMusic={this.bgMusic}
+									musicDeckB={this.musicDeckB}
 									fadeOut={this.fadeOut}
 									musicPlay={this.musicPlay}
 									musicPlaying={this.state.musicPlaying}
@@ -338,7 +373,7 @@ class App extends React.Component {
 								/>
 							</div>
 							<div />
-							<span className={this.state.musicPlaying ? "footer-music-info" : "footer-music-info-disabled"} >{this.state.bgSongInfo}</span>
+							<span className={this.state.musicPlaying ? "footer-music-info" : "footer-music-info-disabled"} >{this.state.songInfo}</span>
 						</div>
 					</div>
 					<div>

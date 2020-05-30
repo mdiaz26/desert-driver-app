@@ -1,782 +1,782 @@
 @keyframes custom-fadein {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
 }
 @keyframes custom-fadeout {
-  100% {
-    opacity: 0;
-  }
-  0% {
-    opacity: 1;
-  }
+	100% {
+		opacity: 0;
+	}
+	0% {
+		opacity: 1;
+	}
 }
 .outer-container {
-  background-color: rgb(31, 29, 29);
-  width: 100%;
-  height: 50%;
-  z-index: -10;
-
+	background-color: rgb(31, 29, 29);
+	width: 100%;
+	height: 50%;
+	z-index: -10;
 }
 
 .stats-container {
-  position: absolute;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  width: 100%;
-  height: 50%;
-  overflow: auto;
-  padding-right: 3%;
-  padding-left: 3%;
-  top: 404px;
-  bottom: 0;
-  margin-top: -10px;
+	position: absolute;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	width: 100%;
+	height: 50%;
+	overflow: auto;
+	padding-right: 3%;
+	padding-left: 3%;
+	top: 404px;
+	bottom: 0;
+	margin-top: -10px;
 }
 
 .stat-box {
-  margin-top: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  height: 50%;
-  width: 36%;
-  flex-wrap: wrap;
+	margin-top: 20px;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	height: 50%;
+	width: 36%;
+	flex-wrap: wrap;
 }
 .stats-top {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
 }
 .stats-bottom {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
 }
 .player-lives-and-keypad-container {
-  display: flex;
-  flex-direction: row;
-  margin-top: 80px;
-  justify-content: space-around;
-  width: 36%;
+	display: flex;
+	flex-direction: row;
+	margin-top: 80px;
+	justify-content: space-around;
+	width: 36%;
 }
 .stat {
-  text-align: center;
-  width: auto;
-  margin-bottom: -40px;
+	text-align: center;
+	width: auto;
+	margin-bottom: -40px;
 }
 
 .stat-cat {
-  position: relative;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  color: rgba(245, 207, 161, 0.61);
-  cursor: default;
-  font-size: 13px;
-  font-weight: bold;
-  margin-top: 60px;
-  margin-bottom: auto;
+	position: relative;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	color: rgba(245, 207, 161, 0.61);
+	cursor: default;
+	font-size: 13px;
+	font-weight: bold;
+	margin-top: 60px;
+	margin-bottom: auto;
 }
 
 .stat-value {
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-  color: #ff0091;
-  cursor: default;
-  font-size: 18px;
-  margin-top: 4px;
+	font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana,
+		sans-serif;
+	color: #ff0091;
+	cursor: default;
+	font-size: 18px;
+	margin-top: 4px;
 }
 
 .profile-and-lives {
-  height: 30%;
-  width: 50%;
-  margin-top: 50px;
-  float: left;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
+	height: 30%;
+	width: 50%;
+	margin-top: 50px;
+	float: left;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: center;
 }
 .name-and-lives {
-  display: flex;
-  flex-direction: row;
+	display: flex;
+	flex-direction: row;
 }
 .lives h3 {
-  margin-top: auto;
-  margin-bottom: auto;
-  margin-right: 5px;
+	margin-top: auto;
+	margin-bottom: auto;
+	margin-right: 5px;
 }
 
 .player-name {
-  margin-top: -2px;
-  margin-right: 5px;
-  cursor: default;
-  font-size: 18px;
-  letter-spacing: 2px;
-  color: rgb(252, 229, 229);
+	margin-top: -2px;
+	margin-right: 5px;
+	cursor: default;
+	font-size: 18px;
+	letter-spacing: 2px;
+	color: rgb(252, 229, 229);
 }
 .player-lives {
-  margin-top: -5px;
-  cursor: default;
-  font-size: 36px;
-  color: #ff0090d5;
+	margin-top: -5px;
+	cursor: default;
+	font-size: 36px;
+	color: #ff0090d5;
 }
 
 .current-player-image {
-  max-width: 160px;
+	max-width: 160px;
 }
 .keypad-container {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  height: 50%;
-  margin-top: 75px;
-  align-items: center;
-  top: 0;
-  width: 50%;
-  justify-content: center;
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	height: 50%;
+	margin-top: 75px;
+	align-items: center;
+	top: 0;
+	width: 50%;
+	justify-content: center;
 }
 .instructions-container {
-  width: 100%;
-  text-align: center;
-  animation-name: custom-fadein;
-  animation-duration: 1s;
-  animation-timing-function: ease-in-out;
+	width: 100%;
+	text-align: center;
+	animation-name: custom-fadein;
+	animation-duration: 1s;
+	animation-timing-function: ease-in-out;
 }
 .hide-instructions {
-  opacity: 0;
-  width: 100%;
-  text-align: center;
-  animation-name: custom-fadeout;
-  animation-duration: 1s;
-  animation-timing-function: ease-in-out;
+	opacity: 0;
+	width: 100%;
+	text-align: center;
+	animation-name: custom-fadeout;
+	animation-duration: 1s;
+	animation-timing-function: ease-in-out;
 }
 .instructions {
-  margin-top: 10px;
-  cursor: default;
-  font-size: 15px;
-  letter-spacing: 1.8px;
-  color: rgba(184, 127, 57, 0.733);
-  font-weight: bold;
+	margin-top: 10px;
+	cursor: default;
+	font-size: 15px;
+	letter-spacing: 1.8px;
+	color: rgba(184, 127, 57, 0.733);
+	font-weight: bold;
 }
 .instructions-entry {
-  margin-bottom: 15px;
-  color: rgba(245, 207, 161, 0.7);
-  cursor: default;
-  font-size: 12px;
+	margin-bottom: 15px;
+	color: rgba(245, 207, 161, 0.7);
+	cursor: default;
+	font-size: 12px;
 }
 .instructions-photo-up {
-  margin-left: 0px;
-  margin-right: -1px;
-  margin-top: -3px;
-  width: 19px;
+	margin-left: 0px;
+	margin-right: -1px;
+	margin-top: -3px;
+	width: 19px;
 }
 .instructions-photo-left {
-  margin-left: 4px;
-  margin-top: -3px;
-  width: 19px;
+	margin-left: 4px;
+	margin-top: -3px;
+	width: 19px;
 }
 .instructions-photo-right {
-  margin-right: 3px;
-  margin-top: -3px;
-  width: 19px;
+	margin-right: 3px;
+	margin-top: -3px;
+	width: 19px;
 }
 .instructions-photo-space {
-  margin-top: -3px;
-  height: 20px;
+	margin-top: -3px;
+	height: 20px;
 }
 .arrow-box-top {
-  width: 100%;
-  align-items: center;
-  width: 187px;
+	width: 100%;
+	align-items: center;
+	width: 187px;
 }
 .arrow-box-bottom {
-  align-items: center;
-  width: 187px;
+	align-items: center;
+	width: 187px;
 }
 .light-up {
-  opacity: 0.65;
-  width: 60px;
-  margin: 1px;
-  background-color: #ff009034;
-  border: 5 solid transparent;
-  border-radius: 10px;
-  overflow: hidden;
+	opacity: 0.65;
+	width: 60px;
+	margin: 1px;
+	background-color: #ff009034;
+	border: 5 solid transparent;
+	border-radius: 10px;
+	overflow: hidden;
 }
 .dim {
-  filter: grayscale(100%);
-  opacity: 0.4;
-  width: 60px;
-  margin: 1px;
+	filter: grayscale(100%);
+	opacity: 0.4;
+	width: 60px;
+	margin: 1px;
 }
 
 .audio-container {
-  background-color: rgb(31, 29, 29);
-  width: 32%;
-  height: 225px;
-  margin-top: 40px;
-  padding-top: 5px;
-  align-content: center;
-  align-items: center;
-  justify-content: space-evenly;
-  display: flex;
-  flex-direction: column;
-  border-radius: 10px;
+	background-color: rgb(31, 29, 29);
+	width: 32%;
+	height: 230px;
+	margin-top: 40px;
+	padding-top: 5px;
+	align-content: center;
+	align-items: center;
+	justify-content: space-between;
+	padding-top: 20px;
+	padding-bottom: 15px;
+	display: flex;
+	flex-direction: column;
+	border-radius: 10px;
 }
 
 .radio-title-off {
-  color: #525252;
-  font-weight: bold;
-  justify-content: center;
-  opacity: 0.2;
-  align-content: center;
-  text-align: center;
-  font-size: 16px;
-  letter-spacing: 4px;
-  margin: 0 4px;
-  transition: all 1s ease-in-out;
+	color: #525252;
+	font-weight: bold;
+	justify-content: center;
+	opacity: 0.2;
+	align-content: center;
+	text-align: center;
+	font-size: 16px;
+	letter-spacing: 4px;
+	margin: 0 4px;
+	transition: all 1s ease-in-out;
 }
 .radio-title {
-  color: #00c4c4;
-  font-weight: bold;
-  justify-content: center;
-  align-content: center;
-  text-align: center;
-  font-size: 16px;
-  letter-spacing: 4px;
-  filter: brightness(200%);
-  margin: 0 4px;
-  transition: all 1s ease-in-out;
+	color: #00c4c4;
+	font-weight: bold;
+	justify-content: center;
+	align-content: center;
+	text-align: center;
+	font-size: 16px;
+	letter-spacing: 4px;
+	filter: brightness(200%);
+	margin: 0 4px;
+	transition: all 1s ease-in-out;
 }
 .radio-title::before {
-  position: absolute;
-  content: "DESERT RADIO";
-  mix-blend-mode: multiply;
-  filter: blur(8px);
-  font-weight: bold;
-  transition: all 1s ease-in-out;
+	position: absolute;
+	content: "DESERT RADIO";
+	mix-blend-mode: multiply;
+	filter: blur(8px);
+	font-weight: bold;
+	transition: all 1s ease-in-out;
 }
 .radio-title-off::before {
-  position: absolute;
-  content: "DESERT RADIO";
-  filter: blur(12px);
-  font-weight: bold;
-  transition: all 1s ease-in-out;
+	position: absolute;
+	content: "DESERT RADIO";
+	filter: blur(12px);
+	font-weight: bold;
+	transition: all 1s ease-in-out;
 }
 .volume-and-controls {
-  align-content: center;
-  justify-content: space-between;
-  width: 100%;
+	align-content: center;
+	justify-content: space-between;
+	width: 100%;
 }
 .artist-and-title-container {
-  background-color: transparent;
-  margin-bottom: 40px;
-  width: 100%;
-  height: 25px;
-  align-content: center;
-  animation-name: custom-fadein;
-  animation-duration: 1s;
-  animation-timing-function: ease-in-out;
-  transition: all 1s ease-in-out;
-} 
-.artist-and-title {
-  text-align: center;
-  width: 100%;
-  letter-spacing: 1.5px;
-  color: rgba(245, 207, 161, 0.7);
-  cursor: default;
-  font-size: 13px;
-  animation-name: custom-fadein;
-  animation-duration: 1s;
-  animation-timing-function: ease-in-out;
-  transition: all 1s ease-in-out;
+	position: relative;
+	background-color: transparent;
+	/* margin-bottom: -10px; */
+	width: 100%;
+	align-content: center;
+	text-align: center;
+	/* justify-content: space-around; */
+	animation-name: custom-fadein;
+	animation-duration: 1s;
+	animation-timing-function: ease-in-out;
+	transition: all 1s ease-in-out;
 }
-.artist-and-title-off {
-  text-align: center;
-  width: 100%;
-  letter-spacing: 1.5px;
-  opacity: 0;
-  color: #525252;;
-  cursor: default;
-  font-size: 13px;
-  animation-name: custom-fadeout;
-  animation-duration: 1s;
-  animation-timing-function: ease-in-out;
-  transition: all 1s ease-in-out;
+.artist {
+	text-align: center;
+	vertical-align: super;
+	width: 100%;
+	letter-spacing: 1px;
+	line-height: 11px;
+	color: rgba(245, 207, 161, 0.7);
+	cursor: default;
+	font-size: 11px;
+	animation-name: custom-fadein;
+	animation-duration: 1s;
+	animation-timing-function: ease-in-out;
+	transition: all 1s ease-in-out;
+}
+.artist-off {
+	text-align: center;
+	vertical-align: super;
+	width: 100%;
+	letter-spacing: 1px;
+	opacity: 0;
+	color: #525252;
+	line-height: 11px;
+	cursor: default;
+	font-size: 11px;
+	animation-name: custom-fadeout;
+	animation-duration: 1s;
+	animation-timing-function: ease-in-out;
+	transition: all 1s ease-in-out;
+}
+.title {
+	text-align: center;
+	vertical-align: sub;
+	width: 100%;
+	letter-spacing: 1.5px;
+	color: rgba(255, 182, 94, 0.829);
+	cursor: default;
+	font-size: 15px;
+	font-weight: bold;
+	animation-name: custom-fadein;
+	animation-duration: 1s;
+	animation-timing-function: ease-in-out;
+	transition: all 1s ease-in-out;
+}
+.title-off {
+	text-align: center;
+	vertical-align: sub;
+	width: 100%;
+	letter-spacing: 1.5px;
+	opacity: 0;
+	color: #525252;
+	cursor: default;
+	font-size: 15px;
+	font-weight: bold;
+	animation-name: custom-fadeout;
+	animation-duration: 1s;
+	animation-timing-function: ease-in-out;
+	transition: all 1s ease-in-out;
 }
 .now-playing {
-  cursor: default;
-  position: relative;
-  line-height: 9px;
-  color: #525252;
-  top: 5px;
-  font-size: 8px;
-  letter-spacing: 6px;
-  animation-name: custom-fadein;
-  animation-duration: 1s;
-  animation-timing-function: ease-in-out;
-  transition: all 1s ease-in-out;
+	cursor: default;
+	position: relative;
+	line-height: 14px;
+	color: #525252;
+	top: 5px;
+	font-size: 8px;
+	letter-spacing: 6px;
+	animation-name: custom-fadein;
+	animation-duration: 1s;
+	animation-timing-function: ease-in-out;
+	transition: all 1s ease-in-out;
 }
 .now-playing-off {
-  cursor: default;
-  position: relative;
-  line-height: 9px;
-  color: #525252;
-  opacity: 0;
-  top: 5px;
-  font-size: 8px;
-  letter-spacing: 6px;
-  animation-name: custom-fadeout;
-  animation-duration: 1s;
-  animation-timing-function: ease-in-out;
-  transition: all 1s ease-in-out;
+	cursor: default;
+	position: relative;
+	line-height: 9px;
+	color: #525252;
+	opacity: 0;
+	top: 5px;
+	font-size: 8px;
+	letter-spacing: 6px;
+	animation-name: custom-fadeout;
+	animation-duration: 1s;
+	animation-timing-function: ease-in-out;
+	transition: all 1s ease-in-out;
 }
 .song-controls {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding-left: 7%;
-  padding-right: 7%;
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	padding-left: 7%;
+	padding-right: 7%;
 }
 .volume-input-container {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  justify-content: center;
-  margin-top: -10px;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	justify-content: center;
+	margin-top: -10px;
 }
 .volume-type {
-  color: #575657d5;
-  width: 77%;
-  text-align: left;
-  font-size: 9px;
-  letter-spacing: 2px;
-  margin-bottom: -3px;
-  margin-left: 25px;
-  cursor: default;
+	color: #575657d5;
+	width: 77%;
+	text-align: left;
+	font-size: 9px;
+	letter-spacing: 2px;
+	margin-bottom: -3px;
+	margin-left: 25px;
+	cursor: default;
 }
 #bg-music-volume {
-  width: 77%;
-  align-self: center;
-  margin-left: 28px;
-  opacity: 0.7;
-  filter: grayscale(0%);
-  cursor: grab;
-  transition: all 1s ease-in-out;
+	width: 77%;
+	align-self: center;
+	margin-left: 28px;
+	opacity: 0.7;
+	filter: grayscale(0%);
+	cursor: grab;
+	transition: all 1s ease-in-out;
 }
 #bg-music-volume-disabled {
-  width: 77%;
-  align-self: center;
-  margin-left: 28px;
-  opacity: 0.1;
-  filter: grayscale(0%);
-  transition: all 1s ease-in-out;
+	width: 77%;
+	align-self: center;
+	margin-left: 28px;
+	opacity: 0.1;
+	filter: grayscale(0%);
+	transition: all 1s ease-in-out;
 }
 .game-sound-controls {
-  position: relative;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  margin-top: 20px;
-  padding-left: 7%;
-  padding-right: 7%;
+	position: relative;
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	margin-top: 15px;
+	padding-left: 7%;
+	padding-right: 7%;
 }
 #game-sound-volume {
-  align-self: center;
-  width: 77%;
-  margin-left: 28px;
-  opacity: 0.7;
-  filter: grayscale(0%);
-  cursor: grab;
-  transition: all 1s ease-in-out;
+	align-self: center;
+	width: 77%;
+	margin-left: 28px;
+	opacity: 0.7;
+	filter: grayscale(0%);
+	cursor: grab;
+	transition: all 1s ease-in-out;
 }
 #game-sound-volume-disabled {
-  align-self: center;
-  width: 77%;
-  margin-left: 28px;
-  opacity: 0.1;
-  filter: grayscale(0%);
-  transition: all 1s ease-in-out;
+	align-self: center;
+	width: 77%;
+	margin-left: 28px;
+	opacity: 0.1;
+	filter: grayscale(0%);
+	transition: all 1s ease-in-out;
 }
 @keyframes activate {
-  0% {
-    filter: grayscale(0%);
-  }
-  100% {
-    filter: grayscale(100%);
-  }
+	0% {
+		filter: grayscale(0%);
+	}
+	100% {
+		filter: grayscale(100%);
+	}
 }
 @keyframes deactivate {
-  100% {
-    filter: grayscale(0%);
-  }
-  0% {
-    filter: grayscale(100%);
-  }
+	100% {
+		filter: grayscale(0%);
+	}
+	0% {
+		filter: grayscale(100%);
+	}
 }
 .next-song-disabled {
-  align-items: flex-end;
-  background: rgb(31, 29, 29);
-  line-height: 29.5px;
-  align-self: center;
-  width: 30px;
-  height: 30px;
-  z-index: 20px;
-  border-radius: 50px;
-  cursor: default;
-  box-shadow: -1px -1px 3px rgba(255,255,255,0.1), 
-  2px 2px 6px rgba(0,0,0,0.8);
+	align-items: flex-end;
+	background: rgb(31, 29, 29);
+	line-height: 29.5px;
+	align-self: center;
+	width: 30px;
+	height: 30px;
+	z-index: 20px;
+	border-radius: 50px;
+	cursor: default;
+	box-shadow: -1px -1px 3px rgba(255, 255, 255, 0.1), 2px 2px 6px rgba(0, 0, 0, 0.8);
 }
 
 .next-song {
-  align-items: flex-end;
-  background: rgb(31, 29, 29);
-  line-height: 29.5px;
-  align-self: center;
-  width: 30px;
-  height: 30px;
-  z-index: 20px;
-  border-radius: 50px;
-  cursor: pointer;
-  box-shadow: -1px -1px 3px rgba(255,255,255,0.1), 
-  2px 2px 6px rgba(0,0,0,0.8);
+	align-items: flex-end;
+	background: rgb(31, 29, 29);
+	line-height: 29.5px;
+	align-self: center;
+	width: 30px;
+	height: 30px;
+	z-index: 20px;
+	border-radius: 50px;
+	cursor: pointer;
+	box-shadow: -1px -1px 3px rgba(255, 255, 255, 0.1), 2px 2px 6px rgba(0, 0, 0, 0.8);
 }
 .next-song:hover {
-  align-self: flex-end;
-  background: rgb(31, 29, 29);
-  line-height: 30px;
-  width: 30px;
-  font-size: 10px;
-  border-radius: 50px;
-  cursor: pointer;
-  box-shadow: -1px -1px 3px rgba(255,255,255,0.1), 
-  2px 2px 6px rgba(0,0,0,0.8),
-  inset -2px -2px 10px rgba(255,255,255,0.1), 
-  inset 2px 2px 10px rgba(0,0,0,0.5);
+	align-self: flex-end;
+	background: rgb(31, 29, 29);
+	line-height: 30px;
+	width: 30px;
+	font-size: 10px;
+	border-radius: 50px;
+	cursor: pointer;
+	box-shadow: -1px -1px 3px rgba(255, 255, 255, 0.1), 2px 2px 6px rgba(0, 0, 0, 0.8),
+		inset -2px -2px 10px rgba(255, 255, 255, 0.1), inset 2px 2px 10px rgba(0, 0, 0, 0.5);
 }
 .next-song:active {
-  align-self: flex-end;
-  background: rgb(31, 29, 29);
-  line-height: 30px;
-  width: 30px;
-  font-size: 10px;
-  border-radius: 50px;
-  cursor: pointer;
-  box-shadow: -1px -1px 3px rgba(255,255,255,0.1), 
-  2px 2px 6px rgba(0,0,0,0.8),
-  inset -1px -1px 3px rgba(255,255,255,0.1), 
-  inset 2px 2px 6px rgba(0,0,0,1);
+	align-self: flex-end;
+	background: rgb(31, 29, 29);
+	line-height: 30px;
+	width: 30px;
+	font-size: 10px;
+	border-radius: 50px;
+	cursor: pointer;
+	box-shadow: -1px -1px 3px rgba(255, 255, 255, 0.1), 2px 2px 6px rgba(0, 0, 0, 0.8),
+		inset -1px -1px 3px rgba(255, 255, 255, 0.1), inset 2px 2px 6px rgba(0, 0, 0, 1);
 }
 
 .speakers-off-container {
-  position: absolute;
-  background: rgb(31, 29, 29);
-  line-height: 29.5px;
-  align-self: center;
-  width: 30px;
-  height: 30px;
-  border-radius: 50px;
-  cursor: default;
-  box-shadow: -1px -1px 3px rgba(255,255,255,0.1), 
-  2px 2px 6px rgba(0,0,0,0.8);
-  
+	position: absolute;
+	background: rgb(31, 29, 29);
+	line-height: 29.5px;
+	align-self: center;
+	width: 30px;
+	height: 30px;
+	border-radius: 50px;
+	cursor: default;
+	box-shadow: -1px -1px 3px rgba(255, 255, 255, 0.1), 2px 2px 6px rgba(0, 0, 0, 0.8);
 }
 .speaker-container {
-  position: absolute;
-  background: rgb(31, 29, 29);
-  line-height: 29.5px;
-  align-self: center;
-  width: 30px;
-  height: 30px;
-  border-radius: 50px;
-  cursor: pointer;
-  box-shadow: -1px -1px 3px rgba(255,255,255,0.1), 
-  2px 2px 6px rgba(0,0,0,0.8);
-  
+	position: absolute;
+	background: rgb(31, 29, 29);
+	line-height: 29.5px;
+	align-self: center;
+	width: 30px;
+	height: 30px;
+	border-radius: 50px;
+	cursor: pointer;
+	box-shadow: -1px -1px 3px rgba(255, 255, 255, 0.1), 2px 2px 6px rgba(0, 0, 0, 0.8);
 }
 .speaker-container:hover {
-  position: absolute;
-  background: rgb(31, 29, 29);
-  line-height: 29.5px;
-  align-self: center;
-  width: 30px;
-  height: 30px;
-  border-radius: 50px;
-  cursor: pointer;
-  box-shadow: -1px -1px 3px rgba(255,255,255,0.1), 
-  2px 2px 6px rgba(0,0,0,0.8),
-  inset -2px -2px 10px rgba(255,255,255,0.1), 
-  inset 2px 2px 10px rgba(0,0,0,0.5);
-  
+	position: absolute;
+	background: rgb(31, 29, 29);
+	line-height: 29.5px;
+	align-self: center;
+	width: 30px;
+	height: 30px;
+	border-radius: 50px;
+	cursor: pointer;
+	box-shadow: -1px -1px 3px rgba(255, 255, 255, 0.1), 2px 2px 6px rgba(0, 0, 0, 0.8),
+		inset -2px -2px 10px rgba(255, 255, 255, 0.1), inset 2px 2px 10px rgba(0, 0, 0, 0.5);
 }
 .speaker-container:active {
-  position: absolute;
-  background: rgb(31, 29, 29);
-  line-height: 29.5px;
-  align-self: center;
-  width: 30px;
-  height: 30px;
-  border-radius: 50px;
-  cursor: pointer;
-  box-shadow: -1px -1px 3px rgba(255,255,255,0.1), 
-  2px 2px 6px rgba(0,0,0,0.8),
-  inset -1px -1px 3px rgba(255,255,255,0.1), 
-  inset 2px 2px 6px rgba(0,0,0,1);
-  
+	position: absolute;
+	background: rgb(31, 29, 29);
+	line-height: 29.5px;
+	align-self: center;
+	width: 30px;
+	height: 30px;
+	border-radius: 50px;
+	cursor: pointer;
+	box-shadow: -1px -1px 3px rgba(255, 255, 255, 0.1), 2px 2px 6px rgba(0, 0, 0, 0.8),
+		inset -1px -1px 3px rgba(255, 255, 255, 0.1), inset 2px 2px 6px rgba(0, 0, 0, 1);
 }
 .speaker-container-disabled {
-  position: absolute;
-  background: rgb(31, 29, 29);
-  line-height: 29.5px;
-  align-self: center;
-  width: 30px;
-  height: 30px;
-  border-radius: 50px;
-  cursor: pointer;
-  box-shadow: -1px -1px 3px rgba(255,255,255,0.1), 
-  2px 2px 6px rgba(0,0,0,0.8);
+	position: absolute;
+	background: rgb(31, 29, 29);
+	line-height: 29.5px;
+	align-self: center;
+	width: 30px;
+	height: 30px;
+	border-radius: 50px;
+	cursor: pointer;
+	box-shadow: -1px -1px 3px rgba(255, 255, 255, 0.1), 2px 2px 6px rgba(0, 0, 0, 0.8);
 }
 .speaker-container-disabled:hover {
-  position: absolute;
-  background: rgb(31, 29, 29);
-  line-height: 29.5px;
-  align-self: center;
-  width: 30px;
-  height: 30px;
-  border-radius: 50px;
-  cursor: pointer;
-  box-shadow: -1px -1px 3px rgba(255,255,255,0.1), 
-  2px 2px 6px rgba(0,0,0,0.8),
-  inset -2px -2px 10px rgba(255,255,255,0.1), 
-  inset 2px 2px 10px rgba(0,0,0,0.5);
+	position: absolute;
+	background: rgb(31, 29, 29);
+	line-height: 29.5px;
+	align-self: center;
+	width: 30px;
+	height: 30px;
+	border-radius: 50px;
+	cursor: pointer;
+	box-shadow: -1px -1px 3px rgba(255, 255, 255, 0.1), 2px 2px 6px rgba(0, 0, 0, 0.8),
+		inset -2px -2px 10px rgba(255, 255, 255, 0.1), inset 2px 2px 10px rgba(0, 0, 0, 0.5);
 }
 .speaker-container-disabled:active {
-  position: absolute;
-  background: rgb(31, 29, 29);
-  line-height: 29.5px;
-  align-self: center;
-  width: 30px;
-  height: 30px;
-  border-radius: 50px;
-  cursor: pointer;
-  box-shadow: -1px -1px 3px rgba(255,255,255,0.1), 
-  2px 2px 6px rgba(0,0,0,0.8),
-  inset -1px -1px 3px rgba(255,255,255,0.1), 
-  inset 2px 2px 6px rgba(0,0,0,1);
+	position: absolute;
+	background: rgb(31, 29, 29);
+	line-height: 29.5px;
+	align-self: center;
+	width: 30px;
+	height: 30px;
+	border-radius: 50px;
+	cursor: pointer;
+	box-shadow: -1px -1px 3px rgba(255, 255, 255, 0.1), 2px 2px 6px rgba(0, 0, 0, 0.8),
+		inset -1px -1px 3px rgba(255, 255, 255, 0.1), inset 2px 2px 6px rgba(0, 0, 0, 1);
 }
 .speaker {
-  position: absolute;
-  margin-top: 7px;
-  margin-left: -9px;
-  width: 18px;
-  height: 18px;
-  filter: brightness(300%);
-  filter: grayscale(0%);
-  animation-name: deactivate;
-  animation-duration: 0.6s;
-  animation-timing-function: ease-in-out;
-  transition: all 0.6s ease-in-out;
+	position: absolute;
+	margin-top: 7px;
+	margin-left: -9px;
+	width: 18px;
+	height: 18px;
+	filter: brightness(300%);
+	filter: grayscale(0%);
+	animation-name: deactivate;
+	animation-duration: 0.6s;
+	animation-timing-function: ease-in-out;
+	transition: all 0.6s ease-in-out;
 }
 .speaker-glow {
-  position: absolute;
-  filter: blur(4px);
-  margin-top: 7px;
-  margin-left: -9px;
-  width: 18px;
-  height: 18px;
-  transition: all 0.6s ease-in-out;
+	position: absolute;
+	filter: blur(4px);
+	margin-top: 7px;
+	margin-left: -9px;
+	width: 18px;
+	height: 18px;
+	transition: all 0.6s ease-in-out;
 }
 .speaker-disabled {
-  position: absolute;
-  margin-top: 7px;
-  margin-left: -9px;
-  opacity: 0.4;
-  width: 18px;
-  height: 18px;
-  filter: grayscale(100%);
-  animation-name: activate;
-  animation-duration: 0.6s;
-  animation-timing-function: ease-in-out;
-  transition: all 0.6s ease-in-out;
+	position: absolute;
+	margin-top: 7px;
+	margin-left: -9px;
+	opacity: 0.4;
+	width: 18px;
+	height: 18px;
+	filter: grayscale(100%);
+	animation-name: activate;
+	animation-duration: 0.6s;
+	animation-timing-function: ease-in-out;
+	transition: all 0.6s ease-in-out;
 }
 .speakers-off {
-  position: absolute;
-  margin-top: 7px;
-  margin-left: -9px;
-  opacity: 0.4;
-  width: 18px;
-  height: 18px;
-  filter: grayscale(100%);
-  animation-name: activate;
-  animation-duration: 0.6s;
-  animation-timing-function: ease-in-out;
-  transition: all 0.6s ease-in-out;
+	position: absolute;
+	margin-top: 7px;
+	margin-left: -9px;
+	opacity: 0.4;
+	width: 18px;
+	height: 18px;
+	filter: grayscale(100%);
+	animation-name: activate;
+	animation-duration: 0.6s;
+	animation-timing-function: ease-in-out;
+	transition: all 0.6s ease-in-out;
 }
 
 .next-power-on {
-  position: absolute;
-  margin-top: 9px;
-  margin-left: -6px;
-  width: 13px;
-  height: 13px;
-  filter: brightness(350%);
-  filter: grayscale(0%);
-  animation-name: deactivate;
-  animation-duration: 0.6s;
-  animation-timing-function: ease-in-out;
-  transition: all 0.6s ease-in-out;
-  cursor: pointer;
+	position: absolute;
+	margin-top: 9px;
+	margin-left: -6px;
+	width: 13px;
+	height: 13px;
+	filter: brightness(350%);
+	filter: grayscale(0%);
+	animation-name: deactivate;
+	animation-duration: 0.6s;
+	animation-timing-function: ease-in-out;
+	transition: all 0.6s ease-in-out;
+	cursor: pointer;
 }
 .next-power-on-glow {
-  position: absolute;
-  filter: blur(4px);
-  margin-top: 9px;
-  margin-left: -6px;
-  width: 13px;
-  height: 13px;
-  transition: all 0.6s ease-in-out;
-  cursor: pointer;
+	position: absolute;
+	filter: blur(4px);
+	margin-top: 9px;
+	margin-left: -6px;
+	width: 13px;
+	height: 13px;
+	transition: all 0.6s ease-in-out;
+	cursor: pointer;
 }
 .next-power-off {
-  position: absolute;
-  margin-top: 9px;
-  margin-left: -6px;
-  opacity: 0.4;
-  width: 13px;
-  height: 13px;
-  filter: grayscale(100%);
-  animation-name: activate;
-  animation-duration: 0.6s;
-  animation-timing-function: ease-in-out;
-  transition: all 0.6s ease-in-out;
-  cursor: default;
+	position: absolute;
+	margin-top: 9px;
+	margin-left: -6px;
+	opacity: 0.4;
+	width: 13px;
+	height: 13px;
+	filter: grayscale(100%);
+	animation-name: activate;
+	animation-duration: 0.6s;
+	animation-timing-function: ease-in-out;
+	transition: all 0.6s ease-in-out;
+	cursor: default;
 }
 
 .power-off {
-  color: #575657;
-  justify-content: center;
-  align-content: center;
-  text-align: center;
-  margin: 0 4px;
-  filter: grayscale(100%);
-  animation-name: deactivate;
-  animation-duration: 0.6s;
-  animation-timing-function: ease-in-out;
-  cursor: pointer;
-  transition: all 0.6s ease-in-out
+	color: #575657;
+	justify-content: center;
+	align-content: center;
+	text-align: center;
+	margin: 0 4px;
+	filter: grayscale(100%);
+	animation-name: deactivate;
+	animation-duration: 0.6s;
+	animation-timing-function: ease-in-out;
+	cursor: pointer;
+	transition: all 0.6s ease-in-out;
 }
 .power-on {
-  color: #00c4c4;
-  font-weight: bold;
-  justify-content: center;
-  align-content: center;
-  filter: grayscale(0%);
-  text-align: center;
-  filter: brightness(200%);
-  margin: 0 4px;
-  animation-name: activate;
-  animation-duration: 0.6s;
-  animation-timing-function: ease-in-out;
-  cursor: pointer;
-  transition: all 0.6s ease-in-out
+	color: #00c4c4;
+	font-weight: bold;
+	justify-content: center;
+	align-content: center;
+	filter: grayscale(0%);
+	text-align: center;
+	filter: brightness(200%);
+	margin: 0 4px;
+	animation-name: activate;
+	animation-duration: 0.6s;
+	animation-timing-function: ease-in-out;
+	cursor: pointer;
+	transition: all 0.6s ease-in-out;
 }
 .power-on::before {
-  position: absolute;
-  content: "ON";
-  mix-blend-mode: multiply;
-  filter: blur(5px);
-  font-weight: bold;
-  animation-name: activate;
-  animation-duration: 0.6s;
-  animation-timing-function: ease-in-out;
-  cursor: pointer;
-  transition: all 0.6s ease-in-out
+	position: absolute;
+	content: "ON";
+	mix-blend-mode: multiply;
+	filter: blur(5px);
+	font-weight: bold;
+	animation-name: activate;
+	animation-duration: 0.6s;
+	animation-timing-function: ease-in-out;
+	cursor: pointer;
+	transition: all 0.6s ease-in-out;
 }
 
 .power-button-off {
-  background: rgb(31, 29, 29);
-  line-height: 31px;
-  width: 31px;
-  height: 31px;
-  font-size: 10px;
-  border-radius: 100%;
-  cursor: pointer;
-  box-shadow: -1px -1px 3px rgba(255,255,255,0.1), 
-  2px 2px 6px rgba(0,0,0,0.8);
+	background: rgb(31, 29, 29);
+	line-height: 31px;
+	width: 31px;
+	height: 31px;
+	font-size: 10px;
+	border-radius: 100%;
+	cursor: pointer;
+	box-shadow: -1px -1px 3px rgba(255, 255, 255, 0.1), 2px 2px 6px rgba(0, 0, 0, 0.8);
 }
 .power-button-off:hover {
-  align-self: flex-end;
-  background: rgb(31, 29, 29);
-  line-height: 31px;
-  width: 31px;
-  font-size: 10px;
-  border-radius: 50px;
-  cursor: pointer;
-  box-shadow: -1px -1px 3px rgba(255,255,255,0.1), 
-  2px 2px 6px rgba(0,0,0,0.8),
-  inset -2px -2px 10px rgba(255,255,255,0.1), 
-  inset 2px 2px 10px rgba(0,0,0,0.5);
-              
+	align-self: flex-end;
+	background: rgb(31, 29, 29);
+	line-height: 31px;
+	width: 31px;
+	font-size: 10px;
+	border-radius: 50px;
+	cursor: pointer;
+	box-shadow: -1px -1px 3px rgba(255, 255, 255, 0.1), 2px 2px 6px rgba(0, 0, 0, 0.8),
+		inset -2px -2px 10px rgba(255, 255, 255, 0.1), inset 2px 2px 10px rgba(0, 0, 0, 0.5);
 }
 .power-button-off:active {
-  align-self: flex-end;
-  background: rgb(31, 29, 29);
-  line-height: 31px;
-  width: 31px;
-  font-size: 10px;
-  border-radius: 50px;
-  cursor: pointer;
-  box-shadow: -1px -1px 3px rgba(255,255,255,0.1), 
-  2px 2px 6px rgba(0,0,0,0.8),
-  inset -1px -1px 3px rgba(255,255,255,0.1), 
-  inset 2px 2px 6px rgba(0,0,0,1);
-              
+	align-self: flex-end;
+	background: rgb(31, 29, 29);
+	line-height: 31px;
+	width: 31px;
+	font-size: 10px;
+	border-radius: 50px;
+	cursor: pointer;
+	box-shadow: -1px -1px 3px rgba(255, 255, 255, 0.1), 2px 2px 6px rgba(0, 0, 0, 0.8),
+		inset -1px -1px 3px rgba(255, 255, 255, 0.1), inset 2px 2px 6px rgba(0, 0, 0, 1);
 }
 .power-button-on {
-  align-self: flex-end;
-  background: rgb(31, 29, 29);
-  line-height: 31px;
-  height: 31px;
-  width: 31px;
-  font-size: 10px;
-  border-radius: 50px;
-  cursor: pointer;
-  box-shadow: -1px -1px 3px rgba(255,255,255,0.1), 
-  2px 2px 6px rgba(0,0,0,0.8);
-              
+	align-self: flex-end;
+	background: rgb(31, 29, 29);
+	line-height: 31px;
+	height: 31px;
+	width: 31px;
+	font-size: 10px;
+	border-radius: 50px;
+	cursor: pointer;
+	box-shadow: -1px -1px 3px rgba(255, 255, 255, 0.1), 2px 2px 6px rgba(0, 0, 0, 0.8);
 }
 .power-button-on:hover {
-  align-self: flex-end;
-  background: rgb(31, 29, 29);
-  line-height: 31px;
-  height: 31px;
-  width: 31px;
-  font-size: 10px;
-  border-radius: 50px;
-  cursor: pointer;
-  box-shadow: -1px -1px 3px rgba(255,255,255,0.1), 
-  2px 2px 6px rgba(0,0,0,0.8),
-  inset -2px -2px 10px rgba(255,255,255,0.1), 
-  inset 2px 2px 10px rgba(0,0,0,0.5);
-              
+	align-self: flex-end;
+	background: rgb(31, 29, 29);
+	line-height: 31px;
+	height: 31px;
+	width: 31px;
+	font-size: 10px;
+	border-radius: 50px;
+	cursor: pointer;
+	box-shadow: -1px -1px 3px rgba(255, 255, 255, 0.1), 2px 2px 6px rgba(0, 0, 0, 0.8),
+		inset -2px -2px 10px rgba(255, 255, 255, 0.1), inset 2px 2px 10px rgba(0, 0, 0, 0.5);
 }
 .power-button-on:active {
-  align-self: flex-end;
-  background: rgb(31, 29, 29);
-  line-height: 31px;
-  height: 31px;
-  width: 31px;
-  font-size: 10px;
-  border-radius: 50px;
-  cursor: pointer;
-  box-shadow: -1px -1px 3px rgba(255,255,255,0.1), 
-  2px 2px 6px rgba(0,0,0,0.8),
-  inset -1px -1px 3px rgba(255,255,255,0.1), 
-  inset 2px 2px 6px rgba(0,0,0,1);
-              
+	align-self: flex-end;
+	background: rgb(31, 29, 29);
+	line-height: 31px;
+	height: 31px;
+	width: 31px;
+	font-size: 10px;
+	border-radius: 50px;
+	cursor: pointer;
+	box-shadow: -1px -1px 3px rgba(255, 255, 255, 0.1), 2px 2px 6px rgba(0, 0, 0, 0.8),
+		inset -1px -1px 3px rgba(255, 255, 255, 0.1), inset 2px 2px 6px rgba(0, 0, 0, 1);
 }
