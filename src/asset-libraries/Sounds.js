@@ -140,6 +140,10 @@ const Sounds = {
       {
 				src: 'audio/sound-effects/big-sean-oh-god.mp3'
       },
+      {
+				src: 'audio/sound-effects/jay-z-woo.mp3'
+      },
+
     ],
     [
 			{
@@ -156,9 +160,6 @@ const Sounds = {
       },
       {
 				src: 'audio/sound-effects/flava-flav-yea-boy.mp3'
-      },
-      {
-				src: 'audio/sound-effects/respec-on-my-name.mp3'
       },
       {
 				src: 'audio/sound-effects/jay-z-im-focused-man.mp3'
