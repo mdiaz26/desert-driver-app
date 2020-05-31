@@ -9,6 +9,9 @@ import React from 'react';
 import Images from './asset-libraries/Images';
 import Sounds from './asset-libraries/Sounds';
 
+// const adapter = new JSONAPIAdapter('https://desert-driver-api.herokuapp.com/api/v1/');
+const adapter = new JSONAPIAdapter('http://localhost:3000/api/v1/');
+
 class App extends React.Component {
 	state = {
 		users: [],
@@ -42,22 +45,27 @@ class App extends React.Component {
 	fadeOut = null;
 
 	componentDidMount() {
-		const adapter = new JSONAPIAdapter('https://desert-driver-api.herokuapp.com/api/v1/');
 		adapter.getAll('scores').then((scores) => this.setState({ scores }));
 		adapter.getAll('users').then((users) => this.setState({ users }));
 		adapter.getAll('avatars').then((avatars) => this.setState({ avatars }));
 	}
 
 	setUser = (userObj) => {
+		!userObj.music_playing && this.musicFadeOut()
+
 		this.setState({
 			userId: userObj.id,
 			username: userObj.username,
-			avatar: userObj.avatar.image
+			avatar: userObj.avatar.image,
+			musicPlaying: userObj.music_playing,
+			gameSound: userObj.game_sound,
+			musicVolume: userObj.music_volume,
+			gameVolume: userObj.game_volume
 		});
 	};
 
 	signOut = () => {
-		this.setState({ userId: '', onGameScreen: true });
+		adapter.getAll('users').then((users) => this.setState({ users, userId: '', onGameScreen: true }));
 		this.musicFadeOut();
 	};
 
@@ -167,7 +175,7 @@ class App extends React.Component {
 		this.musicDeck[activeSide].volume = value;
 		this.setState({
 			musicVolume: value
-		});
+		}, () => adapter.update('users', this.state.userId, { music_volume: value }));
 	};
 
 	setGameVolume = (value) => {
@@ -178,7 +186,7 @@ class App extends React.Component {
 		});
 		this.setState({
 			gameVolume: value
-		});
+		}, () => adapter.update('users', this.state.userId, { game_volume: value }));
 	};
 
 	musicFadeOut = () => {
@@ -241,25 +249,19 @@ class App extends React.Component {
 		}
 	};
 
-	stopAllSounds = () => {
+	toggleAllSounds = () => {
 		if (this.state.musicPlaying) {
-			this.setState(
-				{
-					musicPlaying: false,
-					gameSound: false
-				},
-				this.musicFadeOut()
-			);
+			this.musicFadeOut()
 		} else {
 			let song = Sounds.bgMusic[Math.floor(Math.random() * Sounds.bgMusic.length)];
-			this.setState(
-				{
-					musicPlaying: true,
-					gameSound: true
-				},
-				this.musicPlay(song)
-			);
+			this.musicPlay(song)
 		}
+
+		this.setState(prevState => ({
+			musicPlaying: !prevState.musicPlaying,
+			gameSound: !prevState.gameSound
+			// }), () => console.log(this.state.musicPlaying))
+		}), () => adapter.update('users', this.state.userId, { music_playing: this.state.musicPlaying }))
 	};
 
 	startThemeSong = () => {
@@ -364,16 +366,16 @@ class App extends React.Component {
 									nextSong={this.nextSong}
 									songInfo={this.state.songInfo}
 									musicFadeOut={this.musicFadeOut}
-									stopAllSounds={this.stopAllSounds}
+									toggleAllSounds={this.toggleAllSounds}
 									flipAudio={this.flipAudio}
 									setGameVolume={this.setGameVolume}
 									setMusicVolume={this.setMusicVolume}
 									gameVolume={this.state.gameVolume}
 									gameSound={this.state.gameSound}
-									deckBVolume={this.state.musicVolume}
+									musicVolume={this.state.musicVolume}
 									countdownAudio={this.countdownAudio}
 									coinAudio={this.coinAudio}
-									musicDeckB={this.musicDeckB}
+									// musicDeckB={this.musicDeckB}
 									fadeOut={this.fadeOut}
 									musicPlay={this.musicPlay}
 									musicPlaying={this.state.musicPlaying}
@@ -410,7 +412,7 @@ class App extends React.Component {
 											'footer-speaker-container-disabled'
 										)
 								}
-								onClick={this.stopAllSounds}
+								onClick={this.toggleAllSounds}
 							>
 								<img
 									src={Images.speaker}

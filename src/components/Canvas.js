@@ -503,14 +503,14 @@ class Canvas extends Component {
             songInfo={this.props.songInfo}
             gameSound={this.props.gameSound}
             gameVolume={this.props.gameVolume}
-            deckBVolume={this.props.deckBVolume}
+            musicVolume={this.props.musicVolume}
             musicPlaying={this.props.musicPlaying}
             stats={this.state}
             setMusicVolume={this.props.setMusicVolume}
             setGameVolume={this.props.setGameVolume}
             nextSong={this.props.nextSong}
-            stopAllSounds={this.props.stopAllSounds}
-            musicDeckB={this.props.musicDeckB}
+            toggleAllSounds={this.props.toggleAllSounds}
+          // musicDeckB={this.props.musicDeckB}
           />
           <div className="end-game-container">
             {!this.state.gameOn && (

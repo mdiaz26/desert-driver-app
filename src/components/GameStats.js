@@ -27,8 +27,8 @@ class GameStats extends Component {
             this.state.powerOff
               ? "speakers-off-container"
               : this.state.gameSoundMuted
-              ? "speaker-container-disabled game-volume"
-              : "speaker-container game-volume"
+                ? "speaker-container-disabled game-volume"
+                : "speaker-container game-volume"
           }
           onClick={
             this.props.gameSound ? (event) => this.toggleMuted(event) : null
@@ -41,8 +41,8 @@ class GameStats extends Component {
               this.state.powerOff
                 ? "speakers-off"
                 : this.state.gameSoundMuted
-                ? "speaker-disabled game-volume"
-                : "speaker game-volume"
+                  ? "speaker-disabled game-volume"
+                  : "speaker game-volume"
             }
           />
           <img
@@ -52,8 +52,8 @@ class GameStats extends Component {
               this.state.powerOff
                 ? "speakers-off"
                 : this.state.gameSoundMuted
-                ? "speaker-disabled game-volume"
-                : "speaker-glow game-volume"
+                  ? "speaker-disabled game-volume"
+                  : "speaker-glow game-volume"
             }
           />
         </div>
@@ -65,7 +65,7 @@ class GameStats extends Component {
             max="1"
             disabled={!this.props.musicPlaying}
             step="0.001"
-            defaultValue="0.8"
+            defaultValue={this.props.gameVolume}
             id={
               this.props.musicPlaying && this.props.gameSound
                 ? "game-sound-volume"
@@ -99,8 +99,8 @@ class GameStats extends Component {
             this.state.powerOff
               ? "speakers-off-container"
               : this.state.musicMuted
-              ? "speaker-container-disabled music-volume"
-              : "speaker-container music-volume"
+                ? "speaker-container-disabled music-volume"
+                : "speaker-container music-volume"
           }
           onClick={
             this.props.musicPlaying ? (event) => this.toggleMuted(event) : null
@@ -113,8 +113,8 @@ class GameStats extends Component {
               this.state.powerOff
                 ? "speakers-off"
                 : this.state.musicMuted
-                ? "speaker-disabled music-volume"
-                : "speaker music-volume"
+                  ? "speaker-disabled music-volume"
+                  : "speaker music-volume"
             }
           />
           <img
@@ -124,8 +124,8 @@ class GameStats extends Component {
               this.state.powerOff
                 ? "speakers-off"
                 : this.state.musicMuted
-                ? "speaker-disabled music-volume"
-                : "speaker-glow music-volume"
+                  ? "speaker-disabled music-volume"
+                  : "speaker-glow music-volume"
             }
           />
         </div>
@@ -137,7 +137,7 @@ class GameStats extends Component {
             max="1"
             disabled={!this.props.musicPlaying}
             step="0.001"
-            defaultValue="0.8"
+            defaultValue={this.props.musicVolume}
             id={
               this.props.musicPlaying
                 ? "bg-music-volume"
@@ -418,7 +418,7 @@ class GameStats extends Component {
     this.setState((state) => ({
       powerOff: !state.powerOff,
     }));
-    this.stopAllSounds();
+    this.toggleAllSounds();
   };
 
   toggleMuted = (event) => {
@@ -462,8 +462,8 @@ class GameStats extends Component {
     this.props.nextSong();
   };
 
-  stopAllSounds = () => {
-    this.props.stopAllSounds();
+  toggleAllSounds = () => {
+    this.props.toggleAllSounds();
   };
 
   render() {
