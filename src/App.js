@@ -9,6 +9,9 @@ import React from 'react';
 import Images from './asset-libraries/Images';
 import Sounds from './asset-libraries/Sounds';
 
+// const adapter = new JSONAPIAdapter('https://desert-driver-api.herokuapp.com/api/v1/');
+const adapter = new JSONAPIAdapter('http://localhost:3000/api/v1/');
+
 class App extends React.Component {
 	state = {
 		users: [],
@@ -26,6 +29,8 @@ class App extends React.Component {
 		onGameScreen: true
 	};
 
+
+
 	bgMusic = null;
 	fadeOut = null;
 	gameSound = {
@@ -34,7 +39,6 @@ class App extends React.Component {
 	};
 
 	componentDidMount() {
-		const adapter = new JSONAPIAdapter('https://desert-driver-api.herokuapp.com/api/v1/');
 		adapter.getAll('scores').then((scores) => this.setState({ scores }));
 
 		adapter.getAll('users').then((users) => this.setState({ users }));
@@ -49,11 +53,17 @@ class App extends React.Component {
 			username: userObj.username,
 			avatar: userObj.avatar.image
 		});
+		userObj.music_volume && this.setState({
+			musicPlaying: userObj.music_playing,
+			gameSound: userObj.game_sound,
+			bgMusicVolume: userObj.music_volume,
+			gameVolume: userObj.game_volume
+		}, console.log(userObj))
 	};
 
 	signOut = () => {
 		this.setState({ userId: '', onGameScreen: true });
-    this.musicFadeOut()
+		this.musicFadeOut()
 	};
 
 	updateScores = (scoreObj) => {
@@ -101,18 +111,18 @@ class App extends React.Component {
 		this.bgMusic.controls = true;
 		this.bgMusic.volume = this.state.bgMusicVolume;
 		this.bgMusic.autoPlay = true
-    this.bgMusic.load()
-    let playPromise = this.bgMusic.play();
-    if (playPromise) {
-      playPromise
-      .then(_ => {
-        console.log("audio played auto")
-      })
-      .catch(error => {
-        console.log("playback prevented")
-      })
-    }
-    this.bgMusic.muted = false
+		this.bgMusic.load()
+		let playPromise = this.bgMusic.play();
+		if (playPromise) {
+			playPromise
+				.then(_ => {
+					console.log("audio played auto")
+				})
+				.catch(error => {
+					console.log("playback prevented")
+				})
+		}
+		this.bgMusic.muted = false
 		setTimeout(() => this.bgMusic.play(), 1000);
 		this.setState({
 			bgSongInfo: `"${song.title}" by ${song.artist}`
@@ -134,8 +144,8 @@ class App extends React.Component {
 			newSong.src === song.src && this.nextSong((song = this.bgMusic));
 		} else if (!this.state.onGameScreen) {
 			newSong = Sounds.themeSong;
-    }
-    this.bgMusic = new Audio()
+		}
+		this.bgMusic = new Audio()
 		this.musicPlay(newSong);
 	};
 
@@ -144,15 +154,18 @@ class App extends React.Component {
 		this.setState({
 			bgMusicVolume: value
 		});
+		adapter.update('users', this.state.userId, { music_volume: value })
 	};
 
 	setGameVolume = (value) => {
 		Object.keys(this.gameSound).forEach((audioType) => {
 			this.gameSound[audioType].volume = value * this.gameSound[audioType].maxVolume;
 		});
+
 		this.setState({
 			gameVolume: value
 		});
+		adapter.update('users', this.state.userId, { game_volume: value })
 	};
 
 	musicFadeOut = () => {
@@ -190,14 +203,18 @@ class App extends React.Component {
 			this.setState((state) => ({
 				musicPlaying: false,
 				gameSound: false,
-			}), this.musicFadeOut());
+			}), this.musicFadeOut(),
+				adapter.update('users', this.state.userId, { music_playing: false, game_sound: false })
+			);
 
 		} else {
 			let song = Sounds.bgMusic[Math.floor(Math.random() * Sounds.bgMusic.length)];
 			this.setState((state) => ({
 				musicPlaying: true,
 				gameSound: true,
-			}), this.musicPlay(song));
+			}), this.musicPlay(song),
+				adapter.update('users', this.state.userId, { music_playing: true, game_sound: true })
+			);
 
 		}
 	};
@@ -211,17 +228,20 @@ class App extends React.Component {
 		this.setState({ onGameScreen: false })
 	};
 
-  switchFromGameScreen = () => {
-    if (this.state.userId !== "") {
-    this.setState({ onGameScreen: false })
-    }
-  }
+	switchFromGameScreen = () => {
+		if (this.state.userId !== "") {
+			this.setState({ onGameScreen: false })
+		}
+	}
 	toggleMusicPlaying = () => {
 		if (this.state.musicPlaying) {
 			this.musicFadeOut()
 		} else {
 			this.startThemeSong()
 		}
+
+		adapter.update('users', this.state.userId, { music_playing: !this.state.musicPlaying })
+
 		this.setState((state) => ({
 			musicPlaying: !state.musicPlaying
 		}));
@@ -231,9 +251,9 @@ class App extends React.Component {
 		if (this.state.musicPlaying) {
 			this.musicFadeOut()
 		}
-    if (this.state.user !== "") {
-		this.setState({ onGameScreen: true })
-    }
+		if (this.state.user !== "") {
+			this.setState({ onGameScreen: true })
+		}
 	}
 
 	render() {
@@ -263,25 +283,27 @@ class App extends React.Component {
 							path="/leaderboard"
 							render={() => <Leaderboard scores={this.state.scores} users={this.state.users} />}
 						/>
-						<Route
-							path="/users/:id"
-							render={(routerProps) => (
-								<ProfileContainer
-									{...routerProps}
-									scores={this.state.scores}
-									avatars={this.state.avatars}
-									userId={this.state.userId}
-									appendUpdatedUser={this.appendUpdatedUser}
-									updateProfileLink={this.updateProfileLink}
-									signOut={this.signOut}
-								/>
-							)}
-						/>
+						{this.state.userId !== '' &&
+							<Route
+								path="/users/:id"
+								render={(routerProps) => (
+									<ProfileContainer
+										{...routerProps}
+										scores={this.state.scores}
+										avatars={this.state.avatars}
+										userId={this.state.userId}
+										appendUpdatedUser={this.appendUpdatedUser}
+										updateProfileLink={this.updateProfileLink}
+										signOut={this.signOut}
+									/>
+								)}
+							/>
+						}
 						<Route
 							path="/"
 							render={() => (
 								<GameContainer
-                  switchFromGameScreen={this.switchFromGameScreen}
+									switchFromGameScreen={this.switchFromGameScreen}
 									startThemeSong={this.startThemeSong}
 									stopThemeSong={this.stopThemeSong}
 									nextSong={this.nextSong}
