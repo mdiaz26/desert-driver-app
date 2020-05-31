@@ -250,18 +250,26 @@ class App extends React.Component {
 	};
 
 	toggleAllSounds = () => {
-		if (this.state.musicPlaying) {
+		if (this.state.musicPlaying || this.state.gameSound) {
+			this.setState({
+				musicPlaying: false,
+				gameSound: false
+			}, () => adapter.update('users', this.state.userId, { music_playing: false, game_sound: false }))
 			this.musicFadeOut()
 		} else {
+			this.setState({
+				musicPlaying: true,
+				gameSound: true
+			}, () => adapter.update('users', this.state.userId, { music_playing: true, game_sound: true }))
 			let song = Sounds.bgMusic[Math.floor(Math.random() * Sounds.bgMusic.length)];
 			this.musicPlay(song)
 		}
 
-		this.setState(prevState => ({
-			musicPlaying: !prevState.musicPlaying,
-			gameSound: !prevState.gameSound
-			// }), () => console.log(this.state.musicPlaying))
-		}), () => adapter.update('users', this.state.userId, { music_playing: this.state.musicPlaying }))
+		// this.setState(prevState => ({
+		// 	musicPlaying: !prevState.musicPlaying,
+		// 	gameSound: !prevState.gameSound
+		// 	// }), () => console.log(this.state.musicPlaying))
+		// }), () => adapter.update('users', this.state.userId, { music_playing: this.state.musicPlaying, game_sound: this.state.gameSound }))
 	};
 
 	startThemeSong = () => {
