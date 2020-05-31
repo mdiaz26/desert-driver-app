@@ -276,7 +276,6 @@ class Canvas extends Component {
         player.rSpeed += (k.ArrowLeft - k.ArrowRight) * 0.07;
       }
       if (player.rSpeed > 1.7) {
-        console.log("rspeed", player.rSpeed);
         player.rSpeed = 1.6;
       }
       player.rot -= player.rSpeed * 0.1;

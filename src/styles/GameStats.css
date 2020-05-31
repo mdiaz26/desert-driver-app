@@ -402,7 +402,7 @@
 	width: 77%;
 	align-self: center;
 	margin-left: 28px;
-	opacity: 0.7;
+	opacity: 0.6;
 	filter: grayscale(0%);
 	cursor: grab;
 	transition: all 1s ease-in-out;

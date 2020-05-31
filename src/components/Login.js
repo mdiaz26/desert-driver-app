@@ -45,6 +45,7 @@ class Login extends React.Component {
 
   enterSite = () => {
     this.props.startThemeSong();
+    this.props.hideFooterMusic();
     this.setState({
       entered: true,
       flashing: false,
