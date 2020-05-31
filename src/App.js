@@ -62,11 +62,11 @@ class App extends React.Component {
 	};
 
 	updateScores = (scoreObj) => {
-		this.setState((prevState) => ({ scores: [ ...prevState.scores, scoreObj ] }));
+		this.setState((prevState) => ({ scores: [...prevState.scores, scoreObj] }));
 	};
 
 	appendNewUser = (userObj) => {
-		this.setState((prevState) => ({ users: [ ...prevState.users, userObj ] }));
+		this.setState((prevState) => ({ users: [...prevState.users, userObj] }));
 		return userObj;
 	};
 
@@ -338,20 +338,22 @@ class App extends React.Component {
 							path="/leaderboard"
 							render={() => <Leaderboard scores={this.state.scores} users={this.state.users} />}
 						/>
-						<Route
-							path="/users/:id"
-							render={(routerProps) => (
-								<ProfileContainer
-									{...routerProps}
-									scores={this.state.scores}
-									avatars={this.state.avatars}
-									userId={this.state.userId}
-									appendUpdatedUser={this.appendUpdatedUser}
-									updateProfileLink={this.updateProfileLink}
-									signOut={this.signOut}
-								/>
-							)}
-						/>
+						{this.state.userId !== '' &&
+							<Route
+								path="/users/:id"
+								render={(routerProps) => (
+									<ProfileContainer
+										{...routerProps}
+										scores={this.state.scores}
+										avatars={this.state.avatars}
+										userId={this.state.userId}
+										appendUpdatedUser={this.appendUpdatedUser}
+										updateProfileLink={this.updateProfileLink}
+										signOut={this.signOut}
+									/>
+								)}
+							/>
+						}
 						<Route
 							path="/"
 							render={() => (
@@ -396,8 +398,8 @@ class App extends React.Component {
 								this.state.musicPlaying ? this.state.showFooterMusic ? (
 									'footer-speaker-outer-container'
 								) : (
-									'footer-speaker-outer-container-closed'
-								) : 'footer-speaker-outer-container-closed'
+										'footer-speaker-outer-container-closed'
+									) : 'footer-speaker-outer-container-closed'
 							}
 						>
 							<div
@@ -405,8 +407,8 @@ class App extends React.Component {
 									this.state.musicPlaying ? (
 										'footer-speaker-container'
 									) : (
-										'footer-speaker-container-disabled'
-									)
+											'footer-speaker-container-disabled'
+										)
 								}
 								onClick={this.stopAllSounds}
 							>
@@ -426,12 +428,12 @@ class App extends React.Component {
 							<div />
 							<div className={this.state.musicPlaying ? this.state.showFooterMusic ? "volume-and-title-container" : "volume-and-title-container-disabled" : "volume-and-title-container-disabled"}>
 								<div>
-								<span className={this.state.musicPlaying ? this.state.showFooterMusic ? "footer-music-info-title" : "footer-music-info-title-disabled" : "footer-music-info-title-disabled"}>
-              {this.state.songInfo && this.state.songInfo.split(" by ")[0]}
-            </span>
-            <span className={this.state.musicPlaying ? this.state.showFooterMusic ? "footer-music-info-artist" : "footer-music-info-artist-disabled" : "footer-music-info-title-disabled"}>
-              {this.state.songInfo && "by " + this.state.songInfo.split(" by ")[1]}
-            </span>
+									<span className={this.state.musicPlaying ? this.state.showFooterMusic ? "footer-music-info-title" : "footer-music-info-title-disabled" : "footer-music-info-title-disabled"}>
+										{this.state.songInfo && this.state.songInfo.split(" by ")[0]}
+									</span>
+									<span className={this.state.musicPlaying ? this.state.showFooterMusic ? "footer-music-info-artist" : "footer-music-info-artist-disabled" : "footer-music-info-title-disabled"}>
+										{this.state.songInfo && "by " + this.state.songInfo.split(" by ")[1]}
+									</span>
 								</div>
 								<div className="volume-input-container">
 									<p className="volume-type">VOLUME</p>
