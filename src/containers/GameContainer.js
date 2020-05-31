@@ -22,6 +22,7 @@ const GameContainer = (props) => {
             songInfo={props.songInfo}
             musicFadeOut={props.musicFadeOut}
             stopAllSounds={props.stopAllSounds}
+            flipAudio={props.flipAudio}
             setGameVolume={props.setGameVolume}
             gameSound={props.gameSound}
             setMusicVolume={props.setMusicVolume}

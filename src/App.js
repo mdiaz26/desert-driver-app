@@ -32,16 +32,13 @@ class App extends React.Component {
 		c: null
 	}
 
-	// currentDeck = "a"
-
 	gameSound = {
 		countdownAudio: null,
-		coinAudio: null
+		coinAudio: null,
+		flipAudio: null
 	};
 	
 	fadeOut = null;
-
-
 
 	componentDidMount() {
 		const adapter = new JSONAPIAdapter('https://desert-driver-api.herokuapp.com/api/v1/');
@@ -122,23 +119,13 @@ class App extends React.Component {
     this.musicDeck[emptySide].muted = false
 		this.musicDeck[emptySide].play()
 		this.setState({
-			songInfo: `"${song.title}" by ${song.artist}`
+			songInfo: `"${song.title}" by ${song.artist}`,
 		});
 		this.musicDeck[emptySide].addEventListener('ended', () => {
 			this.musicDeck[emptySide].pause();
 			this.nextSong(song);
 		});
 	};
-
-	// findCurrentSong = () => {
-	// 	if (this.state.musicPlaying) {
-	// 		if (this.musicDeck.a) {
-	// 			return this.musicDeck.a
-	// 		} else if (this.musicDeck.b) {
-	// 			return this.musicDeck.b
-	// 		}
-	// 	}
-	// }
 
 	nextSong = (song) => {
 		let activeSide;
@@ -184,7 +171,9 @@ class App extends React.Component {
 
 	setGameVolume = (value) => {
 		Object.keys(this.gameSound).forEach((audioType) => {
-			this.gameSound[audioType].volume = value * this.gameSound[audioType].maxVolume;
+			if (this.gameSound[audioType]) {
+				this.gameSound[audioType].volume = value * this.gameSound[audioType].maxVolume;
+			}
 		});
 		this.setState({
 			gameVolume: value
@@ -202,12 +191,11 @@ class App extends React.Component {
 				activeSide = "c"
 			}
 			this.fadeOut = setInterval(() => {
-				console.log(this.musicDeck[activeSide].volume)
 				this.musicDeck[activeSide].volume -= this.musicDeck[activeSide].volume * 0.5
 			}, 10);
-			setTimeout(() => clearInterval(this.fadeOut), 18);
-			setTimeout(() => this.musicDeck[activeSide].pause(), 18);
-			setTimeout(() => this.musicDeck[activeSide] = null, 20);
+			setTimeout(() => clearInterval(this.fadeOut), 150);
+			setTimeout(() => this.musicDeck[activeSide].pause(), 150);
+			setTimeout(() => this.musicDeck[activeSide] = null, 160);
 		}
 	};
 
@@ -233,6 +221,22 @@ class App extends React.Component {
 		}
 	};
 
+	flipAudio = (flipCount) => {
+		if (flipCount > 1) {
+			if (flipCount > 2) {
+				flipCount = 3
+			}
+			if (this.state.gameSound) {
+				this.gameSound.flipAudio = new Audio();
+				this.gameSound.flipAudio.src = Sounds.flipAudio[flipCount - 2][Math.floor(Math.random() * Sounds.flipAudio[flipCount - 2].length)].src;
+				this.gameSound.flipAudio.controls = true
+				this.gameSound.flipAudio.maxVolume = 0.7;
+				this.gameSound.flipAudio.volume = this.state.gameVolume * this.gameSound.flipAudio.maxVolume
+				this.gameSound.flipAudio.play();
+			}
+		}
+	}
+		
 	stopAllSounds = () => {
 		if (this.state.musicPlaying) {
 			this.setState({
@@ -266,17 +270,6 @@ class App extends React.Component {
     this.setState({ onGameScreen: false })
     }
 	}
-	
-	// toggleMusicPlaying = () => {
-	// 	if (this.state.musicPlaying) {
-	// 		this.musicFadeOut()
-	// 	} else {
-	// 		this.startThemeSong()
-	// 	}
-	// 	this.setState((state) => ({
-	// 		musicPlaying: !state.musicPlaying
-	// 	}));
-	// };
 
 	stopThemeSong = () => {
 		if (this.state.musicPlaying) {
@@ -339,6 +332,7 @@ class App extends React.Component {
 									songInfo={this.state.songInfo}
 									musicFadeOut={this.musicFadeOut}
 									stopAllSounds={this.stopAllSounds}
+									flipAudio={this.flipAudio}
 									setGameVolume={this.setGameVolume}
 									setMusicVolume={this.setMusicVolume}
 									gameVolume={this.state.gameVolume}

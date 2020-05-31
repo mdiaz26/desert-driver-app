@@ -46,12 +46,17 @@ class Canvas extends Component {
   componentDidMount() {
     this.game();
     this.props.coinAudio();
-    setTimeout(() => {
+
+    if (this.state.countDown > 0) {
+      setTimeout(() => {
+        this.startTimers();
+      }, 3000);
+      this.countDown = setInterval(() => {
+        this.setState((prevState) => ({ countDown: prevState.countDown - 1 }));
+      }, 1000);
+    } else {
       this.startTimers();
-    }, 3000);
-    this.countDown = setInterval(() => {
-      this.setState((prevState) => ({ countDown: prevState.countDown - 1 }));
-    }, 1000);
+    }
     let song =
       Sounds.bgMusic[Math.floor(Math.random() * Sounds.bgMusic.length)];
     this.props.musicPlaying && this.props.musicPlay(song);
@@ -86,7 +91,7 @@ class Canvas extends Component {
         timer: 0,
         gameOn: true,
         distance: 0,
-        countDown: 3,
+        // countDown: 3,
         millisecond: 0,
         maxDistance: 0,
         currentDistance: 0,
@@ -246,6 +251,7 @@ class Canvas extends Component {
         if (this.state.bestFlip < flipCount * 360) {
           this.setState({ bestFlip: flipCount * 360 });
         }
+        this.props.flipAudio(flipCount);
         flipCount = 0;
       }
 
@@ -266,7 +272,13 @@ class Canvas extends Component {
       }
 
       //LEFT & RIGHT KEY SETTINGS
-      player.rSpeed += (k.ArrowLeft - k.ArrowRight) * 0.08;
+      if (player.rSpeed < 1.7) {
+        player.rSpeed += (k.ArrowLeft - k.ArrowRight) * 0.07;
+      }
+      if (player.rSpeed > 1.7) {
+        console.log("rspeed", player.rSpeed);
+        player.rSpeed = 1.6;
+      }
       player.rot -= player.rSpeed * 0.1;
       if (player.rot > Math.PI) player.rot = -Math.PI;
       if (player.rot < -Math.PI) player.rot = Math.PI;
