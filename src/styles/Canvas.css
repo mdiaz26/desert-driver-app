@@ -1,6 +1,7 @@
 body {
 	background-color: #070507;
 	position: fixed;
+	min-width: 1000px;
 	width: 100%;
 }
 @keyframes custom-fadein {
@@ -88,6 +89,7 @@ body {
 canvas {
 	margin-top: 54px;
 	width: 100%;
+	min-width: 1000px;
 	height: 350px;
 	transition: all 3s ease-in-out;
 }

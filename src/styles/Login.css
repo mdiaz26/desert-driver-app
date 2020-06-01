@@ -1,6 +1,5 @@
 .container {
 	width: 100%;
-	/* height: calc(100%-55px); */
 	display: block;
 	flex-direction: row;
 	justify-content: center;
@@ -8,7 +7,6 @@
 
 .logo-background {
 	position: absolute;
-	/* height: calc(100%-55px); */
 	width: 100%;
 	top: 55px;
 	left: 0;
@@ -17,7 +15,6 @@
 .logo-container {
 	display: flex;
 	flex-direction: column;
-	/* height: calc(100%-55px); */
 	width: 100%;
 	top: 0;
 	bottom: 0;
@@ -26,13 +23,8 @@
 }
 
 .about-and-logo {
-	/* height: calc(100%-55px); */
 	display: flex;
 	flex-direction: row;
-	/* width: 100%;
-	height: 100%; */
-	/* padding-left: 30%;
-	padding-right: 30%; */
 	justify-content: center;
 }
 .show-about {
@@ -41,8 +33,6 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	/* margin-top: 8%; */
-	/* margin-left: 0px; */
 	width: 50%;
 	min-width: 450px;
 	height: 70%;
@@ -59,9 +49,6 @@
 	justify-content: center;
 	width: 50%;
 	height: 70%;
-	/* left: -400px; */
-	/* margin-left: -465px; */
-	/* margin-right: 465px; */
 	opacity: 0;
 	transition: all 1s ease-in-out;
 }
@@ -70,14 +57,11 @@
 	top: 10%;
 	padding: 30px;
 	padding-top: 150px;
-	/* left: 0; */
 	width: 100%;
 	height: 100%;
-	/* height: 100%; */
-	/* margin-left: 15%; */
-	/* z-index: -10; */
-	font-size: 12px;
+	font-size: 11px;
 	color: rgb(204, 187, 161);
+	overflow: hidden;
 	background-color: rgb(15, 15, 15);
 }
 .about-headings {
@@ -90,10 +74,7 @@
 #logo-about {
 	position: absolute;
 	align-self: center;
-	/* height: calc(100%-55px); */
-	/* right: 0; */
 	top: 17%;
-	/* margin-right: 15%; */
 	width: 15%;
 	transition: all 1s ease-in-out;
 	transition-timing-function: cubic-bezier(0.310, 0.00, 0.0, 1.000);
@@ -101,7 +82,6 @@
 
 #logo {
 	position: absolute;
-	/* height: calc(100%-55px); */
 	align-self: center;
 	top: 13%;
 	width: 20%;
@@ -110,7 +90,6 @@
 }
 #large-logo {
 	position: absolute;
-	/* height: calc(100%-55px); */
 	align-self: center;
 	justify-self: center;
 	top: 20%;
@@ -184,7 +163,6 @@
 
 .home-screen-buttons-container {
 	position: absolute;
-	/* height: calc(100%-55px); */
 	margin-top: 15px;
 	display: flex;
 	flex-direction: row;

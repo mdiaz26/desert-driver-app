@@ -17,6 +17,7 @@
 .outer-container {
 	background-color: rgb(31, 29, 29);
 	width: 100%;
+	min-width: 1000px;
 	height: 50%;
 	z-index: -10;
 }
@@ -29,6 +30,7 @@
 	z-index: 0;
 	justify-content: space-around;
 	width: 100%;
+	min-width: 1000px;
 	height: 50%;
 	overflow: auto;
 	padding-right: 3%;
