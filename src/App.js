@@ -21,7 +21,7 @@ class App extends React.Component {
 		username: '',
 		avatar: '',
 		selectedStage: '',
-		musicPlaying: false,
+		musicPlaying: true,
 		gameSound: true,
 		musicVolume: 0.8,
 		gameVolume: 0.8,
@@ -276,12 +276,7 @@ class App extends React.Component {
 			let song = Sounds.bgMusic[Math.floor(Math.random() * Sounds.bgMusic.length)];
 			this.musicPlay(song)
 		}
-
-		// this.setState(prevState => ({
-		// 	musicPlaying: !prevState.musicPlaying,
-		// 	gameSound: !prevState.gameSound
-		// 	// }), () => console.log(this.state.musicPlaying))
-		// }), () => adapter.update('users', this.state.userId, { music_playing: this.state.musicPlaying, game_sound: this.state.gameSound }))
+		
 	};
 
 	startThemeSong = () => {
@@ -294,6 +289,13 @@ class App extends React.Component {
 			});
 		}
 	};
+
+	startSignUpSong = () => {
+		if (this.state.musicPlaying) {
+			let signUpSong = Sounds.signUpSong;
+      this.musicPlay(signUpSong);
+		}
+	}
 
 	switchFromGameScreen = () => {
 		if (this.state.userId !== '') {
@@ -356,8 +358,7 @@ class App extends React.Component {
 							path="/signup"
 							render={() => (
 								<SignUp
-									musicPlaying={this.state.musicPlaying}
-									musicPlay={this.musicPlay}
+									startSignUpSong={this.startSignUpSong}
 									users={this.state.users}
 									setUser={this.setUser}
 									appendNewUser={this.appendNewUser}

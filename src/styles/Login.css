@@ -203,7 +203,7 @@
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
-
+	z-index: -200;
 	width: 35%;
 	opacity: 0;
 	align-self: center;
@@ -215,13 +215,13 @@
 	opacity: 1;
 	width: 100px;
 	align-self: center;
-	margin-top: 95%;
+	margin-top: 85%;
 	background-color: transparent;
 	line-height: 18px;
 	font-size: 18px;
 	color: bisque;
 	border: 1px solid transparent;
-	transition: all 1s ease-in;
+	transition: all 0.3s ease-in;
 }
 .home-screen-buttons:focus {
 	outline: none;
@@ -232,7 +232,7 @@
 	width: 100px;
 	opacity: 1;
 	align-self: center;
-	margin-top: 95%;
+	margin-top: 85%;
 	line-height: 18px;
 	font-size: 18px;
 	background-color: transparent;

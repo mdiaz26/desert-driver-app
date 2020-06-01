@@ -19,8 +19,7 @@ class SignUp extends React.Component {
   };
 
   componentDidMount() {
-    // console.log("the component has mounted");
-    this.signUpSong();
+    this.props.startSignUpSong();
   }
 
   handleChange = (event) => {
@@ -121,13 +120,6 @@ class SignUp extends React.Component {
       if (key === "image") image = obj[key];
     }
     return image;
-  };
-
-  signUpSong = () => {
-    if (!this.props.musicPlaying) {
-      let signUpSong = Sounds.signUpSong;
-      this.props.musicPlay(signUpSong);
-    }
   };
 
   render() {
