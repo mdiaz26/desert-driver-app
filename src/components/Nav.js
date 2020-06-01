@@ -24,17 +24,21 @@ const Nav = (props) => {
             <Link to="/leaderboard" className="btn">
               Leaderboard
             </Link>
-            <button onClick={props.signOut} className="btn signOutButton">
+            <Link to="/" onClick={props.signOut} className="btn signOutButton">
               Sign Out
-            </button>
+            </Link>
           </>
         ) : (
           <>
-            <Link to="/login" className="profile-btn">
+            <Link
+              to="/login"
+              onClick={props.toggleAbout}
+              className="profile-btn"
+            >
               About
             </Link>
-            <Link to="/signup" className="btn">
-              Credits
+            <Link to="/signup" className="btn sign-up-button">
+              Sign Up
             </Link>
           </>
         )}

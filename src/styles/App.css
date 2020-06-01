@@ -84,17 +84,17 @@ body,
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
-	transition: all 1.5s ease-in-out;
+	transition: all 1.7s ease-in-out;
 }
 .volume-and-title-container-disabled {
 	position: absolute;
-	height: 300%;
-	width: 150%;
+	height: 100%;
+	width: 95%;
 	opacity: 0;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
-	transition: all 0.7s ease-in-out;
+	transition: all 0.5s ease-in-out;
 }
 .volume-input-container {
 	width: 80%;
@@ -119,7 +119,7 @@ body,
 	border-radius: 35px;
 	background-color: rgb(31, 29, 29);
 	z-index: 10;
-	transition: all 1.2s ease-in-out;
+	transition: all 0.4s ease-in-out;
 	overflow: hidden;
 }
 /* .footer-speaker-outer-container {
@@ -287,7 +287,7 @@ body,
 	font-size: 14px;
 	opacity: 0.8;
 	cursor: default;
-	transition: all 1.8s ease-out;
+	transition: all 0.3 ease-out;
 	transition-timing-function: cubic-bezier(0.310, 0.0010, 0.165, 1.350);
 }
 .footer-music-info-title-disabled {
@@ -311,7 +311,7 @@ body,
 	font-size: 13px;
 	opacity: 0.8;
 	cursor: default;
-	transition: all 1.8s ease-out;
+	transition: all 0.3 ease-out;
 	transition-timing-function: cubic-bezier(0.310, 0.0010, 0.165, 1.350);
 }
 .footer-music-info-artist-disabled {

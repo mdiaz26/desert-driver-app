@@ -59,6 +59,7 @@ class Login extends React.Component {
       }));
     }, 483);
     setTimeout(() => clearInterval(flashing), 4500);
+    document.querySelector(".input-field").focus();
   };
 
   render() {
@@ -68,34 +69,85 @@ class Login extends React.Component {
     }
     return (
       <div className="container">
-        <div className="logo-container">
-          <img
-            alt="Login Gif"
-            className="logo-background"
-            src={Images.loginGif}
-          />
-          <img
-            id={this.state.entered ? "logo" : "large-logo"}
-            src={Images.logo}
-            alt="Desert Heat Logo"
-          />
-          <div
-            className={
-              this.state.entered
-                ? "home-screen-buttons-container-hidden"
-                : "home-screen-buttons-container"
-            }
-          >
-            <button onClick={this.enterSite} className="home-screen-buttons">
-              LOG IN
-            </button>
-            <button className="home-screen-buttons">SIGN UP</button>
+        <div className="about-and-logo">
+          <div className={this.props.showAbout ? "show-about" : "hide-about"}>
+            <div className="about-box">
+              <p className="about-headings">ABOUT</p>
+              <p>
+                Welcome to Desert Driver. This is currently a web broswer based
+                single-player game. It was designed and created by Luis Alejo &
+                Michael Diaz. It was made using React, Ruby on Rails,
+                PostgreSQL, Javascript, HTML 5 Canvas, and CSS. The code for
+                this game is open source. Please feel free to use, share, and/or
+                contribute to the code. Enjoy!
+              </p>
+              <p className="about-headings">• HOW TO PLAY •</p>
+              <ol>
+                <li>
+                  To create an account go to the Sign-Up screen by clicking
+                  'Sign-Up' on the upper-right hand corner.
+                </li>
+                <li>Choose a Driver to play with.</li>
+                <li>
+                  Create a Username and Password. Confirm your password and
+                  click 'Submit'.
+                </li>
+                <li>
+                  Once logged in, click the 'Play' link on the navigation bar at
+                  the top of the page.
+                </li>
+                <li>
+                  This will lead you to the Stage Selection screen. Click the
+                  stage you would like to play to initiate the game.
+                </li>
+                <li>Use your keyboard to play the game.</li>
+              </ol>
+              <p></p>
+              <p className="about-headings">• CREDITS •</p>
+              <p>We built this game with you in mind.</p>
+            </div>
+          </div>
+          <div className="logo-container">
+            <img
+              alt="Login Gif"
+              className="logo-background"
+              src={Images.loginGif}
+            />
+            <img
+              id={
+                this.props.showAbout
+                  ? "logo-about"
+                  : this.state.entered
+                  ? "logo"
+                  : "large-logo"
+              }
+              src={Images.logo}
+              alt="Desert Heat Logo"
+            />
+            <div
+              className={
+                this.state.entered
+                  ? "home-screen-buttons-container-hidden"
+                  : this.props.showAbout
+                  ? "home-screen-buttons-container-hidden"
+                  : "home-screen-buttons-container"
+              }
+            >
+              <button onClick={this.enterSite} className="home-screen-buttons">
+                SIGN IN
+              </button>
+            </div>
           </div>
         </div>
+
         <div className="login-screen">
           <div></div>
           <div
-            className={this.state.entered ? "login-form" : "login-form-hidden"}
+            className={
+              this.state.entered && !this.state.showAbout
+                ? "login-form"
+                : "login-form-hidden"
+            }
           >
             <form onSubmit={this.handleSubmit}>
               <label>
@@ -105,6 +157,7 @@ class Login extends React.Component {
                   placeholder="USERNAME"
                   value={this.state.username}
                   name="username"
+                  autoFocus="true"
                   onChange={this.handleChange}
                 />
               </label>

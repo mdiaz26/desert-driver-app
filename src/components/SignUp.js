@@ -5,6 +5,7 @@ import AvatarChoice from "./AvatarChoice";
 import "../styles/styles.scss";
 import "../styles/SignUp.css";
 import Images from "../asset-libraries/Images";
+import Sounds from "../asset-libraries/Sounds";
 import OnImagesLoaded from "react-on-images-loaded";
 
 class SignUp extends React.Component {
@@ -18,7 +19,8 @@ class SignUp extends React.Component {
   };
 
   componentDidMount() {
-    console.log("the component has mounted")
+    // console.log("the component has mounted");
+    this.signUpSong();
   }
 
   handleChange = (event) => {
@@ -28,9 +30,10 @@ class SignUp extends React.Component {
   };
 
   createUser = () => {
-    const adapter = new JSONAPIAdapter(
-      "https://desert-driver-api.herokuapp.com/api/v1/"
-    );
+    // const adapter = new JSONAPIAdapter(
+    //   "https://desert-driver-api.herokuapp.com/api/v1/"
+    // );
+    const adapter = new JSONAPIAdapter("http://localhost:3000/api/v1/");
     adapter
       .post("users", {
         user: {
@@ -40,7 +43,10 @@ class SignUp extends React.Component {
         },
       })
       .then(this.props.appendNewUser)
-      .then((userObj) => this.props.setUser(userObj));
+      .then((userObj) => {
+        this.props.setUser(userObj);
+        this.redirect();
+      });
   };
 
   removeSpaces = (string) => {
@@ -97,7 +103,6 @@ class SignUp extends React.Component {
         password: "",
         confirmPassword: "",
       });
-      this.redirect();
     }
   };
 
@@ -118,16 +123,23 @@ class SignUp extends React.Component {
     return image;
   };
 
+  signUpSong = () => {
+    if (!this.props.musicPlaying) {
+      let signUpSong = Sounds.signUpSong;
+      this.props.musicPlay(signUpSong);
+    }
+  };
+
   render() {
     const redirectToGame = this.state.redirectToGame;
 
-    if (redirectToGame) {
+    if (this.state.redirectToGame) {
       return <Redirect to="/" />;
     } else {
       return (
         <div className="sign-up-screen">
           <div className="logo-container">
-            {/* <img id="sign-up-logo" src={Images.logo} alt="Desert Heat Logo" /> */}
+            <img id="sign-up-logo" src={Images.logo} alt="Desert Heat Logo" />
             <img
               className="sign-up-background"
               src={Images.signUpGif}
@@ -138,49 +150,55 @@ class SignUp extends React.Component {
           <div className="sign-up-form">
             <p className="choose-your-ride">CHOOSE YOUR RIDE</p>
             {/* <> */}
-            {this.props.avatars.length === 7 && <OnImagesLoaded
-              onLoaded={() => this.setState({ showImages: true })}
-              onTimeout={() => this.setState({ showImages: true })}
-              timeout={7000}
-            >
-              <div className="avatar-frame">
-                {this.props.avatars.map((avatar, index) => (
-                  <AvatarChoice
-                    key={avatar.id}
-                    {...avatar}
-                    number={index + 1}
-                    handleRadioChange={this.handleRadioChange}
-                    className={
-                      this.state.selectedAvatar === avatar.name
-                        ? "gold-border"
-                        : "none"
-                    }
-                    opacity={this.state.showImages ? 1 : 0}
-                  />
-                ))}
+            {this.props.avatars.length === 7 && (
+              <OnImagesLoaded
+                onLoaded={() => this.setState({ showImages: true })}
+                onTimeout={() => this.setState({ showImages: true })}
+                timeout={7000}
+              >
+                <div className="avatar-frame">
+                  {this.props.avatars.map((avatar, index) => (
+                    <AvatarChoice
+                      key={avatar.id}
+                      {...avatar}
+                      number={index + 1}
+                      handleRadioChange={this.handleRadioChange}
+                      className={
+                        this.state.selectedAvatar === avatar.name
+                          ? "gold-border"
+                          : "none"
+                      }
+                      opacity={this.state.showImages ? 1 : 0}
+                    />
+                  ))}
 
-                <div className="inner-circle">
-                  <img
-                    id="fill-this-image"
-                    src={this.handleSelection()}
-                    alt={this.handleSelection()}
-                    style={{ opacity: this.state.showImages ? 1 : 0 }}
-                  />
+                  <div className="inner-circle">
+                    <img
+                      id="fill-this-image"
+                      src={this.handleSelection()}
+                      alt={this.handleSelection()}
+                      style={{ opacity: this.state.showImages ? 1 : 0 }}
+                    />
+                  </div>
+                  {!this.state.showImages && <div className="loader"></div>}
                 </div>
-                {!this.state.showImages && <div className="loader"></div>}
-              </div>
-            </OnImagesLoaded>}
+              </OnImagesLoaded>
+            )}
 
             {/* <br />
             <br /> */}
 
             {/* <p>Sign Up Form</p> */}
-            
+
             {/* </> */}
             <div className="moon-container">
               <img className="moon" src={Images.moon} alt="Moon" />
             </div>
-            <form id="sign-up-form" className="form" onSubmit={this.handleSubmit}>
+            <form
+              id="sign-up-form"
+              className="form"
+              onSubmit={this.handleSubmit}
+            >
               <label>
                 <input
                   className="input-field"

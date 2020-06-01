@@ -10,7 +10,12 @@ const Sounds = {
 		src: 'audio/tsuruda-out-here-snippet.mp3',
 		artist: 'Tsuruda',
 		title: 'Out Here'
-	},
+  },
+  signUpSong: {
+    src: 'audio/polyrythmics-yeti-set-go-snippet.mp3',
+    artist: 'Polyrythmics',
+    title: 'Yeti, Set, Go'
+  },
 	bgMusic: [
 		{
 			src: 'audio/tsuruda-heat-wave-snippet.mp3',
@@ -136,9 +141,6 @@ const Sounds = {
       },
       {
 				src: 'audio/sound-effects/jeezy-laugh.mp3'
-      },
-      {
-				src: 'audio/sound-effects/big-sean-oh-god.mp3'
       },
       {
 				src: 'audio/sound-effects/jay-z-woo.mp3'

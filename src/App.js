@@ -21,13 +21,14 @@ class App extends React.Component {
 		username: '',
 		avatar: '',
 		selectedStage: '',
-		musicPlaying: true,
+		musicPlaying: false,
 		gameSound: true,
 		musicVolume: 0.8,
 		gameVolume: 0.8,
 		songInfo: null,
 		onGameScreen: true,
-		showFooterMusic: true
+		showFooterMusic: true,
+		showAbout: false
 	};
 
 	musicDeck = {
@@ -109,13 +110,21 @@ class App extends React.Component {
 	};
 
 	musicPlay = (song) => {
+		if (!this.state.musicPlaying) {
+			this.setState({
+				musicPlaying: true
+			})
+		}
 		let emptySide;
 		if (this.musicDeck.a) {
 			emptySide = 'b';
+			
 		} else if (this.musicDeck.b) {
 			emptySide = 'c';
+			
 		} else if (this.musicDeck.c || (!this.musicDeck.a && !this.musicDeck.b && !this.musicDeck.c)) {
 			emptySide = 'a';
+			
 		}
 
 		this.musicDeck[emptySide] = new Audio();
@@ -173,9 +182,11 @@ class App extends React.Component {
 		}
 
 		this.musicDeck[activeSide].volume = value;
-		this.setState({
-			musicVolume: value
-		}, () => adapter.update('users', this.state.userId, { music_volume: value }));
+		if (this.state.userId) {
+			this.setState({
+				musicVolume: value
+			}, () => adapter.update('users', this.state.userId, { music_volume: value }));
+		}
 	};
 
 	setGameVolume = (value) => {
@@ -250,17 +261,18 @@ class App extends React.Component {
 	};
 
 	toggleAllSounds = () => {
+		
 		if (this.state.musicPlaying || this.state.gameSound) {
 			this.setState({
 				musicPlaying: false,
 				gameSound: false
-			}, () => adapter.update('users', this.state.userId, { music_playing: false, game_sound: false }))
+			}, this.state.userId ? () => adapter.update('users', this.state.userId, { music_playing: false, game_sound: false }) : null)
 			this.musicFadeOut()
 		} else {
 			this.setState({
 				musicPlaying: true,
 				gameSound: true
-			}, () => adapter.update('users', this.state.userId, { music_playing: true, game_sound: true }))
+			}, this.state.userId ? () => adapter.update('users', this.state.userId, { music_playing: true, game_sound: true }) : null)
 			let song = Sounds.bgMusic[Math.floor(Math.random() * Sounds.bgMusic.length)];
 			this.musicPlay(song)
 		}
@@ -315,16 +327,23 @@ class App extends React.Component {
 		}, 1500)
 	}
 
+	toggleAbout = () => {
+		this.setState((state) => ({
+			showAbout: !state.showAbout
+		}))
+	}
+
 	render() {
 		return (
 			<div id="main-container">
 				<div className="App text-white">
-					<Nav userId={this.state.userId} avatar={this.state.avatar} signOut={this.signOut} />
+					<Nav userId={this.state.userId} avatar={this.state.avatar} signOut={this.signOut} toggleAbout={this.toggleAbout} />
 					<Switch>
 						<Route
 							path="/login"
 							render={() => (
 								<Login
+									showAbout={this.state.showAbout}
 									hideFooterMusic={this.hideFooterMusic}
 									startThemeSong={this.startThemeSong}
 									users={this.state.users}
@@ -337,6 +356,8 @@ class App extends React.Component {
 							path="/signup"
 							render={() => (
 								<SignUp
+									musicPlaying={this.state.musicPlaying}
+									musicPlay={this.musicPlay}
 									users={this.state.users}
 									setUser={this.setUser}
 									appendNewUser={this.appendNewUser}
