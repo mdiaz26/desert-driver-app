@@ -72,71 +72,73 @@ class Login extends React.Component {
         <div className="about-and-logo">
           <div className={this.props.showAbout ? "show-about" : "hide-about"}>
             <div className="about-box">
-              <section id="about-section">
-                <p className="about-headings">ABOUT</p>
-                <p>
-                  Welcome to Desert Driver. This is currently a web broswer
-                  based single-player game. It was designed and created by Luis
-                  Alejo & Michael Diaz. It was made using React, Ruby on Rails,
-                  PostgreSQL, Javascript, HTML 5 Canvas, and CSS. The code for
-                  this game is open source. Please feel free to use, share,
-                  and/or contribute to the code. Enjoy!
-                </p>
-              </section>
-              <section id="instructions-section">
-                <p className="about-headings">HOW TO PLAY</p>
-                <ol>
-                  <li>
-                    To create an account go to the Sign-Up screen by clicking
-                    'Sign-Up' on the upper-right hand corner.
-                  </li>
-                  <li>Choose a Driver to play with.</li>
-                  <li>
-                    Create a Username and Password. Confirm your password and
-                    click 'Submit'.
-                  </li>
-                  <li>
-                    Once logged in, click the 'Play' link on the navigation bar
-                    at the top of the page.
-                  </li>
-                  <li>
-                    This will lead you to the Stage Selection screen. Click the
-                    stage you would like to play to initiate the game.
-                  </li>
-                  <li>Use your keyboard to play the game.</li>
-                </ol>
-              </section>
-              <section id="credits-section">
-                <p className="about-headings">CREDITS</p>
-                <span>Development Team:</span>
-                <ul>
-                  <li>Luis Alejo</li>
-                  <li>Michael Diaz</li>
-                </ul>
-                <span>Visual Inspiration</span>
-                <ul>
-                  <li>Make An HTML 5 Canvas Motorcycle Game</li>
-                </ul>
-                <span>Music</span>
-                <p>
-                  We do not own licenses for any of the Music or Sound Effects
-                  sampled in this game. Please support the work of these artists
-                  by following the links below:
-                </p>
-                <ul>
-                  <li>"Still Rockin" by Pretty Lights</li>
-                  <li>"They Don't Know" by 2Late</li>
-                  <li>"Quatic" by Botany</li>
-                  <li>"Vultures" by Chee</li>
-                  <li>"Ecdysis" by Flume</li>
-                  <li>"Vega" by il:lo</li>
-                  <li>"Take Three" by Jerry Folk</li>
-                  <li>"LA Melody" by Konx-Om-Pax</li>
-                  <li>"Eternal Now" by LSDREAM and Champagne Drip</li>
-                  <li>"Moro Cut" by Mad Zach and Yunis</li>
-                  <li>"Noth" by Mad Zach and Yunis</li>
-                </ul>
-              </section>
+              <div className="scroll-box">
+                <section id="about-section">
+                  <p className="about-headings">ABOUT</p>
+                  <p>
+                    Welcome to Desert Driver. This is currently a web broswer
+                    based single-player game. It was designed and created by
+                    Luis Alejo & Michael Diaz. It was made using React, Ruby on
+                    Rails, PostgreSQL, Javascript, HTML 5 Canvas, and CSS. The
+                    code for this game is open source. Please feel free to use,
+                    share, and/or contribute to the code. Enjoy!
+                  </p>
+                </section>
+                <section id="instructions-section">
+                  <p className="about-headings">HOW TO PLAY</p>
+                  <ol>
+                    <li>
+                      To create an account go to the Sign-Up screen by clicking
+                      'Sign-Up' on the upper-right hand corner.
+                    </li>
+                    <li>Choose a Driver to play with.</li>
+                    <li>
+                      Create a Username and Password. Confirm your password and
+                      click 'Submit'.
+                    </li>
+                    <li>
+                      Once logged in, click the 'Play' link on the navigation
+                      bar at the top of the page.
+                    </li>
+                    <li>
+                      This will lead you to the Stage Selection screen. Click
+                      the stage you would like to play to initiate the game.
+                    </li>
+                    <li>Use your keyboard to play the game.</li>
+                  </ol>
+                </section>
+                <section id="credits-section">
+                  <p className="about-headings">CREDITS</p>
+                  <span>Development Team:</span>
+                  <ul>
+                    <li>Luis Alejo</li>
+                    <li>Michael Diaz</li>
+                  </ul>
+                  <span>Visual Inspiration</span>
+                  <ul>
+                    <li>Make An HTML 5 Canvas Motorcycle Game</li>
+                  </ul>
+                  <span>Music</span>
+                  <p>
+                    We do not own licenses for any of the Music or Sound Effects
+                    sampled in this game. Please support the work of these
+                    artists by following the links below:
+                  </p>
+                  <ul>
+                    <li>"Still Rockin" by Pretty Lights</li>
+                    <li>"They Don't Know" by 2Late</li>
+                    <li>"Quatic" by Botany</li>
+                    <li>"Vultures" by Chee</li>
+                    <li>"Ecdysis" by Flume</li>
+                    <li>"Vega" by il:lo</li>
+                    <li>"Take Three" by Jerry Folk</li>
+                    <li>"LA Melody" by Konx-Om-Pax</li>
+                    <li>"Eternal Now" by LSDREAM and Champagne Drip</li>
+                    <li>"Moro Cut" by Mad Zach and Yunis</li>
+                    <li>"Noth" by Mad Zach and Yunis</li>
+                  </ul>
+                </section>
+              </div>
             </div>
           </div>
           <div className="logo-container">

@@ -33,10 +33,11 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	width: 50%;
+	width: 45%;
 	min-width: 450px;
-	height: 70%;
+	height: 85%;
 	justify-content: center;
+	overflow: hidden;
 	transition: all 1s ease-in-out;
 }
 .hide-about {
@@ -47,34 +48,40 @@
 	z-index: -1;
 	align-items: center;
 	justify-content: center;
-	width: 50%;
-	height: 70%;
+	width: 40%;
+	height: 85%;
 	opacity: 0;
+	overflow: hidden;
 	transition: all 1s ease-in-out;
 }
 .about-box {
 	position: relative;
-	top: 10%;
-	padding: 30px;
+	top: 7%;
+	padding: 50px;
 	padding-top: 150px;
 	width: 100%;
 	height: 100%;
 	font-size: 11px;
 	color: rgb(204, 187, 161);
-	overflow: hidden;
+
+	/* overflow: scroll; */
 	background-color: rgb(15, 15, 15);
+}
+.scroll-box {
+	overflow: scroll;
+	height: 90%;
 }
 .about-headings {
 	font-weight: bold;
 	font-size: 15px;
 	color: #df9672;
-	margin-left: 10%;
-	text-align: left;
+	/* margin-left: 10%; */
+	text-align: center;
 }
 #logo-about {
 	position: absolute;
 	align-self: center;
-	top: 17%;
+	top: 14%;
 	width: 15%;
 	transition: all 1s ease-in-out;
 	transition-timing-function: cubic-bezier(0.310, 0.00, 0.0, 1.000);
