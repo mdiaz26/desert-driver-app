@@ -262,6 +262,12 @@ class Login extends React.Component {
                   __________________________________________________
                 </p>
                 <h5 className="sub-headings">HOW TO PLAY</h5>
+                <div className="about-canvas-container">
+                  <canvas className="about-canvas"></canvas>
+                </div>
+                <br />
+                <br />
+                <br />
                 <br />
                 <div className="instructions-container about-instructions">
                   <div className="keypad-container about-keypad">
@@ -589,7 +595,7 @@ class Login extends React.Component {
                         >
                           Still Rockin
                         </a>
-                        " by Pretty Lights [Theme Song]
+                        " by Pretty Lights
                       </li>
                       <li>
                         "

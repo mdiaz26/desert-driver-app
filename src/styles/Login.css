@@ -94,6 +94,8 @@
 .scroll-box {
 	/* align-items: center;
 	align-self: center; */
+	border-top: 1px solid rgb(26, 25, 25);
+	padding-top: 2%;
 	padding-left: 10px;
 	padding-right: 10px;
 	margin-top: 3%;
@@ -101,7 +103,18 @@
 	width: 100%;
 	height: 95%;
 }
-
+.about-canvas-container {
+	margin-top: -45px;
+	width: 100%;
+	min-width: 500px;
+	height: 250px;
+}
+.about-canvas {
+	width: 95%;
+	height: 100%;
+	min-width: 500px;
+	background-color: rgb(87, 87, 87);
+}
 .scroll-box::-webkit-scrollbar {
 	display: none;
 }
