@@ -1,7 +1,7 @@
 body {
 	background-color: #070507;
 	position: fixed;
-	min-width: 1000px;
+	/* min-width: 1000px; */
 	width: 100%;
 }
 @keyframes custom-fadein {
