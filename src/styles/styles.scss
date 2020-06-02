@@ -1,15 +1,9 @@
-.nav-container {
-	display: flex;
-	justify-content: space-evenly;
-	width: 100%;
-	height: 39px;
-	flex-direction: row;
-	min-width: 50%;
-}
 #nav-bar {
 	background-color: rgb(31, 29, 29);
 }
 .nav-container {
+	height: 39px;
+	min-width: 500px;
 	position: relative;
 	width: 100%;
 	display: flex;
@@ -18,11 +12,15 @@
 	justify-content: space-between;
 }
 .logo-box {
-	position: absolute;
-	width: 100%;
+	// position: absolute;
+	// width: 100%;
+	// z-index: 0;
 }
 .logo {
+	// position: absolute;
 	min-width: 80px;
+	margin-left: 280px;
+	// z-index: 10;
 	width: 80px;
 	cursor: pointer;
 }
@@ -32,13 +30,14 @@
 	left: 0;
 	z-index: -20;
 }
-.nav-container .btn {
+.btn {
+	// z-index: 100;
 	color: rgb(252, 229, 229);
 	font-weight: bold;
 	margin-left: 10px;
 	transition: all 0.3s ease-in-out;
 }
-.nav-container .btn:focus {
+.btn:focus {
 	box-shadow: none;
 }
 .btn:hover {
