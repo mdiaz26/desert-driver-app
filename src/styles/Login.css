@@ -77,13 +77,18 @@
 .about-instructions {
 	display: flex;
 	flex-direction: row;
+	width: 100%;
+	min-width: 400px;
+	justify-content: space-between;
+	padding-left: 10%;
+	padding-right: 10%;
 }
 .about-keypad {
 	margin-top: 0px;
-	margin-left: 80px;
+	/* margin-left: 80px; */
 }
 .about-keys-explained {
-	margin-left: -70px;
+	/* margin-left: -70px; */
 	float: left;
 }
 .scroll-box {

@@ -187,11 +187,12 @@ class Login extends React.Component {
                         </a>{" "}
                       </li>
                       <li>
-                        Mobile Compatibility: Making a React Native version of
-                        this game would be a lengthy project but certain high on
-                        our list of goals. Some avenues to explore React Native
-                        Game Engine for continuous image rendering and Matter.JS
-                        for physics capabilities.{" "}
+                        <strong className="strong">Mobile Compatibility</strong>
+                        : Making a React Native version of this game would be a
+                        lengthy project but certain high on our list of goals.
+                        Some avenues to explore React Native Game Engine for
+                        continuous image rendering and Matter.JS for physics
+                        capabilities.{" "}
                       </li>
                     </ul>
                     <p>
