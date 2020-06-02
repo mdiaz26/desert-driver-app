@@ -104,16 +104,17 @@
 	height: 95%;
 }
 .about-canvas-container {
-	margin-top: -45px;
 	width: 100%;
-	min-width: 500px;
+	min-width: 400px;
 	height: 250px;
+	background-color: rgb(238, 238, 238);
 }
 .about-canvas {
-	width: 95%;
+	margin-top: -15px;
+	z-index: 10;
+	width: 400px;
 	height: 100%;
-	min-width: 500px;
-	background-color: rgb(87, 87, 87);
+	min-width: 400px;
 }
 .scroll-box::-webkit-scrollbar {
 	display: none;

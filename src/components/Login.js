@@ -2,6 +2,8 @@ import "../styles/Login.css";
 import React from "react";
 import { Redirect } from "react-router-dom";
 import Images from "../asset-libraries/Images";
+import Ground from "../helpers/Ground";
+import Player from "../stages/Player";
 
 class Login extends React.Component {
   state = {
@@ -10,6 +12,123 @@ class Login extends React.Component {
     redirectToGame: false,
     entered: false,
     flashing: false,
+  };
+
+  canvas = React.createRef();
+  animationID = null;
+
+  componentDidMount() {
+    this.gameDemo();
+  }
+
+  componentWillUnmount() {
+    cancelAnimationFrame(this.animationID);
+  }
+
+  gameDemo = () => {
+    const canvas = this.canvas.current;
+    const context = canvas.getContext("2d");
+    const ground = new Ground();
+    const player = new Player(canvas, this.props.avatarImage);
+    const k = { ArrowUp: 0, ArrowDown: 0, ArrowLeft: 0, ArrowRight: 0 };
+    let isRunning = false;
+    let lifeOver = false;
+    let playing = true;
+    let speed = 0;
+    let t = 0;
+
+    const loseDemoLife = () => {
+      lifeOver = true;
+      this.gameDemo();
+      return;
+    };
+
+    this.draw = function () {
+      let p1 = canvas.height - ground.getY(t + player.x) * 0.25;
+      let p2 = canvas.height - ground.getY(t + 5 + player.x) * 0.25;
+
+      let grounded = 0;
+      if (p1 - 15 > player.y) {
+        player.ySpeed += 0.1;
+      } else {
+        player.ySpeed -= player.y - (p1 - 15);
+        player.y = p1 - 15;
+        grounded = 1;
+      }
+
+      //LOSING CONDITION
+      if (player.rot < -2 && grounded) {
+        loseDemoLife();
+        lifeOver = true;
+      }
+      if (!playing || (grounded && Math.abs(player.rot) > Math.PI * 0.5)) {
+        playing = false;
+        player.rSpeed = 5;
+        k.ArrowUp = 1;
+        player.x -= speed * 5;
+      }
+
+      //AVATAR ADJUST TO ENVIRONMENT
+      let angle = Math.atan2(p2 - 15 - player.y, player.x + 5 - player.x);
+      player.y += player.ySpeed;
+
+      if (grounded && playing) {
+        player.rot -= (player.rot - angle) * 0.5;
+        player.rSpeed = player.rSpeed - (angle - player.rot);
+      }
+
+      //LEFT & RIGHT KEY SETTINGS
+      if (player.rSpeed < 1.7) {
+        player.rSpeed += (k.ArrowLeft - k.ArrowRight) * 0.07;
+      }
+      if (player.rSpeed > 1.7) {
+        player.rSpeed = 1.6;
+      }
+      player.rot -= player.rSpeed * 0.1;
+      if (player.rot > Math.PI) player.rot = -Math.PI;
+      if (player.rot < -Math.PI) player.rot = Math.PI;
+      context.save();
+      context.translate(player.x, player.y);
+      context.rotate(player.rot);
+
+      //AVATAR SIZE AND SCREEN POSITION
+      context.drawImage(player.movingImage, -19, -19, 40, 32);
+      context.restore();
+    };
+    //LOOP
+    const loop = () => {
+      if (lifeOver) {
+        return;
+      }
+      speed -= (speed - (k.ArrowUp - k.ArrowDown)) * 0.007;
+      t += 7 * speed;
+
+      if (speed.toFixed(2) > 0.05 && !isRunning) {
+        isRunning = true;
+      }
+
+      if (speed.toFixed(2) < 0.05) {
+        player.stopAnimation();
+        isRunning = false;
+      }
+
+      context.fillRect(0, 0, canvas.width, canvas.height * 2);
+      context.fillStyle = "rgb(255, 29, 29)";
+      context.beginPath();
+
+      this.draw();
+      this.animationID = requestAnimationFrame(loop);
+      const playerCoordinates = {};
+      playerCoordinates.x = Math.round(player.x);
+      playerCoordinates.y = Math.round(player.y);
+
+      context.moveTo(0, canvas.height);
+      for (let i = 0; i < canvas.width; i++) {
+        context.lineTo(i, canvas.height - ground.getY(t + i) * 0.25);
+      }
+      context.lineTo(canvas.width, canvas.height);
+      context.fill();
+    };
   };
 
   handleChange = (event) => {
@@ -263,11 +382,13 @@ class Login extends React.Component {
                 </p>
                 <h5 className="sub-headings">HOW TO PLAY</h5>
                 <div className="about-canvas-container">
-                  <canvas className="about-canvas"></canvas>
+                  <canvas
+                    ref={this.canvas}
+                    height={250}
+                    width={300}
+                    className="about-canvas"
+                  ></canvas>
                 </div>
-                <br />
-                <br />
-                <br />
                 <br />
                 <div className="instructions-container about-instructions">
                   <div className="keypad-container about-keypad">
