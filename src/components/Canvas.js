@@ -154,10 +154,10 @@ class Canvas extends Component {
   }
 
   saveScore = () => {
-    const adapter = new JSONAPIAdapter(
-      "https://desert-driver-api.herokuapp.com/api/v1/"
-    );
-    // const adapter = new JSONAPIAdapter("http://localhost:3000/api/v1/");
+    // const adapter = new JSONAPIAdapter(
+    //   "https://desert-driver-api.herokuapp.com/api/v1/"
+    // );
+    const adapter = new JSONAPIAdapter("http://localhost:3000/api/v1/");
     const body = {
       points: this.state.coins * this.state.maxDistance - this.state.timer,
       max_distance: parseInt(this.state.maxDistance),
