@@ -475,7 +475,7 @@ class App extends React.Component {
 										max="1"
 										disabled={!this.state.musicPlaying}
 										step="0.001"
-										defaultValue="0.8"
+										defaultValue={this.state.musicVolume}
 										id={this.state.musicPlaying ? 'bg-music-volume' : 'bg-music-volume-disabled'}
 										className={'music-volume-input'}
 										onInput={(event) => this.volumeHandler(event)}
