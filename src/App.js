@@ -359,6 +359,7 @@ class App extends React.Component {
 							render={() => (
 								<SignUp
 									startSignUpSong={this.startSignUpSong}
+									musicFadeOut={this.musicFadeOut}
 									users={this.state.users}
 									setUser={this.setUser}
 									appendNewUser={this.appendNewUser}

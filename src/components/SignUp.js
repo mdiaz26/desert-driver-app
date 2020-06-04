@@ -21,6 +21,9 @@ class SignUp extends React.Component {
   componentDidMount() {
     this.props.startSignUpSong();
   }
+  componentWillUnmount() {
+    this.props.musicFadeOut();
+  }
 
   handleChange = (event) => {
     this.setState({
