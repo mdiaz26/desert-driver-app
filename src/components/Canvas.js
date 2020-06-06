@@ -33,6 +33,7 @@ class Canvas extends Component {
     pauseGame: false,
     flipCount: 0,
     bestFlip: 0,
+    bestFlipCount: 0
   };
 
   canvas = React.createRef();
@@ -97,6 +98,7 @@ class Canvas extends Component {
         currentDistance: 0,
         flipCount: 0,
         bestFlip: 0,
+        bestFlipCount: 0
       },
       this.componentDidMount()
     );
@@ -163,6 +165,11 @@ class Canvas extends Component {
       max_distance: parseInt(this.state.maxDistance),
       user_number: this.props.userId,
       username: this.props.username,
+      best_flip: this.state.bestFlip,
+      total_flips: this.state.flipCount,
+      coins: this.state.coins,
+      timer: this.state.timer,
+      best_flip_count: this.state.bestFlipCount,
     };
     adapter.post("scores", body).then(this.props.updateScores);
   };
@@ -181,6 +188,7 @@ class Canvas extends Component {
     let t = 0;
     let flipping = false;
     let flipCount = 0;
+    let bestFlipCount = 0;
     let flipDirection;
 
     this.setState({ gameOn: true });
@@ -250,7 +258,10 @@ class Canvas extends Component {
       }
       if (!flipping && grounded) {
         if (this.state.bestFlip < flipCount * 360) {
-          this.setState({ bestFlip: flipCount * 360 });
+          this.setState({ bestFlip: flipCount * 360, bestFlipCount: 1 });
+        } else if (this.state.bestFlip === flipCount * 360) {
+          // NEW CODE to keep count of "best flip"
+          this.setState(prevState => ({ bestFlipCount: prevState.bestFlipCount + 1 }))
         }
         this.props.flipAudio(flipCount);
         flipCount = 0;
@@ -511,7 +522,7 @@ class Canvas extends Component {
             setGameVolume={this.props.setGameVolume}
             nextSong={this.props.nextSong}
             toggleAllSounds={this.props.toggleAllSounds}
-            // musicDeckB={this.props.musicDeckB}
+          // musicDeckB={this.props.musicDeckB}
           />
           <div className="end-game-container">
             {!this.state.gameOn && (
