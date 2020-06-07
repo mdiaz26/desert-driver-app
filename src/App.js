@@ -9,8 +9,8 @@ import React from 'react';
 import Images from './asset-libraries/Images';
 import Sounds from './asset-libraries/Sounds';
 
-// const adapter = new JSONAPIAdapter('https://desert-driver-api.herokuapp.com/api/v1/');
-const adapter = new JSONAPIAdapter('http://localhost:3000/api/v1/');
+const adapter = new JSONAPIAdapter('https://desert-driver-api.herokuapp.com/api/v1/');
+// const adapter = new JSONAPIAdapter('http://localhost:3000/api/v1/');
 
 class App extends React.Component {
 	state = {
@@ -63,6 +63,9 @@ class App extends React.Component {
 			musicVolume: userObj.music_volume,
 			gameVolume: userObj.game_volume
 		});
+		this.setMusicVolume(userObj.music_volume)
+		let input = document.getElementById('bg-music-volume')
+		input.value = userObj.music_volume
 	};
 
 	signOut = () => {
@@ -359,6 +362,7 @@ class App extends React.Component {
 							render={() => (
 								<SignUp
 									startSignUpSong={this.startSignUpSong}
+									musicFadeOut={this.musicFadeOut}
 									users={this.state.users}
 									setUser={this.setUser}
 									appendNewUser={this.appendNewUser}
@@ -475,7 +479,7 @@ class App extends React.Component {
 										max="1"
 										disabled={!this.state.musicPlaying}
 										step="0.001"
-										defaultValue="0.8"
+										defaultValue={this.state.musicVolume}
 										id={this.state.musicPlaying ? 'bg-music-volume' : 'bg-music-volume-disabled'}
 										className={'music-volume-input'}
 										onInput={(event) => this.volumeHandler(event)}

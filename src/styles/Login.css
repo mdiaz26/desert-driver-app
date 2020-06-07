@@ -31,52 +31,123 @@
 	position: absolute;
 	opacity: 1;
 	display: flex;
+	border-radius: 45px;
 	flex-direction: column;
-	align-items: center;
-	width: 45%;
+	/* align-items: center; */
+	/* align-content: center; */
+	width: 48%;
 	min-width: 450px;
 	height: 85%;
-	justify-content: center;
+	/* justify-content: center; */
 	overflow: hidden;
-	transition: all 1s ease-in-out;
+	transition: all 0.9s ease-in-out;
 }
 .hide-about {
 	position: absolute;
 	display: flex;
+	border-radius: 5px;
 	flex-direction: column;
-	margin-top: 10%;
+	margin-top: 17%;
+	align-content: center;
 	z-index: -1;
 	align-items: center;
 	justify-content: center;
-	width: 40%;
+
+	width: 48%;
 	height: 85%;
 	opacity: 0;
 	overflow: hidden;
-	transition: all 1s ease-in-out;
+	transition: all 0.9s ease-in-out;
 }
 .about-box {
-	position: relative;
+	align-items: center;
+	position: absolute;
+	align-self: center;
+	align-content: center;
 	top: 7%;
-	padding: 50px;
-	padding-top: 150px;
+	padding: 80px;
+	padding-top: 22%;
 	width: 100%;
 	height: 100%;
-	font-size: 11px;
+	font-size: 12px;
+	cursor: default;
 	color: rgb(204, 187, 161);
-
-	/* overflow: scroll; */
 	background-color: rgb(15, 15, 15);
 }
+.about-instructions {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	min-width: 400px;
+	justify-content: space-between;
+	padding-left: 10%;
+	padding-right: 10%;
+}
+.about-keypad {
+	margin-top: 0px;
+	/* margin-left: 80px; */
+}
+.about-keys-explained {
+	/* margin-left: -70px; */
+	float: left;
+}
 .scroll-box {
+	/* align-items: center;
+	align-self: center; */
+	border-top: 1px solid rgb(26, 25, 25);
+	padding-top: 2%;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-top: 3%;
 	overflow: scroll;
-	height: 90%;
+	width: 100%;
+	height: 95%;
+}
+.about-canvas-container {
+	width: 100%;
+	min-width: 400px;
+	height: 250px;
+	background-color: rgb(238, 238, 238);
+}
+.about-canvas {
+	margin-top: -15px;
+	z-index: 10;
+	width: 400px;
+	height: 100%;
+	min-width: 400px;
+}
+.scroll-box::-webkit-scrollbar {
+	display: none;
 }
 .about-headings {
-	font-weight: bold;
-	font-size: 15px;
-	color: #df9672;
-	/* margin-left: 10%; */
+	font-weight: 900;
+	font-size: 35px;
+	color: #e68859;
+	letter-spacing: 4px;
 	text-align: center;
+}
+.divider {
+	font-weight: 100;
+	font-size: 8px;
+	margin-bottom: 5px;
+}
+.sub-headings {
+	font-size: 13px;
+	letter-spacing: 2.4px;
+	color: rgb(165, 138, 103);
+}
+.about-links {
+	color: #b8592a;
+	transition: all 0.3s ease-in-out;
+}
+.strong {
+	font-size: 13px;
+	color: rgb(221, 174, 112);
+}
+.about-links:hover {
+	color: #e69e3f;
+	text-decoration: none;
+	transition: all 0.3s ease-in-out;
 }
 #logo-about {
 	position: absolute;
@@ -85,6 +156,67 @@
 	width: 15%;
 	transition: all 1s ease-in-out;
 	transition-timing-function: cubic-bezier(0.310, 0.00, 0.0, 1.000);
+}
+#credits-section {
+	margin-right: auto;
+	margin-left: auto;
+}
+#image-table {
+	width: 240px;
+}
+.team-photos-container {
+	filter: grayscale(80%);
+	opacity: 0.6;
+	height: 100px;
+	width: 120px;
+	object-fit: cover;
+	transition: all 0.4s ease-in-out;
+}
+.team-photos-container:hover {
+	filter: grayscale(0%);
+	opacity: 1;
+	height: 100px;
+	width: 120px;
+	object-fit: cover;
+	transition: all 0.4s ease-in-out;
+}
+.team-photos {
+	height: 100px;
+	width: 100px;
+	object-fit: cover;
+	border-radius: 3px;
+	/* border: 1px solid rgb(248, 237, 223); */
+	transition: all 0.4s ease-in-out;
+}
+.team-photos:hover {
+	cursor: pointer;
+	height: 100px;
+	width: 100px;
+	object-fit: cover;
+	transition: all 0.4s ease-in-out;
+}
+.team-photo-names {
+	cursor: pointer;
+	color: #b8592a;
+	/* filter: brightness(150%); */
+	font-size: 10px;
+	transition: all 0.3s ease-in-out;
+}
+
+.team-photo-names:hover {
+	color: #e69e3f;
+	font-size: 10px;
+	transition: all 0.3s ease-in-out;
+}
+.about-lists {
+	text-align: left;
+}
+.about-songs-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	/* height: 100px; */
+	width: 100%;
 }
 
 #logo {
@@ -110,7 +242,6 @@
 	height: calc(100%-55px);
 	left: 0;
 }
-
 .login-form {
 	position: absolute;
 	height: calc(100%-55px);

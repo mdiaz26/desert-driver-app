@@ -18,11 +18,13 @@ const Images = {
   loginGif: "gifs/login-background.gif",
   desertHeatGif: "gifs/desert-heat-snippet.gif",
   nightSkyGif: "gifs/night-sky-snippet.gif",
-
+  
   desertHeatStill: "gifs/desert-heat-screenshot.jpg",
   nightSkyStill: "gifs/night-sky-screenshot.jpg",
   logo: "logo7.png",
   heart: "heart.png",
+  lou: "lou.jpeg",
+  mike: "mike.jpeg"
 };
 
 export default Images;
