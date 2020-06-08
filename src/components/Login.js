@@ -12,6 +12,10 @@ class Login extends React.Component {
     redirectToGame: false,
     entered: false,
     flashing: false,
+    ArrowUp: false,
+    ArrowDown: false,
+    ArrowLeft: false,
+    ArrowRight: false,
   };
 
   canvas = React.createRef();
@@ -112,10 +116,10 @@ class Login extends React.Component {
         isRunning = false;
       }
 
-      context.fillStyle = "rgb(240, 245, 241)";
+      context.fillStyle = "rgb(143, 181, 219)";
 
       context.fillRect(0, 0, canvas.width, canvas.height * 2);
-      context.fillStyle = "rgb(31, 29, 29)";
+      context.fillStyle = "rgb(15, 15, 15)";
       context.beginPath();
 
       this.draw();
@@ -414,7 +418,7 @@ class Login extends React.Component {
                   <canvas
                     ref={this.canvas}
                     height={250}
-                    width={400}
+                    width={1000}
                     className="about-canvas"
                   ></canvas>
                 </div>
@@ -422,28 +426,34 @@ class Login extends React.Component {
                 <div className="instructions-container about-instructions">
                   <div className="keypad-container about-keypad">
                     <div className="arrow-box-top">
-                      <img src={Images.up} alt="Up Arrow" className={"dim"} />
+                      <img
+                        src={Images.up}
+                        alt="Up Arrow"
+                        className={this.state.ArrowUp ? "light-up" : "dim"}
+                      />
                     </div>
                     <div className="arrow-box-bottom">
                       <img
                         src={Images.left}
                         alt="Left Arrow"
-                        className={"dim"}
+                        className={this.state.ArrowLeft ? "light-up" : "dim"}
                       />
                       <img
                         src={Images.down}
                         alt="Down Arrow"
-                        className={"dim"}
+                        className={this.state.ArrowDown ? "light-up" : "dim"}
                       />
                       <img
                         src={Images.right}
                         alt="Right Arrow"
-                        className={"dim"}
+                        className={this.state.ArrowRight ? "light-up" : "dim"}
                       />
                     </div>
                   </div>
                   <div className="about-keys-explained">
-                    <p>Use your keyboard to play</p>
+                    <p className="about-instructions-entry">
+                      Use your keyboard
+                    </p>
                     <p>
                       <img
                         src={Images.up}
@@ -471,15 +481,6 @@ class Login extends React.Component {
                         className="instructions-photo-right"
                       />
                       to swing the rotation
-                    </p>
-                    <p>
-                      <img
-                        src={Images.spaceBar}
-                        alt="Space-Bar"
-                        className="instructions-photo-space"
-                      />{" "}
-                      {"  "}
-                      to pause the game
                     </p>
                   </div>
                 </div>
