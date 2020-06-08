@@ -9,8 +9,8 @@ import React from 'react';
 import Images from './asset-libraries/Images';
 import Sounds from './asset-libraries/Sounds';
 
-const adapter = new JSONAPIAdapter('https://desert-driver-api.herokuapp.com/api/v1/');
-// const adapter = new JSONAPIAdapter('http://localhost:3000/api/v1/');
+// const adapter = new JSONAPIAdapter('https://desert-driver-api.herokuapp.com/api/v1/');
+const adapter = new JSONAPIAdapter('http://localhost:3000/api/v1/');
 
 class App extends React.Component {
 	state = {

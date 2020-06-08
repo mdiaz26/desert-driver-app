@@ -92,7 +92,7 @@ class Login extends React.Component {
       context.rotate(player.rot);
 
       //AVATAR SIZE AND SCREEN POSITION
-      context.drawImage(player.movingImage, -19, -19, 40, 32);
+      context.drawImage(player.movingImage, -19.5, -19.5, 36, 32);
       context.restore();
     };
     //LOOP
@@ -112,8 +112,10 @@ class Login extends React.Component {
         isRunning = false;
       }
 
+      context.fillStyle = "rgb(240, 245, 241)";
+
       context.fillRect(0, 0, canvas.width, canvas.height * 2);
-      context.fillStyle = "rgb(255, 29, 29)";
+      context.fillStyle = "rgb(31, 29, 29)";
       context.beginPath();
 
       this.draw();
@@ -128,7 +130,34 @@ class Login extends React.Component {
       }
       context.lineTo(canvas.width, canvas.height);
       context.fill();
+
+      onkeydown = (d) => {
+        if (d.key === "ArrowUp") {
+          this.setState({ ArrowUp: true });
+        } else if (d.key === "ArrowDown") {
+          this.setState({ ArrowDown: true });
+        } else if (d.key === "ArrowLeft") {
+          this.setState({ ArrowLeft: true });
+        } else if (d.key === "ArrowRight") {
+          this.setState({ ArrowRight: true });
+        }
+
+        return (k[d.key] = 1);
+      };
+      onkeyup = (d) => {
+        if (d.key === "ArrowUp") {
+          this.setState({ ArrowUp: false });
+        } else if (d.key === "ArrowDown") {
+          this.setState({ ArrowDown: false });
+        } else if (d.key === "ArrowLeft") {
+          this.setState({ ArrowLeft: false });
+        } else if (d.key === "ArrowRight") {
+          this.setState({ ArrowRight: false });
+        }
+        return (k[d.key] = 0);
+      };
     };
+    loop();
   };
 
   handleChange = (event) => {
@@ -385,7 +414,7 @@ class Login extends React.Component {
                   <canvas
                     ref={this.canvas}
                     height={250}
-                    width={300}
+                    width={400}
                     className="about-canvas"
                   ></canvas>
                 </div>
