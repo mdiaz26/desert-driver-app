@@ -1,5 +1,5 @@
 class Player {
-  constructor(canvas, avatarImage) {
+  constructor(canvas, avatarImage = 'Avatars/pink-tracktor.png') {
     this.movingImage = new Image();
     this.movingImage.src = avatarImage;
     this.movement = null;
