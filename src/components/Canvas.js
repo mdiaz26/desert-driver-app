@@ -33,7 +33,7 @@ class Canvas extends Component {
     pauseGame: false,
     flipCount: 0,
     bestFlip: 0,
-    bestFlipCount: 0
+    bestFlipCount: 0,
   };
 
   canvas = React.createRef();
@@ -98,7 +98,7 @@ class Canvas extends Component {
         currentDistance: 0,
         flipCount: 0,
         bestFlip: 0,
-        bestFlipCount: 0
+        bestFlipCount: 0,
       },
       this.componentDidMount()
     );
@@ -156,10 +156,10 @@ class Canvas extends Component {
   }
 
   saveScore = () => {
-    // const adapter = new JSONAPIAdapter(
-    //   "https://desert-driver-api.herokuapp.com/api/v1/"
-    // );
-    const adapter = new JSONAPIAdapter("http://localhost:3000/api/v1/");
+    const adapter = new JSONAPIAdapter(
+      "https://desert-driver-api.herokuapp.com/api/v1/"
+    );
+    // const adapter = new JSONAPIAdapter("http://localhost:3000/api/v1/");
     const body = {
       points: this.state.coins * this.state.maxDistance - this.state.timer,
       max_distance: parseInt(this.state.maxDistance),
@@ -261,7 +261,9 @@ class Canvas extends Component {
           this.setState({ bestFlip: flipCount * 360, bestFlipCount: 1 });
         } else if (this.state.bestFlip === flipCount * 360) {
           // NEW CODE to keep count of "best flip"
-          this.setState(prevState => ({ bestFlipCount: prevState.bestFlipCount + 1 }))
+          this.setState((prevState) => ({
+            bestFlipCount: prevState.bestFlipCount + 1,
+          }));
         }
         this.props.flipAudio(flipCount);
         flipCount = 0;
@@ -522,7 +524,7 @@ class Canvas extends Component {
             setGameVolume={this.props.setGameVolume}
             nextSong={this.props.nextSong}
             toggleAllSounds={this.props.toggleAllSounds}
-          // musicDeckB={this.props.musicDeckB}
+            // musicDeckB={this.props.musicDeckB}
           />
           <div className="end-game-container">
             {!this.state.gameOn && (
