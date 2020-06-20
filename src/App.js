@@ -9,8 +9,8 @@ import React from 'react';
 import Images from './asset-libraries/Images';
 import Sounds from './asset-libraries/Sounds';
 
-const adapter = new JSONAPIAdapter('https://desert-driver-api.herokuapp.com/api/v1/');
-// const adapter = new JSONAPIAdapter('http://localhost:3000/api/v1/');
+// const adapter = new JSONAPIAdapter('https://desert-driver-api.herokuapp.com/api/v1/');
+const adapter = new JSONAPIAdapter('http://localhost:3000/api/v1/');
 
 class App extends React.Component {
 	state = {
@@ -53,7 +53,11 @@ class App extends React.Component {
 
 	setUser = (userObj) => {
 		!userObj.music_playing && this.musicFadeOut()
-
+		let input = document.getElementById('bg-music-volume')
+		if (!input) {
+			userObj.music_playing = false
+			userObj.game_sound = false
+		}
 		this.setState({
 			userId: userObj.id,
 			username: userObj.username,
@@ -64,7 +68,9 @@ class App extends React.Component {
 			gameVolume: userObj.game_volume
 		});
 		this.setMusicVolume(userObj.music_volume)
-		let input = document.getElementById('bg-music-volume')
+		if (!input) {
+			return
+		}
 		input.value = userObj.music_volume
 	};
 
@@ -127,9 +133,7 @@ class App extends React.Component {
 			
 		} else if (this.musicDeck.c || (!this.musicDeck.a && !this.musicDeck.b && !this.musicDeck.c)) {
 			emptySide = 'a';
-			
 		}
-
 		this.musicDeck[emptySide] = new Audio();
 		this.musicDeck[emptySide].src = song.src;
 		this.musicDeck[emptySide].controls = true;
@@ -183,7 +187,9 @@ class App extends React.Component {
 		} else if (this.musicDeck.c) {
 			activeSide = 'c';
 		}
-
+		if (!this.musicDeck[activeSide]) {
+			return
+		}
 		this.musicDeck[activeSide].volume = value;
 		if (this.state.userId) {
 			this.setState({
@@ -264,7 +270,6 @@ class App extends React.Component {
 	};
 
 	toggleAllSounds = () => {
-		
 		if (this.state.musicPlaying || this.state.gameSound) {
 			this.setState({
 				musicPlaying: false,
@@ -293,12 +298,12 @@ class App extends React.Component {
 		}
 	};
 
-	startSignUpSong = () => {
-		if (this.state.musicPlaying) {
-			let signUpSong = Sounds.signUpSong;
-      this.musicPlay(signUpSong);
-		}
-	}
+	// startSignUpSong = () => {
+	// 	if (this.state.musicPlaying) {
+	// 		let signUpSong = Sounds.signUpSong;
+  //     this.musicPlay(signUpSong);
+	// 	}
+	// }
 
 	switchFromGameScreen = () => {
 		if (this.state.userId !== '') {

@@ -12,6 +12,10 @@ class Login extends React.Component {
     redirectToGame: false,
     entered: false,
     flashing: false,
+    ArrowUp: false,
+    ArrowDown: false,
+    ArrowLeft: false,
+    ArrowRight: false,
   };
 
   canvas = React.createRef();
@@ -92,7 +96,7 @@ class Login extends React.Component {
       context.rotate(player.rot);
 
       //AVATAR SIZE AND SCREEN POSITION
-      context.drawImage(player.movingImage, -19, -19, 40, 32);
+      context.drawImage(player.movingImage, -19.5, -19.5, 36, 32);
       context.restore();
     };
     //LOOP
@@ -112,8 +116,10 @@ class Login extends React.Component {
         isRunning = false;
       }
 
+      context.fillStyle = "rgb(143, 181, 219)";
+
       context.fillRect(0, 0, canvas.width, canvas.height * 2);
-      context.fillStyle = "rgb(255, 29, 29)";
+      context.fillStyle = "rgb(15, 15, 15)";
       context.beginPath();
 
       this.draw();
@@ -128,7 +134,34 @@ class Login extends React.Component {
       }
       context.lineTo(canvas.width, canvas.height);
       context.fill();
+
+      onkeydown = (d) => {
+        if (d.key === "ArrowUp") {
+          this.setState({ ArrowUp: true });
+        } else if (d.key === "ArrowDown") {
+          this.setState({ ArrowDown: true });
+        } else if (d.key === "ArrowLeft") {
+          this.setState({ ArrowLeft: true });
+        } else if (d.key === "ArrowRight") {
+          this.setState({ ArrowRight: true });
+        }
+
+        return (k[d.key] = 1);
+      };
+      onkeyup = (d) => {
+        if (d.key === "ArrowUp") {
+          this.setState({ ArrowUp: false });
+        } else if (d.key === "ArrowDown") {
+          this.setState({ ArrowDown: false });
+        } else if (d.key === "ArrowLeft") {
+          this.setState({ ArrowLeft: false });
+        } else if (d.key === "ArrowRight") {
+          this.setState({ ArrowRight: false });
+        }
+        return (k[d.key] = 0);
+      };
     };
+    loop();
   };
 
   handleChange = (event) => {
@@ -213,34 +246,37 @@ class Login extends React.Component {
                     <h5 className="sub-headings">TECH STACK</h5>
                     <p>
                       The current version of this game is running{" "}
-                      <strong class="strong">React.js</strong> on the frontend.
-                      There's an <strong class="strong">HTML 5 Canvas</strong>{" "}
-                      that is rendering the game's action. The physics, general
-                      movement and game surface are generated through a series
-                      of <strong class="strong">Javascript</strong> functions
+                      <strong className="strong">React.js</strong> on the
+                      frontend. There's an{" "}
+                      <strong className="strong">HTML 5 Canvas</strong> that is
+                      rendering the game's action. The physics, general movement
+                      and game surface are generated through a series of{" "}
+                      <strong className="strong">Javascript</strong> functions
                       that were carefully crafted to promote optimal
                       performance. We are keeping track of user information and
                       game progress via a{" "}
-                      <strong class="strong">
+                      <strong className="strong">
                         PostgreSQL-powered database
                       </strong>{" "}
                       and routing that data through our{" "}
-                      <strong class="strong">Ruby on Rails</strong>{" "}
+                      <strong className="strong">Ruby on Rails</strong>{" "}
                       infrastructure. The bulk of the styling is handled by{" "}
-                      <strong class="strong">CSS</strong> with some minor
-                      additional <strong class="strong">Bootstrap</strong>{" "}
+                      <strong className="strong">CSS</strong> with some minor
+                      additional <strong className="strong">Bootstrap</strong>{" "}
                       component. We customized the publicly sourced images using{" "}
-                      <strong class="strong">Adobe Photoshop</strong> in order
-                      to achieve visual consistency. Our database and routes are
-                      live thanks to <strong class="strong">Heroku's</strong>{" "}
-                      web services while <strong class="strong">Netlify</strong>{" "}
-                      provides us a public access URL.
+                      <strong className="strong">Adobe Photoshop</strong> in
+                      order to achieve visual consistency. Our database and
+                      routes are live thanks to{" "}
+                      <strong className="strong">Heroku's</strong> web services
+                      while <strong className="strong">Netlify</strong> provides
+                      us a public access URL.
                       <br />
                       The Github repositories can be accessed here:{" "}
                       <a
                         href="https://github.com/mdiaz26/running-game-api"
                         className="about-links"
                         target="_blank"
+                        rel="noopener noreferrer"
                       >
                         Backend
                       </a>{" "}
@@ -249,6 +285,7 @@ class Login extends React.Component {
                         href="https://github.com/mdiaz26/running-game-app"
                         className="about-links"
                         target="_blank"
+                        rel="noopener noreferrer"
                       >
                         Frontend
                       </a>
@@ -300,6 +337,7 @@ class Login extends React.Component {
                         <a
                           href="https://www.youtube.com/watch?v=DgG9us3QkTE"
                           target="_blank"
+                          rel="noopener noreferrer"
                           className="about-links"
                         >
                           Hill Climbing Racing Game
@@ -321,6 +359,7 @@ class Login extends React.Component {
                       <a
                         href="mailto:DesertDriverGame@gmail.com"
                         target="_blank"
+                        rel="noopener noreferrer"
                         className="about-links"
                       >
                         DesertDriverGame@gmail.com
@@ -385,7 +424,7 @@ class Login extends React.Component {
                   <canvas
                     ref={this.canvas}
                     height={250}
-                    width={300}
+                    width={1000}
                     className="about-canvas"
                   ></canvas>
                 </div>
@@ -393,28 +432,34 @@ class Login extends React.Component {
                 <div className="instructions-container about-instructions">
                   <div className="keypad-container about-keypad">
                     <div className="arrow-box-top">
-                      <img src={Images.up} alt="Up Arrow" className={"dim"} />
+                      <img
+                        src={Images.up}
+                        alt="Up Arrow"
+                        className={this.state.ArrowUp ? "light-up" : "dim"}
+                      />
                     </div>
                     <div className="arrow-box-bottom">
                       <img
                         src={Images.left}
                         alt="Left Arrow"
-                        className={"dim"}
+                        className={this.state.ArrowLeft ? "light-up" : "dim"}
                       />
                       <img
                         src={Images.down}
                         alt="Down Arrow"
-                        className={"dim"}
+                        className={this.state.ArrowDown ? "light-up" : "dim"}
                       />
                       <img
                         src={Images.right}
                         alt="Right Arrow"
-                        className={"dim"}
+                        className={this.state.ArrowRight ? "light-up" : "dim"}
                       />
                     </div>
                   </div>
                   <div className="about-keys-explained">
-                    <p>Use your keyboard to play</p>
+                    <p className="about-instructions-entry">
+                      Use your keyboard
+                    </p>
                     <p>
                       <img
                         src={Images.up}
@@ -443,15 +488,6 @@ class Login extends React.Component {
                       />
                       to swing the rotation
                     </p>
-                    <p>
-                      <img
-                        src={Images.spaceBar}
-                        alt="Space-Bar"
-                        className="instructions-photo-space"
-                      />{" "}
-                      {"  "}
-                      to pause the game
-                    </p>
                   </div>
                 </div>
                 <p className="divider">
@@ -464,13 +500,18 @@ class Login extends React.Component {
                   </p>
                   <h5 className="sub-headings">DEVELOPERS</h5>
                   <table align="center">
-                    <tr id="image-table">
-                      <a
-                        href="https://www.linkedin.com/in/alejoluis/"
-                        target="_blank"
-                        className="about-links"
-                      >
-                        <th className="team-photos-container">
+                    <tbody>
+                      <tr id="image-table">
+                        <th
+                          onClick={() =>
+                            window.open(
+                              "https://www.linkedin.com/in/alejoluis/",
+                              "_blank"
+                            )
+                          }
+                          style={{ cursor: "pointer" }}
+                          className="team-photos-container"
+                        >
                           <img
                             className="team-photos"
                             width="100px"
@@ -479,13 +520,17 @@ class Login extends React.Component {
                           />
                           <span className="team-photo-names">Luis Alejo</span>
                         </th>
-                      </a>
-                      <a
-                        href="https://www.linkedin.com/in/mikediaz006/"
-                        target="_blank"
-                        className="about-links"
-                      >
-                        <th className="team-photos-container">
+
+                        <th
+                          onClick={() =>
+                            window.open(
+                              "https://www.linkedin.com/in/mikediaz006/",
+                              "_blank"
+                            )
+                          }
+                          style={{ cursor: "pointer" }}
+                          className="team-photos-container"
+                        >
                           <img
                             className="team-photos"
                             width="100px"
@@ -494,8 +539,8 @@ class Login extends React.Component {
                           />
                           <span className="team-photo-names">Michael Diaz</span>
                         </th>
-                      </a>
-                    </tr>
+                      </tr>
+                    </tbody>
                   </table>
                   <br />
 
@@ -511,6 +556,7 @@ class Login extends React.Component {
                       href="https://open.spotify.com/playlist/3kGdFkUcB5rtQ4pITay3tT?si=W2-fIL7KRG-AXP9VHF0dFg"
                       className="about-links"
                       target="_blank"
+                      rel="noopener noreferrer"
                     >
                       Spotify Playlist
                     </a>
@@ -524,6 +570,7 @@ class Login extends React.Component {
                           href="https://open.spotify.com/track/275qMus6giB04ILrWdBaN9?si=vekttmjuRF6HSUQ2njd2Fw"
                           className="about-links"
                           target="_blank"
+                          rel="noopener noreferrer"
                         >
                           5ive
                         </a>
@@ -535,6 +582,7 @@ class Login extends React.Component {
                           href="https://open.spotify.com/track/1EFPehJv13my9zvLFzGE8Z?si=xavgMtPKQoitu_-KjWSBHQ"
                           className="about-links"
                           target="_blank"
+                          rel="noopener noreferrer"
                         >
                           Ecdysis
                         </a>
@@ -546,6 +594,7 @@ class Login extends React.Component {
                           href="https://open.spotify.com/track/0ylsZHLhKUlTwpIcs4Y4CG?si=SkBICXrrTyevrcw6T3fIlg"
                           className="about-links"
                           target="_blank"
+                          rel="noopener noreferrer"
                         >
                           End Of The World ft. Blu
                         </a>
@@ -557,6 +606,7 @@ class Login extends React.Component {
                           href="https://open.spotify.com/track/40XVgYlIzqv4cndzgam9uW?si=BhBPnEuhQR-bzk9tuhG-JA"
                           className="about-links"
                           target="_blank"
+                          rel="noopener noreferrer"
                         >
                           Eternal Now
                         </a>
@@ -568,6 +618,7 @@ class Login extends React.Component {
                           href="https://open.spotify.com/track/7tBa1miuCyMBRAT3n3MEU2?si=ImNo8PFwR-a0VGunRPsGyw"
                           className="about-links"
                           target="_blank"
+                          rel="noopener noreferrer"
                         >
                           Fubar
                         </a>
@@ -579,6 +630,7 @@ class Login extends React.Component {
                           href="https://open.spotify.com/track/51LCWDbrIQWR2658tnvIBM?si=Qu3XCJ_EQWGUGQhhxBltLA"
                           className="about-links"
                           target="_blank"
+                          rel="noopener noreferrer"
                         >
                           Ghost
                         </a>
@@ -590,6 +642,7 @@ class Login extends React.Component {
                           href="https://open.spotify.com/track/7jefHw7FTksEOKDPV6lqLO?si=jtE39FVhQPmXTVrQX6-hNg"
                           className="about-links"
                           target="_blank"
+                          rel="noopener noreferrer"
                         >
                           Heat Wave
                         </a>
@@ -601,6 +654,7 @@ class Login extends React.Component {
                           href="https://open.spotify.com/track/7cPO2IPraPDlGIguekShlV?si=_8NiUXCYTt-MqCUPBvU6tw"
                           className="about-links"
                           target="_blank"
+                          rel="noopener noreferrer"
                         >
                           Jewel
                         </a>
@@ -612,6 +666,7 @@ class Login extends React.Component {
                           href="https://open.spotify.com/track/0MdMnqkulXGOkYFexs9y9g?si=uFyTamXsR3uyEIJdAgFoaA"
                           className="about-links"
                           target="_blank"
+                          rel="noopener noreferrer"
                         >
                           LA Melody
                         </a>
@@ -623,6 +678,7 @@ class Login extends React.Component {
                           href="https://open.spotify.com/track/3X0fBUr0jUWOugmo6rGko3?si=V5PYpUTxStyFQmUM8zYUzQ"
                           className="about-links"
                           target="_blank"
+                          rel="noopener noreferrer"
                         >
                           Lemon Grass
                         </a>
@@ -634,6 +690,7 @@ class Login extends React.Component {
                           href="https://open.spotify.com/track/6luAShpeqHTE84A4pY6Zcg?si=P5cu0P_SQle3nPLnHLqGGA"
                           className="about-links"
                           target="_blank"
+                          rel="noopener noreferrer"
                         >
                           Life Is So Beautiful
                         </a>
@@ -645,6 +702,7 @@ class Login extends React.Component {
                           href="https://open.spotify.com/track/6bLh84TbbMalr0e2uqZamf?si=fwfDRDGhQjyGJxOnt5KM8A"
                           className="about-links"
                           target="_blank"
+                          rel="noopener noreferrer"
                         >
                           Moro Cut
                         </a>
@@ -656,6 +714,7 @@ class Login extends React.Component {
                           href="https://open.spotify.com/track/4XE9Ggjr33rRGbjDHbGaTQ?si=oETHDwu2QqGplR9fJf_e0g"
                           className="about-links"
                           target="_blank"
+                          rel="noopener noreferrer"
                         >
                           Mr. Skitters
                         </a>
@@ -669,6 +728,7 @@ class Login extends React.Component {
                           href="https://open.spotify.com/track/035epJwRLJQLXbQ7XtPFEf?si=BzSMhLYzQI-H-YprFG6C2g"
                           className="about-links"
                           target="_blank"
+                          rel="noopener noreferrer"
                         >
                           Noth
                         </a>
@@ -680,6 +740,7 @@ class Login extends React.Component {
                           href="https://open.spotify.com/track/0RZtD85ed03ARIuYLOHMWc?si=MzOJXo3lQDiFd6lRGtUZBA"
                           className="about-links"
                           target="_blank"
+                          rel="noopener noreferrer"
                         >
                           Out Here
                         </a>
@@ -691,6 +752,7 @@ class Login extends React.Component {
                           href="https://open.spotify.com/track/2g6XtLzKbaFSNtZ56z588v?si=o2WYiFLzSim6qTzg0m3VhQ"
                           className="about-links"
                           target="_blank"
+                          rel="noopener noreferrer"
                         >
                           Quatic
                         </a>
@@ -702,6 +764,7 @@ class Login extends React.Component {
                           href="https://open.spotify.com/track/2IMeYPA1T0wwivGpvxZfET?si=CqcTUyT3SlufNa7PPeg63g"
                           className="about-links"
                           target="_blank"
+                          rel="noopener noreferrer"
                         >
                           Ruthless
                         </a>
@@ -713,6 +776,7 @@ class Login extends React.Component {
                           href="https://open.spotify.com/track/3kkaPg3wAVTmaEeQP4a81Y?si=POasfrUkQzq1ZtnkP6qRJw"
                           className="about-links"
                           target="_blank"
+                          rel="noopener noreferrer"
                         >
                           Still Rockin
                         </a>
@@ -724,6 +788,7 @@ class Login extends React.Component {
                           href="https://open.spotify.com/track/2u3HmBPHrk3ooSdVikignW?si=UXW-n2mkQZeRkhMavP1Ckg"
                           className="about-links"
                           target="_blank"
+                          rel="noopener noreferrer"
                         >
                           Sweet Thang
                         </a>
@@ -735,6 +800,7 @@ class Login extends React.Component {
                           href="https://open.spotify.com/track/0SLH9b0nlK4larScjLxfSn?si=bPIEiNz2RPKwaJ4u-wk8ow"
                           className="about-links"
                           target="_blank"
+                          rel="noopener noreferrer"
                         >
                           Take Three
                         </a>
@@ -746,6 +812,7 @@ class Login extends React.Component {
                           href="https://open.spotify.com/track/2FjbCrOGLOdghhrCRUqCm6?si=zHWPxp7yTSWVSxoaoiyVSw"
                           className="about-links"
                           target="_blank"
+                          rel="noopener noreferrer"
                         >
                           They Don't Know
                         </a>
@@ -757,6 +824,7 @@ class Login extends React.Component {
                           href="https://open.spotify.com/track/6H6SjMBqmpow1osltTbmFz?si=hiBJtsFtRKWPAJGgMM-_fw"
                           className="about-links"
                           target="_blank"
+                          rel="noopener noreferrer"
                         >
                           Vega
                         </a>
@@ -768,6 +836,7 @@ class Login extends React.Component {
                           href="https://open.spotify.com/track/70nIZ6RlNhgqxcCShFmYwf?si=z5YNMYJ8R9uyAteZDnkAeA"
                           className="about-links"
                           target="_blank"
+                          rel="noopener noreferrer"
                         >
                           Vultures
                         </a>
@@ -779,6 +848,7 @@ class Login extends React.Component {
                           href="https://open.spotify.com/track/3uw7dZjvRMAe30U91cSyLO?si=AryeiKU9R6e5ClD9dGhCHw"
                           className="about-links"
                           target="_blank"
+                          rel="noopener noreferrer"
                         >
                           Yeti, Set, Go
                         </a>
@@ -797,6 +867,7 @@ class Login extends React.Component {
                       className="about-links"
                       href="http://www.therapboard.com/"
                       target="_blank"
+                      rel="noopener noreferrer"
                     >
                       The Rap Board
                     </a>
@@ -812,6 +883,7 @@ class Login extends React.Component {
                     <a
                       href="https://www.youtube.com/watch?v=MW8HcwHK1S0&t=524s"
                       target="_blank"
+                      rel="noopener noreferrer"
                       className="about-links"
                     >
                       Coding a Motorcycle Game in HTML
@@ -875,7 +947,7 @@ class Login extends React.Component {
                   placeholder="USERNAME"
                   value={this.state.username}
                   name="username"
-                  autoFocus="true"
+                  autoFocus={true}
                   onChange={this.handleChange}
                 />
               </label>

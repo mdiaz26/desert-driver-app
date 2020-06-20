@@ -5,7 +5,7 @@ import AvatarChoice from "./AvatarChoice";
 import "../styles/styles.scss";
 import "../styles/SignUp.css";
 import Images from "../asset-libraries/Images";
-import Sounds from "../asset-libraries/Sounds";
+// import Sounds from "../asset-libraries/Sounds";
 import OnImagesLoaded from "react-on-images-loaded";
 
 class SignUp extends React.Component {
@@ -19,10 +19,10 @@ class SignUp extends React.Component {
   };
 
   componentDidMount() {
-    this.props.startSignUpSong();
+    // this.props.startSignUpSong();
   }
   componentWillUnmount() {
-    this.props.musicFadeOut();
+    // this.props.musicFadeOut();
   }
 
   handleChange = (event) => {

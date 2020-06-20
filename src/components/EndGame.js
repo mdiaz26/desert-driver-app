@@ -7,8 +7,6 @@ import Sounds from "../asset-libraries/Sounds";
 const EndGame = (props) => {
   const fade = useSpring({ from: { opacity: 0 }, opacity: 1 });
 
-  const [play, changePlay] = useState({ play: false });
-
   useEffect(() => {
     let gameOverSong = Sounds.losingSong;
     props.musicPlay(gameOverSong);
@@ -16,7 +14,7 @@ const EndGame = (props) => {
 
   return (
     <div className="background">
-      <div onLoad={() => changePlay()} className="end-game-report">
+      <div className="end-game-report">
         <div className="report-container">
           <div className="buttons">
             <button
@@ -35,6 +33,28 @@ const EndGame = (props) => {
               <div>
                 <p className="stat-report-category">COINS</p>
                 <Spring from={{ number: 0 }} to={{ number: props.stats.coins }}>
+                  {(props) => (
+                    <div className="counter">{props.number.toFixed(0)}</div>
+                  )}
+                </Spring>
+              </div>
+              <div>
+                <p className="stat-report-category">FLIPS</p>
+                <Spring
+                  from={{ number: 0 }}
+                  to={{ number: props.stats.flipCount }}
+                >
+                  {(props) => (
+                    <div className="counter">{props.number.toFixed(0)}</div>
+                  )}
+                </Spring>
+              </div>
+              <div>
+                <p className="stat-report-category">BEST FLIP</p>
+                <Spring
+                  from={{ number: 0 }}
+                  to={{ number: props.stats.bestFlip }}
+                >
                   {(props) => (
                     <div className="counter">{props.number.toFixed(0)}</div>
                   )}
@@ -62,15 +82,17 @@ const EndGame = (props) => {
                   )}
                 </Spring>
               </div>
-              <div>
-                <p className="stat-report-category">FINAL SCORE</p>
-                <Spring from={{ number: 0 }} to={{ number: props.stats.score }}>
-                  {(props) => (
-                    <div className="counter">{props.number.toFixed(0)}</div>
-                  )}
-                </Spring>
-              </div>
             </div>
+          </div>
+          <div>
+            <p className="stat-report-category">FINAL SCORE</p>
+            <Spring from={{ number: 0 }} to={{ number: props.stats.score }}>
+              {(props) => (
+                <div className="total-score-counter">
+                  {props.number.toFixed(0)}
+                </div>
+              )}
+            </Spring>
           </div>
         </div>
       </div>

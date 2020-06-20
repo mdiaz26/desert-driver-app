@@ -74,6 +74,12 @@
 	color: rgb(204, 187, 161);
 	background-color: rgb(15, 15, 15);
 }
+.about-instructions-entry {
+	font-size: 16px;
+	font-weight: bold;
+	color: #e68859;
+	margin-bottom: 10px;
+}
 .about-instructions {
 	display: flex;
 	flex-direction: row;
@@ -89,9 +95,11 @@
 }
 .about-keys-explained {
 	/* margin-left: -70px; */
+	margin-top: 15px;
 	float: left;
 }
 .scroll-box {
+	position: relative;
 	/* align-items: center;
 	align-self: center; */
 	border-top: 1px solid rgb(26, 25, 25);
@@ -104,17 +112,23 @@
 	height: 95%;
 }
 .about-canvas-container {
+	position: relative;
 	width: 100%;
-	min-width: 400px;
 	height: 250px;
+	justify-content: center;
+	align-content: center;
 	background-color: rgb(238, 238, 238);
 }
 .about-canvas {
-	margin-top: -15px;
+	position: relative;
+	margin-top: 0px;
+	object-fit: cover;
 	z-index: 10;
-	width: 400px;
+	width: 100%;
 	height: 100%;
-	min-width: 400px;
+	align-self: center;
+	justify-content: center;
+	overflow: hidden;
 }
 .scroll-box::-webkit-scrollbar {
 	display: none;
@@ -239,12 +253,12 @@
 	position: absolute;
 	z-index: -1;
 	width: 100%;
-	height: calc(100%-55px);
+	height: calc(100% - 55px);
 	left: 0;
 }
 .login-form {
 	position: absolute;
-	height: calc(100%-55px);
+	height: calc(100% - 55px);
 	flex-direction: column;
 	margin-top: 20%;
 	z-index: 1;
