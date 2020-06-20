@@ -8,7 +8,9 @@ import OnImagesLoaded from "react-on-images-loaded";
 const ProfileEdit = (props) => {
   // const [modalState, changeModalState] = useState({ display: false });
   const [passwordState, changePasswordState] = useState({ display: false });
-  const [showImagesState, changeShowImagesState] = useState({ showImages: false });
+  const [showImagesState, changeShowImagesState] = useState({
+    showImages: false,
+  });
 
   // const toggleModal = () => {
   //   changeModalState({ display: !modalState.display });
@@ -68,14 +70,14 @@ const ProfileEdit = (props) => {
                   onChange={props.handleChange}
                 />
               ) : (
-                  <input
-                    className="input-field"
-                    type="password"
-                    name="password"
-                    value={props.user.password}
-                    onChange={props.handleChange}
-                  />
-                )}
+                <input
+                  className="input-field"
+                  type="password"
+                  name="password"
+                  value={props.user.password}
+                  onChange={props.handleChange}
+                />
+              )}
             </div>
           </label>
           {passwordState.display ? (
@@ -86,42 +88,44 @@ const ProfileEdit = (props) => {
               className="eye"
             />
           ) : (
-              <img
-                onClick={togglePassword}
-                src="/game-images/show-password.png"
-                alt="show-password"
-                className="eye"
-              />
-            )}
+            <img
+              onClick={togglePassword}
+              src="/game-images/show-password.png"
+              alt="show-password"
+              className="eye"
+            />
+          )}
           <br />
           <p className="choose-your-ride">SWITCH YOUR RIDE</p>
-          {props.avatars.length === 7 && <OnImagesLoaded
-            onLoaded={() => changeShowImagesState({ showImages: true })}
-          >
-            <div className="avatar-frame">
-              {props.avatars.map((avatar, index) => (
-                <AvatarChoice
-                  key={avatar.id}
-                  {...avatar}
-                  number={index + 1}
-                  handleRadioChange={props.handleRadioChange}
-                  className={
-                    props.avatar.name === avatar.name ? "gold-border" : "none"
-                  }
-                  opacity={showImagesState.showImages ? 1 : 0}
-                />
-              ))}
-              <div className="inner-circle">
-                <img
-                  id="fill-this-image"
-                  src={handleSelection()}
-                  alt={handleSelection()}
-                  style={{ opacity: showImagesState.showImages ? 1 : 0 }}
-                />
+          {props.avatars.length === 7 && (
+            <OnImagesLoaded
+              onLoaded={() => changeShowImagesState({ showImages: true })}
+            >
+              <div className="avatar-frame">
+                {props.avatars.map((avatar, index) => (
+                  <AvatarChoice
+                    key={avatar.id}
+                    {...avatar}
+                    number={index + 1}
+                    handleRadioChange={props.handleRadioChange}
+                    className={
+                      props.avatar.name === avatar.name ? "gold-border" : "none"
+                    }
+                    opacity={showImagesState.showImages ? 1 : 0}
+                  />
+                ))}
+                <div className="inner-circle">
+                  <img
+                    id="fill-this-image"
+                    src={handleSelection()}
+                    alt={handleSelection()}
+                    style={{ opacity: showImagesState.showImages ? 1 : 0 }}
+                  />
+                </div>
+                {!showImagesState.showImages && <div className="loader"></div>}
               </div>
-              {!showImagesState.showImages && <div className="loader"></div>}
-            </div>
-          </OnImagesLoaded>}
+            </OnImagesLoaded>
+          )}
           <input className="submit-btn" type="submit" value="Submit" /> |
           <button className="cancel-btn" onClick={props.toggleEdit}>
             Cancel
@@ -138,7 +142,11 @@ const ProfileEdit = (props) => {
         {/* )} */}
       </div>
       <div className="edit-moon-container">
-        <img className="edit-moon" src="night-stage-images/moon.png" alt="Moon" />
+        <img
+          className="edit-moon"
+          src="/night-stage-images/moon.png"
+          alt="Moon"
+        />
         {/* <img className="edit-moon" src={Images.moon} alt="Moon" /> */}
       </div>
     </div>
