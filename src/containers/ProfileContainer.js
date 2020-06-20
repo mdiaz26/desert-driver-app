@@ -4,7 +4,9 @@ import { Redirect } from "react-router-dom";
 import Profile from "../components/Profile";
 import ProfileEdit from "../components/ProfileEdit";
 
-const adapter = new JSONAPIAdapter("https://desert-driver-api.herokuapp.com/api/v1/");
+// const adapter = new JSONAPIAdapter("https://desert-driver-api.herokuapp.com/api/v1/");
+const adapter = new JSONAPIAdapter('http://localhost:3000/api/v1/');
+
 
 class ProfileContainer extends React.Component {
   state = {
@@ -108,16 +110,16 @@ class ProfileContainer extends React.Component {
             />
           </>
         ) : (
-          <>
-            <Profile
-              user={this.state.user}
-              avatar={this.state.avatar}
-              findBestInAttribute={this.findBestInAttribute}
-              toggleEdit={this.toggleEdit}
-            />
-            {/* <button onClick={this.toggleEdit}>Edit</button> */}
-          </>
-        )}
+            <>
+              <Profile
+                user={this.state.user}
+                avatar={this.state.avatar}
+                findBestInAttribute={this.findBestInAttribute}
+                toggleEdit={this.toggleEdit}
+              />
+              {/* <button onClick={this.toggleEdit}>Edit</button> */}
+            </>
+          )}
       </div>
     );
   }

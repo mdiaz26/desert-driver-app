@@ -36,8 +36,9 @@ const ProfileEdit = (props) => {
       <div className="logo-container">
         <img
           className="sign-up-background"
-          src={Images.signUpGif}
-          alt="Sign Up Gif"
+          src="/gifs/sign-up-background.gif"
+          // src={Images.signUpGif}
+          alt="Sign Up Giff"
         />
       </div>
       <div className="sign-up-form">
@@ -137,7 +138,8 @@ const ProfileEdit = (props) => {
         {/* )} */}
       </div>
       <div className="edit-moon-container">
-        <img className="edit-moon" src={Images.moon} alt="Moon" />
+        <img className="edit-moon" src="night-stage-images/moon.png" alt="Moon" />
+        {/* <img className="edit-moon" src={Images.moon} alt="Moon" /> */}
       </div>
     </div>
   );
