@@ -253,12 +253,12 @@
 	position: absolute;
 	z-index: -1;
 	width: 100%;
-	height: calc(100%-55px);
+	height: calc(100% - 55px);
 	left: 0;
 }
 .login-form {
 	position: absolute;
-	height: calc(100%-55px);
+	height: calc(100% - 55px);
 	flex-direction: column;
 	margin-top: 20%;
 	z-index: 1;
