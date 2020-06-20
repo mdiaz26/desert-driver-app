@@ -28,15 +28,18 @@ class SignUp extends React.Component {
   };
 
   createUser = () => {
-    const adapter = new JSONAPIAdapter(
-      "https://desert-driver-api.herokuapp.com/api/v1/"
-    );
+    // const adapter = new JSONAPIAdapter("https://desert-driver-api.herokuapp.com/api/v1/");
+    const adapter = new JSONAPIAdapter('http://localhost:3000/api/v1/');
     adapter
       .post("users", {
         user: {
           username: this.state.username,
           password: this.state.password,
           avatar_id: this.getAvatarId(this.state.selectedAvatar),
+          music_playing: this.props.musicPlaying,
+          game_sound: this.props.gameSound,
+          music_volume: this.props.bgMusicVolume,
+          game_volume: this.props.gameVolume,
         },
       })
       .then(this.props.appendNewUser)
@@ -175,7 +178,7 @@ class SignUp extends React.Component {
             <br /> */}
 
             {/* <p>Sign Up Form</p> */}
-            
+
             {/* </> */}
             <div className="moon-container">
               <img className="moon" src={Images.moon} alt="Moon" />
