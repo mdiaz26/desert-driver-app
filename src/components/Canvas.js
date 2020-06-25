@@ -165,6 +165,7 @@ class Canvas extends Component {
       this.state.flipCount * this.state.maxDistance -
       this.state.timer +
       this.state.bestFlip;
+
     const body = {
       points: totalScore,
       max_distance: parseInt(this.state.maxDistance),
