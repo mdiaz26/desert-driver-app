@@ -61,20 +61,20 @@
 	text-align: center;
 	line-height: 100%;
 	text-shadow: 0 0 2px black;
-	opacity: 0.1;
+	opacity: 0.3;
 	font-size: 250%;
 	margin-top: 11%;
 	font-weight: 900;
 	color: #ffe4ef;
 	mix-blend-mode: exclusion;
-	filter: brightness(290%);
 	transition: all 1s ease-in-out;
 }
 .stage-title-big {
 	position: absolute;
 	opacity: 1;
 	text-shadow: 0 0 2px black;
-	margin-top: 8%;
+	filter: brightness(490%);
+	margin-top: 11%;
 	margin-bottom: auto;
 	width: 100%;
 	height: 100%;

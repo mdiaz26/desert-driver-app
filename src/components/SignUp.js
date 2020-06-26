@@ -5,7 +5,7 @@ import AvatarChoice from "./AvatarChoice";
 import "../styles/styles.scss";
 import "../styles/SignUp.css";
 import Images from "../asset-libraries/Images";
-// import Sounds from "../asset-libraries/Sounds";
+import Sounds from "../asset-libraries/Sounds";
 import OnImagesLoaded from "react-on-images-loaded";
 
 class SignUp extends React.Component {
@@ -42,6 +42,10 @@ class SignUp extends React.Component {
           username: this.state.username,
           password: this.state.password,
           avatar_id: this.getAvatarId(this.state.selectedAvatar),
+          music_playing: true,
+          game_sound: true,
+          music_volume: 0.8,
+          game_volume: 0.4,
         },
       })
       .then(this.props.appendNewUser)
@@ -99,6 +103,8 @@ class SignUp extends React.Component {
         confirmPassword: "",
       });
     } else {
+      let signUpSong = Sounds.signUpSong;
+      this.props.musicPlay(signUpSong);
       this.createUser();
       this.setState({
         username: "",
