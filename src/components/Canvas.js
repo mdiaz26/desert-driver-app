@@ -160,14 +160,11 @@ class Canvas extends Component {
       "https://desert-driver-api.herokuapp.com/api/v1/"
     );
     // const adapter = new JSONAPIAdapter("http://localhost:3000/api/v1/");
-<<<<<<< HEAD
-=======
     const totalScore =
       this.state.coins +
       this.state.flipCount * this.state.maxDistance -
       this.state.timer +
       this.state.bestFlip;
->>>>>>> development
     const body = {
       points: totalScore,
       max_distance: parseInt(this.state.maxDistance),
