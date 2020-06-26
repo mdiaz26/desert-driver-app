@@ -1,114 +1,136 @@
 body {
-  margin: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
+	margin: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
 }
 
 .buttons {
-  display: flex;
-  flex-direction: row;
+	display: flex;
+	flex-direction: row;
 }
 
 button:hover {
-  color: blanchedalmond;
-  background-color: rgb(241, 97, 97);
-  border: none;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
+	color: blanchedalmond;
+	background-color: rgb(241, 97, 97);
+	border: none;
+	cursor: pointer;
+	transition: all 0.2s ease-in-out;
 }
 .btn1 {
-  float: left;
-  margin-right: 50px;
-  background-color: transparent;
-  border: 1px solid rgb(170, 202, 235);
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-  color: rgb(247, 183, 183);
-  margin-bottom: 30px;
-  transition: all 0.2s ease-in-out;
+	float: left;
+	margin-right: 50px;
+	background-color: transparent;
+	border: 1px solid rgb(170, 202, 235);
+	cursor: pointer;
+	transition: all 0.2s ease-in-out;
+	color: rgb(247, 183, 183);
+	margin-bottom: 40px;
+	border-radius: 10px;
+	transition: all 0.2s ease-in-out;
 }
 .btn2 {
-  background-color: transparent;
-  border: 1px solid rgb(170, 202, 235);
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-  color: rgb(247, 183, 183);
-  margin-bottom: 30px;
-  transition: all 0.2s ease-in-out;
+	background-color: transparent;
+	border: 1px solid rgb(170, 202, 235);
+	cursor: pointer;
+	transition: all 0.2s ease-in-out;
+	color: rgb(247, 183, 183);
+	margin-bottom: 40px;
+	border-radius: 10px;
+	transition: all 0.2s ease-in-out;
 }
 .btn1:hover {
-  float: left;
-  margin-right: 50px;
-  color: blanchedalmond;
-  background-color: rgb(241, 97, 97);
-  border: 1px solid transparent;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-  margin-bottom: 30px;
-  transition: all 0.2s ease-in-out;
+	float: left;
+	margin-right: 50px;
+	color: blanchedalmond;
+	background-color: rgb(241, 97, 97);
+	border: 1px solid transparent;
+	cursor: pointer;
+	transition: all 0.2s ease-in-out;
+	margin-bottom: 40px;
+	transition: all 0.2s ease-in-out;
 }
 .btn2:hover {
-  color: blanchedalmond;
-  background-color: rgb(241, 97, 97);
-  border: 1px solid transparent;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-  margin-bottom: 30px;
-  transition: all 0.2s ease-in-out;
+	color: blanchedalmond;
+	background-color: rgb(241, 97, 97);
+	border: 1px solid transparent;
+	cursor: pointer;
+	transition: all 0.2s ease-in-out;
+	margin-bottom: 40px;
+	transition: all 0.2s ease-in-out;
 }
 .background .end-game-report {
-  position: absolute;
-  width: 100%;
-  top: 0;
+	position: absolute;
+
+	width: 100%;
+	top: 0;
 }
 .end-game-report {
-  position: relative;
-  height: 100%;
-  width: 100%;
-  top: 0;
+	position: absolute;
+
+	height: 100%;
+	width: 100%;
+	top: 0;
 }
 
 .report-container {
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
-  margin-left: auto;
-  margin-right: auto;
-  padding-bottom: 280px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  /* color: antiquewhite; */
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.85);
+	margin-left: auto;
+	margin-right: auto;
+	padding-bottom: 160px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	/* color: antiquewhite; */
 }
 .counters .container {
-  display: grid;
-  grid-row: 30px;
-  grid-template-columns: repeat(4, 1fr);
-  text-align: center;
-  color: rgb(245, 186, 83);
+	display: grid;
+	grid-row: 30px;
+	grid-template-columns: repeat(5, 1fr);
+	text-align: center;
+	color: rgba(245, 186, 83, 0.726);
 }
 .stat-report-category {
-  font-weight: bolder;
-  font-size: 20px;
-  color: rgb(170, 202, 235);
+	font-weight: bolder;
+	font-size: 20px;
+	color: rgb(170, 202, 235);
 }
-
 .counters .counter {
-  font-size: 30px;
-  margin: 10px 0;
+	font-size: 28px;
+	font-weight: 600;
+	margin: 20px 0;
+	margin-bottom: 40px;
 }
+.final-score-category {
+	font-size: 20px;
+	font-weight: 700;
+	color: rgb(170, 202, 235);
+}
+.final-score-counter {
+	font-size: 35px;
+	font-weight: 900;
+	color: tomato;
+}
+.operation {
+	position: absolute;
+	margin-left: 60px;
+	margin-top: 5px;
+	font-weight: bold;
+	font-size: 20px;
+	color: rgb(136, 96, 74);
+}
+@media (max-width: 1000px) {
+	.counters .container {
+		grid-template-columns: repeat(2, 1fr);
+	}
 
-@media (max-width: 700px) {
-  .counters .container {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .counters .container > div:nth-of-type(1),
-  .counters .container > div:nth-of-type(2) {
-    border-bottom: 1px antiquewhite;
-    padding-bottom: 20px;
-  }
+	.counters .container > div:nth-of-type(1),
+	.counters .container > div:nth-of-type(2) {
+		border-bottom: 1px antiquewhite;
+		padding-bottom: 20px;
+	}
 }
 
 /* .end-game-report {
