@@ -33,6 +33,7 @@ class Canvas extends Component {
     pauseGame: false,
     flipCount: 0,
     bestFlip: 0,
+    bestFlipCount: 0,
   };
 
   canvas = React.createRef();
@@ -46,18 +47,21 @@ class Canvas extends Component {
   componentDidMount() {
     this.game();
     this.props.coinAudio();
-    setTimeout(() => {
+
+    if (this.state.countDown > 0) {
+      setTimeout(() => {
+        this.startTimers();
+      }, 3000);
+      this.countDown = setInterval(() => {
+        this.setState((prevState) => ({ countDown: prevState.countDown - 1 }));
+      }, 1000);
+    } else {
       this.startTimers();
-    }, 3000);
-    this.countDown = setInterval(() => {
-      this.setState((prevState) => ({ countDown: prevState.countDown - 1 }));
-    }, 1000);
+    }
     let song =
       Sounds.bgMusic[Math.floor(Math.random() * Sounds.bgMusic.length)];
-    setTimeout(() => {
-      this.props.musicPlaying && this.props.musicPlay(song);
-    }, 3000);
-    this.props.countdownAudio();
+    this.props.musicPlaying && this.props.musicPlay(song);
+    // this.props.countdownAudio();
   }
 
   componentWillUnmount() {
@@ -65,15 +69,19 @@ class Canvas extends Component {
     clearInterval(this.miniInterval);
     cancelAnimationFrame(this.animationID);
     this.props.selectedStage(null);
-    this.props.switchFromGameScreen()
-    // this.props.bgMusic && this.props.musicFadeOut();
+    this.props.switchFromGameScreen();
+    // this.props.musicDeckB && this.props.musicFadeOut();
     // setTimeout(() => this.props.startThemeSong(), 1001);
   }
 
   restartGame = () => {
     clearInterval(this.miniInterval);
     this.coins = this.createCoins();
-    if (this.props.bgMusic) {
+    this.props.musicFadeOut();
+    // let song =
+    //   Sounds.bgMusic[Math.floor(Math.random() * Sounds.bgMusic.length)];
+    // this.props.musicPlay(song);
+    if (this.props.musicDeckB) {
       clearInterval(this.props.fadeOut);
     }
     this.setState(
@@ -84,12 +92,13 @@ class Canvas extends Component {
         timer: 0,
         gameOn: true,
         distance: 0,
-        countDown: 3,
+        // countDown: 3,
         millisecond: 0,
         maxDistance: 0,
         currentDistance: 0,
         flipCount: 0,
         bestFlip: 0,
+        bestFlipCount: 0,
       },
       this.componentDidMount()
     );
@@ -150,11 +159,23 @@ class Canvas extends Component {
     const adapter = new JSONAPIAdapter(
       "https://desert-driver-api.herokuapp.com/api/v1/"
     );
+    // const adapter = new JSONAPIAdapter("http://localhost:3000/api/v1/");
+    const totalScore =
+      this.state.coins +
+      this.state.flipCount * this.state.maxDistance -
+      this.state.timer +
+      this.state.bestFlip;
+
     const body = {
-      points: this.state.coins * this.state.maxDistance - this.state.timer,
+      points: totalScore,
       max_distance: parseInt(this.state.maxDistance),
       user_number: this.props.userId,
       username: this.props.username,
+      best_flip: this.state.bestFlip,
+      total_flips: this.state.flipCount,
+      coins: this.state.coins,
+      timer: this.state.timer,
+      best_flip_count: this.state.bestFlipCount,
     };
     adapter.post("scores", body).then(this.props.updateScores);
   };
@@ -173,6 +194,7 @@ class Canvas extends Component {
     let t = 0;
     let flipping = false;
     let flipCount = 0;
+    let bestFlipCount = 0;
     let flipDirection;
 
     this.setState({ gameOn: true });
@@ -217,7 +239,10 @@ class Canvas extends Component {
           lastLife();
           clearInterval(this.interval);
           let totalScore =
-            this.state.coins * this.state.maxDistance - this.state.timer;
+            this.state.coins +
+            this.state.flipCount * this.state.maxDistance -
+            this.state.timer +
+            this.state.bestFlip;
           this.setState({
             lives: 0,
             gameOn: false,
@@ -242,8 +267,14 @@ class Canvas extends Component {
       }
       if (!flipping && grounded) {
         if (this.state.bestFlip < flipCount * 360) {
-          this.setState({ bestFlip: flipCount * 360 });
+          this.setState({ bestFlip: flipCount * 360, bestFlipCount: 1 });
+        } else if (this.state.bestFlip === flipCount * 360) {
+          // NEW CODE to keep count of "best flip"
+          this.setState((prevState) => ({
+            bestFlipCount: prevState.bestFlipCount + 1,
+          }));
         }
+        this.props.flipAudio(flipCount);
         flipCount = 0;
       }
 
@@ -264,7 +295,12 @@ class Canvas extends Component {
       }
 
       //LEFT & RIGHT KEY SETTINGS
-      player.rSpeed += (k.ArrowLeft - k.ArrowRight) * 0.08;
+      if (player.rSpeed < 1.7) {
+        player.rSpeed += (k.ArrowLeft - k.ArrowRight) * 0.07;
+      }
+      if (player.rSpeed > 1.7) {
+        player.rSpeed = 1.6;
+      }
       player.rot -= player.rSpeed * 0.1;
       if (player.rot > Math.PI) player.rot = -Math.PI;
       if (player.rot < -Math.PI) player.rot = Math.PI;
@@ -487,27 +523,28 @@ class Canvas extends Component {
             </div>
           </div>
           <GameStats
-            bgSongInfo={this.props.bgSongInfo}
+            songInfo={this.props.songInfo}
             gameSound={this.props.gameSound}
             gameVolume={this.props.gameVolume}
-            bgMusicVolume={this.props.bgMusicVolume}
+            musicVolume={this.props.musicVolume}
             musicPlaying={this.props.musicPlaying}
             stats={this.state}
             setMusicVolume={this.props.setMusicVolume}
             setGameVolume={this.props.setGameVolume}
             nextSong={this.props.nextSong}
-            stopAllSounds={this.props.stopAllSounds}
-            bgMusic={this.props.bgMusic}
+            toggleAllSounds={this.props.toggleAllSounds}
+            // musicDeckB={this.props.musicDeckB}
           />
           <div className="end-game-container">
-            {!this.state.gameOn ? (
+            {!this.state.gameOn && (
               <EndGame
                 backToGameMenu={this.props.backToGameMenu}
+                musicPlay={this.props.musicPlay}
                 stats={this.state}
                 saveScore={this.saveScore}
                 restartGame={this.restartGame}
               />
-            ) : null}
+            )}
           </div>
         </div>
       </div>
