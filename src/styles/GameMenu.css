@@ -12,7 +12,7 @@
 	cursor: pointer;
 	border: 3px solid rgb(43, 43, 43);
 	text-align: center;
-	width: 65%;
+	width: 85%;
 	opacity: 0.5;
 	margin-bottom: 10px;
 	filter: grayscale(100%);
@@ -27,7 +27,7 @@
 	border: 3px solid #fff0e9;
 	transition: all 0.5s ease-in-out;
 	filter: grayscale(0%);
-	width: 70%;
+	width: 90%;
 }
 
 .stage-container {
@@ -39,7 +39,7 @@
 	margin-top: 2%;
 }
 .desert-heat {
-	height: 20%;
+	/* height: 20%; */
 	width: 100%;
 	align-content: center;
 	position: relative;
@@ -53,19 +53,43 @@
 
 .stage-title {
 	position: absolute;
+	display: flex;
+	justify-content: space-around;
 	text-align: left;
-	align-content: center;
 	width: 100%;
-	letter-spacing: 4px;
-	left: 18.5%;
-	bottom: 7%;
-	opacity: 0.7;
-	font-size: 70%;
+	letter-spacing: 1.5vmax;
+	text-align: center;
+	line-height: 100%;
+	text-shadow: 0 0 2px black;
+	opacity: 0.3;
+	font-size: 250%;
 	margin-top: 11%;
-	margin-bottom: auto;
-	font-weight: bold;
-	color: #ff006a;
+	font-weight: 900;
+	color: #ffe4ef;
+	mix-blend-mode: exclusion;
+	transition: all 1s ease-in-out;
 }
+.stage-title-big {
+	position: absolute;
+	opacity: 1;
+	text-shadow: 0 0 2px black;
+	margin-top: 8%;
+	margin-bottom: auto;
+	width: 100%;
+	height: 100%;
+	letter-spacing: 2px;
+	mix-blend-mode: exclusion;
+	font-size: 3.5em;
+	text-align: center;
+	justify-content: center;
+	font-weight: 900;
+	pointer-events: none;
+	color: rgb(147, 180, 206);
+	/* filter: brightness(290%); */
+	z-index: 1;
+	transition: all 1s ease-in-out;
+}
+
 
 /* .stage-title {
 	position: absolute;

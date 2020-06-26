@@ -32,7 +32,12 @@ class EndGame extends Component {
           <div className="stage-container">
             <div className="stage-box">
               <div className="desert-heat" alt="Desert Heat Stage">
-                <p className="stage-title" alt="Desert Heat Stage">
+                <p
+                  className={
+                    this.state.desertHover ? "stage-title-big" : "stage-title"
+                  }
+                  alt="Desert Heat Stage"
+                >
                   DESERT HEAT
                 </p>
                 <img
@@ -50,7 +55,12 @@ class EndGame extends Component {
                 <div className="title-container"></div>
               </div>
               <div className="night-sky" alt="Night Sky Stage">
-                <p className="stage-title" alt="Night Sky Stage">
+                <p
+                  className={
+                    this.state.nightHover ? "stage-title-big" : "stage-title"
+                  }
+                  alt="Night Sky Stage"
+                >
                   NIGHT SKY
                 </p>
                 <img
