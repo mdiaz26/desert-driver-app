@@ -25,7 +25,7 @@ button:hover {
 	cursor: pointer;
 	transition: all 0.2s ease-in-out;
 	color: rgb(247, 183, 183);
-	margin-bottom: 60px;
+	margin-bottom: 40px;
 	border-radius: 10px;
 	transition: all 0.2s ease-in-out;
 }
@@ -35,7 +35,7 @@ button:hover {
 	cursor: pointer;
 	transition: all 0.2s ease-in-out;
 	color: rgb(247, 183, 183);
-	margin-bottom: 60px;
+	margin-bottom: 40px;
 	border-radius: 10px;
 	transition: all 0.2s ease-in-out;
 }
@@ -47,7 +47,7 @@ button:hover {
 	border: 1px solid transparent;
 	cursor: pointer;
 	transition: all 0.2s ease-in-out;
-	margin-bottom: 60px;
+	margin-bottom: 40px;
 	transition: all 0.2s ease-in-out;
 }
 .btn2:hover {
@@ -56,7 +56,7 @@ button:hover {
 	border: 1px solid transparent;
 	cursor: pointer;
 	transition: all 0.2s ease-in-out;
-	margin-bottom: 60px;
+	margin-bottom: 40px;
 	transition: all 0.2s ease-in-out;
 }
 .background .end-game-report {
@@ -75,11 +75,10 @@ button:hover {
 
 .report-container {
 	height: 100%;
-	background-color: rgba(0, 0, 0, 0.8);
-	/* padding-top: 20%; */
+	background-color: rgba(0, 0, 0, 0.85);
 	margin-left: auto;
 	margin-right: auto;
-	padding-bottom: 280px;
+	padding-bottom: 160px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -91,19 +90,37 @@ button:hover {
 	grid-row: 30px;
 	grid-template-columns: repeat(5, 1fr);
 	text-align: center;
-	color: rgb(245, 186, 83);
+	color: rgba(245, 186, 83, 0.726);
 }
 .stat-report-category {
 	font-weight: bolder;
 	font-size: 20px;
 	color: rgb(170, 202, 235);
 }
-
 .counters .counter {
-	font-size: 30px;
+	font-size: 28px;
+	font-weight: 600;
 	margin: 20px 0;
+	margin-bottom: 40px;
 }
-
+.final-score-category {
+	font-size: 20px;
+	font-weight: 700;
+	color: rgb(170, 202, 235);
+}
+.final-score-counter {
+	font-size: 35px;
+	font-weight: 900;
+	color: tomato;
+}
+.operation {
+	position: absolute;
+	margin-left: 60px;
+	margin-top: 5px;
+	font-weight: bold;
+	font-size: 20px;
+	color: rgb(136, 96, 74);
+}
 @media (max-width: 1000px) {
 	.counters .container {
 		grid-template-columns: repeat(2, 1fr);

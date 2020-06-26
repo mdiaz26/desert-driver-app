@@ -160,8 +160,16 @@ class Canvas extends Component {
       "https://desert-driver-api.herokuapp.com/api/v1/"
     );
     // const adapter = new JSONAPIAdapter("http://localhost:3000/api/v1/");
+<<<<<<< HEAD
+=======
+    const totalScore =
+      this.state.coins +
+      this.state.flipCount * this.state.maxDistance -
+      this.state.timer +
+      this.state.bestFlip;
+>>>>>>> development
     const body = {
-      points: this.state.coins * this.state.maxDistance - this.state.timer,
+      points: totalScore,
       max_distance: parseInt(this.state.maxDistance),
       user_number: this.props.userId,
       username: this.props.username,
@@ -233,7 +241,10 @@ class Canvas extends Component {
           lastLife();
           clearInterval(this.interval);
           let totalScore =
-            this.state.coins * this.state.maxDistance - this.state.timer;
+            this.state.coins +
+            this.state.flipCount * this.state.maxDistance -
+            this.state.timer +
+            this.state.bestFlip;
           this.setState({
             lives: 0,
             gameOn: false,
