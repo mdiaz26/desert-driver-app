@@ -222,7 +222,7 @@ class GameStats extends Component {
               ? this.props.stats.playerName.toUpperCase()
               : "..."}
           </p>
-          <p className="player-lives">x {this.props.stats.lives}</p>
+          <p className="player-lives">x{this.props.stats.lives}</p>
         </div>
       </div>
     );

@@ -96,7 +96,7 @@ class Login extends React.Component {
       context.rotate(player.rot);
 
       //AVATAR SIZE AND SCREEN POSITION
-      context.drawImage(player.movingImage, -19.5, -19.5, 36, 32);
+      context.drawImage(player.movingImage, -19.5, -19.5, 39, 32);
       context.restore();
     };
     //LOOP
@@ -219,11 +219,21 @@ class Login extends React.Component {
     if (redirectToGame) {
       return <Redirect to="/" />;
     }
+
+    document.addEventListener("click", (event) => {
+      if (event.target.parentNode.className === "login-form-hidden") {
+        this.props.toggleAbout();
+      } else if (event.target.parentNode.className === "container") {
+        this.props.toggleAbout();
+      } else if (event.target.parentNode.className === "about-and-logo") {
+        this.props.toggleAbout();
+      }
+    });
     return (
       <div className="container">
         <div className="about-and-logo">
           <div className={this.props.showAbout ? "show-about" : "hide-about"}>
-            <div className="about-box">
+            <div id="about-box" className="about-box">
               <div className="scroll-box">
                 <section id="about-section">
                   <span className="about-headings">ABOUT</span>

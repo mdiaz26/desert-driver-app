@@ -10,7 +10,9 @@ const EndGame = (props) => {
 
   useEffect(() => {
     let gameOverSong = Sounds.losingSong;
-    props.musicPlay(gameOverSong);
+    if (props.musicPlaying) {
+      props.musicPlay(gameOverSong);
+    }
   }, []);
 
   return (
@@ -30,7 +32,7 @@ const EndGame = (props) => {
             </button>
           </div>
           <div className="counters">
-            <div className="container">
+            <div className="container-end-game">
               <div>
                 <p className="stat-report-category">COINS</p>
                 <Spring from={{ number: 0 }} to={{ number: props.stats.coins }}>
@@ -67,7 +69,7 @@ const EndGame = (props) => {
                     <div className="counter">
                       <span className="operation">+</span>
                       {props.number.toFixed(0)}
-                      <span className="flip-details">x360</span>
+                      <span className="flip-details">x360°</span>
                     </div>
                   )}
                 </Spring>
@@ -81,7 +83,7 @@ const EndGame = (props) => {
                   {(props) => (
                     <div className="counter">
                       <span className="operation">+</span>
-                      {props.number.toFixed(0)}
+                      {props.number.toFixed(0)}°
                       <span className="flip-details">x{bestFlipCount}</span>
                     </div>
                   )}

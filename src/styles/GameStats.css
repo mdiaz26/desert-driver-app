@@ -24,7 +24,6 @@
 
 .stats-container {
 	position: absolute;
-	/* background-color: rgb(31, 29, 29); */
 	display: flex;
 	flex-direction: row;
 	z-index: 0;
@@ -35,7 +34,6 @@
 	overflow: auto;
 	padding-right: 3%;
 	padding-left: 3%;
-	/* top: 40; */
 	bottom: 0;
 	margin-top: -10px;
 }
@@ -87,6 +85,7 @@
 	font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana,
 		sans-serif;
 	color: #ff0091;
+	font-weight: 900;
 	cursor: default;
 	font-size: 18px;
 	margin-top: 4px;
@@ -95,10 +94,12 @@
 	position: absolute;
 	font-size: 11px;
 	letter-spacing: 0.0005px;
-	margin-top: 5px;
+	margin-top: 13px;
+	margin-left: -10px;
 	vertical-align: middle;
-	color: burlywood;
+	color: tomato;
 	font-weight: 100;
+	transform: rotate(-5deg);
 }
 
 .profile-and-lives {
@@ -119,21 +120,26 @@
 	margin-top: auto;
 	margin-bottom: auto;
 	margin-right: 5px;
+	
 }
 
 .player-name {
 	margin-top: -2px;
+	margin-left: 25px;
 	margin-right: 5px;
 	cursor: default;
-	font-size: 18px;
+	font-size: 25px;
+	font-weight: 900;
 	letter-spacing: 2px;
-	color: rgb(252, 229, 229);
+	color: rgba(252, 229, 229, 0.863);
 }
 .player-lives {
-	margin-top: -5px;
+	margin-top: 8px;
+	margin-left: -5px;
 	cursor: default;
-	font-size: 36px;
-	color: #ff0090d5;
+	font-size: 20px;
+	transform: rotate(-5deg);
+	color: tomato;
 }
 
 .current-player-image {

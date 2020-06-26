@@ -2,7 +2,7 @@
 	width: 100%;
 	display: block;
 	flex-direction: row;
-	justify-content: center;
+	justify-content: space-around;
 }
 
 .logo-background {
@@ -251,6 +251,7 @@
 }
 .login-screen {
 	position: absolute;
+	
 	z-index: -1;
 	width: 100%;
 	height: calc(100% - 55px);

@@ -359,6 +359,7 @@ class App extends React.Component {
 									users={this.state.users}
 									setUser={this.setUser}
 									musicPlaying={this.state.musicPlaying}
+									toggleAbout={this.toggleAbout}
 								/>
 							)}
 						/>

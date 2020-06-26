@@ -541,6 +541,7 @@ class Canvas extends Component {
             {!this.state.gameOn && (
               <EndGame
                 backToGameMenu={this.props.backToGameMenu}
+                musicPlaying={this.props.musicPlaying}
                 musicPlay={this.props.musicPlay}
                 stats={this.state}
                 saveScore={this.saveScore}

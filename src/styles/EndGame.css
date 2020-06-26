@@ -35,7 +35,6 @@ button:hover {
 }
 .btn2 {
 	float: left;
-	margin-right: 50px;
 	background-color: rgba(2, 2, 2, 0.63);
 	border: 1px solid rgb(170, 202, 235);
 	cursor: pointer;
@@ -78,15 +77,15 @@ button:hover {
 .end-game-report {
 	position: absolute;
 	height: 100%;
-	width: 100%;
+	width: 120%;
 	top: 0;
 }
 
 .report-container {
 	height: 100%;
 	background-color: rgba(0, 0, 0, 0.890);
-	margin-left: auto;
-	margin-right: auto;
+	/* margin-left: auto;
+	margin-right: auto; */
 	padding-bottom: 160px;
 	display: flex;
 	flex-direction: column;
@@ -94,9 +93,13 @@ button:hover {
 	justify-content: center;
 	/* color: antiquewhite; */
 }
-.counters .container {
+.counters {
+	width: 65%;
+}
+.container-end-game {
 	display: grid;
-	grid-row: 30px;
+	grid-row: 20px;
+	width: 100%;
 	grid-template-columns: repeat(5, 1fr);
 	text-align: center;
 	color: rgb(238, 200, 135);
@@ -106,14 +109,14 @@ button:hover {
 	font-size: 20px;
 	color: rgb(170, 202, 235);
 }
-.counters .counter {
+.counter {
 	font-size: 28px;
 	font-weight: 600;
-	margin: 20px 0;
+	margin: 10px 0;
 	margin-bottom: 40px;
 }
 .final-score-category {
-	font-size: 20px;
+	font-size: 25px;
 	font-weight: 700;
 	color: rgb(170, 202, 235);
 }
@@ -147,7 +150,7 @@ button:hover {
 }
 .multiply-operation {
 	position: absolute;
-	margin-left: -70px;
+	margin-left: -85px;
 	margin-top: 5px;
 	font-weight: 700;
 	font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -159,13 +162,15 @@ button:hover {
 	position: absolute;
 	font-size: 12px;
 	letter-spacing: 0.0005px;
-	margin-left: 2px;
-	margin-top: 8px;
-	color: burlywood;
+	margin-left: -15px;
+	margin-top: 28px;
+	color: tomato;
+	transform: rotate(-10deg);
+	/* color: burlywood; */
 }
-@media (max-width: 1000px) {
+@media (max-width: 756px) {
 	.counters .container {
-		grid-template-columns: repeat(2, 1fr);
+		grid-template-columns: repeat(3, 1fr);
 	}
 
 	.counters .container > div:nth-of-type(1),
