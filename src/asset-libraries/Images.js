@@ -1,4 +1,5 @@
 const Images = {
+
   stars: "night-stage-images/stars.png",
   moon: "night-stage-images/moon.png",
   plane: "night-stage-images/plane.png",

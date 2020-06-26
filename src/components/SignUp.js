@@ -42,6 +42,10 @@ class SignUp extends React.Component {
           username: this.state.username,
           password: this.state.password,
           avatar_id: this.getAvatarId(this.state.selectedAvatar),
+          music_playing: this.props.musicPlaying,
+          game_sound: this.props.gameSound,
+          music_volume: this.props.bgMusicVolume,
+          game_volume: this.props.gameVolume,
         },
       })
       .then(this.props.appendNewUser)

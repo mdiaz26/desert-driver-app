@@ -109,16 +109,16 @@ class ProfileContainer extends React.Component {
             />
           </>
         ) : (
-          <>
-            <Profile
-              user={this.state.user}
-              avatar={this.state.avatar}
-              findBestInAttribute={this.findBestInAttribute}
-              toggleEdit={this.toggleEdit}
-            />
-            {/* <button onClick={this.toggleEdit}>Edit</button> */}
-          </>
-        )}
+            <>
+              <Profile
+                user={this.state.user}
+                avatar={this.state.avatar}
+                findBestInAttribute={this.findBestInAttribute}
+                toggleEdit={this.toggleEdit}
+              />
+              {/* <button onClick={this.toggleEdit}>Edit</button> */}
+            </>
+          )}
       </div>
     );
   }

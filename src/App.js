@@ -9,6 +9,7 @@ import React from 'react';
 import Images from './asset-libraries/Images';
 import Sounds from './asset-libraries/Sounds';
 
+
 const adapter = new JSONAPIAdapter('https://desert-driver-api.herokuapp.com/api/v1/');
 // const adapter = new JSONAPIAdapter('http://localhost:3000/api/v1/');
 
@@ -36,6 +37,7 @@ class App extends React.Component {
 		b: null,
 		c: null
 	};
+
 
 	gameSound = {
 		countdownAudio: null,
@@ -67,6 +69,8 @@ class App extends React.Component {
 			musicVolume: userObj.music_volume,
 			gameVolume: userObj.game_volume
 		});
+
+    
 		this.setMusicVolume(userObj.music_volume)
 		if (!input) {
 			return
@@ -77,6 +81,7 @@ class App extends React.Component {
 	signOut = () => {
 		adapter.getAll('users').then((users) => this.setState({ users, userId: '', onGameScreen: true }));
 		this.musicFadeOut();
+
 	};
 
 	updateScores = (scoreObj) => {
@@ -119,6 +124,7 @@ class App extends React.Component {
 	};
 
 	musicPlay = (song) => {
+
 		if (!this.state.musicPlaying) {
 			this.setState({
 				musicPlaying: true
@@ -143,6 +149,7 @@ class App extends React.Component {
 		this.musicDeck[emptySide].play();
 		this.musicDeck[emptySide].muted = false;
 		this.musicDeck[emptySide].play();
+
 		this.setState({
 			songInfo: `"${song.title}" by ${song.artist}`
 		});
@@ -174,11 +181,13 @@ class App extends React.Component {
 		} else if (!this.state.onGameScreen) {
 			newSong = Sounds.themeSong;
 		}
+
 		this.musicDeck[activeSide] = null;
 		this.musicPlay(newSong);
 	};
 
 	setMusicVolume = (value) => {
+
 		let activeSide = null;
 		if (this.musicDeck.a) {
 			activeSide = 'a';
@@ -204,6 +213,7 @@ class App extends React.Component {
 				this.gameSound[audioType].volume = value * this.gameSound[audioType].maxVolume;
 			}
 		});
+
 		this.setState({
 			gameVolume: value
 		}, () => adapter.update('users', this.state.userId, { game_volume: value }));
@@ -250,6 +260,7 @@ class App extends React.Component {
 		}
 	};
 
+
 	flipAudio = (flipCount) => {
 		if (flipCount > 1) {
 			if (flipCount > 2) {
@@ -279,6 +290,7 @@ class App extends React.Component {
 		} else {
 			this.setState({
 				musicPlaying: true,
+
 				gameSound: true
 			}, this.state.userId ? () => adapter.update('users', this.state.userId, { music_playing: true, game_sound: true }) : null)
 			let song = Sounds.bgMusic[Math.floor(Math.random() * Sounds.bgMusic.length)];
@@ -297,6 +309,7 @@ class App extends React.Component {
 			});
 		}
 	};
+
 
 	// startSignUpSong = () => {
 	// 	if (this.state.musicPlaying) {
@@ -318,6 +331,7 @@ class App extends React.Component {
 		if (this.state.user !== '') {
 			this.setState({ onGameScreen: true });
 		}
+
 	};
 
 	volumeHandler = (event) => {
@@ -372,6 +386,10 @@ class App extends React.Component {
 									setUser={this.setUser}
 									appendNewUser={this.appendNewUser}
 									avatars={this.state.avatars}
+									musicPlaying={this.state.musicPlaying}
+									gameSound={this.state.gameSound}
+									bgMusicVolume={this.state.bgMusicVolume}
+									gameVolume={this.state.gameVolume}
 								/>
 							)}
 						/>
