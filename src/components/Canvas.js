@@ -160,13 +160,12 @@ class Canvas extends Component {
       "https://desert-driver-api.herokuapp.com/api/v1/"
     );
     // const adapter = new JSONAPIAdapter("http://localhost:3000/api/v1/");
-    const totalScore =
-      this.state.coins +
-      this.state.flipCount * this.state.maxDistance -
-      this.state.timer +
-      this.state.bestFlip;
+    // const totalScore =
+    //   (this.state.coins + this.state.flipCount) * this.state.maxDistance -
+    //   this.state.timer +
+    //   this.state.bestFlip;
     const body = {
-      points: totalScore,
+      points: this.state.score,
       max_distance: parseInt(this.state.maxDistance),
       user_number: this.props.userId,
       username: this.props.username,
@@ -238,10 +237,10 @@ class Canvas extends Component {
           lastLife();
           clearInterval(this.interval);
           let totalScore =
-            this.state.coins +
-            this.state.flipCount * this.state.maxDistance -
-            this.state.timer +
-            this.state.bestFlip;
+            this.state.coins * this.state.maxDistance +
+            this.state.flipCount * 360 +
+            this.state.bestFlip * this.state.bestFlipCount -
+            85;
           this.setState({
             lives: 0,
             gameOn: false,
@@ -267,7 +266,10 @@ class Canvas extends Component {
       if (!flipping && grounded) {
         if (this.state.bestFlip < flipCount * 360) {
           this.setState({ bestFlip: flipCount * 360, bestFlipCount: 1 });
-        } else if (this.state.bestFlip === flipCount * 360) {
+        } else if (
+          this.state.bestFlip > 0 &&
+          this.state.bestFlip === flipCount * 360
+        ) {
           // NEW CODE to keep count of "best flip"
           this.setState((prevState) => ({
             bestFlipCount: prevState.bestFlipCount + 1,

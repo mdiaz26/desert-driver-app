@@ -6,6 +6,7 @@ import Sounds from "../asset-libraries/Sounds";
 
 const EndGame = (props) => {
   const fade = useSpring({ from: { opacity: 0 }, opacity: 1 });
+  const bestFlipCount = props.stats.bestFlipCount;
 
   useEffect(() => {
     let gameOverSong = Sounds.losingSong;
@@ -35,22 +36,8 @@ const EndGame = (props) => {
                 <Spring from={{ number: 0 }} to={{ number: props.stats.coins }}>
                   {(props) => (
                     <div className="counter">
-                      {props.number.toFixed(0)}{" "}
-                      <span className="operation">+</span>{" "}
-                    </div>
-                  )}
-                </Spring>
-              </div>
-              <div>
-                <p className="stat-report-category">FLIPS</p>
-                <Spring
-                  from={{ number: 0 }}
-                  to={{ number: props.stats.flipCount }}
-                >
-                  {(props) => (
-                    <div className="counter">
-                      {props.number.toFixed(0)}{" "}
-                      <span className="operation">x</span>{" "}
+                      <span className="operation">+</span>
+                      {props.number.toFixed(0)}
                     </div>
                   )}
                 </Spring>
@@ -63,8 +50,39 @@ const EndGame = (props) => {
                 >
                   {(props) => (
                     <div className="counter">
+                      <span className="multiply-operation">x</span>
+                      <span className="operation">+</span>
                       {props.number.toFixed(0)}
-                      <span className="operation">-</span>{" "}
+                    </div>
+                  )}
+                </Spring>
+              </div>
+              <div>
+                <p className="stat-report-category">FLIPS</p>
+                <Spring
+                  from={{ number: 0 }}
+                  to={{ number: props.stats.flipCount }}
+                >
+                  {(props) => (
+                    <div className="counter">
+                      <span className="operation">+</span>
+                      {props.number.toFixed(0)}
+                      <span className="flip-details">x360</span>
+                    </div>
+                  )}
+                </Spring>
+              </div>
+              <div>
+                <p className="stat-report-category">BEST FLIP</p>
+                <Spring
+                  from={{ number: 0 }}
+                  to={{ number: props.stats.bestFlip }}
+                >
+                  {(props) => (
+                    <div className="counter">
+                      <span className="operation">+</span>
+                      {props.number.toFixed(0)}
+                      <span className="flip-details">x{bestFlipCount}</span>
                     </div>
                   )}
                 </Spring>
@@ -77,20 +95,9 @@ const EndGame = (props) => {
                 >
                   {(props) => (
                     <div className="counter">
-                      {props.number.toFixed(0)}{" "}
-                      <span className="operation">+</span>{" "}
+                      <span className="negative-operation">-</span>
+                      {props.number.toFixed(0)}
                     </div>
-                  )}
-                </Spring>
-              </div>
-              <div>
-                <p className="stat-report-category">BEST FLIP</p>
-                <Spring
-                  from={{ number: 0 }}
-                  to={{ number: props.stats.bestFlip }}
-                >
-                  {(props) => (
-                    <div className="counter">{props.number.toFixed(0)}</div>
                   )}
                 </Spring>
               </div>

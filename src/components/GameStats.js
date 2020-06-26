@@ -336,7 +336,12 @@ class GameStats extends Component {
           </div>
           <div className="stat">
             <p className="stat-cat">BEST FLIP</p>
-            <p className="stat-value">{this.props.stats.bestFlip}°</p>
+            <p className="stat-value">
+              {this.props.stats.bestFlip}°{" "}
+              <span className="best-flip-count">
+                x{this.props.stats.bestFlipCount}
+              </span>
+            </p>
           </div>
         </div>
         <div className="stats-bottom">
