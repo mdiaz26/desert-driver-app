@@ -25,6 +25,5 @@ const Images = {
   logo: "/logo5.png",
   heart: "/heart.png",
 };
-};
 
 export default Images;
