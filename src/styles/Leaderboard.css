@@ -5,17 +5,22 @@
 }
 
 .leaderboard-heading {
-  margin-top: 2%;
-  margin-bottom: 20px;
-  letter-spacing: 5px;
-  font-size: 24px;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  letter-spacing: 10px;
+  font-size: 30px;
   font-weight: bold;
   color: rgb(231, 199, 160);
+  text-shadow: 0 0 20px coral;
 }
 
 .table {
-  border: 10px solid white;
-  width: 30%;
+  /* border: 2px solid rgb(83, 79, 79); */
+  outline-style: solid;
+  outline-width: 5px;
+  outline-color: rgb(255, 255, 248);
+  width: 60%;
+
   margin-left: auto;
   margin-right: auto;
   align-self: center;
@@ -23,13 +28,25 @@
 }
 
 .table-head {
-  background-color: rgb(190, 153, 107);
+  background-color: rgb(177, 110, 16);
+  filter: brightness(140%);
+  /* border: 2px solid rgb(83, 79, 79); */
+  /* outline-style: solid;
+  outline-width: 2px;
+  outline-color: rgb(83, 79, 79); */
 }
 
 .table-body {
-  background-color: rgb(172, 80, 80);
-  background-color: rgb(227, 240, 253);
+  /* background-color: rgb(242, 249, 255); */
   color: rgb(27, 130, 170);
+}
+.table-row-even {
+  background-color: rgb(242, 249, 255);
+  line-height: 26px
+}
+.table-row-odd {
+  background-color: rgb(233, 238, 243);
+  line-height: 25px
 }
 
 .rank {
@@ -37,12 +54,25 @@
 }
 
 .ranked-player {
-  font-weight: bold;
-  letter-spacing: 3px;
+  font-weight: bolder;
+  font-size: 18px;
+  letter-spacing: 0.1px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  color: #a83f7b;
+}
+.ranked-distance {
+  width: 130px;
+}
+.ranked-best-flip {
+  font-weight: 600;
+}
+.flip-count-style {
+  font-size: 12px;
+  margin-top: 4px;
+  color: #a83f7b;
+  position: absolute;
 }
 
-.ranked-distance {
-  width: 125px;
-}
-.ranked-score {
+.table-header-title {
+  font-size: 13px;
 }

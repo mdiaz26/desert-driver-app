@@ -14,11 +14,14 @@ const Leaderboard = (props) => {
       <table className="table">
         <thead className="table-head">
           <tr>
-            <th>Rank</th>
-            <th>Player</th>
-            <th>Score</th>
-            {/* <th>Coins</th> */}
-            <th>Max Distance</th>
+            <th className="table-header-title">RANK</th>
+            <th className="table-header-title">PLAYER</th>
+            <th className="table-header-title">SCORE</th>
+            <th className="table-header-title">TIMER</th>
+            <th className="table-header-title">MAX DISTANCE</th>
+            <th className="table-header-title">COINS</th>
+            <th className="table-header-title">FLIPS</th>
+            <th className="table-header-title">BEST FLIP</th>
           </tr>
         </thead>
         <tbody className="table-body">
