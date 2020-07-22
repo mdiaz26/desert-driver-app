@@ -251,7 +251,7 @@
 }
 .login-screen {
 	position: absolute;
-	
+
 	z-index: -1;
 	width: 100%;
 	height: calc(100% - 55px);
@@ -341,7 +341,7 @@
 	transition: all 0.5s ease-in-out;
 }
 .home-screen-buttons {
-	position: absolute;
+	/* position: absolute; */
 	height: calc(100%-55px);
 	opacity: 1;
 	width: 100px;
@@ -358,7 +358,7 @@
 	outline: none;
 }
 .home-screen-buttons:hover {
-	position: absolute;
+	/* position: absolute; */
 	height: calc(100%-55px);
 	width: 100px;
 	opacity: 1;

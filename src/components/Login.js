@@ -221,11 +221,20 @@ class Login extends React.Component {
     }
 
     document.addEventListener("click", (event) => {
-      if (event.target.parentNode.className === "login-form-hidden") {
+      if (
+        event.target.parentNode.className === "login-form-hidden" &&
+        this.props.showAbout
+      ) {
         this.props.toggleAbout();
-      } else if (event.target.parentNode.className === "container") {
+      } else if (
+        event.target.parentNode.className === "container" &&
+        this.props.showAbout
+      ) {
         this.props.toggleAbout();
-      } else if (event.target.parentNode.className === "about-and-logo") {
+      } else if (
+        event.target.parentNode.className === "about-and-logo" &&
+        this.props.showAbout
+      ) {
         this.props.toggleAbout();
       }
     });
